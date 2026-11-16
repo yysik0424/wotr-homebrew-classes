@@ -985,6 +985,8 @@ At each of levels 5, 10 and 15 you choose one of three materials. The new materi
 
 Three of Abjuration, Conjuration, Divination, Enchantment, Evocation, Illusion and Necromancy. Every option has the same effect: extracts of that school take two slots to prepare.
 
+Opposition schools apply only to your Golemancer extracts. They do not affect a spellbook gained from another class through multiclassing, your bombs, mutagens or discoveries, or the use of scrolls, wands and potions. You can still use opposition-school extracts; they just take two slots to prepare.
+
 ### Feats
 
 - Feats granted automatically: none. Bonus feat slots are unchanged.
