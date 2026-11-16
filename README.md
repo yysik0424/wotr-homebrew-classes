@@ -647,7 +647,7 @@ Nothing else is removed from the brawler.
 |---|---|---|
 | 1 | Arcane School ×3 | Choose three different schools out of eight. Only wizard spells of those schools enter your spellbook. The choice is permanent. |
 | 1 | Spellfist spellbook | Arcanist-style arcane spellbook. Intelligence-based, cantrips included, caster level equals brawler level. |
-| 1 | Arcane Reservoir | Maximum = 3 + 2 × brawler level + Intelligence modifier. Refills fully on rest. |
+| 1 | Arcane Reservoir | Maximum = 3 + brawler level + Intelligence modifier. Refills fully on rest. |
 | 1 | Reservoir Quicken | Toggle. In combat, spells are cast as swift actions; each successful cast drains points equal to the spell level (minimum 1). |
 | 2 | Fist Spellstrike | Hold a touch spell from your Spellfist spellbook and deliver it with an unarmed strike (flurry included) or a melee weapon attack. |
 | 3 | Spellfist Exploits | Choose one exploit (1st) |
@@ -685,8 +685,8 @@ Cantrips are available from 1st level, but only if one of your schools has any (
 
 #### Arcane Reservoir
 
-- A resource you gain automatically. Maximum = 3 + 2 × brawler level + Intelligence modifier.
-- Examples: 8 points at level 1 with a +3 modifier, 28 at level 10 with +5, 51 at level 20 with +8.
+- A resource you gain automatically. Maximum = 3 + brawler level + Intelligence modifier.
+- Examples: 7 points at level 1 with a +3 modifier, 18 at level 10 with +5, 31 at level 20 with +8.
 - It refills to the maximum when you rest, and also when you level up.
 - It pays for two things: Reservoir Quicken and exploits.
 
@@ -771,7 +771,7 @@ These eleven are the whole list. Other arcanist exploits (the ones that convert 
 
 | Resource | Maximum | Recovery | Spent on |
 |---|---|---|---|
-| Arcane Reservoir | 3 + 2 × brawler level + Intelligence modifier | Fully on rest, fully on level-up | Reservoir Quicken (spell level, minimum 1), exploits (1 point for most) |
+| Arcane Reservoir | 3 + brawler level + Intelligence modifier | Fully on rest, fully on level-up | Reservoir Quicken (spell level, minimum 1), exploits (1 point for most) |
 | Spell slots | Arcanist table for the same level | Rest | Casting spells |
 
 The reservoir is the same resource as the base game arcanist's arcane reservoir. Unlike the arcanist's, it refills completely on rest rather than halfway.
