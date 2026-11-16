@@ -272,20 +272,20 @@ Fighter bonus feats (levels 1, 2, 4, 6, … 20), Weapon Training (5, 9, 13, 17),
 | Level | Feature | Effect |
 |---|---|---|
 | 2 | Phantom Blade — the Guardian Phantom and its absorption pool | Grants the Manifest Guardian Phantom toggle (free action, no cost, on by default). While it is manifest, the pool takes 50% of the damage you would suffer. Pool maximum = Phantom Blade level × Charisma modifier (minimum 1) |
-| 3 | Guardian Phantom Rush: 1 Strike | Once per round, your first melee hit makes the phantom strike the same target with a fist. Damage = fist dice + Charisma modifier, force |
+| 3 | Guardian Phantom Rush — once per round | When one of your melee attacks hits, the phantom strikes the same target once with its fist. Up to 1 time per round. Damage = fist dice + Charisma modifier, force |
 | 5 | Ghost Slash: 1 Projectile | Standard action, 30 ft., 1 force projectile (ranged touch). Costs half your level (rounded up) from the absorption pool |
 | 6 | Guardian Phantom Ranged Guard | +2 AC against ranged attacks while the phantom is manifest |
-| 7 | Guardian Phantom Rush: 2 Strikes | 2 blows per round (one on each of your first 2 melee hits) |
+| 7 | Guardian Phantom Rush — twice per round | The per-round limit rises to 2 (still one blow per attack) |
 | 10 | Guardian Phantom Refill | The absorption pool refills completely when combat ends |
 | 10 | Ghost Slash: 2 Projectiles | Ghost Slash fires 2 projectiles |
-| 10 | (Rush rule change — no separate feature) | Rush no longer rides on your hits. For each of your melee attacks, hit or miss, the phantom makes its own melee touch attack (base attack bonus + Charisma modifier against touch AC) |
-| 11 | Guardian Phantom Rush: 3 Strikes | 3 blows per round (one on each of your first 3 melee attacks) |
+| 10 | (Rush rule change — no separate feature) | The phantom now follows up even when your attack **misses**. It makes its own melee touch attack (base attack bonus + Charisma modifier against touch AC). A missed attack still uses up one of that round's follow-ups |
+| 11 | Guardian Phantom Rush — 3 times per round | Per-round limit of 3 |
 | 14 | Guardian Phantom Ranged Guard (second step) | The AC bonus against ranged attacks rises to +4 in total |
-| 15 | Guardian Phantom Rush: 4 Strikes | 4 blows per round |
-| 15 | Guardian Phantom Full Assault | Swift action, 1 round. For that round the Rush limit is lifted and the phantom makes 2 touch blows on every melee attack. Usable Charisma modifier times per day (minimum 1) |
+| 15 | Guardian Phantom Rush — 4 times per round | Per-round limit of 4 |
+| 15 | Guardian Phantom Full Assault | Swift action, 1 round. For that round Rush has no per-round limit, and the phantom makes **2** touch blows for each melee attack you make. Usable Charisma modifier times per day (minimum 1) |
 | 15 | Ghost Slash: 3 Projectiles | Ghost Slash fires 3 projectiles |
 | 18 | Guardian Phantom Greater Absorption | The absorbed share rises from 50% to 75% |
-| 19 | Guardian Phantom Rush: 5 Strikes | 5 blows per round |
+| 19 | Guardian Phantom Rush — 5 times per round | Per-round limit of 5 |
 | 20 | Ghost Slash: 4 Projectiles | Ghost Slash fires 4 projectiles |
 
 ### Abilities in detail
@@ -306,14 +306,46 @@ Fighter bonus feats (levels 1, 2, 4, 6, … 20), Weapon Training (5, 9, 13, 17),
 
 #### Guardian Phantom Rush
 
-Automatic. Whenever you make a **melee** attack, the phantom strikes the same target with its Phantom Fist. Ranged attacks never trigger it.
+Automatic. There are only two rules.
 
-- **Levels 3–9**: one blow on each of your first N melee attacks that **hit** in a round. Misses do not use up blows. The fist makes its own attack roll at your full base attack bonus, with no iterative penalty.
-- **Level 10 and up**: one blow on each of your first N melee **attacks** in a round, hit or miss. The phantom makes its own melee touch attack: full base attack bonus + Charisma modifier against touch AC. Your sneak attack and other precision damage are not added to these touch blows.
-- Damage: fist dice + Charisma modifier, **force** damage. Confirmed critical hits apply the fist's multiplier.
+1. **Each time you make one melee attack, the phantom hits the same target once with its Phantom Fist.** It never lands several blows off a single attack.
+2. **There is a limit on how many times per round this can happen.** The phantom follows up on your first attacks of the round, up to the limit, and not on any attack after that.
+
+| Fighter level | Follow-ups per round (limit) |
+|---|---|
+| 3–6 | 1 |
+| 7–10 | 2 |
+| 11–14 | 3 |
+| 15–18 | 4 |
+| 19–20 | 5 |
+
+In game these steps are named "Rush: 1 Strike" through "Rush: 5 Strikes". The number is the per-round limit from the table above, not the number of blows per attack.
+
+What gets counted changes at level 10.
+
+| | Levels 3–9 | Level 10 and up |
+|---|---|---|
+| The phantom follows up when | your attack **hits** | you attack, **hit or miss** |
+| What counts against the limit | only attacks that hit (a miss uses nothing) | every attack (a miss counts as one) |
+| The phantom's attack roll | its own attack roll at your full base attack bonus, with no iterative penalty | a melee touch attack: full base attack bonus + Charisma modifier against touch AC |
+
+Examples:
+
+- Level 7 (limit 2), two attacks, both hit: 2 phantom blows.
+- Level 7 (limit 2), first attack misses, second hits: 1 phantom blow.
+- Level 11 (limit 3), four attacks under haste: the phantom follows up on the first three (rolling on its own even if they miss) and not on the fourth.
+- Level 3 (limit 1), your regular attack and an attack of opportunity both hit: 1 phantom blow, on whichever hit first.
+
+A fighter's number of attacks grows at about the same levels as the limit does, so in ordinary play nearly every attack gets one phantom blow. The limit only bites when haste, two-weapon fighting or attacks of opportunity give you more attacks than it allows.
+
+- Ranged attacks never trigger it.
+- Damage per blow: fist dice + Charisma modifier, **force** damage. Confirmed critical hits apply the fist's multiplier.
 - The fist dice follow your fighter level at the moment of the strike and match the monk's unarmed strike table for a Medium creature, regardless of your own size.
+- From level 10, your sneak attack and other precision damage are not added to the touch blows.
 - The phantom's fists never trigger Rush themselves.
-- Attacks of opportunity count as melee attacks and use up that round's blows.
+- Attacks of opportunity count as melee attacks and use up that round's follow-ups.
+- Switching the phantom off and on does not give back follow-ups already used that round.
+- In a round where you use Full Assault (level 15), the limit is gone and each attack gets 2 blows. That is the only case where one attack produces more than one blow.
 - Dismissing and re-manifesting the phantom does not give back blows already used that round.
 
 | Fighter level | Blows per round | Fist dice | Mode |
@@ -389,7 +421,7 @@ Damage absorption and Ghost Slash draw on the same pool. You can read what is le
 
 - **Required mods and DLC**: none. Only base-game assets are used.
 - **TabletopTweaks-Base**: if its Advanced Armor Training option has rearranged the fighter progression, the Phantom Blade recognises that layout and removes everything that sits in those slots. If it meets a fighter progression that is neither the base game's nor TabletopTweaks' (another mod has moved or removed armor training at levels 3, 7, 11 or 15, bravery, or armor mastery), the archetype is not registered and will not appear in the archetype list.
-- **Multiclassing and prestige classes**: Rush blows, fist dice, Ghost Slash, the absorbed share, Ranged Guard and the pool size all look at **fighter levels** only. Levels in other classes help only through base attack bonus, which the phantom uses for its attack rolls.
+- **Multiclassing and prestige classes**: The Rush limit, fist dice, Ghost Slash, the absorbed share, Ranged Guard and the pool size all look at **fighter levels** only. Levels in other classes help only through base attack bonus, which the phantom uses for its attack rolls.
 - **Beyond level 20**: if your fighter level somehow exceeds 20, Rush, fist dice and Ghost Slash stay at their level-20 values.
 - **Difficulty multipliers**: the pool is charged in damage **before** the difficulty's damage multiplier. On difficulties where incoming damage is scaled, the points drained from the pool and the hit points actually saved can differ.
 - **Combat log**: absorption lines appear on the log's "All" tab, not on the "Combat" tab.
