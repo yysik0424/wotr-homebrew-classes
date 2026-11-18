@@ -11,7 +11,7 @@ Twelve new archetypes for *Pathfinder: Wrath of the Righteous*, packed into a si
 
 | Archetype | Base class | What it does | Needs |
 |---|---|---|---|
-| [Pack Warden](#pack-warden) | Hunter | Commands a pack: extra animals of your companion's kind join each fight | — |
+| [Pack Warden](#pack-warden) | Hunter | Commands a pack: up to four extra animals of your companion's kind join each fight, and pack-only spell effects replace spellcasting | — |
 | [Phantom Blade](#phantom-blade) | Fighter | A guardian phantom strikes alongside you and absorbs half the damage you take | — |
 | [Blast Magus](#blast-magus) | Magus | Picks an element, fires blasts with Intelligence and detonates them through weapon hits | *KineticistElementsExpanded* (optional: 5 more elements) |
 | [Spellfist](#spellfist) | Brawler | Unarmed brawler with full arcane casting from three chosen schools | **BrawlerClassWrath** |
@@ -19,7 +19,7 @@ Twelve new archetypes for *Pathfinder: Wrath of the Righteous*, packed into a si
 | [Warlock](#warlock) | Witch | Unlimited patron blasts that build Overheat and call summons | — |
 | [Weapon-Spirit Shaman](#weapon-spirit-shaman) | Shaman | A floating spirit weapon fights on its own and borrows the magic of stored weapons | — |
 | [Bulwark Mage](#bulwark-mage) | Wizard | Full caster in heavy armor behind a tower shield that strikes back | — |
-| [Chaos Warrior](#chaos-warrior) | Warpriest | Rages, mutates at random and drives enemies mad with stacking pain | — |
+| [Chaos Warrior](#chaos-warrior) | Warpriest | Rages, mutates at random (claws, fangs and more), drives enemies mad with stacking pain, and casts the first spell of each rage as a swift action | — |
 | [Chimera Monk](#chimera-monk) | Monk | Reshapes the body with a new mutation every two levels | **DarkCodex** |
 | [Oathbound Revenant](#oathbound-revenant) | Paladin | An undead paladin whose smites knit the body back together | — |
 | [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | Shadow doubles recast your spells as illusions | — |
@@ -90,20 +90,20 @@ Click a class to expand it.
 |---|---|
 | Base class | Hunter |
 | Key ability | Wisdom. The archetype recommends Wisdom, Dexterity and Constitution, and marks Charisma and Intelligence as not recommended |
-| Spellcasting | None. The Hunter spellbook and orisons are removed entirely |
+| Spellcasting | None. The Hunter spellbook and orisons are removed entirely. Instead, the Pack Empowerment picks at levels 4, 10 and 16 let you put the effects of some of ten Hunter spells on your pack (as spell-like abilities) |
 | Required mods | None |
 | Optional integrations | None |
 | Alignment / deity restrictions | None added by the archetype |
 
 ### Overview
 
-The Pack Warden is a Hunter who travels with several animals at once. You give up all spellcasting; in exchange, auxiliary animals of the same species as your main animal companion appear whenever a fight starts. The auxiliaries do not pick targets of their own. They trail the main companion, and every time it swings in melee each of them bites the same target once. Your own job is command: mark a studied target, then flip between the Fierce and Tough aspects to buff the whole pack. From levels 1 to 6 a single toggle calls one auxiliary; from level 7 you have to fight from the saddle of your main companion, and two auxiliaries follow.
+The Pack Warden is a Hunter who travels with several animals at once. You give up all spellcasting; in exchange, auxiliary animals of the same species as your main animal companion appear whenever a fight starts. The auxiliaries do not pick targets of their own. They trail the main companion (moving up beside its target while it fights), and every time it swings in melee each of them bites the same target once. Your own job is command: mark a studied target, flip between the Fierce and Tough aspects, and use Pack Empowerment to put spell effects on the whole pack. From levels 1 to 6 a single toggle calls the pack; from level 7 you have to fight from the saddle of your main companion, and the pack grows from one auxiliary to as many as four as you level.
 
 ### What you give up
 
 | Level | Base feature | Notes |
 |---|---|---|
-| 1 | Hunter spellcasting (the whole spellbook) | All 1st- to 6th-level spells are gone, with no way to get them back |
+| 1 | Hunter spellcasting (the whole spellbook) | All 1st- to 6th-level spells are gone, with no way to get the spellbook back. The effects of some spells can be put on your pack only, through Pack Empowerment |
 | 1 | Orisons | No 0-level spells either |
 | 1 | Animal Companion selection | Replaced by Pack's Main Animal Companion, which offers fewer species (see Choices) |
 | 1 | Animal Focus | Replaced by Aspects of the Pack. The focus you could apply to yourself is gone too |
@@ -115,20 +115,25 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 
 | Level | Feature | Effect |
 |---|---|---|
-| 1 | Pack's Main Animal Companion | Choose an animal companion from the species of Medium size or larger that can serve as mounts. Its advancement, the mount toggle and the animal companion archetype choice work as for a base Hunter |
+| 1 | Pack's Main Animal Companion | Choose one of the base-game animal companions whose base size is Medium or larger. Its advancement, the mount toggle and the animal companion archetype choice work as for a base Hunter |
 | 1 | Studied Target | The level 1 Studied Target of the base game's Tandem Executioner hunter archetype, unchanged |
 | 1 | Aspects of the Pack | Two toggles, Fierce Aspect and Tough Aspect. The active aspect gives the main companion and every auxiliary a bonus equal to your Wisdom modifier. Switching is a free action with no limit |
-| 1 | Call the Pack | If the call condition is met when you enter combat, auxiliary animals of your main companion's species appear. 1 auxiliary at level 1, 2 from level 7. Auxiliary level = Hunter level − 4 (minimum 1). The pack disperses when combat ends |
+| 1 | Call the Pack | If the call condition is met when you enter combat, auxiliary animals of your main companion's species appear: 1 at levels 1–6, 2 at levels 7–12, 3 at levels 13–18 and 4 at levels 19–20. Auxiliary level = Hunter level − 4 (minimum 1). Auxiliaries appear at Small size and are immune to enemy attacks of opportunity. The pack disperses when combat ends |
 | 1 | Call the Pack: Toggle | The call condition for levels 1–6: the Call the Pack toggle is on (it is on by default) |
 | 4 | Tandem Executioner base feature | The base feature a Tandem Executioner receives at level 4, which the techniques below build on |
 | 4 | Tandem Executioner technique (1st) | Pick one technique from the Tandem Executioner list |
-| 7 | Mounted Call | The call condition changes: you must be riding your main animal companion when combat starts. The Call the Pack toggle is removed. The pack grows to 2 auxiliaries |
+| 4 | Pack Empowerment (1st) | Pick one pack empowerment, at this point from the six that correspond to Hunter spells of levels 1–2. Each one you pick can be used twice per day as a move action |
+| 7 | Mounted Call | The call condition changes: you must be riding your main animal companion when combat starts, or mount it during combat. The Call the Pack toggle is removed. Call the Pack now brings 2 auxiliaries |
 | 7 | Swift Studied Target | The base game's Slayer feature |
 | 7 | Tandem Executioner technique (2nd) | |
 | 10 | Tandem Executioner technique (3rd) | |
+| 10 | Pack Empowerment (2nd) | One not yet chosen from the seven up to Hunter spell level 3 |
 | 13 | Tandem Executioner technique (4th) | |
+| 13 | (Call the Pack) | No separate feature. Call the Pack now brings 3 auxiliaries |
 | 16 | Tandem Executioner technique (5th) | |
+| 16 | Pack Empowerment (3rd) | One not yet chosen from all ten, up to Hunter spell level 5 |
 | 19 | Tandem Executioner technique (6th) | |
+| 19 | (Call the Pack) | No separate feature. Call the Pack now brings 4 auxiliaries |
 | 20 | Both Aspects | Fierce Aspect and Tough Aspect can be active at the same time |
 
 ### Abilities in detail
@@ -139,24 +144,28 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 - **Call condition**
   - Levels 1–6: the Call the Pack toggle is on. It starts on and resting does not turn it off. Turning it on in the middle of a fight calls the pack at once. Turning it off in the middle of a fight does not dismiss a pack that is already out.
   - Level 7 and up: you are riding **your own main animal companion**. No other mount counts. Mounting up in the middle of a fight calls the pack at once.
-- **Pack size**: 1 auxiliary at Hunter levels 1–6, 2 at level 7 and up. Never more than 2.
+- **Pack size**: 1 auxiliary at Hunter levels 1–6, 2 at levels 7–12, 3 at levels 13–18 and 4 at levels 19–20.
 - **What an auxiliary is**
   - Species: the same as your main animal companion.
   - Level: Hunter level − 4, minimum 1. Only Hunter class levels count.
-  - Species upgrade: once the auxiliary's level reaches that species' upgrade level (the same value the base game uses for animal companions), it receives the same upgrade feature. The pre-order bonus horse has no upgrade feature in the base game and so gets none.
+  - Size: Pack Auxiliary. Whatever the species' normal size, an auxiliary appears at **Small** size and never grows. Your main companion's size is not changed.
+  - Species upgrade: once the auxiliary's level reaches that species' upgrade level (the same value the base game uses for animal companions), it receives the species upgrade feature, minus the size increase; the ability score bonuses, natural armor and the rest are kept. The pre-order bonus horse has no upgrade feature in the base game and so gets none.
+  - Pack's Fangs: despite the Small body, natural weapon damage dice are rolled as for the original size (the size it would have had at that level without being fixed at Small). Attack, AC and reach stay those of a Small creature.
+  - Immunity to attacks of opportunity: enemies cannot make attacks of opportunity against auxiliaries.
   - Pack's Quarry: +2 on attack rolls against a foe you have marked as your studied target.
   - It receives the bonus of whichever aspect is active as soon as it appears.
   - It counts as a summoned creature, and it dies outright at 0 hit points instead of dropping into a dying state.
 - **When the pack disperses**
   - Always when the party's combat ends.
   - When you leave combat while conscious. While you are down, the pack stays and keeps fighting (ordinary summons vanish when their summoner falls; auxiliaries are exempt).
-  - Level 7 and up: when you dismount by choice. Mounting again brings the pack straight back. Entering an area where riding is not allowed also disperses it.
+  - Level 7 and up: when you dismount by choice. Mounting again brings the pack straight back, except for auxiliaries that died in that combat. Entering an area where riding is not allowed also disperses it.
   - Level 7 and up: being thrown off because you or the mount went down, or being dismounted by a cutscene, does **not** disperse the pack.
-- **Recall delay**: when an auxiliary dies, its place can be refilled after 1 hour of game time. Each place is tracked separately. Completing a rest clears the delay; an interrupted rest does not. An auxiliary that dispersed without dying has no delay.
+- **Fallen auxiliaries**: an auxiliary that dies does not come back during that combat (dismounting and mounting again does not change this). In the next combat it appears again at once, with no waiting time. If you leave combat while conscious, that combat counts as over for you and the whole pack appears in your next one.
 
 #### How the auxiliaries fight
 
-- While the main companion is conscious, the auxiliaries **do not attack on their own**. They only move to keep up with it.
+- While the main companion is conscious, the auxiliaries **do not attack on their own**. Normally they move to keep up with it.
+- While the main companion is fighting, the auxiliaries move up **beside its target**. The target is the enemy the main companion is currently ordered to attack, or, while you ride it, the enemy you are ordered to attack, or else an enemy the main companion attacked in melee within the last 6 seconds (one round), in that order of priority. They only close in; they still do not strike on their own. If there is no room around the target and they cannot reach it, they go back to following the main companion.
 - Each time the main companion makes one melee weapon swing (natural weapons included), every living auxiliary makes **one attack against the same target**. These are real attacks with their own attack and damage rolls.
   - Requirements: the target is alive, the auxiliary can act, and the target is within the auxiliary's melee reach. An auxiliary that fails any of these skips that swing.
   - The auxiliary uses a natural weapon of the same type the main companion used, or its primary weapon if it has none of that type.
@@ -180,6 +189,15 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 - The Tough Aspect's temporary hit points are granted only if Tough Aspect is active at the moment the auxiliary appears. Switching to Tough Aspect in the middle of a fight does not grant them, and lost temporary hit points are never refilled.
 - If the main companion is revived or joins in the middle of a fight, the active aspect is applied to it again.
 
+#### Pack Empowerment
+
+- **When**: one at each of Hunter levels 4, 10 and 16, three in all. The same one cannot be chosen twice. At level 4 you choose from Hunter spell levels 1–2, at level 10 from up to level 3, and at level 16 from up to level 5 (the list is under Choices).
+- **Effect**: applies the effect of a Hunter spell that normally targets one creature to **the main animal companion and every living auxiliary at once**. The base-game spell's effect is used as is, so its values, duration and stacking rules are those of the base-game spell.
+- **Use**: a move action. Each chosen ability has its own 2 uses per day, which return on rest. It is a spell-like ability with caster level equal to Hunter level.
+- **Targets**: there is no range limit. Auxiliaries that appear after the casting are not affected. It cannot be used when the pack has no member (no main animal companion and no auxiliary).
+- It can be used while riding the main animal companion, and using it does not dismount you.
+- It does not affect you yourself.
+
 #### Studied Target and Tandem Executioner techniques
 
 - Studied Target at level 1, the base feature at level 4 and the technique picks at levels 4, 7, 10, 13, 16 and 19 are taken unchanged from the base game's Tandem Executioner. Their effects and numbers are the base game's.
@@ -194,7 +212,7 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 |---|---|
 | Bear | |
 | Boar | |
-| Centipede | |
+| Hissing Centipede | It cannot be ridden in the base game. From level 7 the call condition (riding the main companion) can never be met, so no auxiliaries appear |
 | Dog | |
 | Elk | |
 | Horse | The pre-order bonus variant is also in the list |
@@ -205,7 +223,25 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 
 - Base-game species that are not offered: Leopard, Monitor Lizard and Velociraptor. They start at Small size.
 - Species that other mods add to the Hunter's companion list do not appear in this archetype's list.
-- Each species has the same statistics and advancement as the base-game animal companion. Auxiliaries appear as the species you chose.
+- Each species has the same statistics and advancement as the base-game animal companion. Auxiliaries appear as the species you chose, at Small size.
+
+**Pack Empowerment** — one at each of levels 4, 10 and 16. Each can also be chosen at any later selection level after the first one listed. Every duration scales with Hunter level.
+
+| Pack empowerment | First selection level | Effect | Duration |
+|---|---|---|---|
+| Pack Empowerment: Magic Fang | 4 | A +1 enhancement bonus on attack and damage rolls with natural weapons and unarmed strikes | 1 minute per Hunter level |
+| Pack Empowerment: Bull's Strength | 4 | A +4 enhancement bonus to Strength. It does not stack with other enhancement bonuses to the same ability score | 1 minute per Hunter level |
+| Pack Empowerment: Cat's Grace | 4 | A +4 enhancement bonus to Dexterity. It does not stack with other enhancement bonuses to the same ability score | 1 minute per Hunter level |
+| Pack Empowerment: Bear's Endurance | 4 | A +4 enhancement bonus to Constitution. It does not stack with other enhancement bonuses to the same ability score | 1 minute per Hunter level |
+| Pack Empowerment: Barkskin | 4 | An enhancement bonus to natural armor (AC): +2 at Hunter levels 4–5, +3 at 6–8, +4 at 9–11, +5 at 12–20. It stacks with the creature's own natural armor, but not with other enhancement bonuses to natural armor | 10 minutes per Hunter level |
+| Pack Empowerment: Natural Rhythm | 4 | During a full attack, each consecutive hit with a natural weapon against the same target adds +1 damage to the next natural weapon attack of that full attack. A miss or a change of target starts the count again from 0, and attacks of opportunity are not affected | 1 round per Hunter level |
+| Pack Empowerment: Magic Fang, Greater | 10 | An enhancement bonus on attack and damage rolls with natural weapons and unarmed strikes: +2 at Hunter levels 10–11, +3 at 12–15, +4 at 16–19, +5 at 20 | 1 hour per Hunter level |
+| Pack Empowerment: Freedom of Movement | 16 | Immunity to the paralyzed, slowed, entangled, difficult terrain and unable-to-move conditions, immunity to grapple combat maneuvers, and immunity to movement-impairing and paralysis effects | 10 minutes per Hunter level |
+| Pack Empowerment: Blessing of the Salamander | 16 | Fast healing 5, fire resistance 20 and a +2 competence bonus to Combat Maneuver Defense | 1 round per Hunter level |
+| Pack Empowerment: Death Ward | 16 | A +4 morale bonus on saving throws against death effects, and immunity to negative energy damage, energy drain and harmful channeled negative energy | 1 minute per Hunter level |
+
+- Animal Growth is not on the list, because it would break the auxiliaries' fixed Small size.
+- The effect is the result of running the base-game spell itself. The values above are the base game's; if another mod changes the spell, the actual effect follows the changed spell (see Compatibility and notes).
 
 **Tandem Executioner techniques** — one at each of levels 4, 7, 10, 13, 16 and 19, from the base game's Tandem Executioner list. The list and its effects are unchanged.
 
@@ -218,21 +254,26 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 
 ### Resources
 
-- There is no resource pool and no daily limit. Call the Pack and both aspects are unlimited.
-- The only limit is the **recall delay**: a dead auxiliary's place is refilled after 1 hour of game time, or after a completed rest.
+- Call the Pack and both aspects are unlimited. A fallen auxiliary returns at once in the next combat, so there is no recall delay either.
+- **Pack Empowerment**: 2 uses per day for each chosen ability, counted separately, returning on rest. The number does not grow with Hunter level or ability scores.
 
 ### Compatibility and notes
 
-- No other mod is required. If the game data is not what the archetype expects (a patch or another mod has changed the Hunter progression or the animal companion list), the archetype does not appear in character creation and the rest of the game runs normally.
+- No other mod is required. If the game data is not what the archetype expects (a patch or another mod has changed the Hunter progression, the animal companion list or the animal companion upgrades), the archetype does not appear in character creation and the rest of the game runs normally.
 - **Mods that add animal companions (ExpandedContent and the like)**: the added species stay available to a base Hunter but are left out of the Pack Warden's list.
+- **TabletopTweaks**
+  - The archetype recognises the way TabletopTweaks-Base reworks the size increase of animal companion upgrades, and removes only the auxiliaries' size increase, just as it does with the base-game data.
+  - Pack Empowerment runs the original spell's effect, so spells that TabletopTweaks-Base fixes (Freedom of Movement, Death Ward and others) apply as fixed. The component TabletopTweaks-Base adds to Death Ward is accepted. The base-game Freedom of Movement also grants immunity to staggering, but TabletopTweaks-Base removes it; since this depends on whether that mod is installed, it is left out of the in-game description and the table above.
+- **When a pack empowerment is disabled**: if a spell's game data is not in a shape this mod knows (a game patch or another mod has changed that spell), only that pack empowerment is removed from the selection list, and a character who already chose it cannot use it (a message gives the reason, and the mod log has a detailed line). If so many are disabled that a selection level would have nothing to pick, the whole archetype does not appear in character creation.
 - **Pre-order bonus animals**: the pre-order bonus variants of the Horse, Smilodon and Triceratops are part of the selection list.
-- **Multiclassing and prestige classes**: the number and level of auxiliaries, the switch to Mounted Call at level 7 and the Tough Aspect's temporary hit points all use Hunter class levels only. With no spellbook, Hunter levels contribute nothing to the requirements or spell progression of caster prestige classes.
+- **Multiclassing and prestige classes**: the number and level of auxiliaries, the switch to Mounted Call at level 7, the Tough Aspect's temporary hit points, and the selection levels, caster level and durations of Pack Empowerment all use Hunter class levels only. With no spellbook, Hunter levels contribute nothing to the requirements or spell progression of caster prestige classes.
 - **Two Pack Wardens in one party** each keep their own pack and their own aspects.
 - **Known limitations**
-  - From level 7 you cannot call the pack unless you can ride your main companion. The base-game rule that a mount must be larger than its rider still applies.
+  - From level 7 you cannot call the pack unless you can ride your main companion. The base-game rule that a mount must be larger than its rider still applies, and if you chose the Hissing Centipede, which cannot be ridden in the base game, no auxiliaries appear from level 7.
   - Auxiliaries exist only during combat. Outside combat you travel with the main companion alone.
   - For an ability attack that does not go through a weapon slot, if it cannot be determined which natural weapon the main companion used, that swing is not followed.
-  - The vanishing effect when auxiliaries disperse can look cut short, and it does not play for auxiliaries that are neither Medium nor Large (under a size-changing effect, for instance). Rules are unaffected.
+  - The pack empowerment descriptions are written from the base-game spell values. If another mod changes a spell's values, the description does not follow.
+  - The vanishing effect when auxiliaries disperse can look cut short, and it does not play for auxiliaries that are not Small, Medium or Large (under a size-changing effect, for instance). Rules are unaffected.
 
 
 </details>
@@ -255,7 +296,7 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 
 ### Overview
 
-The Phantom Blade is a fighter bound to a Guardian Phantom. You fight in melee as usual while a shadowy figure overlapping your body drives force fists into whatever you attack. The same phantom soaks half of the damage you take into its own absorption pool. That pool is both your defence and the fuel for Ghost Slash, your ranged attack, so every fight is a choice between keeping the pool for protection and spending it on offence. In exchange you give up bravery, armor training and armor mastery; bonus feats, weapon training and weapon mastery are untouched.
+The Phantom Blade is a fighter bound to a Guardian Phantom. You fight in melee as usual while a shadowy figure overlapping your body drives force fists into whatever you attack. The same phantom soaks half of the damage you take into its own absorption pool. The pool refills only when you rest, so it is a defensive resource you have to ration across the day. Ghost Slash, your ranged attack, does not draw on it: it has its own uses per day equal to your Charisma modifier. In exchange you give up bravery, armor training and armor mastery; bonus feats, weapon training and weapon mastery are untouched.
 
 ### What you give up
 
@@ -271,12 +312,11 @@ Fighter bonus feats (levels 1, 2, 4, 6, … 20), Weapon Training (5, 9, 13, 17),
 
 | Level | Feature | Effect |
 |---|---|---|
-| 2 | Phantom Blade — the Guardian Phantom and its absorption pool | Grants the Manifest Guardian Phantom toggle (free action, no cost, on by default). While it is manifest, the pool takes 50% of the damage you would suffer. Pool maximum = Phantom Blade level × Charisma modifier (minimum 1) |
+| 2 | Phantom Blade — the Guardian Phantom and its absorption pool | Grants the Manifest Guardian Phantom toggle (free action, no cost, on by default). While it is manifest, the pool takes 50% of the damage you would suffer. Pool maximum = Phantom Blade level × Charisma modifier (minimum 1) × 3. The pool refills only when you finish a rest or gain a level |
 | 3 | Guardian Phantom Rush — once per round | When one of your melee attacks hits, the phantom strikes the same target once with its fist. Up to 1 time per round. Damage = fist dice + Charisma modifier, force |
-| 5 | Ghost Slash: 1 Projectile | Standard action, 30 ft., 1 force projectile (ranged touch). Costs half your level (rounded up) from the absorption pool |
+| 5 | Ghost Slash: 1 Projectile | Standard action, 30 ft., 1 force projectile (ranged touch). Usable Charisma modifier times per day (minimum 1). Does not spend the absorption pool |
 | 6 | Guardian Phantom Ranged Guard | +2 AC against ranged attacks while the phantom is manifest |
 | 7 | Guardian Phantom Rush — twice per round | The per-round limit rises to 2 (still one blow per attack) |
-| 10 | Guardian Phantom Refill | The absorption pool refills completely when combat ends |
 | 10 | Ghost Slash: 2 Projectiles | Ghost Slash fires 2 projectiles |
 | 10 | (Rush rule change — no separate feature) | The phantom now follows up even when your attack **misses**. It makes its own melee touch attack (base attack bonus + Charisma modifier against touch AC). A missed attack still uses up one of that round's follow-ups |
 | 11 | Guardian Phantom Rush — 3 times per round | Per-round limit of 3 |
@@ -294,12 +334,14 @@ Fighter bonus feats (levels 1, 2, 4, 6, … 20), Weapon Training (5, 9, 13, 17),
 
 - A toggle. Turning it on or off is a free action, it costs nothing, and it stays on through rest. It is already on when you gain it at level 2.
 - Rush, absorption, Ranged Guard, Ghost Slash and Full Assault all work **only while the phantom is manifest**.
-- While manifest, a shadowy figure overlaps your character, follows you, and swings along with Rush, Ghost Slash and Full Assault. It is purely cosmetic: it cannot be selected or attacked, takes no part in combat, does not block movement and is never written to your save. It hides when you are stealthed or invisible.
+- While manifest, a shadowy figure overlaps your character, follows you, swings along with Rush and Full Assault, and on a Ghost Slash dashes up to the target, swings and returns. When you walk, it plays a walking animation at your speed. It is purely cosmetic: it cannot be selected or attacked, takes no part in combat, does not block movement and is never written to your save. It hides when you are stealthed or invisible.
 
 #### Absorption pool (Phantom Blade Absorption Pool)
 
 - While the phantom is manifest, the pool takes **50%** of the damage you would suffer (**75%** from level 18). The absorbed amount is rounded down and can never exceed what is left in the pool.
 - Absorption applies to the damage that remains **after** damage reduction, resistances and immunities.
+- Pool maximum = Phantom Blade level × Charisma modifier (minimum 1) × 3. Example: level 10 with a +4 Charisma modifier gives 120.
+- The pool refills only when you finish a rest or gain a level. It does not refill when combat ends.
 - When the pool is empty, only absorption stops. The phantom stays manifest and Rush keeps working.
 - Damage that ignores damage reduction is not absorbed.
 - Every absorption writes a line to the combat log — "The phantom absorbed N damage (pool left M)" — and shows "Absorb N" over your character's head.
@@ -369,27 +411,29 @@ A fighter's number of attacks grows at about the same levels as the limit does, 
 - Each projectile makes its own **ranged touch attack** with base attack bonus + **Charisma** modifier (not Dexterity).
 - Damage per projectile: the same fist dice as Rush + Charisma modifier, force. It crits like a ray (20 / ×2).
 - Sneak attack and other precision damage apply to only one projectile per use.
-- Cost: each use spends **half your fighter level (rounded up)** from the absorption pool. It cannot be used if the pool holds less.
+- Uses: **Charisma modifier times per day (minimum 1)**, one per use. They are restored by rest and on level-up. It cannot be used when no uses remain.
+- These uses are counted separately from Guardian Phantom Full Assault. Ghost Slash does not spend the absorption pool.
+- Visuals: when you use Ghost Slash, the phantom dashes to just in front of the target, swings once per projectile, then snaps straight back to your side. If the target is already down or gone, it swings once in place instead. This is cosmetic and does not affect the rolls.
+  - The projectiles themselves are not shown in flight; only their impact effect appears, so it looks as if the phantom delivers the strike itself.
+  - The phantom leaves short-lived black cloud afterimages along its path: up to 3 on the way out and up to 3 on the way back, spaced about 1.5 m apart. A shorter path leaves none.
+  - Each swing shows a force impact flash on the target. Once the target is down, the remaining swings show no flash.
+  - While the phantom is hidden because you are stealthed or invisible, neither the afterimages nor the flashes appear. If one of these effects fails to load, only that effect is skipped; Ghost Slash itself works as normal.
 - Ghost Slash does not trigger Rush.
 
-| Fighter level | Projectiles | Damage per projectile | Pool cost |
-|---|---|---|---|
-| 5–7 | 1 | 1d8 + Cha | 3–4 |
-| 8–9 | 1 | 1d10 + Cha | 4–5 |
-| 10–11 | 2 | 1d10 + Cha | 5–6 |
-| 12–14 | 2 | 2d6 + Cha | 6–7 |
-| 15 | 3 | 2d6 + Cha | 8 |
-| 16–19 | 3 | 2d8 + Cha | 8–10 |
-| 20 | 4 | 2d10 + Cha | 10 |
+| Fighter level | Projectiles | Damage per projectile |
+|---|---|---|
+| 5–7 | 1 | 1d8 + Cha |
+| 8–9 | 1 | 1d10 + Cha |
+| 10–11 | 2 | 1d10 + Cha |
+| 12–14 | 2 | 2d6 + Cha |
+| 15 | 3 | 2d6 + Cha |
+| 16–19 | 3 | 2d8 + Cha |
+| 20 | 4 | 2d10 + Cha |
 
 #### Guardian Phantom Ranged Guard
 
 - While the phantom is manifest, you gain +2 AC against ranged attacks at level 6, rising to +4 in total at level 14.
 - The bonus is untyped and stacks with everything. It applies to ranged weapon attacks and to ranged touch attacks such as rays, but not to melee attacks.
-
-#### Guardian Phantom Refill
-
-- From level 10, the absorption pool returns to its maximum every time combat ends.
 
 #### Guardian Phantom Full Assault
 
@@ -412,16 +456,20 @@ None
 
 | Resource | Maximum | Restored |
 |---|---|---|
-| Phantom Blade Absorption Pool | Phantom Blade (fighter) level × Charisma modifier (minimum 1) | On rest and on level-up; from level 10 also whenever combat ends |
+| Phantom Blade Absorption Pool | Phantom Blade (fighter) level × Charisma modifier (minimum 1) × 3 | On rest and on level-up. Not when combat ends |
+| Ghost Slash uses | Charisma modifier (minimum 1) | On rest and on level-up |
 | Guardian Phantom Full Assault uses | Charisma modifier (minimum 1) | On rest and on level-up |
 
-Damage absorption and Ghost Slash draw on the same pool. You can read what is left from the "pool left" number in the absorption log line and, from level 5, from the remaining-uses counter on the Ghost Slash button. The Manifest Guardian Phantom button itself shows no number.
+The absorption pool is spent only on absorbing damage. Ghost Slash and Guardian Phantom Full Assault each have their own separate uses. You can read what is left in the pool from the "pool left" number in the absorption log line. The counter on the Ghost Slash button shows Ghost Slash's remaining uses, and the Manifest Guardian Phantom button shows no number.
 
 ### Compatibility and notes
 
-- **Required mods and DLC**: none. Only base-game assets are used.
+- **Required mods and DLC**: none. However, the black cloud afterimage of Ghost Slash borrows an effect from game data tagged DLC3 (Treasure of the Midnight Isles). If that effect cannot be loaded, only the afterimage is skipped; Ghost Slash and its other visuals are unaffected.
+- **Ghost Slash projectile look**: Ghost Slash borrows the projectile of the base-game spell Ray of Enfeeblement and hides only the flight of projectiles fired by a Phantom Blade's Ghost Slash. Ray of Enfeeblement cast by anyone else looks as usual. Because the game reuses projectile visuals, the mod checks every Ray of Enfeeblement projectile once, whoever fired it, and restores any that it left hidden.
+- **Engine patch**: for the phantom's walking animation, this archetype adds one Harmony patch (a prefix and a postfix) to the unit animation update. It does nothing for any unit other than the phantom. Another mod that changes the same update may affect the phantom's walking animation only. If the patch is not applied, the mod log shows one error line and only the walking animation stops; the phantom's position and all ability rules are unaffected.
 - **TabletopTweaks-Base**: if its Advanced Armor Training option has rearranged the fighter progression, the Phantom Blade recognises that layout and removes everything that sits in those slots. If it meets a fighter progression that is neither the base game's nor TabletopTweaks' (another mod has moved or removed armor training at levels 3, 7, 11 or 15, bravery, or armor mastery), the archetype is not registered and will not appear in the archetype list.
 - **Multiclassing and prestige classes**: The Rush limit, fist dice, Ghost Slash, the absorbed share, Ranged Guard and the pool size all look at **fighter levels** only. Levels in other classes help only through base attack bonus, which the phantom uses for its attack rolls.
+- **Characters from an earlier version**: Guardian Phantom Refill, formerly gained at level 10 (pool refill when combat ends), has been removed. A character who already has it keeps it as a hidden feature with no effect.
 - **Beyond level 20**: if your fighter level somehow exceeds 20, Rush, fist dice and Ghost Slash stay at their level-20 values.
 - **Difficulty multipliers**: the pool is charged in damage **before** the difficulty's damage multiplier. On difficulties where incoming damage is scaled, the points drained from the pool and the hit points actually saved can differ.
 - **Combat log**: absorption lines appear on the log's "All" tab, not on the "Combat" tab.
@@ -488,6 +536,7 @@ Everything else is unchanged, including Spell Combat, Spellstrike and spellcasti
 
 - Activation: you use the base game's kineticist simple blast for your element.
 - Attack: energy elements (fire, cold, electricity) make a ranged touch attack and are subject to spell resistance. Physical elements (air, earth, water) make a normal ranged attack and ignore spell resistance.
+- Action and range (the six base-game elements): standard action, 30 feet. Damage is 1d6 per blast rank, plus half your Intelligence modifier for energy elements or your blast rank + your Intelligence modifier for physical elements. For KineticistElementsExpanded elements, that mod sets the range and damage.
 - Attack ability: Intelligence is used whenever your Intelligence modifier is at least as high as your Dexterity modifier. The damage bonus follows Intelligence.
 - Caster level: your magus level (not kineticist level).
 - Burn: your maximum burn is 0, so anything that costs burn is unavailable. You use only the zero-cost simple blast (the composite blast at 20th level is the exception, see below).
@@ -716,7 +765,7 @@ Cantrips are available from 1st level, but only if one of your schools has any (
 - They do what the base game's arcanist exploits do, with different scaling:
   - damage and effect rank use brawler level instead of arcanist level;
   - saving throw DCs use Intelligence instead of Charisma;
-  - ranges and durations that depend on caster level use character level.
+  - values that depend on caster level (Energy Shield resistance, save DCs) use character level.
 - Their cost is paid from the arcane reservoir.
 - The full list is in the exploit table under Choices.
 
@@ -743,19 +792,23 @@ You make the same choice three times at 1st level and cannot pick a school twice
 
 #### Exploits (levels 3, 7, 11, 15, 19 — choose five)
 
-| Exploit | Cost | Effect | Requirements |
+Every exploit is paid for from the arcane reservoir. Values use your brawler level unless marked as based on character level. Exploits that allow a saving throw have DC = 10 + half your character level (at most 9) + your Intelligence modifier.
+
+| Exploit | Action and cost | Effect | Requirements |
 |---|---|---|---|
-| Dimensional Slide | 1 reservoir point | Teleport a short distance as a move action. The distance grows with level. | — |
-| Arcane Barrier | 1 reservoir point | As a swift action, wrap yourself in a barrier that absorbs damage. The amount grows with level, and using it again while a barrier remains costs more. | — |
-| Energy Shield | 1 reservoir point | Gain resistance to acid, cold, electricity or fire (your choice). The resistance grows with level. | — |
-| Force Strike | 1 reservoir point | Fire a missile of force. Like magic missile it always hits one foe, and its damage grows with level. | — |
-| Spell Resistance | 1 reservoir point | Gain spell resistance equal to 6 + your level for a number of rounds. | — |
-| Greater Spell Resistance | — | Whenever you use the Spell Resistance exploit, the spell resistance is 11 + your level instead. | Level 11, Spell Resistance exploit |
-| Shadow Veil | 1 reservoir point | Wrap yourself in shadows for a number of rounds, gaining a bonus on Stealth. | — |
-| Wooden Flesh | 1 reservoir point | Gain a natural armor bonus for a number of rounds. | — |
-| Armored Mask | 1 reservoir point | Don a mask of force that grants a bonus to AC. | — |
-| Ice Missile | 1 reservoir point | Ranged touch attack dealing cold damage. The damage dice grow with level, and a target that fails its save is staggered. | — |
-| Lightning Lance | 1 reservoir point | Ranged touch attack dealing electricity damage. The damage dice grow with level, and a target that fails its save is blinded. | — |
+| Dimensional Slide | Move action, 1 reservoir point | Teleport to a point within 30 feet. The distance does not grow with level. | — |
+| Arcane Barrier | Swift action, 1 reservoir point and up | Gain temporary hit points equal to your brawler level + your Intelligence modifier. Lasts 1 minute per brawler level, or until the temporary hit points are gone. Using it again replaces the temporary hit points and the duration (they do not stack). The cost rises by 1 with each use, up to 3, and returns to 1 when you rest. | — |
+| Energy Shield | Standard action, 1 reservoir point | Each use, choose acid, cold, electricity or fire and gain resistance to that energy. Resistance (by character level): 10 at levels 1-4, 15 at 5-9, 20 at 10-14, 25 at 15-19, 30 at 20. Lasts 1 minute per brawler level. | — |
+| Force Strike | Standard action, 1 reservoir point | Strike one enemy within 30 feet with force. It always hits: no attack roll and no saving throw. Damage: 1d4 force + your brawler level. | — |
+| Spell Resistance | Standard action, 1 reservoir point | Gain spell resistance equal to 6 + your brawler level for a number of rounds equal to your Intelligence modifier. | — |
+| Greater Spell Resistance | — | Whenever you use the Spell Resistance exploit, the spell resistance is 11 + your brawler level instead. It is not a separate ability; duration and cost are unchanged. | Brawler level 11, Spell Resistance exploit |
+| Shadow Veil | Standard action, 1 reservoir point | Every attack against you has a 20% miss chance, and you gain a +5 bonus on Stealth checks. Lasts your Intelligence modifier + 1 rounds. It does not grow with level. | — |
+| Wooden Flesh | Standard action, 1 reservoir point | Gain a +2 natural armor bonus to AC and damage reduction equal to your Intelligence modifier against physical damage that is not slashing (DR N/slashing), and count as a plant creature while it lasts. Lasts 1 minute per brawler level. | — |
+| Armored Mask | Standard action, 1 reservoir point | Gain the effect of mage armor (+4 armor bonus to AC for 1 hour per brawler level). If you already have mage armor, you instead gain shield of faith for 1 minute per brawler level (deflection bonus by character level: +2 at levels 1-5, +3 at 6-11, +4 at 12-17, +5 from 18). With the Archmage Armor mythic ability you get its improved version of mage armor instead. The armor bonus does not stack with the armor bonus of worn armor; only the higher one applies. | — |
+| Ice Missile | Standard action, 1 reservoir point | Ranged touch attack against one enemy within 30 feet. Cold damage (1 + (brawler level - 1) / 2, rounded down)d6 + your Intelligence modifier: 2d6 at level 3, 4d6 at 7, 6d6 at 11, 8d6 at 15, 10d6 at 19. A target that is hit and fails a Fortitude save is staggered for 1 round. The damage applies regardless of the save. | — |
+| Lightning Lance | Standard action, 1 reservoir point | Ranged touch attack against one enemy within 30 feet. Electricity damage with the same dice as Ice Missile. A target that is hit and fails a Fortitude save has a 20% miss chance on all of its attacks for 1 round (it is not blinded). The damage applies regardless of the save. | — |
+
+- Ice Missile and Lightning Lance: if you also have Powerful Exploit (Elemental Focus — Water / Air), which an Elemental Master arcanist gains at level 9 (through multiclassing), the damage dice become d8 (the number of dice stays the same).
 
 These eleven are the whole list. Other arcanist exploits (the ones that convert spell slots into reservoir points, Potent Magic and so on) are not offered.
 
@@ -771,7 +824,7 @@ These eleven are the whole list. Other arcanist exploits (the ones that convert 
 
 | Resource | Maximum | Recovery | Spent on |
 |---|---|---|---|
-| Arcane Reservoir | 3 + brawler level + Intelligence modifier | Fully on rest, fully on level-up | Reservoir Quicken (spell level, minimum 1), exploits (1 point for most) |
+| Arcane Reservoir | 3 + brawler level + Intelligence modifier | Fully on rest, fully on level-up | Reservoir Quicken (spell level, minimum 1), exploits (1 point; Arcane Barrier 1 to 3) |
 | Spell slots | Arcanist table for the same level | Rest | Casting spells |
 
 The reservoir is the same resource as the base game arcanist's arcane reservoir. Unlike the arcanist's, it refills completely on rest rather than halfway.
@@ -780,7 +833,7 @@ The reservoir is the same resource as the base game arcanist's arcane reservoir.
 
 - **Without BrawlerClassWrath**: the game starts normally and only this archetype is left unregistered (it does not appear at character creation). One error line is written to the mod log.
 - **Other mods that add brawler archetypes**: this archetype knows, and blocks combination with, only the brawler mod's eight original archetypes. If the brawler class has any other archetype added to it, this archetype is not registered.
-- **Mods that change the wizard spell list**: spells added to the wizard list by a mod that loads before this one are sorted into the Spellfist school lists by their school (universal spells are skipped). If a mod removes a base-game wizard spell from the list or moves it to another level or school, this archetype is not registered.
+- **Mods that change the wizard spell list**: spells another mod adds to the wizard list are sorted into the Spellfist school lists by their school (universal spells are skipped). This includes mods that add spells after this one (for example CharacterOptionsPlus): on the first frame after the game starts, the school lists are rebuilt from the wizard list as it is then. The spells added or removed are logged in one line in the mod log; if the wizard list cannot be read, the school lists built at load are kept and one error line is written to the mod log. If a mod removes a base-game wizard spell from the list or moves it to another level or school, this archetype is not registered.
 - **DLC spells**: DLC spells on the wizard list are included in the school lists. Without the DLC the game hides them, exactly as it does for a wizard.
 - **Multiclassing and Reservoir Quicken**: the quicken effect applies to the caster as a whole. A multiclass character with another spellbook gets that book's spells quickened too while the toggle is on, and those casts do not drain the reservoir. The drain and the spell-level cap line up exactly only on a single-class character.
 - **Magus multiclass**: not supported. With magus levels, Fist Spellstrike is not attached to the Spellfist spellbook and the magus's own Spellstrike is used as is.
@@ -809,7 +862,7 @@ The reservoir is the same resource as the base game arcanist's arcane reservoir.
 
 ### Overview
 
-The Golemancer is an alchemist who builds a golem and sends it to the front. From level 1 a wood golem fights at your side, and enemies near it take a penalty on attacks against anyone but the golem. At levels 5, 10 and 15 you pick a new material, which replaces the golem's look, size, immunities and special abilities wholesale. From level 10 you can wear the golem as a swift action and tank in person, with the golem's hit points soaking damage before yours. You pay for it with fewer bombs per day, three opposition schools, and the loss of poison resistance, poison immunity and the cognatogens.
+The Golemancer is an alchemist who builds a golem and sends it to the front. From level 1 a wood golem fights at your side, and enemies near it take a penalty on attacks against anyone but the golem. At levels 5, 10 and 15 you pick a new material, which replaces the golem's look, size, immunities and special abilities wholesale. From level 5 you can also use Golem Overdrive, injecting a prepared extract into the golem to give it extra slams and a school-based effect for a short time. From level 10 you can wear the golem as a swift action and tank in person, with the golem's hit points soaking damage before yours. You pay for it with fewer bombs per day, three opposition schools, and the loss of poison resistance, poison immunity and the cognatogens.
 
 ### What you give up
 
@@ -835,8 +888,10 @@ Bomb damage dice, mutagens (including Persistent Mutagen), the extract slot tabl
 | 1 | Golem Material — Wood | The golem's material for levels 1–4. Medium, one slam |
 | 1 | Emergency Repair | Standard action, spends one prepared extract. The golem regains max HP × (extract level × 10)% and is no longer broken |
 | 5 | Golem Material | Replace the material with stone, iron or brass |
+| 5 | Golem Overdrive | Swift action, spends one prepared extract (you pick its level and school). For extract level × 2 rounds the golem makes 2 slams per round (3 from level 11, 4 from level 16) and gains an extra effect based on the spent extract's school |
 | 10 | Golem Material | Replace the material with gold, autumn or summer |
 | 10 | Golem Fusion | Swift-action toggle. Wear the golem: gain its shape, size, two slams, natural armor, DR and Strength, and take damage on the golem's hit points first |
+| 11 | (Golem slam count increase — no separate feature) | The golem's normal slams rise from 1 to 2 per round |
 | 15 | Golem Material | Replace the material with adamantine, greater gold or mithral |
 | 20 | Shared Immunity | While fused, you also gain the current material's additional immunities (not the common construct immunities) |
 
@@ -847,7 +902,16 @@ Bomb damage dice, mutagens (including Persistent Mutagen), the extract slot tabl
 - **Gained**: level 1, automatically. The golem is a companion unit that occupies the animal companion slot and levels up with you (Hit Dice = alchemist level).
 - **Type**: construct. It has the common construct immunities (sleep, paralysis, fear, mind-affecting effects, poison and so on). Alchemical healing does not mend it. It does not have the base game wood golem's blanket spell immunity.
 - **Chassis**: d10 Hit Dice and full base attack bonus, like base game constructs. The golem does not pick feats.
-- **Attacks**: one slam (two slams for you while fused).
+- **Attacks**: slams. Normally one slam per round at levels 1–10 and two from level 11. This costs nothing and always applies. Golem Overdrive raises the number further. The extra slams use the same slam dice. While fused you make two slams (possibly more during a Golem Overdrive).
+
+| Alchemist level | Golem — normal | Golem — overdrive | Fused Golemancer — normal | Fused Golemancer — overdrive |
+|---|---|---|---|---|
+| 1–4 | 1 | — | — | — |
+| 5–9 | 1 | 2 | — | — |
+| 10 | 1 | 2 | 2 | 2 |
+| 11–15 | 2 | 3 | 2 | 3 |
+| 16–20 | 2 | 4 | 2 | 4 |
+
 - **Taunting aura — Golem's Taunt**: enemies within 10 feet of the golem take a −2 penalty on attack rolls against targets other than the golem. Attacks against the golem itself are unpenalized. While fused, the aura moves to you.
 - **Broken**: a golem reduced to 0 hit points is broken. It stays down and cannot be fused with. Only two things bring it back: a successful rest (revived at full hit points) or Emergency Repair. An interrupted rest leaves it broken.
 
@@ -917,12 +981,13 @@ Levels 15–20 — adamantine is Huge, the others Large:
 
 - **Activation**: level 10, swift-action toggle. It can be turned on outside combat.
 - **Effect**: the golem disappears and you polymorph into the shape and size of your golem's current material.
-  - Two slams, using the golem's slam dice for its current material and level.
+  - Two slams, using the golem's slam dice for its current material and level. During a Golem Overdrive you use the overdrive number instead (minimum 2 — 3 from level 11, 4 from level 16).
   - You gain the golem's natural armor and DR from the tables above (the DR is bypassed by the same material as the golem's).
-  - You gain a Strength bonus equal to the golem's Strength modifier. Examples: gold at level 10 (Str 33) gives +12 Strength; mithral at level 20 (Str 44) gives +17.
+  - You gain a Strength bonus equal to the golem's Strength modifier (rounded up when the golem's Strength is odd). Examples: gold at level 10 (Str 33) gives +12 Strength; mithral at level 20 (Str 44) gives +17.
   - The taunting aura moves to you.
+  - The material's special abilities (breath weapons, auras, prismatic surge, fast healing and so on) stay with the golem. The material's additional immunities are shared while fused only from level 20, through Shared Immunity.
 - **Shared hit points**: damage you take while fused is applied to the golem's hit points first. When they run out the fusion ends, the golem is broken, and the remaining damage hits you. If you end the fusion yourself, the golem returns with whatever hit points it has left.
-- **Unavailable while fused**: spells, extracts, bombs and mutagens. A mutagen you drank before fusing keeps working. Emergency Repair can still be used.
+- **Unavailable while fused**: spells, extracts, bombs and mutagens. A mutagen you drank before fusing keeps working. Emergency Repair and Golem Overdrive can still be used.
 - **Cannot be turned on** while the golem is broken or missing, while the game is saving, or while you are already polymorphed by something else.
 - **Ends when** you turn it off, rest, save (including autosaves), change area, are polymorphed by an outside effect, die, or the golem runs out of hit points.
 - **Does not end when** you are stunned, paralyzed, dying or unconscious, or when combat ends.
@@ -940,6 +1005,35 @@ Levels 15–20 — adamantine is Huge, the others Large:
 
 - **Requirements**: the golem must be adjacent (5 feet). While fused, it repairs the worn golem regardless of distance. It cannot be used when there is nothing to repair (full hit points and not broken) or when you have no prepared extract of that level.
 
+#### Golem Overdrive
+
+- **Activation**: from level 5, swift action. It has 54 variants, one per extract level (1st–6th) and school (the eight schools plus No School). It can be used outside combat and while fused.
+- **Cost**: one prepared, unspent extract of that level and school. A two-slot opposition-school extract counts as one. There is no separate limit on uses per day.
+- **Duration**: spent extract level × 2 rounds. The remaining duration keeps running after combat ends.
+
+| Extract level | 1st | 2nd | 3rd | 4th | 5th | 6th |
+|---|---|---|---|---|---|---|
+| Duration (rounds) | 2 | 4 | 6 | 8 | 10 | 12 |
+
+- **Effect 1 — slam count**: for the duration the golem makes 2 slams per round at levels 5–10, 3 at levels 11–15 and 4 at levels 16–20 (see the table under Golem).
+- **Effect 2 — school effect**: for the duration the golem gains the effect below, based on the school of the spent extract.
+
+| School of the spent extract | Effect for the duration |
+|---|---|
+| Transmutation | Strength +4 (enhancement bonus) |
+| Conjuration | Fast healing 5 |
+| Abjuration | AC +4 (armor bonus) |
+| Divination | Attack rolls +2 (insight bonus), critical confirmation rolls +4 |
+| Illusion | 20% concealment (attacks against the golem miss 20% of the time) |
+| Necromancy | Slams deal +1d6 negative energy damage on a hit |
+| Enchantment | Enemies hit by a slam are shaken for 1 round (no save, mind-affecting) |
+| Evocation | Slams deal +2d6 electricity damage on a hit |
+| No School | No additional effect (only the slam count rises) |
+
+- **While fused**: you receive the slam count and the school effect instead of the golem. Your slams follow the overdrive number, with a minimum of 2. If you start or end the fusion during an overdrive, the effects move between you and the golem.
+- **Cannot be used** while an overdrive is already running (the remaining duration cannot be overwritten or extended), while the golem is missing or broken, while the fusion is in the middle of changing, or when you have no prepared extract of that level and school.
+- **Ends when** the duration runs out, or at once if the golem is broken or lost. Repairing the golem afterwards does not bring the ended overdrive back.
+
 #### Halved Bombs
 
 - Bombs per day = (alchemist level + Intelligence modifier) ÷ 2, rounded down, minimum 0. Extra bombs from feats, equipment and mythic sources are added on top, unchanged.
@@ -954,10 +1048,10 @@ Levels 15–20 — adamantine is Huge, the others Large:
 #### Shared Immunity
 
 - Level 20, automatic. Only while fused, you share the current material's additional immunities:
-  - Adamantine: immunity to critical hits and to precision damage
-  - Greater Gold: immunity to insanity (confusion) and petrification
-  - Mithral: immunity to electricity, evasion
-- The common construct immunities (sleep, paralysis, fear, mind-affecting, poison and so on) are not shared. Immunities you already have are left alone and are not removed when the fusion ends.
+  - Adamantine: immunity to critical hits and to precision damage such as sneak attacks
+  - Greater Gold: immunity to confusion and petrification
+  - Mithral: immunity to electricity, evasion (no damage instead of half on a successful Reflex save)
+- The common construct immunities (sleep, paralysis, fear, mind-affecting, poison and so on) and the material's special abilities are not shared. Immunities you already have are left alone and are not removed when the fusion ends. The shared immunities themselves end with the fusion.
 
 ### Choices
 
@@ -967,23 +1061,61 @@ At each of levels 5, 10 and 15 you choose one of three materials. The new materi
 
 | Level | Material | Size | DR bypassed by | Ratios | Additional immunities | Special abilities |
 |---|---|---|---|---|---|---|
-| 1 | Wood | Medium | Adamantine | 1.00 / 1.00 / 1.00 / 1.00 | — | The base game wood golem's splintering ability (save DC based on the golem's level) |
-| 5 | Stone | Large | Adamantine | 0.90 / 0.75 / 0.97 / 0.91 | Petrification, acid | Slowing Aura: enemies entering within 10 feet are slowed for 7 rounds on a failed Will save |
-| 5 | Iron | Large | Adamantine | 1.00 / 1.12 / 0.97 / 1.04 | Electricity | Poison breath (the base game iron golem's breath weapon). Fire Repair: takes no fire damage and heals one third of the damage it would have taken |
-| 5 | Brass | Large | Adamantine | 1.10 / 1.12 / 1.06 / 1.04 | Fire | Incendiary cloud breath (the base game brass golem's breath weapon), see invisibility |
-| 10 | Gold | Large | Adamantine | 0.89 / 1.29 / 1.35 / 1.13 | Blindness, insanity | Prismatic surge (melee) |
-| 10 | Autumn | Large | Nothing (DR/—) | 1.05 / 0.86 / 0.82 / 0.93 | Cold, freedom of movement | Despair aura, entangling grab — save DCs based on the golem's level |
-| 10 | Summer | Large | Nothing (DR/—) | 1.05 / 0.86 / 0.82 / 0.93 | Fire, freedom of movement | Fatigue aura, entangling grab — save DCs based on the golem's level |
-| 15 | Adamantine | Huge | Nothing (DR/—) | 0.93 / 1.00 / 0.88 / 0.95 | Critical hits, precision damage | Fast healing 5, Improved Critical (slam) |
-| 15 | Greater Gold | Large | Adamantine | 0.79 / 1.00 / 0.96 / 1.00 | Insanity, petrification | Prismatic surge (ranged), Cleave |
-| 15 | Mithral | Large | Nothing (DR/—) | 1.29 / 1.00 / 1.17 / 1.05 | Electricity, evasion | Combat Reflexes, fast healing 20, speed 50 feet (+20 feet) |
+| 1 | Wood | Medium | Adamantine | 1.00 / 1.00 / 1.00 / 1.00 | — | Splintering (save DC based on the golem's level) |
+| 5 | Stone | Large | Adamantine | 0.90 / 0.75 / 0.97 / 0.91 | Petrification, acid | Slowing Aura |
+| 5 | Iron | Large | Adamantine | 1.00 / 1.12 / 0.97 / 1.04 | Electricity, fire | Breath weapon (poison cloud) |
+| 5 | Brass | Large | Adamantine | 1.10 / 1.12 / 1.06 / 1.04 | Fire | Breath weapon (incendiary cloud), see invisibility |
+| 10 | Gold | Large | Adamantine | 0.89 / 1.29 / 1.35 / 1.13 | Blindness, confusion | Prismatic surge (touch) |
+| 10 | Autumn | Large | Nothing (DR/—) | 1.05 / 0.86 / 0.82 / 0.93 | Cold, freedom of movement (constant) | Aura of thorny despair, constricting vines — save DCs based on the golem's level |
+| 10 | Summer | Large | Nothing (DR/—) | 1.05 / 0.86 / 0.82 / 0.93 | Fire, freedom of movement (constant) | Aura of the summer heat, constricting vines — save DCs based on the golem's level |
+| 15 | Adamantine | Huge | Nothing (DR/—) | 0.93 / 1.00 / 0.88 / 0.95 | Critical hits, precision damage such as sneak attacks | Fast healing 5, Improved Critical (Slam) — see Known limitations |
+| 15 | Greater Gold | Large | Adamantine | 0.79 / 1.00 / 0.96 / 1.00 | Confusion, petrification | Prismatic surge (ranged), Cleave |
+| 15 | Mithral | Large | Nothing (DR/—) | 1.29 / 1.00 / 1.17 / 1.05 | Electricity, evasion | Combat Reflexes, fast healing 20, speed 50 feet (other materials 30 feet) |
 
-- The breath weapons, prismatic surges, auras and grab are the corresponding base game golems' abilities. The wood golem's splintering and the autumn and summer auras and grab have been adjusted so their save DCs scale with your golem's level.
+**Material special abilities in detail**
+
+| Ability | Material | Effect |
+|---|---|---|
+| Splintering | Wood | Free action. 6d6 physical damage to enemies within 20 feet of the golem (Reflex half). The save DC follows the golem's level |
+| Slowing Aura | Stone | Enemies entering within 10 feet of the golem are slowed for 7 rounds on a failed Will save |
+| Breath weapon (poison cloud) | Iron | Free action. Creates a 5-foot-radius poison cloud at a target within touch range for 1 round. Any creature in it, friend or foe, is poisoned on a failed Fortitude save (1d4 Constitution damage each round for 4 rounds, Fortitude negates) |
+| Breath weapon (incendiary cloud) | Brass | Swift action. Creates a 10-foot-radius incendiary cloud at a target within touch range for 1d6 rounds. Each round every creature in it except the golem, friend or foe, takes 6d6 fire damage (Reflex half) |
+| See invisibility | Brass | Constant |
+| Prismatic surge (touch) | Gold | Swift action, touch range, no attack roll. One of six effects at random: 20 fire / 40 acid / 80 electricity damage (Reflex half for each), poison (Fortitude; 1d4 Constitution damage each round for 6 rounds), petrification (Fortitude, permanent), insanity (Will, permanent) |
+| Prismatic surge (ranged) | Greater Gold | Swift action, needs a ranged touch attack to hit. Same effects as the touch version |
+| Aura of thorny despair | Autumn | Enemies entering within 10 feet of the golem are entangled for 1d4+1 rounds on a failed Reflex save and suffer crushing despair for 1d4+1 rounds on a failed Will save. DCs follow the golem's level |
+| Aura of the summer heat | Summer | Enemies within 10 feet of the golem, on entering and every round, are entangled for 1d4+1 rounds on a failed Reflex save and fatigued on a failed Fortitude save (no time limit). DCs follow the golem's level |
+| Constricting vines | Autumn, Summer | A slam that hits attempts a grapple (+4 on the check). Success deals 2d10 + 1.5 × Strength modifier and grapples; the grappled enemy cannot move and takes 4d10 + 2 × Strength modifier each round. The golem cannot attack while grappling |
+| Fast healing 5 / 20 | Adamantine / Mithral | Regains 5 / 20 hit points each round |
+| Improved Critical (Slam) | Adamantine | Base game feat. See Known limitations |
+| Cleave | Greater Gold | Base game feat |
+| Combat Reflexes | Mithral | Base game feat |
+
+- The breath weapons, prismatic surges, auras and constricting vines are the corresponding base game golems' abilities. The wood golem's splintering and the autumn and summer auras and constricting vines have been adjusted so their save DCs scale with your golem's level.
 - While the golem is broken it loses what the material granted through ongoing effects (fast healing, freedom of movement, see invisibility, auras); they return when it is repaired.
+
+#### Extract spent on Golem Overdrive
+
+Each time you use Golem Overdrive you choose the level (1st–6th) and school of the extract to spend. The level sets the duration and the school sets the extra effect. The effects by school are listed in the table under Abilities in detail — Golem Overdrive.
 
 #### Opposition schools
 
-Three of Abjuration, Conjuration, Divination, Enchantment, Evocation, Illusion and Necromancy. Every option has the same effect: extracts of that school take two slots to prepare.
+Three of Abjuration, Conjuration, Divination, Enchantment, Evocation, Illusion and Necromancy. Every option has the same effect: extracts of that school take two slots to prepare. An opposition school's Golem Overdrive effect can then only come from an extract prepared in two slots.
+
+For reference, the 71 extracts on the base game alchemist list by school, with representative extracts:
+
+| School | Extracts | Representative extracts (level) | Golem Overdrive effect |
+|---|---|---|---|
+| Transmutation | 29 | — (cannot be an opposition school) | +4 Strength |
+| Conjuration | 14 | Cure Light Wounds (1), Restoration, Lesser (2), Heal (6) and others | Fast healing 5 |
+| Abjuration | 12 | Shield (1), Resist Energy (2), Stoneskin (4) and others | +4 AC |
+| Divination | 4 | True Strike (1), See Invisibility (2), True Seeing (6) and others | +2 attack, +4 to confirm criticals |
+| Illusion | 4 | Blur (2), Invisibility (2), Displacement (3) and others | 20% concealment |
+| Necromancy | 4 | False Life (2), Death Ward (4), Eyebite (6) and others | +1d6 negative energy |
+| Enchantment | 3 | Aid (2), Heroism (3), Rage (3) | Shaken for 1 round |
+| Evocation | 1 | Dragon's Breath (4) | +2d6 electricity |
+
+The counts are for the base game list; extracts added by other mods are not included.
 
 Opposition schools apply only to your Golemancer extracts. They do not affect a spellbook gained from another class through multiclassing, your bombs, mutagens or discoveries, or the use of scrolls, wands and potions. You can still use opposition-school extracts; they just take two slots to prepare.
 
@@ -992,23 +1124,25 @@ Opposition schools apply only to your Golemancer extracts. They do not affect a 
 - Feats granted automatically: none. Bonus feat slots are unchanged.
 - Options you can no longer take: the Cognatogen discovery, and with it Greater Cognatogen and Grand Cognatogen, which require it. This applies to discovery selections and to the Extra Discovery feat.
 - Feats added specifically for this archetype: none.
-- The golem does not choose feats. Depending on its material it gains Improved Critical (slam), Cleave or Combat Reflexes.
+- The golem does not choose feats. Depending on its material it gains Improved Critical (Slam) (adamantine), Cleave (greater gold) or Combat Reflexes (mithral).
 
 ### Resources
 
 - **Bombs**: (alchemist level + Intelligence modifier) ÷ 2, rounded down, plus extra bombs from other sources, per day. Restored by resting, as in the base game.
 - **Emergency Repair**: no pool of its own. It spends prepared extracts of 1st–6th level, one per use.
+- **Golem Overdrive**: no pool of its own. Each use spends one prepared extract of 1st–6th level and lasts that level × 2 rounds. Only one overdrive can run at a time.
 - **Golem Fusion**: no uses per day and no duration. The practical resource is the golem's hit points.
-- **Golem hit points**: fully restored by a successful rest, which also revives a broken golem. Some materials add fast healing (adamantine 5, mithral 20), and the iron golem heals from fire damage.
+- **Golem hit points**: fully restored by a successful rest, which also revives a broken golem. Some materials add fast healing (adamantine 5, mithral 20).
 
 ### Compatibility and notes
 
 - **No animal companions**: the golem uses the animal companion slot. Combining it with a class or feature that grants an animal companion (druid, hunter and so on) leaves the golem non-functional and logs a conflict error in the mod log.
 - **DLC content**: the brass material uses the brass golem unit and model added by DLC 3 (The Treasure of the Midnight Isles). All other materials (wood, stone, iron, gold, autumn, summer, adamantine, greater gold, mithral) use base game golems. The cognatogen lockout also covers the Extra Discovery feat selection that ships with DLC 5 (The Lord of Nothing) content.
 - **Other mods**: if another mod moves or removes Poison Resistance at alchemist levels 2, 5 or 8 or Poison Immunity at level 10, this archetype is not created at all, rather than being created half-working. The golem's level is computed directly from your alchemist level, so mods that change animal companion levels do not affect it.
-- **Multiclassing and prestige classes**: the golem's Hit Dice and numbers, the bomb base and the fusion numbers all read alchemist level only. Levels in other classes do not advance them.
+- **Multiclassing and prestige classes**: the golem's Hit Dice and numbers, its slam count (normal and overdrive), the bomb base and the fusion numbers all read alchemist level only. Levels in other classes do not advance them.
 - **Known limitations**
   - At level 1 with Intelligence 10–11 you may have 0 bombs per day.
+  - The adamantine golem's Improved Critical (Slam): the base game feat's weapon type list does not include the golem's slam type, so its threat range is not increased at present.
   - Opposition schools cannot be undone once chosen (a full respec, which rebuilds the character, is the exception).
   - The fusion ends whenever a save starts, including autosaves on area transitions and at the start of dialogues. Hit points, material and broken state are kept; you have to fuse again after loading.
   - Respeccing while fused is not supported.
@@ -1038,7 +1172,7 @@ Opposition schools apply only to your Golemancer extracts. They do not affect a 
 
 ### Overview
 
-The Warlock gives up every hex in exchange for an at-will elemental ray, the blast, shaped by her patron. The patron you pick at level 1 places you in one of six groups (Hell, Abyss, Fey, Storm, Death, Star), and the group decides your blast element, the creatures you can call and your defensive ward. Every blast that hits builds 1 Heat (up to 9), and Heat is spent as a swift action to summon the patron's servants. When Heat reaches 9, the strongest creature you can call appears on its own. You cast spontaneously with Charisma like a Stigmatized Witch, and you keep your patron spells and familiar.
+The Warlock gives up every hex in exchange for an at-will elemental ray, the blast, shaped by her patron. The patron you pick at level 1 places you in one of six groups (Hell, Abyss, Fey, Storm, Death, Star), and the group decides your blast element, the creatures you can call and your defensive ward. Every blast that hits builds 1 Heat (up to 9), and Heat is spent as a swift action to summon the patron's servants. When Heat reaches 9, the strongest creature you can call appears on its own. When combat ends, half of your Heat (rounded down) remains, and a full rest resets it to 0. You cast spontaneously with Charisma like a Stigmatized Witch, and you keep your patron spells and familiar.
 
 ### What you give up
 
@@ -1060,7 +1194,7 @@ Kept: patron selection (including patron spells), familiar, simple weapon profic
 | 1 | Warlock Pact | Your patron decides your warlock group; the pact grants that group's blast and Heat summoning and keeps the group's abilities matched to your level |
 | 1 | Warlock Group | One of Hell, Abyss, Fey, Storm, Death or Star. Decides your blast element, summon table and ward |
 | 1 | Blast | Standard action, close-range ranged touch ray (Charisma to hit). 1d6 + half your Charisma modifier, +1d6 at every odd level from 3rd. Usable at will |
-| 1 | Heat | +1 each time a blast hits (maximum 9). Drops to 0 when combat ends or after a full rest |
+| 1 | Heat | +1 each time a blast hits (maximum 9). When combat ends half of it remains (rounded down); a full rest resets it to 0. Heat that remains can also be spent outside combat |
 | 1 | Heat Summoning I–IX | Swift action. Spend N Heat to summon one tier N creature of your group (N cannot exceed your highest spell level). Lasts 1 round per witch level. At 9 Heat the highest tier is summoned automatically, for free |
 | 1 | Charisma cantrips | The Stigmatized Witch's Charisma-based cantrips |
 | 2 | Group Ward I | Resistance 5 to your group's element (Star: +1 deflection bonus to AC) |
@@ -1105,18 +1239,20 @@ Level 10. One standard action fires two rays at the same target (medium range). 
 - Only the hit matters. Heat rises even if resistance or immunity reduces the damage to 0, or if spell resistance stops the blast.
 - Weapon attacks, spells and your summons' attacks do not build Heat.
 - Maximum 9. At 0 Heat there is no buff; from 1 upward the buff icon shows the current value.
-- Heat drops to 0 when combat ends (when the warlock leaves combat — in real-time mode this includes falling unconscious) and after a completed rest (an interrupted rest changes nothing).
+- When combat ends, Heat does not drop to 0; half of it remains (rounded down — for example 7 → 3, 5 → 2, 1 → 0). This applies once each time the warlock herself leaves combat, which in real-time mode includes dropping out of combat by falling unconscious. If she was not in combat to begin with, Heat does not change.
+- A completed rest resets Heat to 0 (an interrupted rest changes nothing).
+- Heat that remains stays on you as a buff outside combat, and it can be spent on Heat Summoning outside combat as well.
 
 #### Heat Summoning
 
 - Use: swift action, supernatural ability, close range, targeted at a point. Each group has its own "<Group> Heat Summoning" ability with nine variants, I to IX.
-- Requirements: Heat at least equal to the tier, and the tier no higher than the highest spell level of your warlock spellbook (for example up to tier III at witch level 6, and tier IX from level 18). Otherwise the variant is unavailable.
+- Requirements: Heat at least equal to the tier, and the tier no higher than the highest spell level of your warlock spellbook (for example up to tier III at witch level 6, and tier IX from level 18). Otherwise the variant is unavailable. These are the only two requirements, so if you have Heat left you can use it outside combat too.
 - Cost: Heat equal to the tier.
 - Effect: summons one creature of that tier. Any warlock summon you already have vanishes (one at a time per warlock; other warlocks' summons and ordinary summoning spells are unaffected).
 - Duration: 1 round per witch level; doubled from level 16. From level 20, a tier IX summon stays until combat ends and then vanishes.
 - Patron's Servant: warlock summons cannot be directly controlled. They fight on your side on their own.
 - From level 4 they benefit from Augment Summoning (+4 Strength and Constitution).
-- Patron's Favor: the tier IX summons of the Hell, Storm and Death groups gain a further +4 Strength and Constitution (stacks with other bonuses).
+- Patron's Favor: the tier IX summons of the Hell, Storm and Death groups gain a further +4 Strength and Constitution (stacks with other bonuses). A summon without a Constitution score, such as an undead, gains +4 Charisma instead of Constitution (undead hit points are based on Charisma). The Death group's tier IX Graveknight is such a summon, so it gains +4 Strength and Charisma.
 
 #### Automatic summon
 
@@ -1184,9 +1320,11 @@ Cells that use a DLC unit: only Abyss III (Abrikandilu). The other 53 cells use 
 
 ### Resources
 
-| Resource | Maximum | Gained by | Reset |
+| Resource | Maximum | Gained by | Reduced / reset |
 |---|---|---|---|
-| Heat | 9 | +1 per blast hit (+2 on a confirmed critical hit from level 12) | 0 when combat ends, 0 after a completed rest, 0 on an automatic summon |
+| Heat | 9 | +1 per blast hit (+2 on a confirmed critical hit from level 12) | Halved (rounded down) when combat ends, 0 after a completed rest, 0 on an automatic summon |
+
+- Heat left over after combat persists outside combat and can be spent on Heat Summoning.
 
 - Blast and Double Blast are usable at will.
 - Heat Summoning has no daily limit; it only costs Heat.
@@ -1219,7 +1357,7 @@ Cells that use a DLC unit: only Abyss III (Abrikandilu). The other 53 cells use 
 
 **Known limitations**
 - The Storm group's blast deals no damage to demons, which are immune to electricity (Heat still builds).
-- Tier IX of the Hell, Storm and Death groups is a creature of the same rank as tier VIII; in exchange it gains Patron's Favor (+4 Strength and Constitution a second time).
+- Tier IX of the Hell, Storm and Death groups is a creature of the same rank as tier VIII; in exchange it gains Patron's Favor (+4 Strength and Constitution a second time; +4 Strength and Charisma for the Death group's Graveknight).
 - Fey tiers III and IV summon the same creature (Medium Water Elemental).
 - Saving during the brief moment an automatic summon is resolving can lose that summon and your Heat.
 - Loading a save that contains a warlock after removing the mod is not supported.
@@ -1245,7 +1383,7 @@ Cells that use a DLC unit: only Abyss III (Abrikandilu). The other 53 cells use 
 
 ### Overview
 
-The Weapon-Spirit Shaman trades the spirit animal for a spirit dwelling in a weapon: the Weapon Spirit. It is a floating weapon that fights beside you on its own, much like an animal companion. Put magic weapons into the Weapon Spirit's spare weapon sets and their magic is mirrored onto the weapon it is currently wielding, so spare magic weapons become fuel rather than vendor trash. From level 5 you can call on Spirit Possession a few times per day to take that mirrored power into your own weapon for a short while, and at level 20 you can fuse with the spirit and use its hit points as a shield. Your shaman spells, spirit and hexes are untouched.
+The Weapon-Spirit Shaman trades the spirit animal for a spirit dwelling in a weapon: the Weapon Spirit. It is a floating weapon that fights beside you on its own, much like an animal companion. Put magic weapons into the Weapon Spirit's spare weapon sets and their magic is mirrored onto the weapon it is currently wielding, so spare magic weapons become fuel rather than vendor trash. From level 5 you can call on Spirit Possession a few times per day to take that mirrored power into your own weapon for a short while, at level 18 you can call a Spirit Barrage once per day, in which the Weapon Spirit attacks one enemy once with each of its spare melee weapons, and at level 20 you can fuse with the spirit and use its hit points as a shield. Your shaman spells, spirit and hexes are untouched.
 
 ### What you give up
 
@@ -1265,6 +1403,7 @@ The Weapon-Spirit Shaman trades the spirit animal for a spirit dwelling in a wea
 | 5 | Spirit Possession I | Swift action, 1/day, 3 rounds. The power mirrored onto the Weapon Spirit's weapon moves to your own primary weapon (or empty hand) |
 | 10 | Spirit Possession II | 2/day, 5 rounds. Adds flight (immune to ground effects and trip) during possession |
 | 15 | Spirit Possession III | 3/day, 7 rounds. Adds +2 to hex DCs during possession |
+| 18 | Spirit Barrage | Swift action, 1/day. Choose one enemy: the Weapon Spirit attacks it once with each melee weapon in its spare weapon sets (at most 6 attacks). Every attack uses the Weapon Spirit's highest attack bonus, and damage is that spare weapon's own |
 | 20 | Spirit Possession IV (Fusion) | 4/day, 10 rounds. You can spend a possession use on Spirit Fusion — 10 rounds of the Possession III effects, with damage you take going to the Weapon Spirit's hit points first |
 
 ### Abilities in detail
@@ -1287,8 +1426,9 @@ Weapon Spirit traits:
 | Natural armor | +5 |
 | Proficiencies | Every weapon category in the selection (all 59), light and medium armor. No shield proficiency |
 | Equipment slots | Uses all four weapon sets. Cannot use the boots, two ring, glasses and shirt slots |
-| Automatic feats | The Weapon Focus and Improved Critical that animal companions take for their bite are taken for the chosen weapon category instead |
+| Automatic feats | The Weapon Focus and Improved Critical that animal companions take for their bite are taken for the chosen weapon category instead. They keep that target even if the Weapon Spirit wields a weapon of another category |
 | Death | If it falls, it returns after you rest |
+| Portrait | The base-game Animated Weapons portrait. The companion slot on the party bar shows a small version of the same picture |
 
 Differences from a regular animal companion: it does not gain Multiattack, it is not of the animal type, and it cannot take animal companion archetypes.
 
@@ -1340,6 +1480,24 @@ Level 20. A separate ability that draws on the same possession uses.
 - Damage absorption: while fused, damage you take is taken first by the Weapon Spirit's current hit points. When its hit points reach 0, the remaining damage is yours, the spirit falls (it returns after resting) and the fusion ends.
 - Ending: when the duration runs out, the Weapon Spirit reappears with its remaining hit points. Leaving the area or saving ends the fusion, as does the shaman's death.
 
+#### Spirit Barrage
+
+Level 18. A separate ability from possession and fusion, with its own use (1/day) rather than the possession uses.
+
+- Use: swift action, supernatural ability, targets one enemy. Costs one Spirit Barrage use.
+- Requirements:
+  - The Weapon Spirit must be alive, visible and within 30 feet of the shaman.
+  - At least one of the Weapon Spirit's spare slots must hold a melee weapon.
+  - The target must be within the melee reach of at least one of those spare melee weapons. Reach is measured from the Weapon Spirit's position. The distance and line of sight between the shaman and the target do not matter.
+- Effect: the Weapon Spirit attacks the target once with each melee weapon in its spare weapon sets (the three sets not currently in use, up to six slots). At most 6 attacks, taken in weapon set order and, within a set, main hand before off hand.
+  - Each attack is rolled separately, and all of them use the Weapon Spirit's highest attack bonus.
+  - Damage comes from that spare weapon's own dice, enhancement and special properties. The magic that Spirit Mirror places on the currently wielded weapon is not added.
+  - If an earlier attack drops the target, the remaining weapons do not attack.
+  - The Weapon Spirit's normal attacks and actions are unaffected. Its weapon sets and equipment layout do not change either.
+- Slots that do not take part: empty slots, ranged weapons, shields, non-weapons, weapons carrying a temporary enchantment, weapons that cannot reach the target, and weapons that leave a trace when wielded (a weapon that leaves an effect on the Weapon Spirit merely by being picked up and put down).
+- Usable during a possession. Not usable during a fusion, because the Weapon Spirit is hidden.
+- Log: one line in the combat log gives the number of attacks, the number of hits and why any slot was left out, and one line in the mod log gives the result for each weapon that attacked and the slots left out.
+
 ### Choices
 
 The level 1 Weapon Spirit weapon category (59 options). Natural weapons and categories without a weapon model are excluded. In game the options appear under the base game's weapon names.
@@ -1353,6 +1511,8 @@ The level 1 Weapon Spirit weapon category (59 options). Natural weapons and cate
 | Ranged | Longbow, Shortbow, Light Crossbow, Heavy Crossbow, Sling Staff |
 
 Every option does the same thing: Weapon Focus with that category for the shaman, plus a Weapon Spirit wielding a masterwork weapon of that category. Whatever you pick, the Weapon Spirit is proficient with all 59 categories, so you can hand it a different weapon later.
+
+On the selection screen each option has its own multi-line description. It lists the starting weapon's melee or ranged type, whether it is one-handed, two-handed, light or a double weapon, its damage dice, critical range and multiplier, and its melee reach or range in feet; double weapons also list the second head's damage and critical. Ranged categories add a line noting that ranged weapons take no part in Spirit Barrage. These numbers are read from the starting weapon values the game actually uses, so if another mod changes that weapon type, the changed values are shown. The selection screen's overall description and the level-table descriptions of Spirit Possession II-IV also state uses per day and duration in rounds.
 
 ### Feats
 
@@ -1368,8 +1528,10 @@ Every option does the same thing: Weapon Focus with that category for the shaman
 | Resource | Formula | Recovery |
 |---|---|---|
 | Spirit Possession uses | 1 at shaman level 5, +1 every 5 levels after that (1 at level 5 / 2 at 10 / 3 at 15 / 4 at 20) | Resting |
+| Spirit Barrage uses | A fixed 1 per day from shaman level 18 (not increased by level or ability scores) | Resting |
 
 - Spirit Possession and Spirit Fusion share the same uses.
+- Spirit Barrage has its own use, separate from the possession uses.
 - Only shaman levels count.
 - Spirit Mirror uses no resource.
 
@@ -1381,6 +1543,7 @@ Every option does the same thing: Weapon Focus with that category for the shaman
 **Other mods**
 - This archetype removes Spirit Animal (level 1), Wandering Spirit (level 4) and Wandering Hex (levels 6 and 14) from the shaman progression. If another mod changes the shaman progression so that these features are no longer at those levels, the class is not created.
 - If TabletopTweaks or a similar mod changes the animal companion progression, the Weapon Spirit follows the changed progression.
+- If another mod changes a starting weapon into something the option description cannot express (a size other than Medium, a touch attack, damage without dice, and so on), that option alone shows a description stating the reason instead of the numbers, and the mod log gets one error line. Class registration and the other options are unaffected.
 - Known additions that other mods attach to the animal companion class or to basic weapons (ExpandedContent, MAKING FRIENDS, ToggleableThrowingWeapons) are recognized and not carried over to the Weapon Spirit. An unrecognized addition may prevent the class from being created (a `WeaponSpiritShaman:` error appears in the mod log).
 
 **DLC**
@@ -1388,11 +1551,11 @@ Every option does the same thing: Weapon Focus with that category for the shaman
 - The other 58 categories are built from standard base game weapons.
 
 **Multiclassing**
-- Mirror count B and the possession tier, uses and duration count shaman levels only.
+- Mirror count B and the possession tier, uses and duration count shaman levels only. Spirit Barrage is likewise gained at shaman level 18.
 
 **Known limitations**
 - The shaman does not gain proficiency with the chosen weapon. You get Weapon Focus, but need proficiency from elsewhere to wield that weapon yourself.
-- When possession or fusion is unavailable, the tooltip shows all requirements as a single sentence; it does not tell you which one failed.
+- When possession, fusion or Spirit Barrage is unavailable, the tooltip shows all requirements as a single sentence; it does not tell you which one failed.
 - Saving during a fusion ends the fusion just before the save.
 - The damage absorbed during fusion is calculated before the difficulty's damage multiplier is applied.
 - Damage that lands at the exact moment a fusion ends may not be deducted from the Weapon Spirit's hit points.
@@ -1522,7 +1685,7 @@ Shield Rebuke: at levels 1, 5, 10, 15 and 20 you learn one of the seven rebukes 
 | Force Rebuke | N d6 force damage to the attacker | None |
 | Shock Rebuke | N d6 electricity damage | Reflex half |
 | Frost Rebuke | N d4 cold damage, and the attacker is staggered for 1 round | No save against the damage; Fortitude negates the stagger |
-| Repulse | Pushes the attacker 10 feet away (does not provoke attacks of opportunity) | None |
+| Repulse | Pushes the attacker about 10 feet (3 meters) away (does not provoke attacks of opportunity) | None |
 | Slowing Rebuke | Slowed for 1 round + 1 per five wizard levels (1 round at level 1, 5 rounds at level 20) | Will negates |
 | Dazing Rebuke | Dazed for 1 round | Will negates |
 | Dispelling Rebuke | Attempts a targeted dispel magic on the attacker. Caster level = character level | None (dispel check) |
@@ -1552,7 +1715,7 @@ The "once per round" limit on Shield Rebuke is not a resource. It clears when yo
 - **Multiclassing and prestige classes**: rebuke dice, the slow duration and the save DC all look at **wizard levels** only; levels in other classes do not advance them. Only Dispelling Rebuke's caster level uses character level. Bonded Shield's recall restores spells from the wizard spellbook.
 - **Side effects of a one-handed quarterstaff**: the quarterstaff now counts as a one-handed weapon, so other abilities that require one — a magus's Spell Combat, for instance — can be satisfied with it.
 - **Losing One-Handed Staff**: if you lose the feature through a respec, a quarterstaff and shield you already have equipped are not removed automatically.
-- **Repulse distance**: the push is converted to the game's internal metres and comes out slightly short of 10 feet (about 9.8 feet).
+- **Repulse distance**: the push is converted to the game's internal meters and comes out at 3 meters, slightly short of 10 feet (about 9.8 feet).
 - **Bonded Shield enhancement**: a shield that leaves your body without passing through a hand slot may keep the enhancement. It is cleaned up the next time you take that shield in hand.
 - **Iron Concentration**: it works by forcing the check's DC extremely low, so another mod that overwrites the DC of the same check afterwards could break the automatic success.
 
@@ -1577,13 +1740,13 @@ The "once per round" limit on Shield Rebuke is not a resource. It clears when yo
 
 ### Overview
 
-The Chaos Warrior is a warrior priest touched by divine madness. You trade away fervor, channel energy and sacred armor, and in return you can fly into a chaos rage from 1st level. Every rage warps your body at random with a mix of helpful and harmful mutations, and every melee hit you land while raging stacks pain on your enemy. At five stacks the enemy must make a Will save or become confused. Because you can still cast spells while raging, you buff up, wade into the front line and grind the enemy formation into chaos.
+The Chaos Warrior is a warrior priest touched by divine madness. You give up one blessing, fervor, channel energy and sacred armor, and in return you can fly into a chaos rage from 1st level. Every rage warps your body at random with several of 32 mutations: fangs, claws, tails and other natural attacks may sprout, mixed with helpful, harmful and two-sided mutations, and a mutation drawn twice stacks. Every melee weapon hit you land on an enemy while raging stacks pain, and at eight stacks the enemy must make a Will save or become confused. You can still cast spells while raging, and the first warpriest spell of each rage is cast as a swift action, so you buff up, wade straight into the front line and grind the enemy formation into chaos.
 
 ### What you give up
 
 | Level | Base feature | Notes |
 |---|---|---|
-| 1 | Second blessing selection | You choose one blessing instead of two. The first selection and the blessing uses are unchanged |
+| 1 | Second blessing selection | You choose one blessing instead of two. The first selection (within your deity's domains) and the blessing uses are unchanged |
 | 2 | Fervor | The fervor resource and its base ability |
 | 2 | Fervor: heal/harm selection | The touch heal / touch damage use of fervor |
 | 2 | Fervor: swift casting | Spending fervor to cast a self-targeted spell as a swift action |
@@ -1598,9 +1761,13 @@ Kept: spellcasting, the first blessing, bonus feats (levels 3, 6, 9, 12, 15, 18)
 | Level | Feature | Effect |
 |---|---|---|
 | 1 | Chaos Rage | Free action, in combat only. +4 Strength and Constitution, +2 Will saves, -2 AC. Uses per day: max(1, half warpriest level + Wisdom modifier). You can cast spells while raging and are not fatigued afterwards |
-| 1 | Mutations of Madness | Each time you start a rage, 1-3 of 16 mutations (up to 3-6 at higher levels) are applied at random; all end with the rage |
-| 1 | Pain | Each melee weapon hit while raging adds 1 stack to an enemy: -1 attack rolls, saves and skill checks per stack for 3 rounds. At 5 stacks the target makes a Will save (DC 10 + half warpriest level + Wisdom modifier) or is confused for 1d4 rounds |
-| 10 | Spreading Madness | When pain reaches 5 stacks, other enemies within 15 ft of the target make the same Will save |
+| 1 | Frenzied Casting (part of Chaos Rage) | The first warpriest spell you cast in each rage is cast as a swift action. Spell level cap 1 (2 at 7th level, 3 at 10th, 4 at 13th, 5 at 16th, 6 at 19th) |
+| 1 | Pain (part of Chaos Rage) | Each melee weapon hit on an enemy while raging adds 1 stack: -1 attack rolls, saves and skill checks per stack (at most -5) for 3 rounds. At 8 stacks the target makes a Will save (DC 10 + half warpriest level + Wisdom modifier) or is confused for 1d4 rounds |
+| 1 | Mutations of Madness | Each time you start a rage, 1-3 mutations (up to 4-8 at higher levels) are drawn at random from 32. A mutation drawn again stacks. All end with the rage |
+| 3 | Chaos Rage: magic natural weapons | While raging, your natural weapon attacks count as magic |
+| 7 | Chaos Rage: cold iron and silver natural weapons | While raging, your natural weapon attacks also count as cold iron and silver |
+| 10 | Chaos Rage: chaotic and evil natural weapons | While raging, your natural weapon attacks also count as chaotic and evil, whatever your own alignment |
+| 10 | Spreading Madness | When pain reaches its threshold (8 stacks), other enemies within 15 ft of the target make the same Will save |
 | 11 | Greater Chaos Rage | Rage bonuses become +6 Strength and Constitution, +3 Will |
 | 20 | Mighty Chaos Rage | Rage bonuses become +8 Strength and Constitution, +4 Will |
 
@@ -1621,37 +1788,59 @@ Kept: spellcasting, the first blessing, bonus feats (levels 3, 6, 9, 12, 15, 18)
 
 - You can cast spells while raging, and you are not fatigued when the rage ends.
 - Chaos Rage belongs to the same activatable group as barbarian rage and bloodrage, so it cannot be active together with them.
-- Starting the rage rolls your Mutations of Madness, and while it is active your melee hits apply Pain.
+- Starting the rage rolls your Mutations of Madness and grants Frenzied Casting. While it is active, your melee hits apply Pain.
+- Natural weapons: while raging, your natural weapon attacks (from mutations, and also racial or polymorph natural attacks) count as the weapons below, cumulatively by warpriest level. Manufactured weapons and unarmed strikes (including a monk's fists) are not affected. This only matters for checks that read weapon properties, such as damage reduction, incorporeal creatures and regeneration; there is no bonus on attack or damage rolls. Adamantine, good, lawful and DR x/- are not covered. The tier is set by your level when the rage starts and ends with the rage.
+
+| Warpriest level | Natural weapons count as |
+|---|---|
+| 3 | Magic |
+| 7 | Magic, cold iron, silver |
+| 10 | Magic, cold iron, silver, chaotic, evil |
+
+#### Frenzied Casting
+
+- Starting a rage gives you the Frenzied Casting effect. The first warpriest spell at or below the cap that you cast during this rage is cast as a swift action, and casting it uses up the effect. The effect also ends with the rage.
+- Any target is fine (the spell need not target yourself). The spell still uses its spell slot.
+- Spell level cap by warpriest level: 1 at levels 1-6, 2 at 7-9, 3 at 10-12, 4 at 13-15, 5 at 16-18, 6 at 19-20. The level is the level of the spell slot (metamagic cost included). A spell with variants counts at the level of the spell you choose the variant from. A spell above the cap is cast normally and the effect remains.
+- A warpriest spell is any spell on the warpriest spell list: cast from another spellbook it still counts and uses up the effect. A spell that is already a swift action, or one prepared with Quicken Spell, also uses it up.
+- If you have already used your swift action this round and still have your standard action, the spell is cast as a standard action and the effect is still used up (if both are used, it waits for your swift action).
+- A rage that is suppressed and then resumes does not grant it again. Loading a game saved during a rage refills it, even if you had already used it.
 
 #### Mutations of Madness
 
-- Triggers automatically whenever you start a chaos rage. First a number of mutations is rolled uniformly from the range below, then that many are drawn without repeats from the 16 mutations (11 good, 5 bad). Every mutation is equally likely.
+- Triggers automatically whenever you start a chaos rage. First the number of draws is rolled uniformly from the range below, then that many draws are made one at a time. Each draw picks uniformly among the mutations that can be drawn at that moment, so the same mutation can come up again.
 
 | Warpriest level | Number of mutations |
 |---|---|
 | 1-5 | 1-3 |
-| 6-10 | 1-4 |
-| 11-15 | 2-5 |
-| 16-20 | 3-6 |
+| 6-10 | 2-5 |
+| 11-15 | 3-6 |
+| 16-20 | 4-8 |
 
-- All mutations end when the rage ends. They do not change during a rage (a rage that is suppressed and then resumes keeps the mutations it already has).
-- The full list is in the Choices section below. You do not pick them; they are random.
+- Stacking: most mutations add their effect again when drawn again (see the stacking column in the Choices tables).
+- A mutation that would do nothing now is not drawn (that draw is made among the others):
+  - Natural attacks whose slots are full: one bite, one gore, one tail, and two claws and pincers combined. The same attacks from your race, a polymorph or other effects count. The other natural attacks (Extra Arm, Tentacle, Stinger, Wings, Hooves, Talons, Neuro-Stinger) have no limit.
+  - Tough Hide, Horrific Form and Long Limbs once already drawn (once per rage).
+- In a rage begun while polymorphed, the 12 natural attack mutations do not appear (which makes the other mutations more likely).
+- Natural attacks: each adds one 1d6 natural attack to your full attack. While you hold a weapon it is a secondary attack (-5 on the attack roll, half the Strength bonus).
+- All mutations end when the rage ends. They do not change during a rage (a rage that is suppressed and then resumes keeps the mutations it already has). If you level up during a rage and your features are reapplied, the mutations are drawn again from scratch.
 
 #### Pain
 
-- When it stacks: every time the chaos warrior **hits with a melee weapon attack while raging** (attacks of opportunity count, ranged attacks do not) and the creature hit is an **enemy**. Hitting an ally applies nothing.
-- How much: 1 stack per hit, or 2 stacks per hit while you have the Amplified Pain mutation.
-- Effect per stack: -1 on attack rolls, -1 on all saving throws and -1 on skill checks (Athletics, Mobility, Persuasion, Trickery, Stealth, Perception, Use Magic Device, Knowledge (Arcana), Knowledge (World), Lore (Nature), Lore (Religion)).
+- When it stacks: every time the chaos warrior **hits with a melee weapon attack while raging** (natural attacks and attacks of opportunity count, ranged attacks do not) and the creature hit is an **enemy**. Hitting an ally applies nothing.
+- How much per hit: 1 stack, plus 1 for each time Amplified Pain was drawn, plus 1 for each time Pain Resonance was drawn, plus 1 if the hit was with the Neuro-Stinger.
+- Effect per stack: -1 on attack rolls, -1 on all saving throws and -1 on skill checks (Athletics, Mobility, Persuasion, Trickery, Stealth, Perception, Use Magic Device, Knowledge (Arcana), Knowledge (World), Lore (Nature), Lore (Religion)). The penalty grows only up to 5 stacks (-5) and stays at -5 at 6-7 stacks.
 - Duration: 3 rounds after the most recent stack; every new stack resets it to 3 rounds. Pain already applied stays for its remaining duration even after your rage ends.
 - Stacking rules:
   - Pain is tracked per chaos warrior. Two chaos warriors hitting the same enemy build separate stacks and reach the threshold separately.
   - If a creature carries pain from several chaos warriors, the penalties do not add together; only the largest applies.
-- Threshold (5 stacks): the moment one chaos warrior's pain reaches 5 or more stacks (going from 4 to 6 with Amplified Pain still triggers only once):
+- Threshold (8 stacks): the moment one chaos warrior's pain reaches 8 or more stacks (it triggers only once even if a single hit jumps past the threshold):
   1. That chaos warrior's pain is removed from the target, whether or not the save succeeds.
   2. The target makes a Will save. DC = 10 + half warpriest level (rounded down) + Wisdom modifier.
   3. On a failure it is confused for 1d4 rounds (the base game's confusion condition).
-- Creatures immune to mind-affecting effects: pain still builds but stops at 5 stacks. There is no save, no confusion and the pain is not removed (the -5 penalty lasts under the normal 3-round rule).
-- As a result, a creature that is not immune to mind-affecting effects never carries more than 4 stacks.
+- Creatures immune to mind-affecting effects: pain still builds but stops at 8 stacks. There is no save, no confusion and the pain is not removed (the -5 penalty lasts under the normal 3-round rule).
+- Dispel magic removes only the penalty; the stack count stays, and the next hit restores the penalty to match it.
+- The target's buff tooltip does not show the stack count.
 
 #### Spreading Madness
 
@@ -1660,33 +1849,59 @@ Kept: spellcasting, the first blessing, bonus feats (levels 3, 6, 9, 12, 15, 18)
 
 ### Choices
 
-There is nothing to choose beyond the base warpriest's first blessing. Below are the 16 mutations that are applied at random when you start a rage.
+There is nothing to choose beyond the base warpriest's first blessing. Below are the 32 mutations (12 natural attacks, 10 beneficial, 5 harmful, 5 two-sided) that are applied at random when you start a rage. The stacking column says what happens when the same mutation is drawn again in the same rage.
 
-Good mutations (11)
+Natural attack mutations (12) - each adds one 1d6 natural attack to your full attack. While you hold a weapon it is a secondary attack (-5 to hit, half the Strength bonus). They do not appear in a rage begun while polymorphed.
+
+| Mutation | Attack | Stacking |
+|---|---|---|
+| Extra Arm | Slam 1d6 | One more attack each time |
+| Fangs | Bite 1d6 | One bite per character (race and other effects count); not drawn while full |
+| Claws | Claw 1d6 | Claws and pincers share a limit of 2; not drawn while full |
+| Horns | Gore 1d6 | One gore; not drawn while full |
+| Tail | Tail 1d6 | One tail; not drawn while full |
+| Tentacle | Tentacle 1d6 | One more attack each time |
+| Stinger | Sting 1d6 (no poison) | One more attack each time |
+| Wings | Wing 1d6 (no flight) | One more attack each time |
+| Hooves | Hoof 1d6 | One more attack each time |
+| Talons | Talon 1d6 | One more attack each time |
+| Pincer | Pincer 1d6 | Claws and pincers share a limit of 2; not drawn while full |
+| Neuro-Stinger | Sting 1d6; a hit stacks 1 more pain | One more attack each time |
+
+Beneficial mutations (10)
+
+| Mutation | Effect | Stacking |
+|---|---|---|
+| Enlarge | Size increases by one category; +2 size bonus to Strength | Size stays; +2 Strength more each time |
+| Tough Hide | DR 2/-, +1 per 5 warpriest levels (DR 6/- at 20th). Only the highest of this and other damage reduction applies | Once per rage |
+| Regeneration | Fast healing 2, +1 per 5 warpriest levels (fast healing 6 at 20th) | Another fast healing effect is added each time |
+| Swiftness | +10 ft speed, +2 Reflex saves | Applies again |
+| Thorn Skin | Creatures that hit you with a melee attack take 1d6 piercing damage | One more die each time |
+| Chaos Blood | +2 on all saving throws | Applies again |
+| Elemental Shell | Resistance 10 to one random element: fire, cold, acid or electricity | The element is rolled again each time; the same element adds 10 more |
+| Amplified Pain | Hits stack 1 more pain | 1 more each time |
+| Horrific Form | Enemies within 5 ft are shaken (no save) | Once per rage |
+| Long Limbs | +5 ft melee reach | Once per rage |
+
+Harmful mutations (5)
+
+| Mutation | Effect | Stacking |
+|---|---|---|
+| Twisted Legs | -10 ft speed | Applies again |
+| Blurred Eyes | -2 on attack rolls | Applies again |
+| Exposed Nerves | -2 AC | Applies again |
+| Bursting Veins | You take 1 damage every round | 1 more damage each time |
+| Seething Mind | -2 on Will saves | Applies again |
+
+Two-sided mutations (5) - the upside and the downside come together, and drawing one again adds both.
 
 | Mutation | Effect |
 |---|---|
-| Enlarge | Size increases by one category; +2 size bonus to Strength |
-| Tough Hide | DR 2/-, increasing by 1 at levels 5, 10, 15 and 20 (DR 6/- at 20th) |
-| Regeneration | Fast healing 2, increasing by 1 at levels 5, 10, 15 and 20 (fast healing 6 at 20th) |
-| Swiftness | +10 ft speed, +2 Reflex saves |
-| Thorn Skin | Creatures that hit you with a melee attack take 1d6 piercing damage |
-| Chaos Blood | +2 on all saving throws |
-| Elemental Shell | Resistance 10 to one random energy type: fire, cold, acid or electricity |
-| Amplified Pain | Your hits apply 2 stacks of pain instead of 1 |
-| Extra Arm | One additional 1d6 slam secondary attack in a full attack |
-| Horrific Form | Enemies within 5 ft are shaken (-2 on attack rolls, saves and skill checks; no save) |
-| Long Limbs | +5 ft reach |
-
-Bad mutations (5)
-
-| Mutation | Effect |
-|---|---|
-| Twisted Legs | -10 ft speed |
-| Blurred Eyes | -2 on attack rolls |
-| Exposed Nerves | -2 AC |
-| Bursting Veins | You take 1 damage every round |
-| Seething Mind | -2 on Will saves |
+| Bloodthirst | +2 melee damage (natural weapons too), -2 AC |
+| Bloated Muscle | +4 Strength, -4 Dexterity |
+| Stone Shell | +3 natural armor, -10 ft speed |
+| Raw Nerves | +4 Reflex saves, +2 dodge AC, -2 Will saves |
+| Pain Resonance | Hits stack 1 more pain; -1 on all your saving throws |
 
 ### Feats
 
@@ -1698,6 +1913,7 @@ Bad mutations (5)
 ### Resources
 
 - Chaos Rage: max(1, warpriest level / 2 (rounded down) + Wisdom modifier) uses per day. One use is spent each time you start a rage. Restored by resting.
+- Frenzied Casting: no separate resource. Each rage grants one.
 - Blessings: the base game's blessing resource, granted by the first blessing selection.
 - There is no fervor resource.
 
@@ -1706,7 +1922,14 @@ Bad mutations (5)
 - No other mod is needed. If another mod has moved or removed the warpriest progression entries this archetype replaces (second blessing, fervor, the channel energy selection, sacred armor), the archetype is not registered and an error is written to the mod log.
 - Chaos Rage counts as raging for base-game effects that check for barbarian rage: Cloak of Blood Scent, Call to Violence, Mangling Frenzy, Demonic Resentment, Bad Temper and Raging Brutality all respond to it. Inspire Tranquility suppresses Chaos Rage and Crystal Mind ends it. Some conditional parts of Bad Temper are not linked.
 - Abilities outside that list that specifically require barbarian rage or bloodrage (rage powers, for example) may not treat Chaos Rage as a rage.
-- Rage uses, the pain DC and the number and scaling of mutations count warpriest levels only. Levels in other classes or prestige classes do not add to them.
+- While the rage is suppressed (Inspire Tranquility and similar), the mutations, natural weapon properties and Frenzied Casting already granted stay in place.
+- Rage uses, the pain DC, the number and scaling of mutations, the natural weapon tiers and the Frenzied Casting cap count warpriest levels only. Levels in other classes or prestige classes do not add to them.
+- The natural attack limits (one bite, gore and tail each; two claws and pincers combined) are the base game's values. If another mod changes those limits, the changed values are used.
+- The "magic" natural weapon property raises the total enhancement of a +0 natural weapon by 1. A natural weapon whose total is already 4 or 5 from other effects can then bypass good and lawful damage reduction or count as epic. The "evil" property applies even if you are chaotic neutral (it bypasses DR/evil and switches off regeneration that evil weapons suppress).
+- Loading a game saved during a rage refills Frenzied Casting, so repeated save and load can give several quickened casts (the same as the base game's greater bloodrage). The refill happens only for party members, companions and pets.
+- Spells that another mod adds to the warpriest spell list after this mod loads are not quickened by Frenzied Casting.
+- The pain penalty does not stack with other penalties of the same type; only the largest applies.
+- The natural weapons are copies of base-game weapons, so the combat log shows the base-game names (the Neuro-Stinger also appears as "Sting").
 - The alignment restriction is checked when you take the archetype (at your first character level the alignment choices are limited to chaotic neutral and chaotic evil).
 - No Rage or Confusion spells are added to the warpriest spell list.
 - No DLC content is required.
@@ -1732,17 +1955,19 @@ Bad mutations (5)
 
 ### Overview
 
-The Chimera Monk reshapes the body through practice. Every two levels from level 2 you pick one of sixteen mutations, adding natural attacks such as a tail, bite or claw, or scales, wings, a breath weapon or extra organs. Drinking the chimeric mutagen in combat raises an ability score and your natural armor, and pushes every mutation you own one step further. Flurry of blows, unarmed strike, the Wisdom bonus to AC and ki powers all work exactly as they do for a base monk; the price is three bonus feats.
+The Chimera Monk reshapes the body through practice. Every two levels from level 2 you pick one of eighteen mutations, adding natural attacks such as a tail, bite, claw or horns, or scales, wings, a breath weapon or extra organs. Drinking the chimeric mutagen in combat raises an ability score and your natural armor, and pushes every mutation you own one step further. Flurry of blows, unarmed strike, the Wisdom bonus to AC and ki powers all work exactly as they do for a base monk; the price is three bonus feats plus Fast Movement and Still Mind.
 
 ### What you give up
 
 | Level | Base class feature | Notes |
 |---|---|---|
 | 2 | Monk bonus feat | Removed |
+| 3 | Fast Movement | Removed. The whole unarmored speed bonus is gone, including the part that grows with monk level. Nothing replaces it |
+| 4 | Still Mind | Removed. Nothing replaces it |
 | 6 | Monk bonus feat | Removed |
 | 10 | Monk bonus feat | Removed |
 
-The monk bonus feats at levels 1, 14 and 18 are kept. Flurry of blows, unarmed damage dice, the AC bonus, ki powers and every other monk feature are unchanged.
+The monk bonus feats at levels 1, 14 and 18 are kept. Flurry of blows, unarmed damage dice, the AC bonus, ki powers and every monk feature not listed above are unchanged.
 
 ### What you gain (by level)
 
@@ -1750,10 +1975,10 @@ The monk bonus feats at levels 1, 14 and 18 are kept. Flurry of blows, unarmed d
 |---|---|---|
 | 1 | Feral Combat Training (a DarkCodex feat) | Granted automatically. DarkCodex's feat that lets natural weapons be used like unarmed strikes |
 | 1 | Chimeric Mutagen | Standard action. +4 alchemical bonus to Strength, Dexterity or Wisdom (+6 at level 10, +8 at level 16) and +2 natural armor (+4, +6). Lasts 1 round per monk level, 3 + Wisdom modifier uses per day (minimum 1). Empowers every mutation while it lasts |
-| 1 | Chimeric Body | The damage dice of natural weapon mutations grow with monk level (1d3 up to 2d6). Not shown on the character sheet |
-| 2, 4, 6, 8, 10, 12, 14, 16, 18 | Chimeric Mutation | Choose one of sixteen mutations. Nine picks in total, each mutation once |
+| 1 | Chimeric Body | The damage dice of natural weapon mutations grow with monk level (1d4 up to 1d8; 1d6 up to 1d10 while mutated). Not shown on the character sheet |
+| 2, 4, 6, 8, 10, 12, 14, 16, 18 | Chimeric Mutation | Choose one of eighteen mutations. Nine picks in total, each mutation once |
 
-Numbers that rise automatically with level: the mutagen bonuses (levels 10 and 16), natural weapon dice (levels 4, 8, 12, 16 and 20), Scales (levels 5, 10, 15 and 20) and breath dice (every two levels).
+Numbers that rise automatically with level: the mutagen bonuses (levels 10 and 16), natural weapon dice (levels 8 and 16), Scales (levels 5, 10, 15 and 20) and breath dice (every two levels).
 
 ### Abilities in detail
 
@@ -1776,16 +2001,20 @@ Numbers that rise automatically with level: the mutagen bonuses (levels 10 and 1
 
 #### Natural weapon mutations and Chimeric Body
 
-Tail, Bite, Claw, Extra Arm and Extra Tail each add one natural attack. Your hands remain unarmed strikes and your monk fist dice are untouched. All five use the same damage progression.
+Tail, Bite, Claw, Horns and Extra Arm each add one natural attack. Your hands remain unarmed strikes and your monk fist dice are untouched. All five use the same damage progression. The die starts at 1d4, becomes 1d6 at monk level 8 and 1d8 at level 16 (1d8 at most), and is one step higher while mutated (1d10 at most).
 
 | Monk level | 1–3 | 4–7 | 8–11 | 12–15 | 16–19 | 20 |
 |---|---|---|---|---|---|---|
-| Natural weapon mutation | 1d3 | 1d4 | 1d6 | 1d8 | 1d10 | 2d6 |
-| While mutated | 1d4 | 1d6 | 1d8 | 1d10 | 2d6 | 2d8 |
+| Natural weapon mutation | 1d4 | 1d4 | 1d6 | 1d6 | 1d8 | 1d8 |
+| While mutated | 1d6 | 1d6 | 1d8 | 1d8 | 1d10 | 1d10 |
 | (For reference) base monk fist | 1d6 | 1d8 | 1d10 | 2d6 | 2d8 | 2d10 |
 
+- **Primary or secondary**: the natural attack is a primary attack while both hands are empty, and a secondary attack (-5 on the attack roll) while you hold a weapon. Flurry of blows and unarmed strikes are kept as they are.
+- **Number of attacks**: each mutation gives one natural attack, made once in a full attack in addition to your other attacks.
+- **Per-type limits**: the game engine lets a character use at most one tail attack, one bite, one gore and two claws. If another source also grants an attack of the same type, the one with the larger damage die stays.
 - The Extra Arm also gains +1 on its attack roll while mutated, on top of the die step.
 - Feral Combat Training (DarkCodex), granted at level 1, is what lets these natural weapons count as unarmed strikes.
+- **Appearance**: taking the Tail mutation gives your character a tail, and taking Horns gives it horns. Neither is shown while you are polymorphed. On a pet with Chimera Monk levels, such as an animal companion, the tail and horns are not shown (the natural attacks and numbers still apply).
 
 #### Venom
 
@@ -1805,6 +2034,7 @@ Tail, Bite, Claw, Extra Arm and Extra Tail each add one natural attack. Your han
 #### Scales
 
 - A natural armor bonus of the form type. It stacks with the mutagen's natural armor, with natural armor enhancement from amulets, and with barkskin.
+- Against a polymorph effect that grants the same kind of natural armor, only the larger applies.
 
 | Monk level | 1–4 | 5–9 | 10–14 | 15–19 | 20 |
 |---|---|---|---|---|---|
@@ -1813,35 +2043,42 @@ Tail, Bite, Claw, Extra Arm and Extra Tail each add one natural attack. Your han
 
 #### Partial Aspect
 
-- Choose one of the shifter's ten minor aspects (one only; it cannot be changed later). You gain a toggle that turns that aspect on and off, with no uses per day and no resource.
+- Choose one of the shifter's ten minor aspects (it cannot be changed later). You gain a toggle that turns that aspect on and off. Turning it on is a swift action, with no limit on uses or duration.
+- **Partial Aspect II** and **Partial Aspect III** are separate mutations: the first needs Partial Aspect and monk level 8 or higher, the second needs Partial Aspect II and monk level 14 or higher. Each grants one more aspect toggle, different from those already chosen (three at most, all different).
+- All aspects you have can be active at the same time.
 - The aspect's numbers are computed from monk level instead of shifter level. The tiers are tier 1 at monk levels 1–7, tier 2 at 8–14 and tier 3 at 15–20.
-- While mutated you get the values of the next tier up (a fourth tier's worth from level 15).
+- While mutated every active aspect gets the values of the next tier up (a fourth tier's worth from level 15).
 - The per-aspect numbers are in the table under Choices.
 
 ### Choices
 
-#### Chimeric Mutation — sixteen options
+#### Chimeric Mutation — eighteen options
 
 One pick at each of levels 2, 4, 6, 8, 10, 12, 14, 16 and 18, nine in all. Each mutation can be taken once.
 
 | Mutation | Requirement | Constant effect | While mutated |
 |---|---|---|---|
-| Tail | — | One tail natural attack. Damage 1d3 up to 2d6 (see the progression) | Die one step higher |
-| Bite | — | One bite natural attack. Damage 1d3 up to 2d6 | Die one step higher |
-| Claw | — | One claw natural attack (hands stay unarmed). Damage 1d3 up to 2d6 | Die one step higher |
+| Tail | — | One tail natural attack. Damage 1d4 up to 1d8 (see the progression). Your character grows a tail | Die one step higher (1d6 up to 1d10) |
+| Bite | — | One bite natural attack. Damage 1d4 up to 1d8 | Die one step higher (1d6 up to 1d10) |
+| Claw | — | One claw natural attack (hands stay unarmed). Damage 1d4 up to 1d8 | Die one step higher (1d6 up to 1d10) |
+| Horns | — | One gore natural attack. Damage 1d4 up to 1d8. Your character grows horns (some races have no horn model) | Die one step higher (1d6 up to 1d10) |
 | Venom | — | Natural and unarmed hits poison the target (once per round): Fortitude save each round for 6 rounds or 1d2 Constitution damage. DC 10 + half monk level + Wisdom | DC +2 |
 | Scales | — | +2 natural armor (form) bonus, +1 more at levels 5, 10, 15 and 20 (maximum +6). Stacks with other natural armor | +1 |
-| Partial Aspect | — | One of the ten shifter minor aspects as an at-will toggle (scaled by monk level) | Aspect values one tier higher |
-| Wings | Monk level 10 | You grow wings (the base game wings effect) | +10 ft speed |
+| Partial Aspect | — | One of the ten shifter minor aspects as an at-will toggle (swift action, scaled by monk level). It can be active together with the aspects gained from Partial Aspect II and III | Every active aspect is one tier higher |
+| Partial Aspect II | Monk level 8, Partial Aspect | One more aspect, different from the one already chosen, as an at-will toggle. All aspects you have can be active at the same time | Every active aspect is one tier higher |
+| Partial Aspect III | Monk level 14, Partial Aspect II | One more aspect, different from the two already chosen, as an at-will toggle. All aspects you have can be active at the same time | Every active aspect is one tier higher |
+| Wings | Monk level 10 | You grow wings (the base game wings effect): +3 dodge bonus to AC against melee attacks and immunity to difficult terrain. The wings are visible | +10 ft speed |
 | Breath | Monk level 10 | Choose an element: 30-ft cone, 1d6 per two monk levels, Reflex half, 3 per day, standard action | One extra breath usable only while mutated (refills on rest) |
-| Extra Arm | Monk level 10 | One extra-arm natural attack. Damage 1d3 up to 2d6 | Die one step higher, +1 on that attack roll |
-| Extra Legs | — | +10 ft speed, +4 CMD against trip and bull rush | Another +10 ft speed |
-| Extra Tail | Tail mutation | One more tail natural attack. Damage 1d3 up to 2d6 | Die one step higher |
-| Extra Eyes | — | Cannot be flanked, +2 Perception | Another +2 Perception |
-| Extra Ears | — | Blind-Fight feat, +2 Perception | Another +2 Perception |
+| Extra Arm | Monk level 10 | One extra-arm slam natural attack. Damage 1d4 up to 1d8 | Die one step higher (1d6 up to 1d10), +1 on that attack roll |
+| Extra Legs | — | +10 ft speed, +4 CMD against trip and bull rush | Another +10 ft speed (+20 ft in total) |
+| Extra Eyes | — | Cannot be flanked, +2 Perception | Another +2 Perception (+4 in total) |
+| Extra Ears | — | Blind-Fight feat, +2 Perception | Another +2 Perception (+4 in total) |
 | Extra Senses | Monk level 10 | Blindsense 30 ft | Blindsense 60 ft |
-| Extra Heart | — | +2 hit points, immunity to bleed | Fast healing 2 |
-| Extra Lung | — | Immunity to fatigue and to the area effects of four cloud spells (stinking cloud, cloudkill, mind fog, acid fog) | If you have Breath, +1 extra breath usable while mutated |
+| Extra Heart | — | +2 hit points (a flat amount, not per level), immunity to bleed | Fast healing 2 |
+| Extra Lung | — | Immunity to fatigue and to the areas created by four cloud spells (stinking cloud, cloudkill, mind fog, acid fog). Not a general immunity to poison | If you have Breath, +1 extra breath usable while mutated (2 in total) |
+
+- The Perception bonuses of Extra Eyes and Extra Ears stack with each other.
+- Extra Lung: if you gain it while standing in such a cloud, it applies only after you leave and re-enter the cloud.
 
 #### Breath element
 
@@ -1849,30 +2086,31 @@ Breath: Fire, Breath: Cold, Breath: Acid or Breath: Electricity. Only the energy
 
 #### Partial Aspect forms
 
-You can take only one. Tiers correspond to monk levels 1–7 / 8–14 / 15–20; while mutated you use the next tier's value.
+Partial Aspect, Partial Aspect II and Partial Aspect III each pick one, and the aspects chosen must all be different. Tiers correspond to monk levels 1–7 / 8–14 / 15–20; while mutated you use the next tier's value.
 
 | Aspect | Main effect | Tier 1 / 2 / 3 | While mutated |
 |---|---|---|---|
 | Bear | Constitution (inherent bonus) | +2 / +4 / +6 | +4 / +6 / +8 |
 | Boar | Fortitude saves (inherent bonus) | +2 / +4 / +6 | +4 / +6 / +8 |
-| Dinosaur | Initiative | +2 / +4 / +6 | +4 / +6 / +8 |
+| Dinosaur | Initiative (untyped bonus) | +2 / +4 / +6 | +4 / +6 / +8 |
 | Elephant | Strength (inherent bonus) | +2 / +4 / +6 | +4 / +6 / +8 |
-| Horse | Speed, plus the base aspect's Endurance | +5 / +10 / +15 ft | +10 / +15 / +20 ft |
+| Horse | Speed (inherent bonus), plus the Endurance feat | +5 / +10 / +15 ft | +10 / +15 / +20 ft |
 | Lizard | Reflex saves (inherent bonus) | +2 / +4 / +6 | +4 / +6 / +8 |
 | Spider | AC (dodge bonus) | +2 / +4 / +6 | +4 / +6 / +8 |
 | Tiger | Dexterity (inherent bonus) | +2 / +4 / +6 | +4 / +6 / +8 |
-| Wolf | Extra damage, plus scent (blindsense) | +2 / +4 / +6 | +4 / +6 / +8 |
+| Wolf | Weapon damage rolls (untyped bonus), plus scent (blindsense) | +2 / +4 / +6 | +4 / +6 / +8 |
 | Wolverine | Hit points and Constitution (see below) | See below | See below |
 
-- **Wolverine**: bonus hit points = monk level × 2 × tier (for example +14 at level 7, +32 at level 8, +56 at level 14, +90 at level 15, +120 at level 20). While mutated it is monk level × 2 × (tier + 1) (for example +48 at level 8, +160 at level 20). The Constitution bonus is +2 at levels 1–14 and +4 from level 15 (+4 / +6 while mutated).
-- **Wolf**: the scent blindsense is 20 ft at levels 8–14 and 30 ft from level 15. The base game shifter loses it at level 15; the Chimera Monk keeps the 30-ft version.
+- **Bonus types**: inherent and racial bonuses do not stack with other bonuses of the same type; only the larger applies. Dodge and untyped bonuses stack.
+- **Wolverine**: bonus hit points (untyped) = monk level × 2 × tier (for example +14 at level 7, +32 at level 8, +56 at level 14, +90 at level 15, +120 at level 20). While mutated it is monk level × 2 × (tier + 1) (for example +48 at level 8, +160 at level 20). The Constitution bonus (racial) is +2 at levels 1–14 and +4 from level 15 (+4 / +6 while mutated). From monk level 8 you also gain the Diehard feat.
+- **Wolf**: the scent blindsense is 10 ft at levels 1–7, 20 ft at levels 8–14 and 30 ft from level 15. The base game shifter loses it at level 15; the Chimera Monk keeps the 30-ft version.
 - Any other side effects of an aspect are the same as the base game shifter's corresponding minor aspect.
 
 ### Feats
 
 - **Feats granted automatically**: Feral Combat Training (a DarkCodex feat) at level 1, regardless of that feat's prerequisites.
 - **Bonus feat slots**: the monk bonus feats at levels 2, 6 and 10 are gone; those at levels 1, 14 and 18 remain.
-- **Feats gained through mutations**: Extra Ears grants Blind-Fight.
+- **Feats gained through mutations**: Extra Ears grants Blind-Fight. Partial Aspect: Horse grants Endurance, Wolverine grants Diehard (from monk level 8, while the aspect is active).
 - **Feats you can no longer take**: none.
 - **Feats added specifically for this archetype**: none.
 
@@ -1890,16 +2128,20 @@ Venom, the Partial Aspect toggle and the other mutations use no resource. The ki
 
 - **DarkCodex is required**: without DarkCodex installed this mod does not load. If DarkCodex is installed but Feral Combat Training is turned off in its settings, the whole Chimera Monk archetype is not created and the missing piece is reported as an error in the mod log — you never get a half-working class.
 - **What it uses from DarkCodex**: a single feat, Feral Combat Training, granted automatically at level 1 so that the natural weapon mutations work alongside the monk's unarmed techniques. The mod builds its content after DarkCodex has created that feat.
-- **Shifter content**: Partial Aspect copies the base game shifter's minor aspects (the features, abilities and effects of the ten aspects, the wolf's scent, Diehard and Endurance) and rescales them to monk level. If any of those is missing from the game, the whole archetype is not created. The shifter originals are not modified, and the shifter's aspect uses per day are not involved.
+- **Shifter content**: Partial Aspect copies the base game shifter's minor aspects (the features, abilities and effects of the ten aspects, the wolf's scent, Diehard and Endurance) and rescales them to monk level. If any of those is missing from the game, the whole archetype is not created. The shifter originals are not modified, and the shifter's aspect uses per day are not involved. The Chimera Monk's aspect toggles can be active together, but the base game shifter's own aspects are still limited to one at a time.
+- **Mutation visuals**: the tail uses the look of the base game Gold Dragon mythic tail, and the horns use the base game Devil mythic small horns. If either of those visuals is missing from the game, the whole archetype is not created. The Wings mutation keeps the look of the base game wings effect.
 - **Breath**: built from the base game Scaled Fist's dragon breath, but it uses neither Charisma nor ki. The base game has no dedicated electricity cone visual, so the electricity breath uses a generic cone effect.
 - **TabletopTweaks**: with the setting that disables natural armor stacking, Scales is unaffected because it is a form-type bonus (only the mutagen's natural armor stops stacking with other natural armor). The chimeric mutagen's ability bonus is alchemical, so against a base game mutagen only the higher applies.
-- **Other mods**: if another mod moves or removes the monk bonus feats at levels 2, 6 or 10, this archetype is not created.
-- **Multiclassing and prestige classes**: the mutagen's bonuses and duration, natural weapon dice, Scales, breath dice and DC, the venom DC and the aspect tiers all read monk level only. Mutations with a level 10 requirement need monk level 10.
+- **Other mods**: if another mod moves or removes the monk bonus feats at levels 2, 6 or 10, or moves Fast Movement (level 3) or Still Mind (level 4) to other levels or adds them elsewhere in the monk progression, this archetype is not created (it is never created with only part of the removals applied).
+- **Retired mutation "Extra Tail"**: the Extra Tail mutation from earlier versions is no longer offered. The game engine allows only one tail attack per character, so taking it never added an attack. Saves of characters who already took it still load; the mutation stays as a hidden feature with no effect (some screens may show it as "Extra Tail (retired)"). Such a character can retrain and choose another mutation instead.
+- **Multiclassing and prestige classes**: the mutagen's bonuses and duration, natural weapon dice, Scales, breath dice and DC, the venom DC and the aspect tiers all read monk level only. Mutations with a level 10 requirement need monk level 10, and the level 8 and 14 requirements of Partial Aspect II and III are monk levels too.
 - **Known limitations**
-  - It is not guaranteed that the extra natural attacks from mutations receive flurry's bonus attacks or iterative attacks from a high base attack bonus. Each mutation adds one natural attack.
+  - The natural attacks from mutations are each made once in a full attack, in addition to your other attacks. They do not gain extra attacks the way flurry of blows or iterative attacks from a high base attack bonus do.
+  - Natural attacks of one type never exceed the engine limit (one tail, one bite, one gore, two claws). If you already have an attack of that type from another source, only the one with the larger die remains.
   - The chimeric mutagen cannot be drunk while you are polymorphed.
   - The Surge breath refills only on rest and cannot be used without an active mutagen.
   - Extra Lung is not a general immunity to poison. It covers only the four cloud spell areas listed above, and fatigue.
+  - The horns are not shown if the base game has no matching visual for your race and gender (you still gain the gore attack). The tail and horns are not shown on pets such as animal companions. The Wings mutation uses the base game wings effect as is, so this restriction does not apply to it.
 
 
 </details>
@@ -2056,20 +2298,20 @@ You choose one at levels 3, 6, 9, 12, 15 and 18 — six out of twenty. Each tale
 
 | Level | Talent | Effect |
 |---|---|---|
-| 3 | Oath of Pursuit | Your smite target moves at half speed for as long as the smite lasts. No save. |
+| 3 | Oath of Pursuit | Your smite target moves at half its current speed (after armor and other effects) for as long as the smite lasts. No save. It uses the base game's half-speed condition, so a target immune to that condition (Freedom of Movement and the like) is not slowed. |
 | 3 | Terrible Gaze | 3/day, standard action. One enemy at close range is frightened for 1d4 rounds on a failed Will save (paladin DC). Fear, mind-affecting. |
 | 3 | Death's Touch | Standard action, costs 1 use of lay on hands. Touch an enemy to deal 1d6 negative energy damage per two paladin levels. Divine damage against negative energy affinity. No save. |
 | 3 | Ghost Stride | Ignore difficult terrain; +10 feet to speed. |
 | 3 | Death's Resolve | Adjacent allies (within 5 feet) are immune to fear. |
 | 6 | Dense Fear | Your Aura of Death grows to 20 feet and its fear save penalty becomes −6. Healing is still halved. |
 | 6 | Grave Armor | Damage reduction 5/good. |
-| 6 | Oath Shield | When an adjacent ally (within 5 feet) takes melee weapon damage, you take up to 5 of the damage actually dealt in their place. |
+| 6 | Oath Shield | When an adjacent ally (within 5 feet) is hit by a melee attack (a melee weapon attack with an attack roll, melee touch spells included) and takes damage, you take up to 5 of the damage actually dealt in their place. Ranged attacks (ranged touch spells such as rays included) and damage without an attack roll (save-only spells, area effects and the like) are not moved. |
 | 6 | Soul Harvest | When you kill an enemy with a weapon, heal hit points equal to your paladin level. Kills with touch or ray attacks do not count. |
 | 9 | Life Drain | Hitting your smite target with a weapon bestows one negative level for 1 minute. Once per your round. |
 | 9 | Command Undead | 1/day. Take control of one enemy undead; Will negates (paladin DC). A supernatural ability with the effect of the command undead spell. |
 | 9 | Wail of the Dead | 1/day, standard action. Enemies within 30 feet are frightened for 1d4 rounds on a failed Will save (paladin DC). Fear, mind-affecting. |
 | 9 | Cursed Strike | Your smite target cannot be healed for as long as the smite lasts. |
-| 9 | Iron Bones | 25% chance to negate critical hits and precision damage. |
+| 9 | Iron Bones | A critical hit or sneak attack against you has a 25% chance to be negated, so you take normal damage only (the same as 25% fortification). It does not reduce damage by a share. |
 | 12 | Death Blade | All melee weapon hits deal +1d6 negative energy damage. Divine damage against negative energy affinity. Not multiplied on a critical hit. The target does not have to be smitten. |
 | 12 | Empowered Channel | Your negative channel deals +2d6. Your self-healing from it rises by the same amount. |
 | 12 | Vengeful Riposte | 3/day. When a melee attack hits you, make one melee attack against the attacker. You must be wielding a melee weapon (or be unarmed) and the attacker must be within reach. A use is spent only when the riposte actually happens. |
@@ -2130,7 +2372,7 @@ Channel Negative Energy draws on lay on hands uses, not on the base paladin's ch
 
 ### Overview
 
-The Shadow Sorcerer casts with shadow doubles standing at their side. Cast one harmful spell at an enemy and the same spell lands again on the same target or the same spot, once per double, while only the original uses a spell slot. The doubles' spells are illusions, though, and an enemy that sees through them with a Will save takes only half. The price is one spell per day at every spell level and all three bloodline feats. You cast less often, and every cast hits several times over.
+The Shadow Sorcerer casts with shadow doubles standing at their side. Cast one harmful spell at an enemy and the same spell lands again on the same target or the same spot, once per double, while only the original uses a spell slot. The doubles' spells are illusions, though: they deal half the original damage, and an enemy that sees through them with a Will save takes only a quarter and ignores their effects other than damage. The price is one spell per day at every spell level and all three bloodline feats. You cast less often, and every cast hits several times over.
 
 ### What you give up
 
@@ -2147,8 +2389,8 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 
 | Level | Feature | Effect |
 |---|---|---|
-| 1 | Shadow Echo | When you cast a harmful spell at an enemy from your Sorcerer spellbook, the first such spell each round is recast at the same target or point once per shadow double. No spell slot is used. Each target may disbelieve with a Will save against the original DC; on a success it takes half damage and buffs and debuffs apply only 50% of the time |
-| 1 | Shadow Doubles 1 | 1 double — 1 echo |
+| 1 | Shadow Echo | When you cast a harmful spell at an enemy from your Sorcerer spellbook, the first such spell each round is recast at the same target or point once per shadow double. No spell slot is used. An echo deals half the original damage. Each target may disbelieve with a Will save against the original DC; on a success the damage drops to a quarter and effects other than damage do not apply |
+| 1 | Shadow Doubles 1 | 1 double — 1 echo. When the echo fires, a shadow figure appears behind the caster and performs the cast |
 | 1 | Spells Given to Shadow | One fewer spell per day of each spell level from 1st to 9th. Ability bonus spells are unaffected |
 | 3 | Shadow Arcana: Vanish | You learn Vanish (1st level) as an extra spell |
 | 5 | Shadow Arcana: Mirror Image | You learn Mirror Image (2nd level) as an extra spell |
@@ -2177,7 +2419,7 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
   - You have not already echoed a spell this round.
 - **Number of echoes**: one per shadow double. 1 at Sorcerer level 1, 2 at level 7, 3 at level 13. Only Sorcerer class levels count.
 - **One spell per round**: only one spell can be echoed each round. In turn-based combat this goes by round number; in real-time combat and outside combat, 6 seconds must have passed since the last echoed spell. A new combat makes it available again.
-- **Timing**: once the original spell's effect has finished, the echoes go off one at a time, 0.5 seconds of game time apart.
+- **Timing**: once the original spell's effect has finished, the echoes go off one at a time, 0.5 seconds of game time apart; the first one fires 0.5 seconds after the original spell ends. The timing is the same whether or not the shadow doubles appear (see "Shadow Doubles" below).
 - **Where the echoes land**
   - Single-target spells: on the same target.
   - Area spells aimed at a point: on the original point. Even if you aimed by clicking an enemy, the echoes land where the spell was first placed, not where that enemy has moved to.
@@ -2185,10 +2427,12 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 - **Strength of an echo**: caster level, spell level, saving throw DC and metamagic are those of the original cast. Any metamagic on the original is on every echo. Each echo rolls the spell's own saving throws afresh.
 - **Costs**: echoes use no spell slot. Effects that trigger "when you cast a spell" and metamagic buffs that apply "to your next spell" are triggered and spent once, by the original cast only; echoes neither trigger nor consume them.
 - **Echoes never produce echoes.**
-- **Disbelief (illusion)**: every creature affected by an echo makes a Will save against the original spell's DC.
-  - Failure: the echo applies in full.
-  - Success: damage is halved, and buffs and debuffs take hold only 50% of the time. Effects that are neither damage nor a buff, such as instant death or dispelling, still apply in full.
-  - If the spell is already a shadow spell (Shadow Evocation and the like), the echo halves that spell's own reality percentage: 20% becomes 10%, 60% becomes 30%.
+- **Echo damage**: an echo deals half (50%) of the damage the spell would normally deal. This applies whether or not the target disbelieves, and fractions round up (minimum 1). The original cast's damage is unchanged.
+- **Disbelief (illusion)**: every creature affected by an echo makes a Will save against the original spell's DC. Each creature rolls only once per echo.
+  - Failure: damage is half (50%), and effects other than damage apply in full.
+  - Success: damage is a quarter (25%). Effects other than damage (buffs and debuffs, ability damage, energy drain, combat maneuvers, healing) do not apply. Nothing is left to a chance roll.
+  - Instant death and dispelling: an echo's instant death effect and dispel magic do not apply to a creature that disbelieved either. A dispel that removes effects at a point or in an area, rather than from one creature, still applies.
+  - If the spell is already a shadow spell (Shadow Evocation and the like), its echo deals half damage on a failed disbelief and a quarter of that spell's own reality percentage on a successful one: 20% becomes 5%, 60% becomes 15%.
 - **Touch spells that hold the charge**: the echo is triggered when the touch is **delivered**, not when you charge the spell.
 - **Fading echoes**: in the cases below the remaining echoes are lost, and the combat log shows "Shadow echo fades" with the reason.
 
@@ -2200,6 +2444,24 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 | original spell did not finish (more than 12 seconds of game time) | all remaining echoes |
 | echo cast failed | that one echo |
 | reloaded | all pending echoes |
+
+#### Shadow Doubles
+
+- **Normally invisible.** The doubles only show themselves while echoes are going off. While hidden they are treated as not being in the fight at all, so nobody's spells (cones, lines and chains included) can catch them. The doubles are not saved, cannot be targeted, do not count as combat participants and carry no items.
+- **Look**: they take the form of the base game's Shadow creature (a black humanoid silhouette). There is one per double (1, 2 or 3).
+- **Sequence**
+  1. When the original spell has finished, all the doubles appear at once **behind** the caster: the first behind and to the left, the second behind and to the right, the third directly behind (relative to the direction of the target, or to the caster's facing when there is no direction, as with an area centred on the caster).
+  2. For each echo, the double whose turn it is faces the target and begins a casting animation (0.35 seconds before the echo fires), and the spell's casting effect flares in its hand as the echo goes off. Spell visuals that would attach to the caster attach to that double instead.
+  3. 0.9 seconds after all the echoed spells have finished, the doubles vanish together. For long-running spells they wait at most 8 seconds.
+- **The spells still come from the caster.** Projectiles, cones, lines and chains all start from the caster's position. Who is hit, attack rolls, areas, range and arrival time are exactly as they would be with no doubles shown.
+- **The show does not change the rules.** The number of echoes, when they fire (0.5 seconds after the original spell ends, then every 0.5 seconds), their damage and disbelief are the same whether or not the doubles appear. If anything goes wrong with the visuals, the echoes still fire.
+- **When the doubles do not appear** (the echoes still fire from the caster)
+  - The caster is unconscious, polymorphed, in stealth, dead or not in the area, or the game is not in normal play or pause (dialogue, cutscenes and the like).
+  - A cone or line echo where a double's spot could fall inside the caster's own cone or line (for example when a wall behind the caster pulls the spot in close).
+  - If, just before a cone or line echo fires, the caster or the target has moved so that a double's spot falls inside that cone or line, all the doubles vanish on the spot.
+  - If a frame hitch keeps a double from starting its animation before its echo fires, only that echo's animation and hand effect are skipped.
+- **When shown doubles vanish early**: the caster dies, falls unconscious, is polymorphed or enters stealth; dialogue or a cutscene starts; or combat ends, if they appeared during combat. If the echoes fizzle (the target died and so on), the remaining doubles vanish without casting. Reloading the area removes them along with the area.
+- **Casting animation**: spells with a casting style the doubles' animation set lacks (thrown, breath weapon and so on) use a substitute animation that reaches toward the target.
 
 #### Spells Given to Shadow
 
@@ -2251,10 +2513,15 @@ The archetype adds no choices of its own. You pick a bloodline exactly as a base
 - **ToyBox**: if you use its spells-per-day multiplier, the reduction of 1 is applied first and the multiplier afterwards.
 - **Multiclassing and prestige classes**: the number of doubles depends on Sorcerer class levels only. Advancing the Sorcerer spellbook through a prestige class does not add doubles. Spells gained that way still echo, since they are cast from the Sorcerer spellbook, and the reduction of 1 per day still applies.
 - **Spells that do not echo**: teleports and utility spells that do no harm (Dimension Door and the like) are excluded. A few area spells that travel with the caster or a target cannot keep their original centre and are excluded as well: Zone of Predetermination, the Angel spell Repel the Profane and the Trickster spell Breath of Money.
+- **Spells excluded from echoing (15)**: the spells below are harmful to enemies but never echo. The original cast is unchanged.
+  - 14 spells with an effect that would still reach an enemy that disbelieved: Inflict Moderate Wounds, Mass / Baleful Polymorph / Prismatic Spray / Clashing Rocks / Force Punch / Hideous Laughter / Slow / Crushing Despair / Cause Fear / Scare / Mortal Terror / the Azata spell Water Torrent / the Lich spell Siphon Time / the Aeon spell Relativity.
+  - 1 spell with a summoning effect (summoning spells never echo): the Lich spell Pit of Despair.
 - **Known limitations**
+  - While the shadow doubles are shown (at most about 10 seconds after the original spell ends), they are in the game. During that time a chain spell cast by an enemy or an ally (Chain Lightning and the like) can pick a double as its next target. The double takes no damage, but it uses up one jump of the chain, so a real target may be skipped or the path may change. In the same way, another unit's cone or line, a ricocheting spell, or a spell that picks allies around its caster can pick a shown double (no damage, but a saving throw or an effect may go to the double).
+  - If another mod has changed the base game's Shadow creature so that it no longer looks as expected, the doubles are not created. Echoes still fire, without doubles.
   - Pending echoes are not saved. If the area is reloaded before they go off, they are lost.
   - If the original spell's effect has not finished within 12 seconds of game time, no echoes are fired.
-  - A successful disbelief does not reduce effects such as instant death or dispelling.
+  - Even on a successful disbelief, a few direct effects such as a push may still apply. Spells found to have such effects have been excluded from echoing (see "Spells excluded from echoing" above).
 
 
 </details>
