@@ -1559,7 +1559,7 @@ On the selection screen each option has its own multi-line description. It lists
 - Mirror count B and the possession tier, uses and duration count shaman levels only. Spirit Barrage is likewise gained at shaman level 18.
 
 **Known limitations**
-- Characters from earlier versions: the Weapon Focus the shaman used to get is removed on load, and a Weapon Spirit already past levels 4, 8 or 12 receives the matching feats on load.
+- Characters from earlier versions: the Weapon Focus the shaman used to get is removed on load when it can be confirmed as coming from this mod (otherwise it stays), and a Weapon Spirit already past levels 4, 8 or 12 receives the matching feats on load.
 - When possession, fusion or Spirit Barrage is unavailable, the tooltip shows all requirements as a single sentence; it does not tell you which one failed.
 - Saving during a fusion ends the fusion just before the save.
 - The damage absorbed during fusion is calculated before the difficulty's damage multiplier is applied.
