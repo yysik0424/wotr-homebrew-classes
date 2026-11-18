@@ -1451,8 +1451,9 @@ Rules:
 - Enhancement bonus: only the single highest enhancement among the spare weapons is mirrored. It is capped at the lower of B and 5, and applies only when it is higher than the wielded weapon's own enhancement (they do not stack).
 - Special properties: up to B of them, taken in weapon set order and, within a set, main hand before off hand. Each property is mirrored once, and properties the wielded weapon already has are skipped. Anything past B is left out.
 - Ghost touch: always mirrored, and does not count against B.
-- What is mirrored: properties that only change the weapon's own rules (for example extra energy damage, critical range or multiplier, alignment or material).
-- What is not: effects that trigger separately on attack, effects that depend on the wielder's or caster's state, equipment effects, and masterwork quality. Temporary enhancements from spells and the like vanish when a weapon is moved to a spare set, so they are not mirrored either.
+- What is mirrored: properties that only change the weapon's own rules (for example extra energy damage, critical range or multiplier, alignment or material) and on-hit triggered effects (for example the acid spell of Black Dragon's Fang).
+- Triggered effects: only one at a time (the first in set and slot order); it takes one special-property slot, and one that would not fire on the spirit's weapon (wrong weapon type or range) is skipped. The Weapon Spirit is the caster of a mirrored triggered effect, so spell DCs use the Weapon Spirit.
+- What is not: effects that depend on the wielder's or caster's state, equipment effects for the wearer (stats, features and so on), and masterwork quality. Temporary enhancements from spells and the like vanish when a weapon is moved to a spare set, so they are not mirrored either.
 - Where it goes: the main-hand weapon of the active set; if there is no main-hand weapon, the off-hand weapon; if both hands are empty, the unarmed strike. If the hands hold only non-weapons (such as a shield), nothing is mirrored.
 - When it is recalculated: when the Weapon Spirit's equipment changes, when it switches weapon sets, and when the shaman levels up.
 - Each recalculation writes one line to the mod log listing what was mirrored and why anything was left out.
@@ -1461,9 +1462,10 @@ Rules:
 
 - Use: swift action, supernatural ability, targets yourself. Costs one possession use.
 - Requirements: the Weapon Spirit must be alive, visible and within 30 feet.
-- Effect: the power mirrored onto the weapon the Weapon Spirit currently wields (mirrored enhancement, mirrored special properties and ghost touch) is placed on your primary weapon. If your main hand is empty, it goes to your unarmed strike.
+- Effect: the power of the Weapon Spirit's spare sets is placed on your primary weapon under the mirror's rules (count B, one enhancement, one triggered effect, ghost touch). If your main hand is empty, it goes to your unarmed strike.
+  - Unlike the mirror, you also receive wielder-dependent effects and equipment effects for the wearer (stats, features). A triggered effect must suit your weapon's type and range.
+  - Effects tied to the original weapon blueprint, features for an animal companion, effects with side effects on removal, and spellbook grants are not taken.
   - Enhancements do not stack. Properties your weapon already has are skipped.
-  - The spirit weapon's own built-in enchantments are not copied — only what was mirrored onto it.
   - Changing weapons ends the borrowed power.
   - If your main hand holds a non-weapon (such as a shield), you receive nothing and the use is still spent.
 - The Weapon Spirit keeps fighting during the possession.
