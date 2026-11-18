@@ -1383,7 +1383,7 @@ Cells that use a DLC unit: only Abyss III (Abrikandilu). The other 53 cells use 
 
 ### Overview
 
-The Weapon-Spirit Shaman trades the spirit animal for a spirit dwelling in a weapon: the Weapon Spirit. It is a floating weapon that fights beside you on its own, much like an animal companion. Put magic weapons into the Weapon Spirit's spare weapon sets and their magic is mirrored onto the weapon it is currently wielding, so spare magic weapons become fuel rather than vendor trash. From level 5 you can call on Spirit Possession a few times per day to take that mirrored power into your own weapon for a short while, at level 18 you can call a Spirit Barrage once per day, in which the Weapon Spirit attacks one enemy once with each of its spare melee weapons, and at level 20 you can fuse with the spirit and use its hit points as a shield. Your shaman spells, spirit and hexes are untouched.
+The Weapon-Spirit Shaman trades the spirit animal for a spirit dwelling in a weapon: the Weapon Spirit. It is a floating weapon that fights beside you on its own, much like an animal companion. Put magic weapons into the Weapon Spirit's spare weapon sets and their magic is mirrored onto the weapon it is currently wielding, so spare magic weapons become fuel rather than vendor trash. From level 5 you can call on Spirit Possession a few times per day to take that mirrored power into your own weapon for a short while, at level 18 you can call a Spirit Barrage once per day, in which the Weapon Spirit attacks one enemy once with each of its spare melee weapons. Your shaman spells, spirit and hexes are untouched.
 
 ### What you give up
 
@@ -1407,7 +1407,7 @@ The Weapon-Spirit Shaman trades the spirit animal for a spirit dwelling in a wea
 | 12 | Weapon Spirit Greater Weapon Specialization | The Weapon Spirit gains Greater Weapon Specialization with the chosen category (ignoring prerequisites) |
 | 15 | Spirit Possession III | 3/day, 7 rounds. Adds +2 to hex DCs during possession |
 | 18 | Spirit Barrage | Swift action, 1/day. Choose one enemy: the Weapon Spirit attacks it once with each melee weapon in its spare weapon sets (at most 6 attacks). Every attack uses the Weapon Spirit's highest attack bonus, and damage is that spare weapon's own |
-| 20 | Spirit Possession IV (Fusion) | 4/day, 10 rounds. You can spend a possession use on Spirit Fusion — 10 rounds of the Possession III effects, with damage you take going to the Weapon Spirit's hit points first |
+| 20 | Spirit Possession IV | 4/day, 10 rounds. Same effects as Spirit Possession III |
 
 ### Abilities in detail
 
@@ -1473,20 +1473,11 @@ Rules:
 | 5–9 | Spirit Possession I | 1 | 3 rounds | Mirrored power on your primary weapon |
 | 10–14 | Spirit Possession II | 2 | 5 rounds | + flight (immune to ground effects and trip) |
 | 15–19 | Spirit Possession III | 3 | 7 rounds | + hex DC +2 |
-| 20 | Spirit Possession IV | 4 | 10 rounds | Possession III effects; Spirit Fusion becomes available |
-
-#### Spirit Fusion
-
-Level 20. A separate ability that draws on the same possession uses.
-
-- Use: swift action, one possession use. Same requirements as possession (Weapon Spirit alive, visible and within 30 feet), and no possession or fusion may already be in progress.
-- Effect: the Weapon Spirit vanishes (hidden), and for 10 rounds you gain the Spirit Possession III effects (mirrored power, flight, hex DC +2).
-- Damage absorption: while fused, damage you take is taken first by the Weapon Spirit's current hit points. When its hit points reach 0, the remaining damage is yours, the spirit falls (it returns after resting) and the fusion ends.
-- Ending: when the duration runs out, the Weapon Spirit reappears with its remaining hit points. Leaving the area or saving ends the fusion, as does the shaman's death.
+| 20 | Spirit Possession IV | 4 | 10 rounds | Possession III effects |
 
 #### Spirit Barrage
 
-Level 18. A separate ability from possession and fusion, with its own use (1/day) rather than the possession uses.
+Level 18. A separate ability from possession, with its own use (1/day) rather than the possession uses.
 
 - Use: swift action, supernatural ability, targets one enemy. Costs one Spirit Barrage use.
 - Requirements:
@@ -1499,7 +1490,7 @@ Level 18. A separate ability from possession and fusion, with its own use (1/day
   - If an earlier attack drops the target, the remaining weapons do not attack.
   - The Weapon Spirit's normal attacks and actions are unaffected. Its weapon sets and equipment layout do not change either.
 - Slots that do not take part: empty slots, ranged weapons, shields, non-weapons, weapons carrying a temporary enchantment, weapons that cannot reach the target, and weapons that leave a trace when wielded (a weapon that leaves an effect on the Weapon Spirit merely by being picked up and put down).
-- Usable during a possession. Not usable during a fusion, because the Weapon Spirit is hidden.
+- Usable during a possession.
 - Log: one line in the combat log gives the number of attacks, the number of hits and why any slot was left out, and one line in the mod log gives the result for each weapon that attacked and the slots left out.
 
 ### Choices
@@ -1535,7 +1526,6 @@ On the selection screen each option has its own multi-line description. It lists
 | Spirit Possession uses | 1 at shaman level 5, +1 every 5 levels after that (1 at level 5 / 2 at 10 / 3 at 15 / 4 at 20) | Resting |
 | Spirit Barrage uses | A fixed 1 per day from shaman level 18 (not increased by level or ability scores) | Resting |
 
-- Spirit Possession and Spirit Fusion share the same uses.
 - Spirit Barrage has its own use, separate from the possession uses.
 - Only shaman levels count.
 - Spirit Mirror uses no resource.
@@ -1559,13 +1549,9 @@ On the selection screen each option has its own multi-line description. It lists
 - Mirror count B and the possession tier, uses and duration count shaman levels only. Spirit Barrage is likewise gained at shaman level 18.
 
 **Known limitations**
+- The old level-20 Spirit Fusion has been removed. Characters that already have it lose the ability on load; Spirit Possession IV stays.
 - Characters from earlier versions: the Weapon Focus the shaman used to get is removed on load when it can be confirmed as coming from this mod (otherwise it stays), and a Weapon Spirit already past levels 4, 8 or 12 receives the matching feats on load.
-- When possession, fusion or Spirit Barrage is unavailable, the tooltip shows all requirements as a single sentence; it does not tell you which one failed.
-- Saving during a fusion ends the fusion just before the save.
-- The damage absorbed during fusion is calculated before the difficulty's damage multiplier is applied.
-- Damage that lands at the exact moment a fusion ends may not be deducted from the Weapon Spirit's hit points.
-- If the fused Weapon Spirit can no longer be found (dismissed, replaced and so on), the fusion may fail to end properly and fusion may become unusable afterwards.
-- A shaman who is merely unconscious does not end the fusion (only death does).
+- When possession or Spirit Barrage is unavailable, the tooltip shows all requirements as a single sentence; it does not tell you which one failed.
 
 
 </details>
