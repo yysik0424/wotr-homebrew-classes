@@ -1398,10 +1398,13 @@ The Weapon-Spirit Shaman trades the spirit animal for a spirit dwelling in a wea
 
 | Level | Feature | Effect |
 |---|---|---|
-| 1 | Weapon Spirit | Choose one of 59 weapon categories. You gain Weapon Focus with it (ignoring prerequisites), and a Weapon Spirit wielding a masterwork weapon of that category becomes your companion |
+| 1 | Weapon Spirit | Choose one of 59 weapon categories. A Weapon Spirit wielding a masterwork weapon of that category becomes your companion and takes weapon feats with that category (below). The shaman gains no weapon feats |
 | 1 | Spirit Mirror | An ability of the Weapon Spirit. The magic of weapons in its spare weapon sets is mirrored onto the weapon it wields. Mirror count B = shaman level / 4 (rounded down) + 1 |
+| 4 | Weapon Spirit Weapon Specialization | The Weapon Spirit gains Weapon Specialization with the chosen category (ignoring prerequisites) |
+| 8 | Weapon Spirit Greater Weapon Focus | The Weapon Spirit gains Greater Weapon Focus with the chosen category (ignoring prerequisites) |
 | 5 | Spirit Possession I | Swift action, 1/day, 3 rounds. The power mirrored onto the Weapon Spirit's weapon moves to your own primary weapon (or empty hand) |
 | 10 | Spirit Possession II | 2/day, 5 rounds. Adds flight (immune to ground effects and trip) during possession |
+| 12 | Weapon Spirit Greater Weapon Specialization | The Weapon Spirit gains Greater Weapon Specialization with the chosen category (ignoring prerequisites) |
 | 15 | Spirit Possession III | 3/day, 7 rounds. Adds +2 to hex DCs during possession |
 | 18 | Spirit Barrage | Swift action, 1/day. Choose one enemy: the Weapon Spirit attacks it once with each melee weapon in its spare weapon sets (at most 6 attacks). Every attack uses the Weapon Spirit's highest attack bonus, and damage is that spare weapon's own |
 | 20 | Spirit Possession IV (Fusion) | 4/day, 10 rounds. You can spend a possession use on Spirit Fusion — 10 rounds of the Possession III effects, with damage you take going to the Weapon Spirit's hit points first |
@@ -1412,7 +1415,8 @@ The Weapon-Spirit Shaman trades the spirit animal for a spirit dwelling in a wea
 
 You must choose one weapon category at level 1.
 
-- Shaman: gains Weapon Focus with the chosen category (ignoring prerequisites). You do not gain proficiency with that weapon.
+- Shaman: gains no weapon feats or proficiencies.
+- Weapon Spirit: takes Weapon Focus and Improved Critical with the chosen category (automatic feats), plus Weapon Specialization at shaman level 4, Greater Weapon Focus at 8 and Greater Weapon Specialization at 12, ignoring prerequisites.
 - Weapon Spirit: appears wielding a masterwork weapon of the chosen category. For double weapons, both heads are masterwork.
 
 Weapon Spirit traits:
@@ -1510,14 +1514,15 @@ The level 1 Weapon Spirit weapon category (59 options). Natural weapons and cate
 | Thrown | Dart, Javelin, Throwing Axe |
 | Ranged | Longbow, Shortbow, Light Crossbow, Heavy Crossbow, Sling Staff |
 
-Every option does the same thing: Weapon Focus with that category for the shaman, plus a Weapon Spirit wielding a masterwork weapon of that category. Whatever you pick, the Weapon Spirit is proficient with all 59 categories, so you can hand it a different weapon later.
+Every option does the same thing: a Weapon Spirit wielding a masterwork weapon of that category, and that category becomes the target of the Weapon Spirit's five weapon feats (Weapon Focus, Improved Critical, Weapon Specialization, Greater Weapon Focus, Greater Weapon Specialization). Whatever you pick, the Weapon Spirit is proficient with all 59 categories, so you can hand it a different weapon later.
 
 On the selection screen each option has its own multi-line description. It lists the starting weapon's melee or ranged type, whether it is one-handed, two-handed, light or a double weapon, its damage dice, critical range and multiplier, and its melee reach or range in feet; double weapons also list the second head's damage and critical. Ranged categories add a line noting that ranged weapons take no part in Spirit Barrage. These numbers are read from the starting weapon values the game actually uses, so if another mod changes that weapon type, the changed values are shown. The selection screen's overall description and the level-table descriptions of Spirit Possession II-IV also state uses per day and duration in rounds.
 
 ### Feats
 
-- Weapon Focus with the weapon category chosen at level 1, gained automatically and ignoring prerequisites.
+- The shaman gains no automatic weapon feats.
 - The Weapon Spirit takes Weapon Focus and Improved Critical with the chosen category as automatic feats.
+- At shaman levels 4, 8 and 12 the Weapon Spirit gains Weapon Specialization, Greater Weapon Focus and Greater Weapon Specialization with the chosen category, ignoring prerequisites. These count shaman levels, not the Weapon Spirit's own level.
 - No change to bonus feat slots.
 - The Weapon Spirit occupies the animal companion slot. If you already have an animal companion, the Weapon Spirit selection is unavailable.
 - Because you lose Wandering Spirit and Wandering Hex, options that require them are unavailable.
@@ -1554,7 +1559,7 @@ On the selection screen each option has its own multi-line description. It lists
 - Mirror count B and the possession tier, uses and duration count shaman levels only. Spirit Barrage is likewise gained at shaman level 18.
 
 **Known limitations**
-- The shaman does not gain proficiency with the chosen weapon. You get Weapon Focus, but need proficiency from elsewhere to wield that weapon yourself.
+- Characters from earlier versions: the Weapon Focus the shaman used to get is removed on load, and a Weapon Spirit already past levels 4, 8 or 12 receives the matching feats on load.
 - When possession, fusion or Spirit Barrage is unavailable, the tooltip shows all requirements as a single sentence; it does not tell you which one failed.
 - Saving during a fusion ends the fusion just before the save.
 - The damage absorbed during fusion is calculated before the difficulty's damage multiplier is applied.
