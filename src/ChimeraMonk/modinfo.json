@@ -1,0 +1,7 @@
+{
+    "displayName":  "키메라 몽크 / Chimera Monk",
+    "version":  "0.1.0",
+    "Requirements":  [
+                         "DarkCodex"
+                     ]
+}

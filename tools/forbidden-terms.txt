@@ -1,0 +1,18 @@
+# One .NET expression per line. Blank lines and comment lines are ignored.
+(?i)[a-z]:[\\/]+Users[\\/]
+(?i)\bAppData[\\/]
+(?i)yysik(?!0424)
+(?i)wotr-class-mod[\\/]checks
+(?i)\b[A-Z0-9._%+-]+@(?!users\.noreply\.github\.com\b)[A-Z0-9.-]+\.[A-Z]{2,}\b
+연구원님
+(?<!Dark)Codex
+(?i)\.superpowers\b
+(?i)docs[\\/](sdd|recon|superpowers|release)(?:[\\/]|$)
+(?i)\bsdd-
+조정자|브리프
+(?i)\bTask\s+\d+\b
+(?i)\breview-
+(?i)\brev\.\s?\d
+\br\d+\s+(?:PASS|FAIL)\b
+(?:소유자|연구원님)\s?판정
+판정 §

@@ -1,0 +1,616 @@
+[
+    {
+        "id":  "BlastMagus",
+        "branch":  "blast-magus",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+                              "KineticistElementsExpanded"
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "BlastMagus.KeeStage::RecordSnapshot",
+                                  "BlastMagus.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "BloodBerserker",
+        "branch":  "mainline",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "BloodBerserker.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "BulwarkMage",
+        "branch":  "bulwark-mage",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "UnityModManagerNet.UnityModManager/ModEntry::OnUpdate",
+                                  "BulwarkMage.RuntimeReadback::Tick",
+                                  "BulwarkMage.RebukeOutcomeTracker::Tick",
+                                  "BulwarkMage.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "ChaosWarrior",
+        "branch":  "chaos-warrior",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "UnityModManagerNet.UnityModManager/ModEntry::OnUpdate",
+                                  "ChaosWarrior.RageOffWatcher::Tick",
+                                  "ChaosWarrior.OrphanMutationSweep::Tick",
+                                  "ChaosWarrior.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "ChimeraMonk",
+        "branch":  "chimera-monk",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+                         {
+                             "modId":  "DarkCodex",
+                             "display":  "DarkCodex"
+                         }
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "ChimeraMonk.DarkCodexHook::Resolve",
+                                  "ChimeraMonk.Main::PatchTypes",
+                                  "HarmonyLib.Harmony::CreateClassProcessor",
+                                  "HarmonyLib.PatchClassProcessor::Patch",
+                                  "ChimeraMonk.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "Deathdealer",
+        "branch":  "mainline",
+        "usesCommon":  true,
+        "linkedSources":  [
+                              "DreamThief/CloneKit.cs"
+                          ],
+        "refs":  [
+                     "Unity.TextMeshPro.dll"
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "Deathdealer.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "DreamThief",
+        "branch":  "mainline",
+        "usesCommon":  true,
+        "refs":  [
+                     "UnityEngine.PhysicsModule.dll"
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "DreamThief.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "Golemancer",
+        "branch":  "golemancer",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "UnityModManagerNet.UnityModManager/ModEntry::OnUpdate",
+                                  "Golemancer.GolemMaster::Tick",
+                                  "Golemancer.Fusion::Tick",
+                                  "Golemancer.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "GreySeer",
+        "branch":  "mainline",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "GreySeer.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "Falconer",
+        "branch":  "mainline",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "Falconer.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "HellRider",
+        "branch":  "mainline",
+        "usesCommon":  true,
+        "linkedSources":  [
+                              "DreamThief/CloneKit.cs"
+                          ],
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "HellRider.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "ProphecyBreaker",
+        "branch":  "mainline",
+        "usesCommon":  true,
+        "refs":  [
+                     "UnityEngine.IMGUIModule.dll",
+                     "UnityEngine.TextRenderingModule.dll"
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "ProphecyBreaker.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "OathboundRevenant",
+        "branch":  "oathbound-revenant",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "OathboundRevenant.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "PackWarden",
+        "branch":  "pack-warden",
+        "usesCommon":  false,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+                        "AstarPathfindingProject.dll"
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "packwarden",
+        "releaseEntryCalls":  [
+                                  "PackWarden.Main::Entry",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "PackWarden.Main::Log"
+                              ],
+        "displayName":  "무리 조련사 / Pack Warden",
+        "version":  "0.1.0"
+    },
+    {
+        "id":  "PhantomBlade",
+        "branch":  "phantom-blade",
+        "usesCommon":  true,
+        "refs":  [
+                     "UnityEngine.PhysicsModule.dll"
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "PhantomBlade.GhostSlashVeilGlobalGuard::Register",
+                                  "PhantomBlade.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "ShadowSorcerer",
+        "branch":  "shadow-sorcerer",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "UnityModManagerNet.UnityModManager/ModEntry::OnUpdate",
+                                  "ShadowSorcerer.RuntimeReadback::Tick",
+                                  "ShadowSorcerer.ShadowDoubles::Tick",
+                                  "ShadowSorcerer.EchoQueue::Tick",
+                                  "ShadowSorcerer.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "SorrowInquisitor",
+        "branch":  "mainline",
+        "usesCommon":  true,
+        "refs":  [
+                     "UnityEngine.IMGUIModule.dll",
+                     "UnityEngine.TextRenderingModule.dll"
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "SorrowInquisitor.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "Spellfist",
+        "branch":  "spellfist",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+                         {
+                             "modId":  "BrawlerClassWrath",
+                             "display":  "Brawler Class"
+                         }
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "Spellfist.BrawlerHook::Resolve",
+                                  "Spellfist.Main::PatchTypes",
+                                  "HarmonyLib.Harmony::CreateClassProcessor",
+                                  "HarmonyLib.PatchClassProcessor::Patch",
+                                  "UnityModManagerNet.UnityModManager/ModEntry::OnUpdate",
+                                  "Spellfist.SchoolLists::FirstFrameTick",
+                                  "Spellfist.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "Spiritsteel",
+        "branch":  "mainline",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "Spiritsteel.Blueprints::BuildAll"
+                              ],
+        "linkedSources":  [
+                              "WeaponSpiritShaman/SpiritCategories.cs",
+                              "WeaponSpiritShaman/CloneKit.cs",
+                              "WeaponSpiritShaman/CloneGraph.cs"
+                          ]
+    },
+    {
+        "id":  "Warlock",
+        "branch":  "warlock",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "UnityModManagerNet.UnityModManager/ModEntry::OnUpdate",
+                                  "Warlock.L20Sync::Tick",
+                                  "Warlock.Blueprints::BuildAll"
+                              ]
+    },
+    {
+        "id":  "WeaponSpiritShaman",
+        "branch":  "weapon-spirit-shaman",
+        "usesCommon":  true,
+        "refs":  [
+
+                 ],
+        "devRefs":  [
+
+                    ],
+        "requires":  [
+
+                     ],
+        "optionalAfter":  [
+
+                          ],
+        "devOnly":  [
+
+                    ],
+        "statusSource":  "common",
+        "releaseEntryCalls":  [
+                                  "WotrClassMod.Common.ModContext::Init",
+                                  "WotrClassMod.Common.Strings::Configure",
+                                  "HarmonyLib.Harmony::PatchAll",
+                                  "UnityModManagerNet.UnityModManager/ModEntry::OnUpdate",
+                                  "WeaponSpiritShaman.ProgressionSync::Tick",
+                                  "WeaponSpiritShaman.Blueprints::BuildAll"
+                              ]
+    }
+]

@@ -1,0 +1,7 @@
+{
+    "displayName":  "주문 격투가 / Spellfist",
+    "version":  "0.1.0",
+    "Requirements":  [
+                         "BrawlerClassWrath"
+                     ]
+}

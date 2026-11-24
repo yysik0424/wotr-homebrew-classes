@@ -2,34 +2,42 @@
 
 **English** | [한국어](README.ko.md)
 
-Twelve new archetypes for *Pathfinder: Wrath of the Righteous*, packed into a single Unity Mod Manager mod. Each one changes how its base class plays rather than just shuffling numbers: a hunter who fights through a pack of animals, an alchemist who wears a golem, a witch who trades hexes for blasts, and more.
+Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> **Status: beta, first release in preparation.**
-> There is no download yet. The first build (`0.9.0-beta`) will appear on the [Releases](../../releases) page. This page describes what that build contains.
+> [Download 0.17.5-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.5-beta/HomebrewClasses-0.17.5-beta.zip) · [Release notes and test coverage](release-notes-0.17.5-beta.md)
 
 ## The classes
 
-| Archetype | Base class | What it does | Needs |
-|---|---|---|---|
-| [Pack Warden](#pack-warden) | Hunter | Commands a pack: up to four extra animals of your companion's kind join each fight, and pack-only spell effects replace spellcasting | — |
-| [Phantom Blade](#phantom-blade) | Fighter | A guardian phantom strikes alongside you and absorbs half the damage you take | — |
-| [Blast Magus](#blast-magus) | Magus | Picks an element, fires blasts with Intelligence and detonates them through weapon hits | *KineticistElementsExpanded* (optional: 5 more elements) |
-| [Spellfist](#spellfist) | Brawler | Unarmed brawler with full arcane casting from three chosen schools | **BrawlerClassWrath** |
-| [Golemancer](#golemancer) | Alchemist | Builds a golem tank, changes its material, and later wears it | — |
-| [Warlock](#warlock) | Witch | Unlimited patron blasts that build Overheat and call summons | — |
-| [Weapon-Spirit Shaman](#weapon-spirit-shaman) | Shaman | A floating spirit weapon fights on its own and borrows the magic of stored weapons | — |
-| [Bulwark Mage](#bulwark-mage) | Wizard | Full caster in heavy armor behind a tower shield that strikes back | — |
-| [Chaos Warrior](#chaos-warrior) | Warpriest | Rages, mutates at random (claws, fangs and more), drives enemies mad with stacking pain, and casts the first spell of each rage as a swift action | — |
-| [Chimera Monk](#chimera-monk) | Monk | Reshapes the body with a new mutation every two levels | **DarkCodex** |
-| [Oathbound Revenant](#oathbound-revenant) | Paladin | An undead paladin whose smites knit the body back together | — |
-| [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | Shadow doubles recast your spells as illusions | — |
+| Archetype | Base class | What it does | Needs | 0.17.5-beta combat retest |
+|---|---|---|---|---|
+| [Pack Warden](#pack-warden) | Hunter | Commands a pack: up to four extra animals of your companion's kind join each fight, and pack-only spell effects replace spellcasting | — | In-game check pending |
+| [Phantom Blade](#phantom-blade) | Fighter | A guardian phantom strikes alongside you and absorbs half the damage you take | — | In-game check pending |
+| [Blast Magus](#blast-magus) | Magus | Picks an element, fires blasts with Intelligence and detonates them through weapon hits | *KineticistElementsExpanded* (optional: 5 more elements) | In-game check pending |
+| [Spellfist](#spellfist) | Brawler | Unarmed brawler with full arcane casting from three chosen schools | **BrawlerClassWrath** | In-game check pending |
+| [Golemancer](#golemancer) | Alchemist | Builds a golem tank, changes its material, and later wears it | DLC 3 | In-game check pending |
+| [Warlock](#warlock) | Witch | Unlimited patron blasts that build Overheat and call summons | — | In-game check pending |
+| [Weapon-Spirit Shaman](#weapon-spirit-shaman) | Shaman | A floating spirit weapon fights on its own and borrows the magic of stored weapons | — | In-game check pending |
+| [Bulwark Mage](#bulwark-mage) | Wizard | Full caster in heavy armor behind a tower shield that strikes back | — | In-game check pending |
+| [Chaos Warrior](#chaos-warrior) | Warpriest | Rages, mutates at random (claws, fangs and more), drives enemies mad with stacking pain, and casts the first spell of each rage as a swift action | — | In-game check pending |
+| [Chimera Monk](#chimera-monk) | Monk | Reshapes the body with a new mutation every two levels | **DarkCodex** | In-game check pending |
+| [Oathbound Revenant](#oathbound-revenant) | Paladin | An undead paladin whose smites knit the body back together | — | In-game check pending |
+| [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | One shadow echoes your first harmful spell each round | — | In-game check pending |
+| [Grey Seer](#grey-seer) | Arcanist | Wields sword and staff and follows a spell with a longsword strike | — | In-game check pending |
+| [Blood Berserker](#blood-berserker) | Bloodrager | Pulls foes with a blood chain and coats melee weapons in blood | — | In-game check pending |
+| [Sorrow Inquisitor](#sorrow-inquisitor) | Inquisitor | Gathers afflictions from allies and sentences an enemy to bear them | — | In-game check pending |
+| [Spiritsteel](#spiritsteel) | Barbarian | Grows an ancestral weapon and fights alongside its spirit during rage | — | In-game check pending |
+| [Dream Thief](#dream-thief) | Rogue | Throws a starknife to put enemies to sleep and strikes from a dreamwalk | — | In-game check pending |
+| [Deathdealer](#deathdealer) | Slayer | Reacts to a studied enemy and uses nine personal arcane abilities | — | In-game check pending |
+| [Falconer](#falconer) | Ranger | Coordinates a diving hawk with archery and an animal companion | — | In-game check pending |
+| [Prophecy Breaker](#prophecy-breaker) | Oracle | Casts divine spells with Intelligence and studies a separate arcane spellbook | — | In-game check pending |
+| [Hell Rider](#hell-rider) | Cavalier | Rides a nightmare and calls devils to strike from charges and a planted standard | — | In-game check pending |
 
 Full details for every archetype (what is removed, what is gained at each level, every choice) are in [Class details](#class-details) below.
 
 ## Requirements
 
 - *Pathfinder: Wrath of the Righteous* (Enhanced Edition, current Steam/GOG version)
-- [Unity Mod Manager](https://www.nexusmods.com/site/mods/21) 0.27.11 or newer
+- [Unity Mod Manager](https://www.nexusmods.com/site/mods/21). Built and checked against 0.32.4. The minimum version declared in the mod metadata is 0.27.11.
 - Optional mods, only for the classes that use them:
   - **BrawlerClassWrath**, required by Spellfist
   - **DarkCodex**, required by Chimera Monk
@@ -39,10 +47,20 @@ If a required mod is missing, only that one class is left out. The rest of the m
 
 ## Installation
 
-1. Install Unity Mod Manager and point it at the game.
-2. Download `HomebrewClasses-<version>.zip` from the Releases page.
-3. Drag the zip onto the Unity Mod Manager window, or extract it so that the folder `Mods\HomebrewClasses` sits inside the game folder.
+1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.5-beta.zip`.
+3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
+
+**Loading a save made with the standalone mods:** Keep every class used by that save enabled in Homebrew Classes. ModMenu records the bundle as one mod and may list the old mod IDs as missing. Use the normal **Load** button. If you clicked **Disable extra mods**, choose **Cancel**. Choosing **Proceed** can disable Homebrew Classes on the next start. Save in a fresh slot, restart the game, and load that slot before replacing the original.
+
+## Build from source
+
+In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
+
+```powershell
+.\tools\package.ps1 -Version 0.17.5-beta -Out .\out -NoDevCompare
+```
 
 ## Settings
 
@@ -65,7 +83,7 @@ Remove the mod in the Unity Mod Manager window or delete `Mods\HomebrewClasses`.
 
 ## Reporting bugs
 
-Open an [issue](../../issues) and include: the class, what you did, what happened, your mod list, and the files `Player.log` and `GameLogFull.txt` from `%USERPROFILE%\AppData\LocalLow\Owlcat Games\Pathfinder Wrath Of The Righteous`.
+Open an [issue](https://github.com/yysik0424/wotr-homebrew-classes/issues) with the affected class, steps to reproduce, active mods, `Player.log` and `GameLogFull.txt` from the game log folder.
 
 ## License and credits
 
@@ -259,6 +277,7 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 
 ### Compatibility and notes
 
+- Pack Warden uses five Tandem Executioner feature and buff blueprints. If the installed game data lacks any of these, the bundle skips Pack Warden and gives the reason in the mod settings.
 - No other mod is required. If the game data is not what the archetype expects (a patch or another mod has changed the Hunter progression, the animal companion list or the animal companion upgrades), the archetype does not appear in character creation and the rest of the game runs normally.
 - **Mods that add animal companions (ExpandedContent and the like)**: the added species stay available to a base Hunter but are left out of the Pack Warden's list.
 - **TabletopTweaks**
@@ -275,8 +294,8 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
   - The pack empowerment descriptions are written from the base-game spell values. If another mod changes a spell's values, the description does not follow.
   - The vanishing effect when auxiliaries disperse can look cut short, and it does not play for auxiliaries that are not Small, Medium or Large (under a size-changing effect, for instance). Rules are unaffected.
 
-
 </details>
+
 
 ## Phantom Blade
 
@@ -360,8 +379,6 @@ Automatic. There are only two rules.
 | 11–14 | 3 |
 | 15–18 | 4 |
 | 19–20 | 5 |
-
-In game these steps are named "Rush: 1 Strike" through "Rush: 5 Strikes". The number is the per-round limit from the table above, not the number of blows per attack.
 
 What gets counted changes at level 10.
 
@@ -477,8 +494,8 @@ The absorption pool is spent only on absorbing damage. Ghost Slash and Guardian 
 - **Other stat-replacement effects**: at levels 3–9 the Rush fist adds Charisma to damage, but if you have another effect that swaps in a higher ability score for weapon damage, the engine may apply that one instead, as it would for any attack.
 - **Turn-based mode**: a "round" for Rush is your own action cycle in real time, and begins at the start of your turn in turn-based mode.
 
-
 </details>
+
 
 ## Blast Magus
 
@@ -652,8 +669,8 @@ Offered only while the KineticistElementsExpanded mod is enabled:
 - **DLC**: no DLC is required. The Extra Arcana feat is DLC content and is not available to this archetype.
 - If another mod also changes the caster level of blasts, which value wins is not guaranteed.
 
-
 </details>
+
 
 ## Spellfist
 
@@ -841,8 +858,8 @@ The reservoir is the same resource as the base game arcanist's arcane reservoir.
 - **Arcanist and Exploiter Wizard**: the base game's exploits are left untouched. Spellfist exploits are separate copies, so they do not satisfy prerequisites of other options that require the original exploits (for example the higher exploits that build on Ice Missile or Lightning Lance).
 - **Known limitation**: if combat ends, or the reservoir drops and lowers the cap, before you turn the toggle off, a queued quickened cast may stay queued instead of being cancelled.
 
-
 </details>
+
 
 ## Golemancer
 
@@ -862,7 +879,7 @@ The reservoir is the same resource as the base game arcanist's arcane reservoir.
 
 ### Overview
 
-The Golemancer is an alchemist who builds a golem and sends it to the front. From level 1 a wood golem fights at your side, and enemies near it take a penalty on attacks against anyone but the golem. At levels 5, 10 and 15 you pick a new material, which replaces the golem's look, size, immunities and special abilities wholesale. From level 5 you can also use Golem Overdrive, injecting a prepared extract into the golem to give it extra slams and a school-based effect for a short time. From level 10 you can wear the golem as a swift action and tank in person, with the golem's hit points soaking damage before yours. You pay for it with fewer bombs per day, three opposition schools, and the loss of poison resistance, poison immunity and the cognatogens.
+The Golemancer is an alchemist who builds a golem and sends it to the front. From level 1 you can call a wood golem to fight at your side, then dismiss it while travelling. Enemies near the deployed golem take a penalty on attacks against anyone else. At levels 5, 10 and 15 you pick a new material, which replaces the golem's look, size, immunities and special abilities wholesale. From level 5 you can also use Golem Overdrive, injecting a prepared extract into the golem to give it extra slams and a school-based effect for a short time. From level 10 you can wear the golem as a swift action and tank in person, with the golem's hit points soaking damage before yours. You pay for it with fewer bombs per day, three opposition schools, and the loss of poison resistance, poison immunity and the cognatogens.
 
 ### What you give up
 
@@ -898,6 +915,8 @@ Bomb damage dice, mutagens (including Persistent Mutagen), the extract slot tabl
 ### Abilities in detail
 
 #### Golem
+
+**Call Golem and Dismiss Golem** are available from level 1. Your golem waits until called. Call it to your side as a standard action, including during combat. Outside combat, send it away until you need it again. Both commands preserve the same companion, its current hit points, material, level and animal companion slot. Fusion, overdrive and mounted use must finish before calling or dismissing it.
 
 - **Gained**: level 1, automatically. The golem is a companion unit that occupies the animal companion slot and levels up with you (Hit Dice = alchemist level).
 - **Type**: construct. It has the common construct immunities (sleep, paralysis, fear, mind-affecting effects, poison and so on). Alchemical healing does not mend it. It does not have the base game wood golem's blanket spell immunity.
@@ -1137,7 +1156,7 @@ Opposition schools apply only to your Golemancer extracts. They do not affect a 
 ### Compatibility and notes
 
 - **No animal companions**: the golem uses the animal companion slot. Combining it with a class or feature that grants an animal companion (druid, hunter and so on) leaves the golem non-functional and logs a conflict error in the mod log.
-- **DLC content**: the brass material uses the brass golem unit and model added by DLC 3 (The Treasure of the Midnight Isles). All other materials (wood, stone, iron, gold, autumn, summer, adamantine, greater gold, mithral) use base game golems. The cognatogen lockout also covers the Extra Discovery feat selection that ships with DLC 5 (The Lord of Nothing) content.
+- **Requires DLC 3.** The bundle skips Golemancer if the brass golem data is unavailable. The brass material uses the brass golem unit and model added by DLC 3 (The Treasure of the Midnight Isles). All other materials (wood, stone, iron, gold, autumn, summer, adamantine, greater gold, mithral) use base game golems. The cognatogen lockout also covers the Extra Discovery feat selection that ships with DLC 5 (The Lord of Nothing) content.
 - **Other mods**: if another mod moves or removes Poison Resistance at alchemist levels 2, 5 or 8 or Poison Immunity at level 10, this archetype is not created at all, rather than being created half-working. The golem's level is computed directly from your alchemist level, so mods that change animal companion levels do not affect it.
 - **Multiclassing and prestige classes**: the golem's Hit Dice and numbers, its slam count (normal and overdrive), the bomb base and the fusion numbers all read alchemist level only. Levels in other classes do not advance them.
 - **Known limitations**
@@ -1151,8 +1170,8 @@ Opposition schools apply only to your Golemancer extracts. They do not affect a 
   - If the golem is removed entirely by something outside the mod, it does not reappear until the next area load or level-up.
   - If the fusion ends while you are dominated or charmed, the golem may not return right away.
 
-
 </details>
+
 
 ## Warlock
 
@@ -1258,6 +1277,8 @@ Level 10. One standard action fires two rays at the same target (medium range). 
 
 When a blast hit brings Heat to 9, the highest tier you can summon (the lower of 9 and your highest spell level) is summoned at once without spending Heat, and Heat resets to 0. Anything above 9 is lost. The automatic summon also replaces your current warlock summon. If you reach 9 again while an automatic summon is still resolving, Heat stays at 9 and the summon happens on your next blast hit.
 
+If you save after Heat resets but before the creature appears, loading that save restores your Heat to 9. You can spend it yourself or land another blast to trigger the automatic summon. A save made after the creature appears keeps the summon and its normal Heat balance.
+
 #### Group Ward
 
 | Tier | Level | Hell, Abyss, Fey, Storm, Death | Star |
@@ -1350,7 +1371,7 @@ Cells that use a DLC unit: only Abyss III (Abrikandilu). The other 53 cells use 
 - If another mod changes the base game's prestige "witch spellbook" options in an unrecognized way, the Warlock may fail to be created (a `Warlock:` error appears in the mod log).
 
 **DLC**
-- The Abyss group's tier III summon (Abrikandilu) uses a unit that belongs to DLC 5 (The Lord of Nothing). DLC ownership is not checked, so this cell is not guaranteed to work in a game without that DLC.
+- The Abyss group's tier III summon uses the Abrikandilu from DLC 5 (The Lord of Nothing). If that unit is unavailable, the tier III option is omitted. Automatic summoning at this tier uses tier II.
 
 **Multiclassing**
 - Blast dice, caster level, summon duration and the Star group's spell resistance count witch levels only. Levels in other classes add nothing.
@@ -1359,11 +1380,11 @@ Cells that use a DLC unit: only Abyss III (Abrikandilu). The other 53 cells use 
 - The Storm group's blast deals no damage to demons, which are immune to electricity (Heat still builds).
 - Tier IX of the Hell, Storm and Death groups is a creature of the same rank as tier VIII; in exchange it gains Patron's Favor (+4 Strength and Constitution a second time; +4 Strength and Charisma for the Death group's Graveknight).
 - Fey tiers III and IV summon the same creature (Medium Water Elemental).
-- Saving during the brief moment an automatic summon is resolving can lose that summon and your Heat.
+- Version 0.9.1-beta and earlier did not record pending automatic summons. Heat already lost in an older save cannot be recovered.
 - Loading a save that contains a warlock after removing the mod is not supported.
 
-
 </details>
+
 
 ## Weapon-Spirit Shaman
 
@@ -1398,7 +1419,7 @@ The Weapon-Spirit Shaman trades the spirit animal for a spirit dwelling in a wea
 
 | Level | Feature | Effect |
 |---|---|---|
-| 1 | Weapon Spirit | Choose one of 59 weapon categories. A Weapon Spirit wielding a masterwork weapon of that category becomes your companion and takes weapon feats with that category (below). The shaman gains no weapon feats |
+| 1 | Weapon Spirit | Choose one of up to 59 weapon categories. A Weapon Spirit wielding a masterwork weapon of that category becomes your companion and takes weapon feats with that category (below). The shaman gains no weapon feats |
 | 1 | Spirit Mirror | An ability of the Weapon Spirit. The magic of weapons in its spare weapon sets is mirrored onto the weapon it wields. Mirror count B = shaman level / 4 (rounded down) + 1 |
 | 4 | Weapon Spirit Weapon Specialization | The Weapon Spirit gains Weapon Specialization with the chosen category (ignoring prerequisites) |
 | 8 | Weapon Spirit Greater Weapon Focus | The Weapon Spirit gains Greater Weapon Focus with the chosen category (ignoring prerequisites) |
@@ -1428,7 +1449,7 @@ Weapon Spirit traits:
 | Size / speed | Medium / 50 ft. |
 | Flight | Always airborne — immune to ground effects and trip |
 | Natural armor | +5 |
-| Proficiencies | Every weapon category in the selection (all 59), light and medium armor. No shield proficiency |
+| Proficiencies | Every weapon category in the selection (up to 59), light and medium armor. No shield proficiency |
 | Equipment slots | Uses all four weapon sets. Cannot use the boots, two ring, glasses and shirt slots |
 | Automatic feats | The Weapon Focus and Improved Critical that animal companions take for their bite are taken for the chosen weapon category instead. They keep that target even if the Weapon Spirit wields a weapon of another category |
 | Death | If it falls, it returns after you rest |
@@ -1497,7 +1518,7 @@ Level 18. A separate ability from possession, with its own use (1/day) rather th
 
 ### Choices
 
-The level 1 Weapon Spirit weapon category (59 options). Natural weapons and categories without a weapon model are excluded. In game the options appear under the base game's weapon names.
+The level 1 Weapon Spirit weapon category (up to 59 options). Natural weapons and categories without a weapon model are excluded. In game the options appear under the base game's weapon names.
 
 | Group | Categories |
 |---|---|
@@ -1507,7 +1528,7 @@ The level 1 Weapon Spirit weapon category (59 options). Natural weapons and cate
 | Thrown | Dart, Javelin, Throwing Axe |
 | Ranged | Longbow, Shortbow, Light Crossbow, Heavy Crossbow, Sling Staff |
 
-Every option does the same thing: a Weapon Spirit wielding a masterwork weapon of that category, and that category becomes the target of the Weapon Spirit's five weapon feats (Weapon Focus, Improved Critical, Weapon Specialization, Greater Weapon Focus, Greater Weapon Specialization). Whatever you pick, the Weapon Spirit is proficient with all 59 categories, so you can hand it a different weapon later.
+Every option does the same thing: a Weapon Spirit wielding a masterwork weapon of that category, and that category becomes the target of the Weapon Spirit's five weapon feats (Weapon Focus, Improved Critical, Weapon Specialization, Greater Weapon Focus, Greater Weapon Specialization). Whatever you pick, the Weapon Spirit is proficient with all available categories, so you can hand it a different weapon later.
 
 On the selection screen each option has its own multi-line description. It lists the starting weapon's melee or ranged type, whether it is one-handed, two-handed, light or a double weapon, its damage dice, critical range and multiplier, and its melee reach or range in feet; double weapons also list the second head's damage and critical. Ranged categories add a line noting that ranged weapons take no part in Spirit Barrage. These numbers are read from the starting weapon values the game actually uses, so if another mod changes that weapon type, the changed values are shown. The selection screen's overall description and the level-table descriptions of Spirit Possession II-IV also state uses per day and duration in rounds.
 
@@ -1544,7 +1565,7 @@ On the selection screen each option has its own multi-line description. It lists
 - Known additions that other mods attach to the animal companion class or to basic weapons (ExpandedContent, MAKING FRIENDS, ToggleableThrowingWeapons) are recognized and not carried over to the Weapon Spirit. An unrecognized addition may prevent the class from being created (a `WeaponSpiritShaman:` error appears in the mod log).
 
 **DLC**
-- The Sawtooth Sabre Weapon Spirit's starting weapon is built from a DLC reward weapon in the base game data and keeps its DLC condition marker (a DLC 6, A Dance of Masks, reward). How this option and weapon appear in a game without that DLC is not guaranteed.
+- The Sawtooth Sabre option requires both its weapon type and reward item to exist in the installed game data. If either is missing, the other weapon choices remain available. When present, the starting weapon retains the original A Dance of Masks reward condition.
 - The other 58 categories are built from standard base game weapons.
 
 **Multiclassing**
@@ -1555,8 +1576,8 @@ On the selection screen each option has its own multi-line description. It lists
 - Characters from earlier versions: the Weapon Focus the shaman used to get is removed on load when it can be confirmed as coming from this mod (otherwise it stays), and a Weapon Spirit already past levels 4, 8 or 12 receives the matching feats on load.
 - When possession or Spirit Barrage is unavailable, the tooltip shows all requirements as a single sentence; it does not tell you which one failed.
 
-
 </details>
+
 
 ## Bulwark Mage
 
@@ -1712,8 +1733,8 @@ The "once per round" limit on Shield Rebuke is not a resource. It clears when yo
 - **Bonded Shield enhancement**: a shield that leaves your body without passing through a hand slot may keep the enhancement. It is cleaned up the next time you take that shield in hand.
 - **Iron Concentration**: it works by forcing the check's DC extremely low, so another mod that overwrites the DC of the same check afterwards could break the automatic success.
 
-
 </details>
+
 
 ## Chaos Warrior
 
@@ -1927,8 +1948,8 @@ Two-sided mutations (5) - the upside and the downside come together, and drawing
 - No Rage or Confusion spells are added to the warpriest spell list.
 - No DLC content is required.
 
-
 </details>
+
 
 ## Chimera Monk
 
@@ -2136,8 +2157,8 @@ Venom, the Partial Aspect toggle and the other mutations use no resource. The ki
   - Extra Lung is not a general immunity to poison. It covers only the four cloud spell areas listed above, and fatigue.
   - The horns are not shown if the base game has no matching visual for your race and gender (you still gain the gore attack). The tail and horns are not shown on pets such as animal companions. The Wings mutation uses the base game wings effect as is, so this restriction does not apply to it.
 
-
 </details>
+
 
 ## Oathbound Revenant
 
@@ -2342,10 +2363,10 @@ Channel Negative Energy draws on lay on hands uses, not on the base paladin's ch
 - **Undead allies and lay on hands**: Revenant's Hands cannot target allies with negative energy affinity, so undead companions and your own undead steed cannot be healed with it.
 - **Divine bond**: only the 5th-level feature matching your choice (mount or weapon) does anything; the other one has no effect.
 - **Multiclassing**: talent prerequisites and all scaling use paladin level, not character level.
-- **DLC**: the visual effect of the Aura of Death area uses a negative-energy area effect that is labelled as DLC 3 content in the game data. The numbers and behavior of every ability use base-game elements only.
-
+- Aura of Death and its stronger aura use a DLC 3 negative-energy visual effect. If the effect is unavailable, both auras still apply their gameplay effects.
 
 </details>
+
 
 ## Shadow Sorcerer
 
@@ -2358,20 +2379,20 @@ Channel Negative Energy draws on lay on hands uses, not on the base paladin's ch
 |---|---|
 | Base class | Sorcerer |
 | Key ability | Charisma. Recommended abilities are the same as the base Sorcerer's |
-| Spellcasting | Kept. The Sorcerer spellbook is unchanged except that you get one fewer spell per day of each spell level from 1st to 9th, and you learn nine extra shadow and illusion spells |
+| Spellcasting | Sorcerer spellbook with up to two fewer base daily slots at each unlocked spell level from 1st to 9th and nine extra shadow and illusion spells |
 | Required mods | None |
 | Optional integrations | None |
 | Alignment / deity restrictions | None added by the archetype |
 
 ### Overview
 
-The Shadow Sorcerer casts with shadow doubles standing at their side. Cast one harmful spell at an enemy and the same spell lands again on the same target or the same spot, once per double, while only the original uses a spell slot. The doubles' spells are illusions, though: they deal half the original damage, and an enemy that sees through them with a Will save takes only a quarter and ignores their effects other than damage. The price is one spell per day at every spell level and all three bloodline feats. You cast less often, and every cast hits several times over.
+One shadow repeats your first eligible harmful sorcerer spell each round. It recasts the same spell at the same target or point 0.5 seconds after the original effect ends. For example, if you maximize a fireball, the original deals maximum damage and the echo rolls the ordinary fireball dice.
 
 ### What you give up
 
 | Level | Base feature | Notes |
 |---|---|---|
-| 1 | Some spells per day | One fewer spell per day of each spell level from 1st to 9th. Shown on the sheet as Spells Given to Shadow |
+| 1 | Spells Given to Shadow | Lose up to two base daily slots at each unlocked spell level from 1st to 9th |
 | 7 | Bloodline Feat Selection | Removed |
 | 13 | Bloodline Feat Selection | Removed |
 | 19 | Bloodline Feat Selection | Removed |
@@ -2382,16 +2403,14 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 
 | Level | Feature | Effect |
 |---|---|---|
-| 1 | Shadow Echo | When you cast a harmful spell at an enemy from your Sorcerer spellbook, the first such spell each round is recast at the same target or point once per shadow double. No spell slot is used. An echo deals half the original damage. Each target may disbelieve with a Will save against the original DC; on a success the damage drops to a quarter and effects other than damage do not apply |
-| 1 | Shadow Doubles 1 | 1 double — 1 echo. When the echo fires, a shadow figure appears behind the caster and performs the cast |
-| 1 | Spells Given to Shadow | One fewer spell per day of each spell level from 1st to 9th. Ability bonus spells are unaffected |
+| 1 | Shadow Echo | One echo follows the first eligible harmful sorcerer spell each round after its effect ends. The echo casts the base spell without metamagic at the same target or point and costs no action or slot |
+| 1 | Shadow Double | One shadow casts your echo from Sorcerer level 1 through 20 |
+| 1 | Spells Given to Shadow | Subtract two base slots at each unlocked spell level from 1st to 9th, to a minimum of zero. Add all bonus slots |
 | 3 | Shadow Arcana: Vanish | You learn Vanish (1st level) as an extra spell |
 | 5 | Shadow Arcana: Mirror Image | You learn Mirror Image (2nd level) as an extra spell |
-| 7 | Shadow Doubles 2 | 2 doubles — 2 echoes |
 | 7 | Shadow Arcana: Displacement | You learn Displacement (3rd level) as an extra spell |
 | 9 | Shadow Arcana: Shadow Conjuration | You learn Shadow Conjuration (4th level) as an extra spell |
 | 11 | Shadow Arcana: Shadow Evocation | You learn Shadow Evocation (5th level) as an extra spell |
-| 13 | Shadow Doubles 3 | 3 doubles — 3 echoes |
 | 13 | Shadow Arcana: Phantasmal Putrefaction | You learn Phantasmal Putrefaction (6th level) as an extra spell |
 | 15 | Shadow Arcana: Greater Shadow Conjuration | You learn Greater Shadow Conjuration (7th level) as an extra spell |
 | 17 | Shadow Arcana: Greater Shadow Evocation | You learn Greater Shadow Evocation (8th level) as an extra spell |
@@ -2410,18 +2429,18 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
   - It is harmful to enemies: a spell that can target enemies and either has a harmful effect on them or cannot target allies. Buffs, healing and summoning spells are excluded.
   - If it targets a single creature, that creature is your enemy at the moment of casting. A spell cast on an ally does not echo.
   - You have not already echoed a spell this round.
-- **Number of echoes**: one per shadow double. 1 at Sorcerer level 1, 2 at level 7, 3 at level 13. Only Sorcerer class levels count.
+- **Echo count** stays at one from Sorcerer level 1 through 20. If you cast a quickened spell and a standard spell in the same round, the first qualifying cast receives the echo.
 - **One spell per round**: only one spell can be echoed each round. In turn-based combat this goes by round number; in real-time combat and outside combat, 6 seconds must have passed since the last echoed spell. A new combat makes it available again.
-- **Timing**: once the original spell's effect has finished, the echoes go off one at a time, 0.5 seconds of game time apart; the first one fires 0.5 seconds after the original spell ends. The timing is the same whether or not the shadow doubles appear (see "Shadow Doubles" below).
+- **Timing** is 0.5 seconds of game time after the original spell effect finishes, whether or not the shadow can appear.
 - **Where the echoes land**
   - Single-target spells: on the same target.
   - Area spells aimed at a point: on the original point. Even if you aimed by clicking an enemy, the echoes land where the spell was first placed, not where that enemy has moved to.
   - Area spells centred on the caster or on a target: on the centre the original cast used.
-- **Strength of an echo**: caster level, spell level, saving throw DC and metamagic are those of the original cast. Any metamagic on the original is on every echo. Each echo rolls the spell's own saving throws afresh.
+- **Echo strength** uses the selected spell variant, base spell level, caster level, casting ability and normal bonuses such as Spell Focus. It makes fresh damage and saving throw rolls. Maximize, Heighten and Persistent on the original never maximize the echo’s damage, raise its DC or force its targets to reroll their saves.
 - **Costs**: echoes use no spell slot. Effects that trigger "when you cast a spell" and metamagic buffs that apply "to your next spell" are triggered and spent once, by the original cast only; echoes neither trigger nor consume them.
 - **Echoes never produce echoes.**
-- **Echo damage**: an echo deals half (50%) of the damage the spell would normally deal. This applies whether or not the target disbelieves, and fractions round up (minimum 1). The original cast's damage is unchanged.
-- **Disbelief (illusion)**: every creature affected by an echo makes a Will save against the original spell's DC. Each creature rolls only once per echo.
+- **Ordinary damage spells** roll fresh damage without metamagic. The echo deals 50% on failed disbelief or 25% on successful disbelief.
+- **Disbelief** gives each affected target one Will save against the echo’s base spell DC.
   - Failure: damage is half (50%), and effects other than damage apply in full.
   - Success: damage is a quarter (25%). Effects other than damage (buffs and debuffs, ability damage, energy drain, combat maneuvers, healing) do not apply. Nothing is left to a chance roll.
   - Instant death and dispelling: an echo's instant death effect and dispel magic do not apply to a creature that disbelieved either. A dispel that removes effects at a point or in an area, rather than from one creature, still applies.
@@ -2441,13 +2460,13 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 #### Shadow Doubles
 
 - **Normally invisible.** The doubles only show themselves while echoes are going off. While hidden they are treated as not being in the fight at all, so nobody's spells (cones, lines and chains included) can catch them. The doubles are not saved, cannot be targeted, do not count as combat participants and carry no items.
-- **Look**: they take the form of the base game's Shadow creature (a black humanoid silhouette). There is one per double (1, 2 or 3).
+- The double takes the form of the base game’s Shadow creature, a black humanoid silhouette.
 - **Sequence**
-  1. When the original spell has finished, all the doubles appear at once **behind** the caster: the first behind and to the left, the second behind and to the right, the third directly behind (relative to the direction of the target, or to the caster's facing when there is no direction, as with an area centred on the caster).
-  2. For each echo, the double whose turn it is faces the target and begins a casting animation (0.35 seconds before the echo fires), and the spell's casting effect flares in its hand as the echo goes off. Spell visuals that would attach to the caster attach to that double instead.
-  3. 0.9 seconds after all the echoed spells have finished, the doubles vanish together. For long-running spells they wait at most 8 seconds.
+  1. When the original spell finishes, one shadow appears behind the caster.
+  2. The shadow faces the target and begins its casting animation 0.35 seconds before the echo fires. The spell effect appears in its hand at release.
+  3. The shadow vanishes 0.9 seconds after the echo finishes, waiting at most 8 seconds for a long-running spell.
 - **The spells still come from the caster.** Projectiles, cones, lines and chains all start from the caster's position. Who is hit, attack rolls, areas, range and arrival time are exactly as they would be with no doubles shown.
-- **The show does not change the rules.** The number of echoes, when they fire (0.5 seconds after the original spell ends, then every 0.5 seconds), their damage and disbelief are the same whether or not the doubles appear. If anything goes wrong with the visuals, the echoes still fire.
+- The echo keeps the same timing, damage and disbelief rules when the shadow cannot appear.
 - **When the doubles do not appear** (the echoes still fire from the caster)
   - The caster is unconscious, polymorphed, in stealth, dead or not in the area, or the game is not in normal play or pause (dialogue, cutscenes and the like).
   - A cone or line echo where a double's spot could fall inside the caster's own cone or line (for example when a wall behind the caster pulls the spot in close).
@@ -2458,7 +2477,7 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 
 #### Spells Given to Shadow
 
-- Your Sorcerer spellbook has one fewer spell per day at each spell level from 1st to 9th.
+- Subtract two base daily slots at each unlocked Sorcerer spell level from 1st to 9th. Three base slots plus one bonus yield two slots, as do one base slot plus two bonus slots.
 - Only the base number from the Sorcerer table is reduced. Bonus spells from your casting ability and extra slots from other effects are untouched.
 - The reduction never takes more than the base number, and the result never goes below 0.
 - Cantrips (level 0) and spell levels you have not unlocked yet are unaffected.
@@ -2496,15 +2515,15 @@ The archetype adds no choices of its own. You pick a bloodline exactly as a base
 ### Resources
 
 - Shadow Echo uses no resource. Its only limit is one echoed spell per round.
-- Spells per day = the base Sorcerer's number minus 1 at each spell level from 1st to 9th, plus ability bonus spells as usual. They are restored by resting, as in the base game.
+- At each affected spell level, subtract two from the base slots (minimum zero), then add every bonus slot. Resting restores spent slots.
 
 ### Compatibility and notes
 
 - No other mod is required. If the game data is not what the archetype expects (another mod has moved the bloodline feat slots in the Sorcerer progression, or one of the nine extra spells is not on the Sorcerer spell list at the expected level), the archetype does not appear in character creation and the rest of the game runs normally.
 - **TabletopTweaks, ExpandedContent, BrawlerClassWrath**: these mods add entries to the bloodline feat selection. The Shadow Sorcerer loses that selection altogether, so there is no conflict.
 - **Merged mythic spellbooks**: mythic spells merged into the Sorcerer spellbook (the base game's Lich merge, and Angel, Aeon, Azata, Demon and Trickster spells merged by mods that extend merging) are Sorcerer spellbook spells, so they echo when they qualify.
-- **ToyBox**: if you use its spells-per-day multiplier, the reduction of 1 is applied first and the multiplier afterwards.
-- **Multiclassing and prestige classes**: the number of doubles depends on Sorcerer class levels only. Advancing the Sorcerer spellbook through a prestige class does not add doubles. Spells gained that way still echo, since they are cast from the Sorcerer spellbook, and the reduction of 1 per day still applies.
+- The **ToyBox** spells-per-day multiplier applies after the base slot reduction.
+- **Multiclassing and prestige classes** can advance the Sorcerer spellbook. Spells cast from that book still use the same echo conditions and daily slot reduction. There is one shadow at every level.
 - **Spells that do not echo**: teleports and utility spells that do no harm (Dimension Door and the like) are excluded. A few area spells that travel with the caster or a target cannot keep their original centre and are excluded as well: Zone of Predetermination, the Angel spell Repel the Profane and the Trickster spell Breath of Money.
 - **Spells excluded from echoing (15)**: the spells below are harmful to enemies but never echo. The original cast is unchanged.
   - 14 spells with an effect that would still reach an enemy that disbelieved: Inflict Moderate Wounds, Mass / Baleful Polymorph / Prismatic Spray / Clashing Rocks / Force Punch / Hideous Laughter / Slow / Crushing Despair / Cause Fear / Scare / Mortal Terror / the Azata spell Water Torrent / the Lich spell Siphon Time / the Aeon spell Relativity.
@@ -2516,5 +2535,190 @@ The archetype adds no choices of its own. You pick a bloodline exactly as a base
   - If the original spell's effect has not finished within 12 seconds of game time, no echoes are fired.
   - Even on a successful disbelief, a few direct effects such as a push may still apply. Spells found to have such effects have been excluded from echoing (see "Spells excluded from echoing" above).
 
+</details>
+
+
+## Grey Seer
+
+<details>
+<summary><b>Grey Seer</b></summary>
+
+### Sword and Staff
+
+An arcanist who fights with a longsword and a quarterstaff, one in each hand. Both gain a melee attack bonus equal to the difference between fighter and arcanist base attack bonuses at your arcanist level (+5 at level 10, +10 at level 20). Rays and iterative attack counts use the usual rules.
+
+Use **Designate for Spell and Sword** to choose a foe before casting. Your next arcanist spell may target yourself, another creature or a point. After a successful cast, spend 1 reservoir point to make one longsword attack if the designated foe is within reach and line of sight.
+
+**Designate for Guarded Casting** also guarantees success when a defensive casting check is required. The total cost, including the strike, is 1 point for slots of levels 0–3, 2 for 4–6, or 3 for 7–9. With insufficient points, the spell uses the normal check and the strike is canceled. Interruptions or a lost target after protection has triggered do not refund it.
+
+Gain Two-Weapon Fighting, Improved Two-Weapon Fighting and Greater Two-Weapon Fighting at levels 1, 7 and 13. Select exploits at levels 3, 7, 11, 15 and 19. Consume Spells and standard arcanist casting progression are retained, including 9th-level spells at level 18.
+
+</details>
+
+
+## Blood Berserker
+
+<details>
+<summary><b>Blood Berserker</b></summary>
+
+### Blood Chain and Blood-Coated Weapons
+
+During bloodrage, spend a move action to fire a chain up to 30 feet. On a ranged touch hit, attempt a pull maneuver against an equal or smaller foe, or pull yourself toward a larger foe. Strike that foe with a melee weapon by the end of your next turn (within one round in real time) to collect the knot and gain temporary hit points equal to your bloodrager level for one round. Each berserker can keep one knot.
+
+| Bloodrager level | Extra physical damage per wielded melee weapon hit | On a confirmed critical | Ability |
+|---|---|---|---|
+| 1 | 1d6 | 1d6 | Blood Chain, Blood Knot and Blood-Coated Weapons |
+| 7 | 2d6 | 2d6 | Blood Price extends range to 60 feet for 5 actual hit points when firing beyond 30 feet |
+| 10 | 2d6 | 2d6 | Blood Conduction loads a known shocking grasp or vampiric touch as a swift action using one bloodrager spell slot |
+| 13 | 3d6 | 6d6 | A confirmed critical doubles the blood dice regardless of the weapon's critical multiplier |
+| 19 | 4d6 | 8d6 | Blood weapon damage increases |
+
+Both hands qualify when dual wielding. A loaded spell lasts until the next chain hit or the end of bloodrage. A miss leaves it loaded. These abilities replace fast movement and the bloodrager damage reduction at levels 7, 10, 13, 16 and 19.
+
+</details>
+
+
+## Sorrow Inquisitor
+
+<details>
+<summary><b>Sorrow Inquisitor</b></summary>
+
+### Gathering and sentencing
+
+Use Gather Suffering on another ally within 30 feet and select the afflictions to store. Dominated party members qualify. Gathering is a standard action and costs one daily use for the whole selection. Daily uses equal 3 + Wisdom modifier, minimum one. Beads last one minute of game time. Examine the Rosary displays their names and remaining time and lets you discard selected beads.
+
+| Level | Slots | Ordinary sentence | Bane weapon |
+|---|---:|---|---:|
+| 1–4 | 1 | Standard, 1 effect | — |
+| 5 | 2 | Standard, 1 effect | 1 effect |
+| 6–9 | 2 | Move, 2 effects | 1 effect |
+| 10 | 3 | Move, 2 effects | 1 effect |
+| 11–14 | 3 | Move or swift, 3 effects | 2 effects |
+| 15 | 4 | Move or swift, 3 effects | 2 effects |
+| 16–19 | 4 | Move or swift, 4 effects | 3 effects |
+| 20 | 5 | Move or swift, 4 effects | 3 effects |
+
+Sentence a single enemy within 30 feet, or load a bane-imbued weapon and release on its first hit this turn. All sentences share one discharge per round. Each effect checks immunities and its original save separately, using Will if there was no initial save. The DC is 10 + half inquisitor level + Wisdom modifier. Reprisal at level 7 adds 2 DC when an affliction returns to its original aggressor.
+
+At level 11, spend a move action to guard one ally for a round. The first eligible affliction that lands goes into a free bead and costs one gather. From level 16, each successfully applied affliction adds **2d10 divine damage** to a single damage roll. Two applied effects deal 4d10. The maximum is 8d10 for an ordinary sentence or 6d10 for a bane weapon. A critical hit uses the same dice.
+
+Count one bead per cause. Blindness and paralysis are two beads, while a single curse affecting several combat stats is one. Direct ability loss, negative levels and dimensional anchor stay with the ally. Poison resumes its remaining progression. The previous ability damage stays with the ally. Transferred effects last for the captured remaining duration, up to three rounds.
+
+This archetype trades stern gaze, solo tactics and six bonus teamwork feats for the rosary. It gains the inquisitor spellbook, domain, judgment, bane and greater bane.
+
+</details>
+
+
+## Spiritsteel
+
+<details>
+<summary><b>Spiritsteel</b></summary>
+
+### An ancestral weapon
+
+The **Spiritsteel** is a barbarian who uses Wisdom for spirit rage and combat maneuvers. At level 1, choose a weapon from the Weapon Spirit Shaman's list. You receive the weapon itself and proficiency in its category, including exotic options such as the fauchard. It goes into an empty hand when possible. If your hands are occupied, equip it from your inventory.
+
+| Barbarian level | Feature |
+|---|---|
+| 1 | Gain a +1 bound weapon and Spirit Rage in exchange for Fast Movement. |
+| 2 | Gain Solo Tactics and one bonus teamwork feat in exchange for this level's rage power. |
+| 5, 9, 13, 17 | The same weapon improves to +2, +3, +4 and +5, respectively. |
+| 6 | During Spirit Rage, your first bound weapon hit each round attempts to trip its target. This replaces the level 6 rage power. |
+| 4, 8, 10, 12, 14, 16, 18, 20 | Choose a rage power or a teamwork feat whose prerequisites you meet. |
+
+You also gain one **weapon feat** at every even level, for ten choices from a list of twenty. Dodge grants the wielder a +2 dodge bonus to AC while the weapon is in hand. Choose up to two elements from acid, fire, cold, electricity and sonic. Each chosen element deals 1d6, 2d6, 3d6 or 4d6 on a hit at barbarian levels 2, 8, 14 and 20. Both ends of a double weapon carry the attack effects. Bound shield spikes apply them on a shield bash. If you lend the weapon to a companion, its equipment effects travel with it.
+
+**Spirit Rage** starts automatically when you enter barbarian rage in combat while wielding your bound weapon. Its base damage dice increase by one size step, and your positive Wisdom modifier adds to offensive combat maneuvers. You can use Spirit Rage for 1 + your Wisdom modifier rounds per combat, with a minimum of 2 and a maximum of 5. At Wisdom 14, that gives you 3 rounds and +2 to maneuvers. Toggle the spirit off to save remaining rounds and back on during the same rage. Switching away from the weapon or ending barbarian rage ends Spirit Rage.
+
+Starting at level 2, wielding the bound weapon grants Solo Tactics. During Spirit Rage the spirit helps its owner flank in melee and use teamwork feats. Effects that require a companion's actual critical hit or shield still depend on that companion's actions and equipment.
+
+</details>
+
+
+## Dream Thief
+
+<details>
+<summary><b>Dream Thief</b></summary>
+
+### Starlight and Dreamwalk
+
+A rogue devoted to Desna. New characters choose the archetype first and select Desna at the deity step. The Dream Thief trades trapfinding and danger sense for starknife proficiency and the following abilities.
+
+| Rogue level | Ability |
+|---|---|
+| 1 | Falling Star throws a wielded starknife up to 30 feet for free. Dream Throw costs 1 starlight and puts a target to sleep for 1d4 rounds on a hit and a failed Will save. Your starknife hits against sleeping enemies deal a confirmed critical and sneak attack. |
+| 3 | Spend 1 starlight as a swift action for Starlight Shroud. For 1 minute your starknife deals an extra 1d6 divine damage and gains an extra attack on full attacks. This extra attack does not stack with haste. |
+| 6, 9, 15 | Dreamwalk spends 1 starlight to step beside an enemy, deliver a sneak attack, and return. Its range increases from 30 to 50 feet at level 9. It becomes a move action at level 15. |
+| 12, 18 | Shrouded critical hits add 1d10 divine damage per point of critical multiplier above one. At level 18 gain 3 extra starlight per day. |
+
+Daily starlight equals half your rogue level, rounded down, plus your Dexterity and Charisma modifiers (minimum 1). Saving against a Dream Thief sleep effect grants 1 minute of immunity to this archetype's sleep effects.
+
+At each even rogue level, choose a standard rogue talent or one of 15 dream talents, including Sleep, Deep Slumber, Restless Slumber, Lulling Aura, Nightmare and Weird. Your caster level is your rogue level. The save DC is 10 + three quarters of your rogue level (rounded down) + your Charisma modifier.
+
+</details>
+
+
+## Deathdealer
+
+<details>
+<summary><b>Deathdealer</b></summary>
+
+### Deathdealer
+
+A slayer who studies a single enemy and reacts to its attacks, movement and spellcasting. At levels 2, 6 and 10, trade a slayer talent for a riposte, a trip and a disruptive strike respectively. One reaction per round spends one attack of opportunity. Use the higher of Intelligence and your normal attack or maneuver ability for these reactions.
+
+At level 14, gain +2 on weapon attack rolls and confirm critical threats against your studied target. At level 19, increase your weapon's critical multiplier by one against it. These abilities replace quarry and improved quarry.
+
+From levels 1 through 17, each odd slayer level unlocks one personal arcane ability. Open the Arcane Abilities icon to choose True Strike, Mirror Image, Haste, Stoneskin, Geniekind, Greater Heroism, Legendary Proportions, Seamantle or Foresight in that order. Each is a standard action, once per day, at your slayer caster level. The four Geniekind forms share one use.
+
+</details>
+
+
+## Falconer
+
+<details>
+<summary><b>Falconer</b></summary>
+
+### Falconer (Ranger)
+
+Send a growing hawk against your prey and follow with a coordinated shot. At level 8 it can dive automatically when you attack. Hawk's Eye grants true strike on the first strike of each round's dive. Keep your animal companion, quarry and improved quarry. Beneficial spells on your animal companion also affect the hawk.
+
+</details>
+
+
+## Prophecy Breaker
+
+<details>
+<summary><b>Prophecy Breaker</b></summary>
+
+### Prophecy Breaker
+
+An oracle who studies failed prophecies prepares for the future by learning arcane magic. The Prophecy Breaker trades mysteries, their bonus spells and class skills, all six revelations and the final revelation for an Intelligence-based divine spellbook and a separate arcane research book. Oracle proficiencies, curse and cure or inflict choice carry over.
+
+| Ability | Progression and use |
+|---|---|
+| Divine spellbook | Cast oracle spells and orisons with Intelligence, with the normal spontaneous progression through 9th-tier spells. |
+| Arcane research book | Unlock tiers 1–9 at oracle levels 1, 4, 6, 8, 10, 12, 14, 16 and 18. Learn two spells per oracle level and copy eligible scrolls. |
+| Inscription | Record four spells per tier. When a tier is full, choose one inscription to erase or cancel to keep the scroll and existing spells. |
+| Preparation | Prepare two spells per tier. Rest to ready them. Both share two daily casts per tier, including repeated casts of one spell. Intelligence does not grant more inscriptions, preparations or daily casts. |
+| Spell parameters | Research caster level equals oracle level. Base save DC equals 10 + half oracle level (rounded down) + Intelligence modifier. |
+
+</details>
+
+
+## Hell Rider
+
+<details>
+<summary><b>Hell Rider</b></summary>
+
+### Hell Rider (Cavalier)
+
+Choose a nightmare at level 1. It grows as a horse companion, deals an extra 1d4 fire damage on hoof hits, and gains a 15-foot fire breath at level 8. You retain your order, challenge, tactician and ordinary cavalier charge.
+
+At level 3, the first weapon attack of a charge calls a devil even if you miss. At levels 11 and 20 you call two and three devils. Each deals 1d6 per three cavalier levels, split between fire and unholy damage. A Reflex save halves the total. Devils first strike other enemies within 10 feet of your target, then concentrate any remaining attacks on that target.
+
+At level 5, plant a standard as a standard action up to medium range, 3 + Charisma modifier times per day. For five rounds it attacks a different enemy for each devil within 20 feet. At level 14 its radius grows to 30 feet and allies inside gain +2 morale to attack and immunity to fear. These abilities exchange the ordinary mount selection, banner, greater banner, mighty charge and supreme charge.
+
+Greater command at level 9, firebrand at level 13 and overwhelming presence at level 17 each have one daily use. Hellfire ray at level 11 uses Charisma for ranged touch attacks and grants one daily use plus one for every two points of positive Charisma modifier. It fires a second ray at level 15 and a third at level 19. Use cavalier level as caster level.
 
 </details>

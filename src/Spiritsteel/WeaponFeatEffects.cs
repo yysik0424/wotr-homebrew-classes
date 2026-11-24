@@ -1,0 +1,120 @@
+using System;
+using System.Linq;
+using Kingmaker.Blueprints.Items.Ecnchantments;
+using Kingmaker.EntitySystem;
+using Kingmaker.EntitySystem.Stats;
+using Kingmaker.Enums;
+using Kingmaker.Items;
+using Kingmaker.PubSubSystem;
+using Kingmaker.RuleSystem;
+using Kingmaker.RuleSystem.Rules;
+
+namespace Spiritsteel
+{
+    public class WeaponFeatAttack : WeaponEnchantmentLogic,
+        IInitiatorRulebookHandler<RuleCalculateAttackBonusWithoutTarget>, IInitiatorRulebookHandler<RuleCalculateWeaponStats>,
+        IInitiatorRulebookHandler<RuleAttackRoll>, IInitiatorRulebookHandler<RuleCalculateAttackBonus>
+    {
+        public WeaponFeatKind Kind;
+        public int Value;
+
+        public void OnEventAboutToTrigger(RuleCalculateAttackBonusWithoutTarget evt)
+        {
+            if (Kind == WeaponFeatKind.Focus && evt.Weapon == Owner &&
+                !WeaponFeats.HasNative(evt.Initiator, Kind, Owner.Blueprint.Category))
+                evt.AddModifier(1, Fact, ModifierDescriptor.UntypedStackable);
+        }
+
+        public void OnEventAboutToTrigger(RuleCalculateWeaponStats evt)
+        {
+            if (Kind != WeaponFeatKind.Specialization || evt.Weapon != Owner) return;
+            int nativeBonus = WeaponFeats.HasNative(evt.Initiator, Kind, Owner.Blueprint.Category) ? 2 : 0;
+            int bonus = WeaponFeatRow.AdditionalBonus(Value, nativeBonus);
+            if (bonus > 0) evt.AddDamageModifier(bonus, Fact, ModifierDescriptor.UntypedStackable);
+        }
+
+        public void OnEventAboutToTrigger(RuleAttackRoll evt)
+        {
+            if (Kind == WeaponFeatKind.Critical && evt.Weapon == Owner && !WeaponFeats.HasNative(evt.Initiator, Kind))
+                evt.CriticalConfirmationBonus += 4;
+        }
+
+        public void OnEventAboutToTrigger(RuleCalculateAttackBonus evt)
+        {
+            if (Kind == WeaponFeatKind.Precise && evt.Weapon == Owner)
+                evt.IgnoreRangedPenalty = true;
+        }
+
+        public void OnEventDidTrigger(RuleCalculateAttackBonusWithoutTarget evt) { }
+        public void OnEventDidTrigger(RuleCalculateWeaponStats evt) { }
+        public void OnEventDidTrigger(RuleAttackRoll evt) { }
+        public void OnEventDidTrigger(RuleCalculateAttackBonus evt) { }
+    }
+
+    // AddItemModifierUnique identifies each bonus by the enchantment runtime. Learning or losing the
+    // original character feat while wielding the weapon changes only this runtime's contribution.
+    public class WeaponFeatWearerStat : WeaponEnchantmentLogic, IUnitGainFactHandler, IUnitLostFactHandler
+    {
+        public WeaponFeatKind Kind;
+        public StatType Stat;
+        public int Value;
+
+        protected override void OnTurnOn()
+        {
+            var wielder = Owner.Wielder;
+            if (wielder != null) Update(!WeaponFeats.HasNative(wielder.Unit, Kind));
+        }
+
+        protected override void OnTurnOff() { Update(false); }
+
+        public void HandleUnitGainFact(EntityFact fact)
+        {
+            if (fact.Blueprint == WeaponFeats.Native[Kind] && fact.Owner == Owner.Wielder?.Unit) Update(false);
+        }
+
+        public void HandleUnitLostFact(EntityFact fact)
+        {
+            if (fact.Blueprint == WeaponFeats.Native[Kind] && fact.Owner == Owner.Wielder?.Unit)
+                // IUnitLostFactHandler runs from OnFactWillDetach, while the departing fact
+                // is still in the collection. Keep any independently granted second copy.
+                Update(!Owner.Wielder.Unit.Facts.List.Any(other => other != fact && other.Blueprint == fact.Blueprint));
+        }
+
+        private void Update(bool apply)
+        {
+            var stat = Owner.Wielder?.Stats.GetStat(Stat);
+            if (stat == null) return;
+            stat.RemoveModifiersFrom(Runtime);
+            if (apply)
+                stat.AddItemModifierUnique(Value, Runtime, Owner,
+                    Kind == WeaponFeatKind.Shield ? ModifierDescriptor.ShieldFocus : ModifierDescriptor.UntypedStackable);
+        }
+    }
+
+    public class WeaponFeatTrip : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RuleCalculateCMB>
+    {
+        private static readonly RulebookEvent.CustomDataKey WeaponKey = new RulebookEvent.CustomDataKey("Spiritsteel.TripWeapon");
+
+        internal static void Mark(RuleCombatManeuver maneuver, ItemEntityWeapon weapon) { maneuver.SetCustomData(WeaponKey, weapon); }
+
+        public void OnEventAboutToTrigger(RuleCalculateCMB evt)
+        {
+            if (evt.Type != CombatManeuver.Trip || WeaponFeats.HasNative(evt.Initiator, WeaponFeatKind.Trip)) return;
+            var maneuver = Rulebook.CurrentContext.EventStack.OfType<RuleCombatManeuver>().LastOrDefault();
+            if (maneuver == null || maneuver.Initiator != evt.Initiator || maneuver.Target != evt.Target) return;
+            ItemEntityWeapon weapon;
+            if (!maneuver.TryGetCustomData(WeaponKey, out weapon))
+            {
+                weapon = maneuver.AttackRule?.Weapon;
+                // Standalone Trip creates an attack bonus rule for the empty hand. Only the actual
+                // basic maneuver may use the wielder's primary weapon here (a spell can also trip).
+                if (weapon == evt.Initiator.Body.EmptyHandWeapon && maneuver.Reason?.Context?.SourceAbility == WeaponFeats.BasicTrip)
+                    weapon = evt.Initiator.Body.PrimaryHand.MaybeWeapon;
+            }
+            if (weapon != null && (weapon == Owner || weapon == Owner.Second))
+                evt.AddModifier(2, Fact, ModifierDescriptor.UntypedStackable);
+        }
+
+        public void OnEventDidTrigger(RuleCalculateCMB evt) { }
+    }
+}

@@ -1,4 +1,5 @@
-# build output
 dist/
-*.zip
-*.user
+out/
+tools/lib/toolchain.local.ps1
+tools/ilscan/IlScan.exe
+tools/ilscan/dnlib.dll

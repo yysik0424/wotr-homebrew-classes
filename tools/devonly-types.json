@@ -1,0 +1,23 @@
+{
+  "BlastMagus": [],
+  "BloodBerserker": [],
+  "BulwarkMage": ["BulwarkMage.ProbeReading"],
+  "ChaosWarrior": ["ChaosWarrior.CheckHookRule", "ChaosWarrior.HookDecision"],
+  "ChimeraMonk": [],
+  "Deathdealer": [],
+  "DreamThief": [],
+  "Golemancer": [],
+  "GreySeer": [],
+  "Falconer": [],
+  "HellRider": [],
+  "ProphecyBreaker": [],
+  "OathboundRevenant": [],
+  "PackWarden": [],
+  "PhantomBlade": ["PhantomBlade.LeakCleanup", "PhantomBlade.LeakCleanupRules"],
+  "ShadowSorcerer": [],
+  "SorrowInquisitor": [],
+  "Spellfist": [],
+  "Spiritsteel": [],
+  "Warlock": [],
+  "WeaponSpiritShaman": []
+}
