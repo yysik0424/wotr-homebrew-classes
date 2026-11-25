@@ -147,10 +147,22 @@ namespace ChaosWarrior
         // 단계 버프(숨김) + 그 단계의 게이트 행동. 반환 = 분노 버프 Activated 끝에 붙일 게이트(Tiers 순서).
         static void AllowLimitlessRage(BlueprintFeature mythic, BlueprintFeature rage)
         {
-            var gate = mythic.ComponentsArray.OfType<PrerequisiteFeaturesFromList>().Single(p => p.Amount == 1 && p.Features.Any());
-            var before = (BlueprintFeatureReference[])FindField(gate.GetType(),"m_Features").GetValue(gate);
-            if (!before.Any(r => r.Guid == rage.AssetGuid))
-                SetField(gate, "m_Features", before.Concat(new[] { Ref<BlueprintFeatureReference>(rage.AssetGuid.ToString()) }).ToArray());
+            // The native gate stores Amount=0. The engine checks the threshold after the first match.
+            var native = BlueprintGuid.Parse(Guids.Game.BarbarianRageFeature);
+            var gates = mythic.ComponentsArray.OfType<PrerequisiteFeaturesFromList>()
+                .Where(p => !(bool)GetF(p, "m_RestrictIfNot") && p.Amount >= 0 && p.Amount <= 1 && p.Features.Any(f => f != null && f.AssetGuid == native))
+                .ToArray();
+            if (gates.Length == 0)
+            {
+                ModContext.Log("Limitless Rage has no matching native rage prerequisite list; retaining its installed prerequisites.");
+                return;
+            }
+            foreach (var gate in gates)
+            {
+                var before = (BlueprintFeatureReference[])FindField(gate.GetType(),"m_Features").GetValue(gate);
+                if (!before.Any(r => r.Guid == rage.AssetGuid))
+                    SetField(gate, "m_Features", before.Concat(new[] { Ref<BlueprintFeatureReference>(rage.AssetGuid.ToString()) }).ToArray());
+            }
             if (rage.IsPrerequisiteFor == null) rage.IsPrerequisiteFor = new List<BlueprintFeatureReference>();
             if (!rage.IsPrerequisiteFor.Any(r => r.Guid == mythic.AssetGuid)) rage.IsPrerequisiteFor.Add(Ref<BlueprintFeatureReference>(mythic.AssetGuid.ToString()));
         }

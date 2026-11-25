@@ -119,6 +119,8 @@ The Pack Warden gives up Hunter spells to fight alongside an animal companion. A
 
 ### What you give up
 
+The Pack Warden no longer gains Studied Target, Swift Studied Target, or Pack's Quarry.
+
 | Level | Base feature | Notes |
 |---|---|---|
 | 1 | Hunter spellcasting (the whole spellbook) | All 1st- to 6th-level spells are gone, with no way to get the spellbook back. The effects of some spells can be put on your pack only, through Pack Empowerment |
@@ -307,7 +309,7 @@ You gain the Tandem Executioner’s base feature at level 4 and choose technique
 
 ### Overview
 
-The Phantom Blade is a fighter bound to a Guardian Phantom. You fight in melee as usual while a shadowy figure overlapping your body drives force fists into whatever you attack. The same phantom soaks 25% of the damage you take into its own absorption pool. The pool refills only when you rest, so it is a defensive resource you have to ration across the day. Ghost Slash, your ranged attack, does not draw on it: it has its own uses per day equal to your Charisma modifier. In exchange you give up bravery, armor training and armor mastery; bonus feats, weapon training and weapon mastery are untouched.
+The Phantom Blade is a fighter bound to a Guardian Phantom. You fight in melee as usual while a shadowy figure overlapping your body drives force fists into whatever you attack. The same phantom soaks 25% of the damage you take into its own absorption pool. The pool refills only when you rest, so it is a defensive resource you have to ration across the day. Ghost Slash, your ranged attack, does not draw on it: it shares daily uses with Guardian Phantom Full Assault. In exchange you give up bravery, armor training and armor mastery; bonus feats, weapon training and weapon mastery are untouched.
 
 ### What you give up
 
@@ -333,7 +335,7 @@ Fighter bonus feats (levels 1, 2, 4, 6, … 20), Weapon Training (5, 9, 13, 17),
 | 11 | Guardian Phantom Rush — 3 times per round | Per-round limit of 3 |
 | 14 | Guardian Phantom Ranged Guard (second step) | The AC bonus against ranged attacks rises to +4 in total |
 | 15 | Guardian Phantom Rush — 4 times per round | Per-round limit of 4 |
-| 15 | Guardian Phantom Full Assault | Swift action, 1 round. For that round Rush has no per-round limit, and the phantom makes **2** touch blows for each melee attack you make. Usable Charisma modifier times per day (minimum 1) |
+| 15 | Guardian Phantom Full Assault | Swift action, 1 round. For that round Rush has no per-round limit, and the phantom makes **2** touch blows for each melee attack you make. Shares daily uses with Ghost Slash equal to your Charisma modifier (minimum 1) |
 | 15 | Ghost Slash: 3 Projectiles | Ghost Slash fires 3 projectiles |
 | 19 | Guardian Phantom Rush — 5 times per round | Per-round limit of 5 |
 | 20 | Ghost Slash: 4 Projectiles | Ghost Slash fires 4 projectiles |
@@ -420,7 +422,7 @@ A fighter's number of attacks grows at about the same levels as the limit does, 
 - Damage per projectile: the same fist dice as Rush + Charisma modifier, force. It crits like a ray (20 / ×2).
 - Sneak attack and other precision damage apply to only one projectile per use.
 - Uses: **Charisma modifier times per day (minimum 1)**, one per use. They are restored by rest and on level-up. It cannot be used when no uses remain.
-- These uses are counted separately from Guardian Phantom Full Assault. Ghost Slash does not spend the absorption pool.
+- Ghost Slash gains the daily uses at fighter level 5. Guardian Phantom Full Assault draws from the same uses starting at level 15. Each Ghost Slash costs one use regardless of projectile count.
 - Visuals: when you use Ghost Slash, the phantom dashes to just in front of the target, swings once per projectile, then snaps straight back to your side. If the target is already down or gone, it swings once in place instead. This is cosmetic and does not affect the rolls.
   - The projectiles themselves are not shown in flight; only their impact effect appears, so it looks as if the phantom delivers the strike itself.
   - The phantom leaves short-lived black cloud afterimages along its path: up to 3 on the way out and up to 3 on the way back, spaced about 1.5 m apart. A shorter path leaves none.
@@ -447,7 +449,7 @@ A fighter's number of attacks grows at about the same levels as the limit does, 
 
 - Swift action, lasts 1 round. Usable only while the phantom is manifest.
 - For that round the per-round limit on Rush is lifted, and the phantom makes **2** touch blows on **every** melee attack you make, hit or miss. These blows do not count against the normal Rush limit.
-- Usable a number of times per day equal to your Charisma modifier (minimum 1).
+- Spend one use from the same daily total as Ghost Slash. When the total reaches zero, both techniques are unavailable until recovery.
 
 ### Choices
 
@@ -465,10 +467,9 @@ None
 | Resource | Maximum | Restored |
 |---|---|---|
 | Phantom Blade Absorption Pool | Phantom Blade (fighter) level × Charisma modifier (minimum 1) × 2 | On rest and on level-up. Not when combat ends |
-| Ghost Slash uses | Charisma modifier (minimum 1) | On rest and on level-up |
-| Guardian Phantom Full Assault uses | Charisma modifier (minimum 1) | On rest and on level-up |
+| Guardian technique uses (Ghost Slash and Guardian Phantom Full Assault) | Charisma modifier (minimum 1) in total, one per activation of either technique | On rest and on level-up |
 
-The absorption pool is spent only on absorbing damage. Ghost Slash and Guardian Phantom Full Assault each have their own separate uses. You can read what is left in the pool from the "pool left" number in the absorption log line. The counter on the Ghost Slash button shows Ghost Slash's remaining uses, and the Manifest Guardian Phantom button shows no number.
+With a +5 Charisma modifier, two Ghost Slashes leave three Full Assaults. The separate absorption pool tracks damage prevented and reports its remaining points in the combat log.
 
 ### Compatibility and notes
 
@@ -476,7 +477,7 @@ The absorption pool is spent only on absorbing damage. Ghost Slash and Guardian 
 - **Ghost Slash projectile look**: Ghost Slash borrows the projectile of the base-game spell Ray of Enfeeblement and hides only the flight of projectiles fired by a Phantom Blade's Ghost Slash. Ray of Enfeeblement cast by anyone else looks as usual. Because the game reuses projectile visuals, the mod checks every Ray of Enfeeblement projectile once, whoever fired it, and restores any that it left hidden.
 - **Engine patch**: for the phantom's walking animation, this archetype adds one Harmony patch (a prefix and a postfix) to the unit animation update. It does nothing for any unit other than the phantom. Another mod that changes the same update may affect the phantom's walking animation only. If the patch is not applied, the mod log shows one error line and only the walking animation stops; the phantom's position and all ability rules are unaffected.
 - **TabletopTweaks-Base**: if its Advanced Armor Training option has rearranged the fighter progression, the Phantom Blade recognises that layout and removes everything that sits in those slots. If it meets a fighter progression that is neither the base game's nor TabletopTweaks' (another mod has moved or removed armor training at levels 3, 7, 11 or 15, bravery, or armor mastery), the archetype is not registered and will not appear in the archetype list.
-- **Multiclassing and prestige classes**: The Rush limit, fist dice, Ghost Slash, the absorbed share, Ranged Guard and the pool size all look at **fighter levels** only. Levels in other classes help only through base attack bonus, which the phantom uses for its attack rolls.
+- **Multiclassing and prestige classes**: The Rush limit, fist dice, Ghost Slash, Ranged Guard and the pool size all look at **fighter levels** only. Levels in other classes help only through base attack bonus, which the phantom uses for its attack rolls.
 - **Characters from an earlier version**: Guardian Phantom Refill, formerly gained at level 10 (pool refill when combat ends), has been removed. A character who already has it keeps it as a hidden feature with no effect.
 - **Beyond level 20**: if your fighter level somehow exceeds 20, Rush, fist dice and Ghost Slash stay at their level-20 values.
 - **Difficulty multipliers**: the pool is charged in damage **before** the difficulty's damage multiplier. On difficulties where incoming damage is scaled, the points drained from the pool and the hit points actually saved can differ.
@@ -636,6 +637,9 @@ Offered only while the KineticistElementsExpanded mod is enabled:
 
 ### Feats
 
+- Spell Penetration and Greater Spell Penetration each add +2 to Elemental Blast and Blast Strike checks against spell resistance. Mythic Spell Penetration adds half your mythic rank (rounded down), or your full rank with Greater Spell Penetration. Energize Weapon makes no spell resistance check.
+- Ascendant Element lets damage of the selected energy type bypass resistance and immunity to that type. It applies to matching damage from ranged blasts, Blast Strike and Energize Weapon. A blast subject to spell resistance must still pass that check.
+
 - Feats granted automatically: none.
 - Blast Pool qualifies for Extra Arcane Pool and Abundant Arcane Pool. DarkCodex’s Limitless Arcane Pool also removes Blast Strike’s arcane pool cost.
 - Feats you can no longer take:
@@ -751,8 +755,8 @@ Cantrips are available from 1st level, but only if one of your schools has any (
 #### Reservoir Quicken
 
 - A toggle. Switching it costs no action, it starts off, and it stays on through a rest.
-- While it is on and you are in combat, any spell whose level is no higher than your remaining reservoir points (9th at most) is cast as a swift action. With 4 points left, for example, spells up to 4th level are quickened.
-- Each successful cast drains points equal to the spell level. A cantrip costs 1 point; a 9th-level spell costs 9. A failed cast drains nothing.
+- In combat, the toggle quickens spells whose level is no higher than your remaining reservoir points. The Spellfist reaches its highest spell level, 6th, at brawler level 16. With 4 points left, you can quicken spells up to 4th level.
+- A successfully quickened Spellfist spell spends reservoir points equal to its spell level (minimum 1). A 6th-level spell, the highest tier from ordinary class progression, costs 6 points. At level 20 with Intelligence 28, 22 points pay for three such quickenings with 4 points left.
 - You have one swift action per round, so a second spell in the same round is cast with its normal action and costs no reservoir points. The same happens when the reservoir holds fewer points than the spell's level.
 - It does nothing out of combat: spells use their normal action and the reservoir is untouched.
 - Never charged: spells that are swift actions to begin with, spells prepared with the Quicken Spell metamagic, and spells quickened by another source such as a metamagic rod.
@@ -1747,7 +1751,7 @@ The "once per round" limit on Shield Rebuke is not a resource. It clears when yo
 
 The Chaos Warrior is a warrior priest touched by divine madness. You give up one blessing, fervor, channel energy and sacred armor, and in return you can fly into a chaos rage from 1st level. Every rage warps your body at random with several of 32 mutations: fangs, claws, tails and other natural attacks may sprout, mixed with helpful, harmful and two-sided mutations, and a mutation drawn twice stacks. Every melee weapon hit you land on an enemy while raging stacks pain, and at eight stacks the enemy must make a Will save or become confused. You can still cast spells while raging, and once per combat, the first eligible warpriest spell cast while raging is cast as a swift action, so you buff up, wade straight into the front line and grind the enemy formation into chaos.
 
-Chaos Rage qualifies for Limitless Rage. With it, you can start Chaos Rage even with no charges left. Ending and restarting rage rolls a new set of mutations. Re-entering rage rerolls mutations. Frenzied Casting quickens one eligible spell per combat.
+Chaos Rage qualifies for Limitless Rage. With it, you can enter rage at zero charges and reroll your mutations each time. Frenzied Casting can quicken one eligible spell per combat.
 
 ### What you give up
 
@@ -1795,7 +1799,7 @@ Kept: spellcasting, the first blessing, bonus feats (levels 3, 6, 9, 12, 15, 18)
 
 - You can cast spells while raging, and you are not fatigued when the rage ends.
 - Chaos Rage belongs to the same activatable group as barbarian rage and bloodrage, so it cannot be active together with them.
-- Starting the rage rolls your Mutations of Madness and grants Frenzied Casting. While it is active, your melee hits apply Pain.
+- Entering rage rolls your Mutations of Madness. If you have not used Frenzied Casting this combat, you can quicken one eligible spell. Your melee hits apply Pain while raging.
 - Natural weapons: while raging, your natural weapon attacks (from mutations, and also racial or polymorph natural attacks) count as the weapons below, cumulatively by warpriest level. Manufactured weapons and unarmed strikes (including a monk's fists) are not affected. This only matters for checks that read weapon properties, such as damage reduction, incorporeal creatures and regeneration; there is no bonus on attack or damage rolls. Adamantine, good, lawful and DR x/- are not covered. The tier is set by your level when the rage starts and ends with the rage.
 
 | Warpriest level | Natural weapons count as |
@@ -1920,7 +1924,7 @@ Two-sided mutations (5) - the upside and the downside come together, and drawing
 ### Resources
 
 - Chaos Rage: max(1, warpriest level / 2 (rounded down) + Wisdom modifier) uses per day. One use is spent each time you start a rage. Restored by resting.
-- Frenzied Casting: no separate resource. Each rage grants one.
+- Frenzied Casting is available once per combat. Re-entering rage after spending it rerolls mutations. Your next opportunity to quicken a spell comes in the next combat.
 - Blessings: the base game's blessing resource, granted by the first blessing selection.
 - There is no fervor resource.
 
@@ -2412,7 +2416,7 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 
 #### Shadow Echo
 
-- **Activation**: automatic. There is nothing to toggle or click. Cast a qualifying spell and the echoes follow.
+- **Shadow toggle.** Turn it on to echo the first eligible harmful spell each round. Turn it off to cast at the ordinary slot cost.
 - **Which spells echo** — all of the following must hold.
   - The spell is cast from your Sorcerer spellbook. Mythic spells merged into that spellbook count. Other classes' spellbooks, items such as scrolls, wands and potions, and abilities that are not spells do not.
   - It is cast by a direct casting command (yours or the AI's). Spells that some other effect casts automatically do not echo.
@@ -2429,7 +2433,7 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
   - Area spells aimed at a point: on the original point. Even if you aimed by clicking an enemy, the echoes land where the spell was first placed, not where that enemy has moved to.
   - Area spells centred on the caster or on a target: on the centre the original cast used.
 - **Echo strength** uses the selected spell variant, base spell level, caster level, casting ability and normal bonuses such as Spell Focus. It makes fresh damage and saving throw rolls. Maximize, Heighten and Persistent on the original never maximize the echo’s damage, raise its DC or force its targets to reroll their saves.
-- **Costs**: echoes use no spell slot. Effects that trigger "when you cast a spell" and metamagic buffs that apply "to your next spell" are triggered and spent once, by the original cast only; echoes neither trigger nor consume them.
+- **Slot cost.** With the toggle on, the original sorcerer cast pays the additional slot. The echo uses no further slot or action. On-cast effects and metamagic buffs for the next spell apply once, to the original cast.
 - **Echoes never produce echoes.**
 - **Ordinary damage spells** roll fresh damage without metamagic. The echo deals 50% on failed disbelief or 25% on successful disbelief.
 - **Disbelief** gives each affected target one Will save against the echo’s base spell DC.
@@ -3367,7 +3371,7 @@ Automatic Dive checks for a surviving enemy after the ranger's own weapon attack
 
 Your oracle’s curse is the mark the prophecy left on you. You follow the trail of failed predictions and copy what you learn from arcane scrolls into a research book. Before a dungeon, the question is which spells to ready. Once inside, you decide whether the same spell is worth both of that tier's casts.
 
-Mythic merging and divine prestige advancement apply to the Intelligence-based Oracle book. The arcane research book grows with Oracle levels. Mystic Theurge requires a separate class that can cast 2nd-level arcane spells. Research spells use a base save DC of 10 + spell level + Intelligence modifier, including the usual adjustments for Spell Focus and Heighten Spell.
+With Spellbook Merge 1.7.1, the Intelligence-based main spellbook follows normal oracle mythic merge paths and qualifies for divine prestige advancement. The arcane research book advances only with oracle levels. A separate class must supply 2nd-level arcane spells for Mystic Theurge entry. Research spells use a base save DC of 10 + spell level + Intelligence modifier, including the usual Spell Focus and Heighten Spell adjustments.
 
 ### What you give up
 

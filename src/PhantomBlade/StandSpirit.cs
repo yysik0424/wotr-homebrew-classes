@@ -385,13 +385,7 @@ namespace PhantomBlade
         protected override void OnTurnOff() { Handle(SpiritRules.LifecycleEvent.TurnOff); }
         protected override void OnDeactivate() { Handle(SpiritRules.LifecycleEvent.Deactivate); }
         public void OnAreaBeginUnloading() { Handle(SpiritRules.LifecycleEvent.AreaBeginUnloading); }
-        public void OnAreaDidLoad()
-        {
-            var pool = StandBlueprints.PoolResource;
-            int excess = Owner.Resources.GetResourceAmount(pool) - pool.GetMaxAmount(Owner);
-            if (excess > 0) Owner.Resources.Spend(pool, excess);
-            Handle(SpiritRules.LifecycleEvent.AreaDidLoad);
-        }
+        public void OnAreaDidLoad() { Handle(SpiritRules.LifecycleEvent.AreaDidLoad); }
         // 전역 이벤트: 모든 유닛·엔티티의 변화가 온다. 주인 것이 아니면 계획 표가 Ignore(정당한 무동작) — null 은 주인일 수 없다(주인은 null 이 아님, Handle 첫 줄).
         public void HandleUnitLifeStateChanged(UnitEntityData unit, UnitLifeState prevLifeState) { Handle(ReferenceEquals(unit, Owner) ? SpiritRules.LifecycleEvent.OwnerLifeStateChanged : SpiritRules.LifecycleEvent.OtherUnitLifeStateChanged); }
         public void HandleObjectInGameChanged(EntityDataBase entityData) { Handle(ReferenceEquals(entityData, Owner) ? SpiritRules.LifecycleEvent.OwnerInGameChanged : SpiritRules.LifecycleEvent.OtherEntityInGameChanged); }
@@ -495,6 +489,33 @@ namespace PhantomBlade
             var lk = game.CutsceneLock;
             if (lk == null) return SpiritRules.Tri.Unknown;
             return lk.Active ? SpiritRules.Tri.Yes : SpiritRules.Tri.No;
+        }
+    }
+
+    // The absorption pool belongs to the permanent feature, including when the phantom is dismissed.
+    public sealed class AbsorptionPoolOnLoad : UnitFactComponentDelegate<AbsorptionPoolOnLoad.Migration>, IAreaHandler, IGlobalSubscriber
+    {
+        public sealed class Migration
+        {
+            [Newtonsoft.Json.JsonProperty] public bool Combined;
+        }
+
+        public void OnAreaBeginUnloading() { }
+        public void OnAreaDidLoad()
+        {
+            var pool = StandBlueprints.PoolResource;
+            int excess = Owner.Resources.GetResourceAmount(pool) - pool.GetMaxAmount(Owner);
+            if (excess > 0) Owner.Resources.Spend(pool, excess);
+
+            var legacy = StandBlueprints.LegacyFullAttackResource;
+            var shared = StandBlueprints.GhostSlashResource;
+            var resources = Owner.Resources;
+            if (Data.Combined || !resources.ContainsResource(legacy) || !resources.ContainsResource(shared)) return;
+            int available = resources.GetResourceAmount(shared);
+            int carry = GhostSlash.SharedRemaining(shared.GetMaxAmount(Owner), available, resources.GetResourceAmount(legacy));
+            if (carry < available) resources.Spend(shared, available - carry);
+            Data.Combined = true;
+            resources.Remove(legacy);
         }
     }
 }

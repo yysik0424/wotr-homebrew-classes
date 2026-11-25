@@ -2,9 +2,12 @@
 
 ## 0.17.9-beta
 
-- Falconers gain Threefold Hunt in place of Improved Evasion at ranger level 16. They keep Evasion at level 9.
-
-- Prophecy Breakers use half BAB. Spellfists gain one reservoir point per two brawler levels. Phantom Blades absorb 25% at every level and use a pool multiplier of two.
+- 팔코너는 9레벨 회피를 유지하고 16레벨에 세 갈래 사냥을 얻는다. 향상된 회피는 성장표에서 제외했다.
+- 예언 파괴자의 BAB는 1/2, 주문 격투가의 저수지는 3 + 브롤러 레벨 절반(내림) + 지능 수정치다. 귀검사의 피해 흡수는 25%, 풀 배율은 2다. 귀신참과 수호령 전력 공격은 매력 수정치(최소 1)만큼의 하루 사용 횟수를 공유한다.
+- 카오스 워리어가 본편 무한한 격노의 선행 조건을 읽을 때 직업 등록이 중단되던 오류를 수정했다.
+- Falconers retain Evasion at level 9 and gain Threefold Hunt in place of Improved Evasion at level 16.
+- Prophecy Breakers have half BAB. Spellfists have a reservoir of 3 + half brawler level (rounded down) + Intelligence modifier. Phantom Blades absorb 25% and use a pool multiplier of two. Ghost Slash and Guardian Phantom Full Assault share one daily counter equal to the Charisma modifier (minimum one).
+- Fixed Chaos Warrior registration when reading the native Limitless Rage prerequisite.
 
 ## 0.17.8-beta
 

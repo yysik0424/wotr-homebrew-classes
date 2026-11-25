@@ -40,8 +40,8 @@ namespace PhantomBlade
     {
         // 주먹 6종 = 본편 몽크 맨손 피해표(중형) 단계(StandRules.RushDiceByLevel, Task 6b). 1d6·1d8·2d6 은 옛 GUID 그대로, 1d10·2d8·2d10 은 2026-11-09 발급.
         public static BlueprintItemWeapon Fist1d6, Fist1d8, Fist1d10, Fist2d6, Fist2d8, Fist2d10;
-        public static BlueprintAbilityResource PoolResource, FullAttackResource;
-        // 귀신참 전용 하루 횟수(2026-11-16). 전력 공격 자원과 같은 방식(MakeResource + Resources + Increase(…, ChaMin1Property))이되 별개 블루프린트 → 횟수를 따로 센다.
+        public static BlueprintAbilityResource PoolResource, LegacyFullAttackResource;
+        // Guardian techniques share the resource granted by the level-five Ghost Slash feature.
         public static BlueprintAbilityResource GhostSlashResource;
         public static BlueprintUnitProperty PoolProperty, ChaMin1Property;
         public static BlueprintBuff StandBuff, FullAttackBuff;
@@ -76,7 +76,8 @@ namespace PhantomBlade
             // --- 자원(설계 §4.3·4.4): BaseValue 0, 최대치는 특성의 IncreaseResourceAmountBySharedValue 가 속성값을 더한다(정찰 §5). 휴식 회복은 게임 기본. ---
             // (2026-11-16: 풀을 채우는 것은 이 「게임 기본」 휴식과 레벨업뿐이다 — 전투 종료 재충전 폐지. 귀신참 전용 횟수 자원은 BuildGhostSlash 가 만든다.)
             PoolResource = MakeResource("PhantomBladePoolResource", Guids.StandPoolResource, "Pool.Name", "Pool.Description", standIcon);
-            FullAttackResource = MakeResource("PhantomBladeFullAttackResource", Guids.FullAttackResource, "FullAttack.Name", "FullAttack.Description", standIcon);
+            LegacyFullAttackResource = MakeResource("PhantomBladeFullAttackResource", Guids.FullAttackResource, "FullAttack.Name", "FullAttack.Description", standIcon);
+            GhostSlashResource = MakeResource("PhantomBladeGhostSlashResource", Guids.GhostSlashResource, "GhostSlashUses.Name", "GhostSlashUses.Description", standIcon);
 
             // --- 스탠드 버프·토글(설계 §4.2) ---
             StandBuff = Create<BlueprintBuff>("PhantomBladeStandBuff", Guids.StandBuff, b =>
@@ -156,14 +157,14 @@ namespace PhantomBlade
             applyBuff.name = "$ContextActionApplyBuff$" + Guids.FullAttackAbility + "#0";
             applyBuff.Owner = FullAttackAbility;
             var resLogic = new AbilityResourceLogic { Amount = 1 };
-            SetField(resLogic, "m_RequiredResource", Ref<BlueprintAbilityResourceReference>(Guids.FullAttackResource));
+            SetField(resLogic, "m_RequiredResource", Ref<BlueprintAbilityResourceReference>(Guids.GhostSlashResource));
             SetField(resLogic, "m_IsSpendResource", true);
             AddComponents(FullAttackAbility, resLogic, new AbilityEffectRunAction { Actions = new ActionList { Actions = new GameAction[] { applyBuff } } });
-            if (resLogic.RequiredResource != FullAttackResource || !resLogic.IsSpendResource) throw new InvalidOperationException("PhantomBlade: AbilityResourceLogic readback failed");
+            if (resLogic.RequiredResource != GhostSlashResource || !resLogic.IsSpendResource) throw new InvalidOperationException("PhantomBlade: AbilityResourceLogic readback failed");
 
             // --- 특성(설계 §4.3·4.4) ---
             StandFeature = MakeFeature("PhantomBladeStandFeature", Guids.StandFeature, "Stand.Name", "Stand.Description", standIcon);
-            AddComponents(StandFeature,
+            AddComponents(StandFeature, new AbsorptionPoolOnLoad(),
                 Facts(StandToggle),
                 Resources(PoolResource),
                 Increase(PoolResource, PoolProperty));
@@ -215,10 +216,7 @@ namespace PhantomBlade
             if (StandBuff.ComponentsArray.OfType<GhostSlashProjectileVeil>().Count() != 1) throw new InvalidOperationException("PhantomBlade: GhostSlashProjectileVeil readback failed");
 
             FullAttackFeature = MakeFeature("PhantomBladeFullAttackFeature", Guids.FullAttackFeature, "FullAttack.Name", "FullAttack.Description", standIcon);
-            AddComponents(FullAttackFeature,
-                Facts(FullAttackAbility),
-                Resources(FullAttackResource),
-                Increase(FullAttackResource, ChaMin1Property));
+            AddComponents(FullAttackFeature, Facts(FullAttackAbility));
 
             BuildRushTriggers();
             BuildGhostSlash(standIcon);
@@ -252,9 +250,8 @@ namespace PhantomBlade
         static void BuildGhostSlash(Sprite icon)
         {
             if (StandBuff == null || ChaMin1Property == null) throw new InvalidOperationException("PhantomBlade: BuildGhostSlash before StandBuff/ChaMin1Property exist");
-            if (GhostSlashAbility != null || GhostSlashResource != null) throw new InvalidOperationException("PhantomBlade: BuildGhostSlash called twice");
+            if (GhostSlashAbility != null) throw new InvalidOperationException("PhantomBlade: BuildGhostSlash called twice");
             // 전용 하루 횟수 자원(전력 공격 자원과 같은 MakeResource — BaseValue 0, 최대치는 특성의 Increase 가 ChaMin1Property 를 더한다).
-            GhostSlashResource = MakeResource("PhantomBladeGhostSlashResource", Guids.GhostSlashResource, "GhostSlashUses.Name", "GhostSlashUses.Description", icon);
             var ray = Get<BlueprintItemWeapon>(Guids.Game.RayItem);
             if (ray.Type == null || ray.Type.AttackType != AttackType.RangedTouch) throw new InvalidOperationException("PhantomBlade: RayItem type is " + (ray.Type == null ? "null" : ray.Type.AttackType.ToString()) + ", expected RangedTouch");
              
@@ -358,9 +355,9 @@ namespace PhantomBlade
             var calc = GhostSlashAbility.ComponentsArray.OfType<IAbilityResourceCostCalculator>().ToArray();
             if (rl.Length != 1 || rl[0].RequiredResource != GhostSlashResource || !rl[0].IsSpendResource || !rl[0].CostIsCustom || calc.Length != 1 || !(calc[0] is GhostSlashCost))
                 throw new InvalidOperationException("PhantomBlade: GhostSlash AbilityResourceLogic readback failed (one logic spending GhostSlashResource with CostIsCustom, one GhostSlashCost)");
-            // 세 자원은 서로 다른 블루프린트여야 한다(풀을 깎지 않고, 전력 공격 횟수와 따로 센다 — 설계 §14 ③).
-            if (PoolResource == null || FullAttackResource == null || ReferenceEquals(GhostSlashResource, PoolResource) || ReferenceEquals(GhostSlashResource, FullAttackResource) || ReferenceEquals(rl[0].RequiredResource, PoolResource))
-                throw new InvalidOperationException("PhantomBlade: GhostSlashResource must be a resource of its own (not the absorb pool, not the full-attack uses)");
+            if (GhostSlashResource == PoolResource || GhostSlashResource == LegacyFullAttackResource ||
+                FullAttackAbility.GetComponent<AbilityResourceLogic>().RequiredResource != GhostSlashResource)
+                throw new InvalidOperationException("PhantomBlade: both techniques must spend the shared daily uses.");
             var hf = GhostSlashAbility.ComponentsArray.OfType<AbilityCasterHasFacts>().ToArray();
             if (hf.Length != 1 || hf[0].Facts.Count() != 1 || hf[0].Facts.First() != StandBuff || !hf[0].NeedsAll) throw new InvalidOperationException("PhantomBlade: GhostSlash AbilityCasterHasFacts(StandBuff) readback failed");
             var ra = GhostSlashAbility.ComponentsArray.OfType<AbilityEffectRunAction>().ToArray();

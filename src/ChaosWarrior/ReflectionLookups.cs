@@ -53,6 +53,7 @@ namespace ChaosWarrior
             F("Kingmaker.UnitLogic.ActivatableAbilities.ActivatableAbilityResourceLogic", "m_RequiredResource"),
             F("Kingmaker.UnitLogic.ActivatableAbilities.ActivatableAbilityResourceLogic", "m_FreeBlueprint"),
             F("Kingmaker.Blueprints.Classes.Prerequisites.PrerequisiteFeaturesFromList", "m_Features"),
+            F("Kingmaker.Blueprints.Classes.Prerequisites.PrerequisiteFeaturesFromList", "m_RestrictIfNot"),
             F("Kingmaker.UnitLogic.FactLogic.AddFacts", "m_Facts"),
             F("Kingmaker.Designers.Mechanics.Facts.AddAbilityResources", "m_Resource"),
             // Mutations.StoredFacts(ChildFacts·IsStoredBy 가 쓴다 — 개편 O3 에서 ChildrenOf 대체): 부모 버프의 저장 사실(비공개, 공개 열거 API 없음 — T5 Step 0)

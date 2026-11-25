@@ -68,8 +68,8 @@ namespace PhantomBlade
             ["Absorb.Overhead"] = ("흡수 {0}", "Absorb {0}"),
             ["FullAttack.Name"] = ("수호령 전력 공격", "Guardian Phantom Full Assault"),
             ["FullAttack.Description"] = (
-                "신속 행동. 수호령이 켜져 있는 동안 쓸 수 있다. 그 라운드 동안 러시의 라운드당 타수 제한이 풀려 모든 근접 공격마다(빗나가도) 수호령이 2타의 접촉 공격을 한다. 하루 매력 수정치 회(최소 1), 휴식하거나 레벨이 오르면 회복한다.",
-                "Swift action, usable while the Guardian Phantom is active. For that round the per-round limit on Rush is lifted and the Guardian Phantom makes 2 touch blows on every melee attack, even on a miss. Usable a number of times per day equal to your Charisma modifier (minimum 1), restored by rest and on level-up."),
+                "신속 행동. 수호령이 켜져 있는 동안 쓸 수 있다. 그 라운드 동안 러시의 라운드당 타수 제한이 풀려 모든 근접 공격마다(빗나가도) 수호령이 2타의 접촉 공격을 한다. 귀신참과 하루 매력 수정치 회(최소 1)를 공유하며, 휴식하거나 레벨이 오르면 회복한다.",
+                "Swift action, usable while the Guardian Phantom is active. For that round the per-round limit on Rush is lifted and the Guardian Phantom makes 2 touch blows on every melee attack, even on a miss. Shares a number of times per day equal to your Charisma modifier (minimum 1) with Ghost Slash. Rest or level up to restore the shared uses."),
             ["Fist.Name"] = ("귀검의 주먹 / Phantom Fist", "Phantom Fist"),
             ["Fist.Description"] = ("수호령 귀검이 꽂아 넣는 역장의 주먹.", "The force fist the Phantom Blade Guardian Phantom drives home."),
             ["FullAttack.Duration"] = ("1 라운드", "1 round"),
@@ -78,14 +78,14 @@ namespace PhantomBlade
             // 소유자 결정 2026-11-16(설계 §14 ③): 비용 = 전용 하루 횟수(매력 수정치 회, 최소 1 — 전력 공격과 같은 식, 따로 셈). 흡수 풀을 쓰지 않는다(종전 「풀에서 레벨의 절반(올림)」).
             ["GhostSlash.Name"] = ("귀신참", "Ghost Slash"),
             ["GhostSlash.Description"] = (
-                "표준 행동. 수호령이 켜져 있는 동안 30피트 안의 적 하나에게 귀검이 역장의 참격을 날린다. 투사체 수: 5레벨 1발, 10레벨 2발, 15레벨 3발, 20레벨 4발(모두 같은 대상). 투사체마다 따로 원거리 접촉 공격을 굴리고, 명중 보너스는 기본 공격 보너스 + 매력 수정치다(민첩과 무관). 피해는 러시 주먹과 같은 주사위(전사 레벨의 몽크 맨손 표) + 매력 수정치의 역장 피해이고, 치명타는 광선과 같다. 하루 매력 수정치 회(최소 1) 쓸 수 있고, 휴식하거나 레벨이 오르면 회복한다. 이 횟수는 수호령 전력 공격과 따로 세며, 귀신참은 흡수 풀을 쓰지 않는다. 남은 횟수가 없으면 쓸 수 없다.",
-                "Standard action, usable while the Guardian Phantom is active. The Phantom Blade hurls slashes of force at one enemy within 30 feet. Projectiles: level 5: 1, level 10: 2, level 15: 3, level 20: 4 (all at the same target). Each projectile makes its own ranged touch attack with your base attack bonus + Charisma modifier (not Dexterity). Each deals force damage equal to the Rush fist dice (the monk unarmed table by fighter level) + your Charisma modifier, and crits like a ray. Usable a number of times per day equal to your Charisma modifier (minimum 1), restored by rest and on level-up. These uses are counted separately from Guardian Phantom Full Assault, and Ghost Slash does not spend the absorption pool. It cannot be used when no uses remain."),
+                "표준 행동. 수호령이 켜져 있는 동안 30피트 안의 적 하나에게 귀검이 역장의 참격을 날린다. 투사체 수: 5레벨 1발, 10레벨 2발, 15레벨 3발, 20레벨 4발(모두 같은 대상). 투사체마다 따로 원거리 접촉 공격을 굴리고, 명중 보너스는 기본 공격 보너스 + 매력 수정치다(민첩과 무관). 피해는 러시 주먹과 같은 주사위(전사 레벨의 몽크 맨손 표) + 매력 수정치의 역장 피해이고, 치명타는 광선과 같다. 하루 매력 수정치 회(최소 1) 쓸 수 있고, 휴식하거나 레벨이 오르면 회복한다. 이 횟수는 수호령 전력 공격과 함께 세며, 귀신참은 흡수 풀을 쓰지 않는다. 남은 횟수가 없으면 쓸 수 없다.",
+                "Standard action, usable while the Guardian Phantom is active. The Phantom Blade hurls slashes of force at one enemy within 30 feet. Projectiles: level 5: 1, level 10: 2, level 15: 3, level 20: 4 (all at the same target). Each projectile makes its own ranged touch attack with your base attack bonus + Charisma modifier (not Dexterity). Each deals force damage equal to the Rush fist dice (the monk unarmed table by fighter level) + your Charisma modifier, and crits like a ray. Usable a number of times per day equal to your Charisma modifier (minimum 1), restored by rest and on level-up. These uses are shared with Guardian Phantom Full Assault, and Ghost Slash does not spend the absorption pool. It cannot be used when no uses remain."),
             ["GhostSlash.Duration"] = ("즉시", "Instantaneous"),
             // 귀신참 전용 횟수 자원(GhostSlashResource)의 이름·설명.
-            ["GhostSlashUses.Name"] = ("귀신참 횟수", "Ghost Slash Uses"),
+            ["GhostSlashUses.Name"] = ("수호령 기술 횟수", "Guardian Technique Uses"),
             ["GhostSlashUses.Description"] = (
-                "귀신참을 쓸 수 있는 남은 횟수. 하루 매력 수정치 회(최소 1)이고 휴식하거나 레벨이 오르면 회복한다. 수호령 전력 공격과 따로 세며, 귀신참은 흡수 풀을 쓰지 않는다.",
-                "How many more times you can use Ghost Slash. Usable a number of times per day equal to your Charisma modifier (minimum 1), restored by rest and on level-up. Counted separately from Guardian Phantom Full Assault; Ghost Slash does not spend the absorption pool."),
+                "귀신참과 수호령 전력 공격이 공유하는 남은 횟수. 하루 매력 수정치 회(최소 1)이고 휴식하거나 레벨이 오르면 회복한다. 수호령 전력 공격과 함께 세며, 귀신참은 흡수 풀을 쓰지 않는다.",
+                "Remaining uses shared by Ghost Slash and Guardian Phantom Full Assault. Usable a number of times per day equal to your Charisma modifier (minimum 1), restored by rest and on level-up. Shared with Guardian Phantom Full Assault; Ghost Slash does not spend the absorption pool."),
             ["GhostSlash5.Name"] = ("귀신참: 1발", "Ghost Slash: 1 Projectile"),
             ["GhostSlash5.Description"] = (
                 "5레벨: 귀신참을 얻는다 — 표준 행동으로 30피트 안의 적에게 역장 투사체 1발(원거리 접촉, 매력)을 쏜다. 하루 매력 수정치 회(최소 1) 쓸 수 있고, 귀신참은 흡수 풀을 쓰지 않는다.",

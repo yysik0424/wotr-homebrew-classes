@@ -73,6 +73,14 @@ namespace PhantomBlade
         // 하루 횟수(휴식으로 회복) = max(1, 매력 수정치) — 전력 공격(StandRules.FullAttackUses)과 같은 식(StandRules.ChaMin1)이되 따로 센다(자원 블루프린트 별개).
         public static int UsesPerDay(int chaMod) { return StandRules.ChaMin1(chaMod); }
 
+        // Both former pools refilled together. Carry forward the combined spending, bounded by today's maximum.
+        public static int SharedRemaining(int maximum, int slashLeft, int assaultLeft)
+        {
+            int slash = Math.Min(maximum, Math.Max(0, slashLeft));
+            int assaultSpent = maximum - Math.Min(maximum, Math.Max(0, assaultLeft));
+            return Math.Max(0, slash - assaultSpent);
+        }
+
         // 투사체 피해 주사위 = 러시 주먹 주사위(StandRules.DiceFor — 본편 몽크 맨손 중형, 설계 §13.1·§13.2)의 행 번호(StandRules.RushDiceByLevel 안).
         public static int DiceRowIndex(int level)
         {
