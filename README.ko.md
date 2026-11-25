@@ -4,7 +4,7 @@
 
 *Pathfinder: Wrath of the Righteous*에 새 아키타입 21종을 더합니다. Unity Mod Manager 모드 하나로 설치합니다. 헌터로 동물 무리를 지휘하거나, 연금술사로 골렘을 입거나, 바바리안으로 부족에게 받은 무기의 신령과 함께 싸울 수 있습니다.
 
-> [Unity Mod Manager용 0.17.12-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.12-beta/HomebrewClasses-0.17.12-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.12-beta.md)
+> [Unity Mod Manager용 0.17.13-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.13-beta/HomebrewClasses-0.17.13-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.13-beta.md)
 
 ## 직업 목록
 
@@ -48,7 +48,7 @@
 ## 설치
 
 1. 게임을 종료합니다. 기존 직업 단독 모드가 설치돼 있으면 12개 직업 폴더를 게임의 `Mods` 밖에 백업합니다. 번들과 단독 모드가 동시에 같은 직업을 등록하지 않도록 합니다.
-2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.12-beta.zip`을 준비합니다.
+2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.13-beta.zip`을 준비합니다.
 3. ZIP을 Unity Mod Manager에 끌어다 놓거나 게임의 `Mods` 폴더에 풉니다. `Mods/HomebrewClasses` 아래에는 `Info.json`, `HomebrewClasses.dll`, 직업 DLL 21개가 든 `classes` 폴더가 있어야 합니다.
 4. 게임을 실행합니다. 캐릭터 생성 화면에서 기반 직업의 아키타입 목록에 나타납니다.
 
@@ -59,7 +59,7 @@
 Windows PowerShell에서 `WOTR_MANAGED_DIR`을 게임의 `Wrath_Data/Managed` 폴더로, `WOTR_CSC`를 Visual Studio Roslyn의 `csc.exe` 경로로 설정합니다. Unity Mod Manager를 설치한 게임의 어셈블리가 필요합니다. 다음 명령은 비어 있는 출력 폴더를 사용합니다.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.12-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.13-beta -Out .\out -NoDevCompare
 ```
 
 ## 설정
@@ -585,7 +585,7 @@ Unity Mod Manager 창에서 모드를 제거하거나 `Mods\HomebrewClasses` 폴
 | 물리(대기·대지·물, 텔레키네틱·중력·나무) | 폭발 주사위 수 + 지능 수정치 | 받지 않는다 | 마법 피해로 취급(DR/마법 통과) |
 
 - 예: 8레벨(랭크 4), 지능 수정치 +4 — 화염은 4d6+2 화염, 대지는 4d6+8 물리. 20레벨(랭크 10, 복합) — 화염은 20d6 + 지능 절반, 대지는 20d6 + 20 + 지능.
-- 치명타: 메이거스 19레벨까지 확정 무기 치명타는 폭발 피해를 2배로 만든다. 20레벨부터 폭발은 일반 피해를 주며, 무기와 접촉 주문에는 각각의 치명타 규칙을 적용한다.
+- 치명타: 메이거스 19레벨까지 확정 무기 치명타는 폭발 피해를 2배로 만든다. 방어 효과로 치명타가 무효화되면 폭발도 일반 피해를 준다. 20레벨부터 폭발은 일반 피해를 주며, 무기와 접촉 주문에는 각각의 치명타 규칙을 적용한다.
 - 주문 저항 굴림의 시전자 레벨은 메이거스 레벨이다.
 - 폭발 피해는 무기 피해가 아니다. 무기에 붙는 추가 피해 효과나 정밀 피해는 폭발에 다시 더해지지 않는다.
 
@@ -1353,6 +1353,8 @@ DLC 유닛을 쓰는 칸: 심연 III(아브리칸딜루) 한 칸뿐이다. 나�
 
 ### 호환과 주의
 
+- 해제 연출이 없는 소환물도 본편 소멸 버프와 같은 시간에 퇴장한다. 후원자가 중복된 캐릭터는 기존 계약을 보존하며 로그에 캐릭터와 판정 시점이 표시된다.
+
 **아키타입 겹침**
 - 스티그마 위치와는 서로 고를 수 없다. 같은 능력을 바꾸는 다른 위치 아키타입과도 함께 고를 수 없다.
 - 스티그마 위치의 주문서와 캔트립만 가져오며, 스티그마 위치의 저주는 받지 않는다.
@@ -1553,6 +1555,8 @@ DLC 유닛을 쓰는 칸: 심연 III(아브리칸딜루) 한 칸뿐이다. 나�
 - 스피릿 웨폰 흡수는 자원을 쓰지 않는다.
 
 ### 호환과 주의
+
+- Making Friends가 직업 등록 뒤에 에이돌론 하위 유형을 추가해도 스피릿 웨폰의 해당 특성 보유 여부를 확인한다.
 
 **동물 동료**
 - 스피릿 웨폰은 동물 동료 자리를 쓴다. 다른 경로로 동물 동료를 얻는 직업·특기와 함께 쓸 수 없다(이미 동물 동료가 있으면 스피릿 웨폰을 고를 수 없다).

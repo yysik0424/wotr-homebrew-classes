@@ -33,6 +33,9 @@ namespace WeaponSpiritShaman
             {
                 if (resolution == null) throw new InvalidOperationException("SpiritPetFactGuard.Check before ResolveAtBuild (PetClass.Build did not run)");
                 var guids = pet.Facts.List.Select(f => f == null || f.Blueprint == null ? null : f.Blueprint.AssetGuid.ToString()).ToList();
+                // Another mod may register its subtype after our blueprints were built. A fact on the pet supplies the resolved blueprint itself.
+                foreach (var guid in guids.Where(g => g != null && resolution.ContainsKey(g)))
+                    resolution[guid] = RefResolution.Resolved;
                 var checks = ForeignComponents.JudgeSpiritPetFacts(ForeignComponents.Rules, guids, resolution);
                 foreach (var rule in ForeignComponents.Violations(checks))
                     if (reported.Add(id + "|" + rule.RefGuid + "|" + rule.Mod)) ModContext.LogError(ForeignComponents.ViolationMessage(name, id, rule));

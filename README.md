@@ -4,7 +4,7 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.12-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.12-beta/HomebrewClasses-0.17.12-beta.zip) · [Release notes and test coverage](release-notes-0.17.12-beta.md)
+> [Download 0.17.13-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.13-beta/HomebrewClasses-0.17.13-beta.zip) · [Release notes and test coverage](release-notes-0.17.13-beta.md)
 
 ## The classes
 
@@ -48,7 +48,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.12-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.13-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -59,7 +59,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.12-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.13-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -585,7 +585,7 @@ Everything else is unchanged, including Spell Combat, Spellstrike and spellcasti
 | Physical (air, earth, water; telekinetic, gravity, wood) | Number of Blast Strike dice + your Intelligence modifier | Does not apply | Counts as magic (bypasses DR/magic) |
 
 - Examples: at 8th level (rank 4) with a +4 Intelligence modifier, fire deals 4d6+2 fire damage and earth deals 4d6+8 physical damage. At 20th level (rank 10, composite), fire deals 20d6 + half Intelligence and earth deals 20d6 + 20 + Intelligence.
-- Critical hits: a confirmed weapon critical doubles Blast Strike damage through magus level 19. From level 20 the blast deals normal damage. The weapon and any delivered touch spell follow their own critical rules.
+- Critical hits: a confirmed weapon critical doubles Blast Strike damage through magus level 19. If fortification negates the critical, the explosion deals ordinary damage. From level 20 the blast deals normal damage. The weapon and any delivered touch spell follow their own critical rules.
 - The caster level used for the spell resistance check is your magus level.
 - Blast Strike damage is not weapon damage. Effects that add damage to weapon hits, and precision damage, are not applied to it a second time.
 
@@ -1353,6 +1353,8 @@ Cells that use a DLC unit: only Abyss III (Abrikandilu). The other 53 cells use 
 
 ### Compatibility and notes
 
+- Summons without a dismissal effect still leave on the native removal timer. If a character has conflicting patrons, the existing pact is preserved and the log identifies the character and the reconciliation stage.
+
 **Archetype overlap**
 - Warlock and Stigmatized Witch cannot be taken together, and neither can any other witch archetype that replaces the same features.
 - Only the Stigmatized Witch's spellbook and cantrips are borrowed; you do not receive the Stigmatized Witch's curse.
@@ -1553,6 +1555,8 @@ On the selection screen each option has its own multi-line description. It lists
 - Spirit Mirror uses no resource.
 
 ### Compatibility and notes
+
+- The spirit weapon is checked for the eidolon subtype even when Making Friends registers it after the shaman.
 
 **Animal companions**
 - The Weapon Spirit uses the animal companion slot. It cannot be combined with classes or feats that grant an animal companion some other way (if you already have one, the Weapon Spirit cannot be chosen).

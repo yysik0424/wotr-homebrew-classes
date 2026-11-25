@@ -365,6 +365,19 @@ namespace Warlock
         {
             if (summon == null) throw new ArgumentNullException("summon");
             RequireBuilt();
+            // SummonedUnitBuff.OnRemoved uses the same timed removal marker when the unit has no dismember prefab.
+            // Apply it first only in that case, so the engine keeps its normal visual path for other summons.
+            if (!summon.Destroyed && !summon.HasFact(dismemberedBuff))
+            {
+                var prefab = summon.Blueprint.Visual?.BloodPuddleFx?.Load();
+                if (prefab == null || prefab.GetComponent<Kingmaker.Visual.Particles.DismemberUnitFX>() == null)
+                {
+                    var delay = TurnBased.Controllers.CombatController.IsInTurnBasedCombat()
+                        ? TimeSpan.Zero : new Kingmaker.Utility.Rounds(1).Seconds;
+                    summon.AddBuff(dismemberedBuff, summon, delay);
+                    if (!summon.HasFact(dismemberedBuff)) throw new InvalidOperationException("Warlock: summon dismissal marker was not applied to " + summon.UniqueId);
+                }
+            }
             summon.RemoveFact(summonedBuff);
             if (summon.HasFact(summonedBuff)) throw new InvalidOperationException("Warlock: SummonedUnitBuff still on " + summon.CharacterName + " (" + summon.UniqueId + ") after RemoveFact");
         }

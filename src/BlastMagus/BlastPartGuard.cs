@@ -48,6 +48,7 @@ namespace BlastMagus
             if (mine == null) throw new InvalidOperationException("BlastMagus: BlastPartGuard on " + Fact.Blueprint.name + " which has no AddKineticistPart (wiring error)");
             var part = owner.Get<UnitPartKineticist>();
             string reason = null;
+            bool conflictingFact = false;
             if (part == null)
             {
                 if (!partMustExist) return; // legitimate no-op: OnActivate runs before AddKineticistPart.OnTurnOn creates the part (EntityFact.Activate IL 0121 < 0190); OnTurnOn decides
@@ -57,6 +58,7 @@ namespace BlastMagus
             {
                 var settings = SettingsOf(part);
                 var other = owner.Facts.List.FirstOrDefault(f => !ReferenceEquals(f, Fact) && f.Blueprint is BlueprintScriptableObject b && b.GetComponent<AddKineticistPart>() != null);
+                conflictingFact = other != null;
                 if (!ReferenceEquals(settings, mine))
                     reason = "part settings come from " + (settings == null ? "null" : settings.OwnerBlueprint == null ? settings.GetType().Name : settings.OwnerBlueprint.name);
                 else if (other != null)
@@ -68,7 +70,11 @@ namespace BlastMagus
                 return;
             }
             if (BlastState.Disable(owner, reason))
-                ModContext.LogError("BlastMagus: UnitPartKineticist on " + owner.CharacterName + " is not ours (kineticist multiclass?) — blasts disabled (" + reason + ")");
+                {
+                string text = "BlastMagus: UnitPartKineticist on " + owner.CharacterName + " is not ours (kineticist multiclass?) — blasts disabled (" + reason + ")";
+                if (conflictingFact) ModContext.Log(text);
+                else ModContext.LogError(text);
+            }
         }
 
         static AddKineticistPart SettingsOf(UnitPartKineticist part)

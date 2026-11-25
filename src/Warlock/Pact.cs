@@ -73,7 +73,7 @@ namespace Warlock
             return game.Player;
         }
 
-        internal static void Emit(PactLine l)
+        internal static void Emit(PactLine l, string context = null)
         {
             if (l == null) throw new ArgumentNullException("l");
             if (l.OnceKey != null && !once.Add(Generation(), l.OnceKey)) return; // 정당한 무동작: 같은 키는 이 로드에서 1회만 기록(계획 「UnknownOnce」)
@@ -82,7 +82,7 @@ namespace Warlock
                 case PactLevel.Debug: ModContext.Log("DEBUG " + l.Text); break;
                 case PactLevel.Info: ModContext.Log("INFO " + l.Text); break;
                 case PactLevel.Warn: ModContext.Log("WARN " + l.Text); break;
-                case PactLevel.Error: ModContext.LogError(l.Text); break;
+                case PactLevel.Error: ModContext.LogError(l.Text + context); break;
                 default: throw new ArgumentOutOfRangeException("l", l.Level, "Warlock: unknown pact log level");
             }
         }
@@ -196,7 +196,9 @@ namespace Warlock
                 Group? recorded = Data.GrantedGroupGuid == null ? (Group?)null : PactRule.GroupOfFeature(Data.GrantedGroupGuid);
                 var decision = PatronGroups.Decide(patrons, groups, Data.FirstPatronGuid, recorded);
                 var plan = PactRule.Plan(decision, mode, unit);
-                foreach (var line in plan.Lines) PactLog.Emit(line);
+                foreach (var line in plan.Lines)
+                    PactLog.Emit(line, decision.Kind == PactKind.Ambiguous
+                        ? " (unit " + Owner.CharacterName + ", blueprint " + Owner.Blueprint.AssetGuid + ", reconciliation " + mode + ", recorded first patron " + (Data.FirstPatronGuid ?? "none") + ")" : null);
                 if (plan.WriteRecord)
                 {
                     Data.FirstPatronGuid = plan.RecordFirst;
