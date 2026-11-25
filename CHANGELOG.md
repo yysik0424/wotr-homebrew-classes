@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.12-beta
+
+- 예언 파괴자는 연구서가 열린 단계마다 신성 주문 2회를 비전에 배정한다. 비전은 지능과 관계없이 단계당 하루 2회이며, 내성 난이도에는 지능을 적용한다.
+- Prophecy Breaker reserves two divine casts for arcane research at each unlocked research tier. Research grants two casts per tier at any Intelligence score and still uses Intelligence for save DCs.
+
 ## 0.17.11-beta
 
 - 스피릿스틸의 신령의 분노가 바바리안의 일일 분노 라운드를 공유한다. 결속 무기를 들면 기본 분노가 지속되는 만큼 신령도 유지할 수 있고, 미씩 끝없는 격노도 두 효과에 적용된다.

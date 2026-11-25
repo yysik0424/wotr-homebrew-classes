@@ -4,7 +4,7 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.11-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.11-beta/HomebrewClasses-0.17.11-beta.zip) · [Release notes and test coverage](release-notes-0.17.11-beta.md)
+> [Download 0.17.12-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.12-beta/HomebrewClasses-0.17.12-beta.zip) · [Release notes and test coverage](release-notes-0.17.12-beta.md)
 
 ## The classes
 
@@ -29,7 +29,7 @@ Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod 
 | 17 | [Dream Thief](#dream-thief) | Rogue | Put enemies to sleep with Desna’s starknife, cross the battlefield through dreams and wake them with a critical hit. Spend starlight on sleep, a sudden strike or divine weapon damage. | — |
 | 18 | [Deathdealer](#deathdealer) | Slayer | Read a studied foe’s actions to riposte, trip a moving enemy or interrupt a spell. Intelligence improves reactions, and nine personal arcane abilities help you prepare for the fight. | — |
 | 19 | [Falconer](#falconer) | Ranger | Send a hawk to open a shot for your bow while an animal companion drives prey into its path. From level 8, the hawk can dive automatically after your weapon attack. | — |
-| 20 | [Prophecy Breaker](#prophecy-breaker) | Oracle | Defy a foretelling through study. Cast divine spells with Intelligence and keep a separate arcane book with four inscriptions, two prepared spells and two shared casts per tier. | — |
+| 20 | [Prophecy Breaker](#prophecy-breaker) | Oracle | Defy a foretelling through study. Cast divine spells with Intelligence and reserve two divine casts per unlocked tier for arcane research. Inscribe four spells and prepare two per tier. | — |
 | 21 | [Hell Rider](#hell-rider) | Cavalier | Charge on a nightmare to concentrate devil strikes, or plant a standard to hit several foes. Wield Charisma-based Hellfire Ray, Greater Command, Firebrand and Overwhelming Presence. | — |
 
 Full details for every archetype (what is removed, what is gained at each level, every choice) are in [Class details](#class-details) below.
@@ -48,7 +48,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.11-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.12-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -59,7 +59,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.11-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.12-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -3409,7 +3409,7 @@ Caster level keeps increasing at 19 and 20. At level 20 research DC still depend
 |---|---|---|
 | Spell list | Oracle orisons and divine spells of tiers 1–9 | Arcane spells of tiers 1–9 from the wizard list |
 | Spells available today | Cast spontaneously from known divine spells | Inscribe up to four distinct spells per tier and prepare two of them |
-| Daily allowance | The oracle's divine spell slots | Two casts per tier, shared by both prepared spells of that tier |
+| Daily allowance | Oracle daily slots minus two at each unlocked research tier | Two casts per tier, shared by both prepared spells of that tier |
 | Role of Intelligence | Intelligence takes over as the divine casting ability | Raises save DC. The limits of four inscribed, two prepared and two daily casts stay fixed. |
 
 Arcane tiers 1 through 9 unlock at oracle levels **1, 4, 6, 8, 10, 12, 14, 16 and 18**. Arcane caster level equals oracle class level. Base save DC is **10 + spell level + Intelligence modifier**. A level 12 oracle with +5 Intelligence unlocks tier 6 and has base DC 16 for a tier 1 spell and DC 21 for a tier 6 spell. Spell Focus and Heighten Spell follow the usual spell rules.
@@ -3426,22 +3426,22 @@ An identically named spell in the divine book keeps its own entry. An arcane rep
 
 #### How large is the divine spellbook?
 
-The divine book keeps the oracle's native progression after giving up mystery bonus spells. These are its **base known-spell and daily-slot tables**, before separate grants such as curse or cure/inflict spells. Read from tier 1 upward, with orisons handled separately. Intelligence can add bonus slots on the divine side.
+Each tier unlocked in the research book reserves two of the oracle’s daily divine slots for arcane research. Tiers reached early through prestige advancement or mythic merging keep their full divine allowance until research catches up. Orisons and tier 10 follow their normal rules. The table shows base spells known and remaining divine casts for a single-class oracle. Intelligence adds bonus slots to the divine book.
 
 | Oracle level | Base spells known per tier | Base daily casts per tier |
 |---|---|---|
-| 1 | 2 | 3 |
-| 4 | 3 / 1 | 6 / 3 |
-| 6 | 4 / 2 / 1 | 6 / 5 / 3 |
-| 8 | 5 / 3 / 2 / 1 | 6 / 6 / 5 / 3 |
-| 10 | 5 / 4 / 3 / 2 / 1 | 6 / 6 / 6 / 5 / 3 |
-| 12 | 5 / 5 / 4 / 3 / 2 / 1 | 6 / 6 / 6 / 6 / 5 / 3 |
-| 14 | 5 / 5 / 4 / 4 / 3 / 2 / 1 | 6 / 6 / 6 / 6 / 6 / 5 / 3 |
-| 16 | 5 / 5 / 4 / 4 / 4 / 3 / 2 / 1 | 6 / 6 / 6 / 6 / 6 / 6 / 5 / 3 |
-| 18 | 5 / 5 / 4 / 4 / 4 / 3 / 3 / 2 / 1 | 6 / 6 / 6 / 6 / 6 / 6 / 6 / 5 / 3 |
-| 20 | 5 / 5 / 4 / 4 / 4 / 3 / 3 / 3 / 3 | 6 / 6 / 6 / 6 / 6 / 6 / 6 / 6 / 6 |
+| 1 | 2 | 1 |
+| 4 | 3 / 1 | 4 / 1 |
+| 6 | 4 / 2 / 1 | 4 / 3 / 1 |
+| 8 | 5 / 3 / 2 / 1 | 4 / 4 / 3 / 1 |
+| 10 | 5 / 4 / 3 / 2 / 1 | 4 / 4 / 4 / 3 / 1 |
+| 12 | 5 / 5 / 4 / 3 / 2 / 1 | 4 / 4 / 4 / 4 / 3 / 1 |
+| 14 | 5 / 5 / 4 / 4 / 3 / 2 / 1 | 4 / 4 / 4 / 4 / 4 / 3 / 1 |
+| 16 | 5 / 5 / 4 / 4 / 4 / 3 / 2 / 1 | 4 / 4 / 4 / 4 / 4 / 4 / 3 / 1 |
+| 18 | 5 / 5 / 4 / 4 / 4 / 3 / 3 / 2 / 1 | 4 / 4 / 4 / 4 / 4 / 4 / 4 / 3 / 1 |
+| 20 | 5 / 5 / 4 / 4 / 4 / 3 / 3 / 3 / 3 | 4 / 4 / 4 / 4 / 4 / 4 / 4 / 4 / 4 |
 
-At oracle level 20 the divine table gives six base tier 9 casts, while research gives exactly two. Spending every divine tier 9 slot leaves both arcane tier 9 casts available.
+At level 20, tier 9 has four base divine casts and two arcane casts. With Intelligence 28, the tier 9 bonus gives five divine casts and two arcane casts. Across tiers 1–9, that is 51 divine plus 18 arcane casts per day, for a total of 69.
 
 ### Choices
 

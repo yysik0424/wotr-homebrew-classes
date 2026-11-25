@@ -87,11 +87,42 @@ namespace ProphecyBreaker
         {
             return FixedSlots(__instance,__0,ref __result);
         }
+        // Only actual oracle levels unlock research. Prestige and mythic levels can advance
+        // the divine book ahead of it. Keep the native per-day calculation for those tiers.
+        static void Postfix(Spellbook __instance, int __0, ref int __result)
+        {
+            if (__result > 0 && ReferenceEquals(__instance.Blueprint, Blueprints.Divine) && Study.Open(__instance, __0))
+                __result = Math.Max(0, __result - Rules.Slots);
+        }
+
         internal static bool FixedSlots(Spellbook book,int tier,ref int result)
         {
             if (!Study.Own(book.Blueprint)) return true;
             result = Study.Open(book,tier) ? Rules.Slots : 0;
             return false;
+        }
+    }
+
+    // Spontaneous uses remaining are serialized independently of the daily capacity.
+    public sealed class DivineSlotMigration : UnitFactComponentDelegate<DivineSlotMigration.State>, IAreaHandler, IGlobalSubscriber
+    {
+        public sealed class State { [Newtonsoft.Json.JsonProperty] public bool Reviewed; }
+
+        public void OnAreaBeginUnloading() { }
+        public void OnAreaDidLoad()
+        {
+            if (Data.Reviewed) return;
+            var divine = Owner.GetSpellbook(Blueprints.Divine);
+            if (divine == null) return;
+            for (int tier = 1; tier <= Rules.MaxTier(Study.Level(divine)); tier++)
+                ClampRemaining(divine, tier);
+            Data.Reviewed = true;
+        }
+
+        internal static void ClampRemaining(Spellbook divine, int tier)
+        {
+            // Restoring zero uses applies the engine's current cap without giving back a cast.
+            divine.RestoreSpontaneousSlots(tier, 0);
         }
     }
 
@@ -133,7 +164,13 @@ namespace ProphecyBreaker
                 book.AddBaseLevel();
                 if (book.BaseLevel <= previous) throw new InvalidOperationException("Research book level did not advance");
             }
-            __0.DemandSpellSelection(book.Blueprint,book.Blueprint.SpellList).SetExtraSpells(book.Blueprint.SpellsPerLevel, Rules.MaxTier(level));
+            int highest = Rules.MaxTier(level);
+            if (highest > Rules.MaxTier(level - 1))
+            {
+                var divine = __1.GetSpellbook(Blueprints.Divine);
+                if (divine != null) DivineSlotMigration.ClampRemaining(divine, highest);
+            }
+            __0.DemandSpellSelection(book.Blueprint,book.Blueprint.SpellList).SetExtraSpells(book.Blueprint.SpellsPerLevel, highest);
         }
     }
 }
