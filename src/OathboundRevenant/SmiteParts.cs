@@ -95,7 +95,8 @@ namespace OathboundRevenant
     public class SmiteLinkComponent : UnitBuffComponentDelegate, IUnitBuffHandler, IUnitLifeStateChanged
     {
         // 한 낙인당 이전 1회(사망 경로 두 개 — 버프 제거 · 생명 상태 — 중 먼저 온 것만).
-        [NonSerialized] bool transferred;
+        static readonly WotrClassMod.Common.WeakKeyTable<Buff, object> transferred = new WotrClassMod.Common.WeakKeyTable<Buff, object>();
+        static readonly object TransferHandled = new object();
 
         protected override void OnActivate()
         {
@@ -117,7 +118,7 @@ namespace OathboundRevenant
             var v = SmiteLinkRule.OnBuffRemoved(smite != null && buff.Blueprint == smite, caster != null && buff.Context != null && buff.Context.MaybeCaster == caster);
             if (v == SmiteLinkOnRemove.Ignore) return;
             // 스마이트가 소유자 사망 때문에 떨어졌다면(소유자 이미 죽음) 그 순간까지 활성이었다 → 사망 처리 먼저.
-            if (Owner.State.IsDead) OnDeath(true);
+            if (Owner.State.IsDead || Owner.State.MarkedForDeath || Owner.State.ForceKill) OnDeath(true);
             if (Buff.Active) Buff.Remove();
         }
 
@@ -131,12 +132,13 @@ namespace OathboundRevenant
 
         void OnDeath(bool smiteActive)
         {
-            if (transferred) return;
-            transferred = true;
+            object handled;
+            if (transferred.TryGetValue(Buff, out handled)) return;
             var caster = Context == null ? null : Context.MaybeCaster;
             var mark = Strike.MarkOfDeathTalent;
             bool hasMark = caster != null && mark != null && caster.Descriptor.HasFact(mark);
             if (SmiteLinkRule.OnOwnerDeath(smiteActive, hasMark) != SmiteLinkOnDeath.Transfer) return;
+            transferred.Add(Buff, TransferHandled);
             var ctx = Context;
             if (!Guard.Run(ErrorLedger.SiteSmiteTransfer, ctx, () =>
             {

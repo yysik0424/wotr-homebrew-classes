@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.15-beta
+
+- Oathbound Revenant tracks death transfers per mark and replaces the same caster’s lesser fear aura on upgrade. Pack Warden uses actual melee reach to judge arrival. Loading a Warlock with an ambiguous first patron preserves the pact and logs a warning.
+- 맹세의 망자는 각 낙인의 사망 이전을 개별로 처리하고 공포 오라를 강화하면 같은 시전자의 하위 효과를 제거한다. 무리 조련사는 실제 사거리로 도착을 판단하고, 기존 워락의 후원자가 모호하면 불러올 때 경고와 함께 계약을 보존한다.
+
 ## 0.17.14-beta
 
 - 그림자 소서러의 매직 미사일은 그림자를 켜도 1레벨 슬롯 1칸을 쓴다. 메아리는 추가 슬롯을 쓰지 않는다.

@@ -247,7 +247,7 @@ namespace PackWarden
         }
 
         // 교전 추종의 「도착」 한계(미터, 중심 거리 UnitEntityData.DistanceTo 와 비교). = 교전 추종 명령의 접근 거리(CreateCommand 와 같은 UnitAttack.GetApproachRadius(GetFirstWeapon, 보조, 대상)
-        // — 엔진 IL: 무기 사거리 + 보조 몸 반경 + 대상 몸 반경) + 추종 점검 여유(ShadowRules.FollowSlackMeters, 설계 §6-9, 1 m). 무기가 없으면 null(판정 불가 — 접근 거리를 모른다).
+        // — 엔진 IL: 무기 사거리 + 보조 몸 반경 + 대상 몸 반경) 와 같다. 일반 펫 추종의 거리 여유는 물기 사거리에 더하지 않는다. 무기가 없으면 null(판정 불가 — 접근 거리를 모른다).
         // 사용처 = 교전 추종 관측(Observe) · 점검 S12 follow(같은 한 곳 — C4).
         public static float? EngagedArrivalLimit(UnitEntityData aux, UnitEntityData target)
         {
@@ -255,7 +255,7 @@ namespace PackWarden
             if (target == null) throw new ArgumentNullException("target");
             var weapon = aux.GetFirstWeapon();
             if (weapon == null) return null;
-            return UnitAttack.GetApproachRadius(weapon, aux, target) + ShadowRules.FollowSlackMeters;
+            return UnitAttack.GetApproachRadius(weapon, aux, target);
         }
 
         static bool Usable(UnitEntityData pet, UnitEntityData u)

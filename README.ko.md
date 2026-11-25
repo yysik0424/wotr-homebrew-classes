@@ -4,7 +4,9 @@
 
 *Pathfinder: Wrath of the Righteous*에 새 아키타입 21종을 더합니다. Unity Mod Manager 모드 하나로 설치합니다. 헌터로 동물 무리를 지휘하거나, 연금술사로 골렘을 입거나, 바바리안으로 부족에게 받은 무기의 신령과 함께 싸울 수 있습니다.
 
-> [Unity Mod Manager용 0.17.14-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.14-beta/HomebrewClasses-0.17.14-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.14-beta.md)
+> [Unity Mod Manager용 0.17.15-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.15-beta/HomebrewClasses-0.17.15-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.15-beta.md)
+
+이번 판은 맹세의 망자의 죽음의 낙인 이전과 공포 오라 교체를 수정했습니다. 기존 워락 캐릭터의 첫 후원자를 판별할 수 없으면 계약을 보존하고 경고를 표시합니다.
 
 ## 직업 목록
 
@@ -48,7 +50,7 @@
 ## 설치
 
 1. 게임을 종료합니다. 기존 직업 단독 모드가 설치돼 있으면 12개 직업 폴더를 게임의 `Mods` 밖에 백업합니다. 번들과 단독 모드가 동시에 같은 직업을 등록하지 않도록 합니다.
-2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.14-beta.zip`을 준비합니다.
+2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.15-beta.zip`을 준비합니다.
 3. ZIP을 Unity Mod Manager에 끌어다 놓거나 게임의 `Mods` 폴더에 풉니다. `Mods/HomebrewClasses` 아래에는 `Info.json`, `HomebrewClasses.dll`, 직업 DLL 21개가 든 `classes` 폴더가 있어야 합니다.
 4. 게임을 실행합니다. 캐릭터 생성 화면에서 기반 직업의 아키타입 목록에 나타납니다.
 
@@ -59,7 +61,7 @@
 Windows PowerShell에서 `WOTR_MANAGED_DIR`을 게임의 `Wrath_Data/Managed` 폴더로, `WOTR_CSC`를 Visual Studio Roslyn의 `csc.exe` 경로로 설정합니다. Unity Mod Manager를 설치한 게임의 어셈블리가 필요합니다. 다음 명령은 비어 있는 출력 폴더를 사용합니다.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.14-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.15-beta -Out .\out -NoDevCompare
 ```
 
 ## 설정
@@ -154,6 +156,8 @@ Unity Mod Manager 창에서 모드를 제거하거나 `Mods\HomebrewClasses` 폴
 ### 능력 상세
 
 #### 무리 소집 (Call the Pack)
+
+보조 동물은 자기 근접 무기가 닿는 거리까지 접근한 뒤에야 주 동료의 공격에 따라친다.
 
 - **발동**: 자동. 헌터가 전투에 들어가는 순간 소집 조건을 만족하면 보조 동물이 헌터 곁에 나타난다. 행동을 쓰지 않고 자원도 쓰지 않는다.
 - **소집 조건**
@@ -1231,6 +1235,8 @@ KineticistElementsExpanded 모드가 켜져 있을 때만 추가되는 원소:
 
 #### 워락 계약과 그룹
 
+기존 캐릭터에게 후견인이 여럿이고 첫 선택 기록이 없으면, 세이브를 불러올 때 현재 계약을 보존하고 모드 로그에 경고를 남긴다.
+
 1레벨에 고른 후견인이 그룹을 정한다(대응표는 「선택지」). 그룹은 한 번 정해지면 처음 고른 후견인을 따르며, 나중에 다른 경로로 후견인이 하나 더 생겨도 바뀌지 않는다. 계약은 레벨업마다 그룹 능력을 다시 맞춘다: 6레벨에 근거리 블라스트가 중거리 블라스트로 교체되고, 10레벨에 연속 사격이 추가되며, 가호는 현재 단계 하나만 유지된다.
 
 대응표에 없는 후견인(다크 시스터의 「어둠의 계약」, 다른 모드가 추가한 후견인)만 가진 워락은 그룹을 받지 못해 블라스트·과열 소환·가호가 생기지 않는다.
@@ -2271,7 +2277,7 @@ DLC 유닛을 쓰는 칸: 심연 III(아브리칸딜루) 한 칸뿐이다. 나�
 - 항상 켜져 있는 오라. 10피트 안의 적에게 적용된다.
 - 공포에 대한 내성 굴림 −4.
 - 받는 치유가 절반이 된다.
-- 재주 짙은 공포를 배우면 이 오라는 20피트·−6 오라로 대체된다(둘이 겹치지 않는다).
+- 재주 짙은 공포를 배우면 이 오라는 20피트·−6 오라로 대체된다. 강화 효과가 적용되는 즉시 같은 팔라딘의 기존 −4 효과가 끝난다.
 
 #### 음에너지 방출 (Channel Negative Energy)
 

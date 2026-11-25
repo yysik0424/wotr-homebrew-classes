@@ -171,6 +171,9 @@ namespace Warlock
                     }
 
                 case PactKind.Ambiguous:
+                    if (mode == PactMode.VerifyOnly)
+                        return new PactPlan(new[] { new PactLine(PactLevel.Warn, unit + "|Ambiguous|load", "Warlock: " + unit + " has multiple patrons in the loaded character (" + Guids(d) + "); group not changed") }, false, null, null, PactKit.None, null);
+                    goto case PactKind.Unmapped;
                 case PactKind.Unmapped:
                 case PactKind.RecordMissing:
                 case PactKind.GroupMismatch:

@@ -17,13 +17,19 @@ namespace ShadowSorcerer
     [HarmonyPatch(typeof(UnitUseAbility), "OnAction")]
     static class OriginScopePatch
     {
+
+
+
         static void Prefix(UnitUseAbility __instance, out bool __state)
         {
             __state = false;
             try
             {
-                ShadowErrors.MaybeFault(ErrorLedger.SiteOriginMarker);
                 var data = __instance.Ability;
+
+
+
+                ShadowErrors.MaybeFault(ErrorLedger.SiteOriginMarker);
                 if (data == null) { ShadowErrors.Report(ErrorLedger.SiteOriginMarker, "UnitUseAbility.OnAction without ability data - scope not opened"); return; }
                 EchoRegistry.Claims.Open(OriginKind.Command, data);
                 __state = true;

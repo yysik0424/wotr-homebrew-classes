@@ -4,7 +4,9 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.14-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.14-beta/HomebrewClasses-0.17.14-beta.zip) · [Release notes and test coverage](release-notes-0.17.14-beta.md)
+> [Download 0.17.15-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.15-beta/HomebrewClasses-0.17.15-beta.zip) · [Release notes and test coverage](release-notes-0.17.15-beta.md)
+
+This version fixes Mark of Death transfers and the fear aura upgrade for Oathbound Revenants. Loading a Warlock with multiple patrons and no recorded first choice preserves the pact and logs a warning.
 
 ## The classes
 
@@ -48,7 +50,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.14-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.15-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -59,7 +61,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.14-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.15-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -154,6 +156,8 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 ### Abilities in detail
 
 #### Call the Pack
+
+An auxiliary must reach the target with its own melee weapon before it can join the companion’s attack.
 
 - **Activation**: automatic. The moment you enter combat with the call condition met, the auxiliaries appear next to you. It costs no action and no resource.
 - **Call condition**
@@ -1231,6 +1235,8 @@ Kept: patron selection (including patron spells), familiar, simple weapon profic
 
 #### Warlock Pact and groups
 
+Loading an existing character with several patrons and no recorded first choice preserves the current pact and logs a warning.
+
 The patron you choose at level 1 decides your group (see the table under "Choices"). The group follows the first patron you picked and does not change if you later gain another patron from some other source. The pact re-aligns your group abilities at every level-up: at level 6 the close-range blast is swapped for the medium-range one, at level 10 Double Blast is added, and you only ever hold the ward of your current tier.
 
 A warlock whose only patron is not on the table (the Dark Sister's Dark Pact, or a patron added by another mod) receives no group, and therefore no blast, Heat summoning or ward.
@@ -2271,7 +2277,7 @@ Everything else stays: Smite Evil, Divine Grace, Divine Bond, the auras of Resol
 - An always-on aura affecting enemies within 10 feet.
 - −4 on saving throws against fear.
 - Healing received is halved.
-- With the Dense Fear talent this aura is replaced by a 20-foot, −6 version. The two never stack.
+- With the Dense Fear talent this aura is replaced by a 20-foot, −6 version. When Dense Fear takes effect, the same paladin’s −4 effect ends immediately.
 
 #### Channel Negative Energy
 

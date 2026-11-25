@@ -22,6 +22,18 @@ namespace OathboundRevenant
 {
      
     // 행 = AuraPlan(DeathAura · DenseFear · DeathsResolve; OathShield 는 T7). Size = AuraGeometry.SizeFor(가장자리 반경, Medium 체구) — 엔진 ScriptZoneCylinder.Contains 식(부록 A-f, T6 Step 0).
+    public sealed class ReplaceLesserFearAura : UnitBuffComponentDelegate
+    {
+        protected override void OnActivate()
+        {
+            var caster = Context == null ? null : Context.MaybeCaster;
+            if (caster == null) return;
+            var lesser = Auras.Effects["DeathAura"];
+            foreach (var buff in Owner.Buffs.Enumerable.Where(b => b.Blueprint == lesser && b.Context != null && b.Context.MaybeCaster == caster).ToArray())
+                buff.Remove();
+        }
+    }
+
     public static class Auras
     {
         public static readonly Dictionary<string, BlueprintAbilityAreaEffect> Areas = new Dictionary<string, BlueprintAbilityAreaEffect>();
@@ -60,6 +72,7 @@ namespace OathboundRevenant
             var ids = AuraGuids(row.Key);
             var effect = NewBuff("OathboundRevenant" + row.Key + "Effect", ids[2], NameKey(row.Key), DescKey(row.Key), false);
             AddComponents(effect, EffectComponents(row).ToArray());
+            if (row.Key == "DenseFear") AddComponents(effect, Comp(new ReplaceLesserFearAura()));
             Effects[row.Key] = effect;
 
             var area = Create<BlueprintAbilityAreaEffect>("OathboundRevenant" + row.Key + "Area", ids[1], a =>
