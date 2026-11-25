@@ -12,8 +12,9 @@ namespace PackWarden
         // 헌터 클래스 레벨 범위. 출처: 본편 헌터 = 20레벨 클래스(이 모드의 20레벨 능력 Aspects「두 상 동시 활성」, Checks\TestUnit 의 「20 을 넘으면 실패」와 같은 상한).
         public const int MinHunterLevel = 1, MaxHunterLevel = 20;
 
-
-        static readonly int[] AuxCountFirstLevels = { 1, 7 };
+        // Keep saved slot indices stable while the hunter level sets the number of active auxiliaries.
+        public const int MountedCallLevel = 7, SecondAuxiliaryLevel = 13;
+        static readonly int[] AuxCountFirstLevels = { MountedCallLevel, SecondAuxiliaryLevel };
         public static int MaxAuxiliaries => AuxCountFirstLevels.Length;
         public const int AuxSlotCount = 4; // 0.17.6 전투 저장의 참조 네 칸과 호환
 
@@ -71,8 +72,8 @@ namespace PackWarden
         {
             if (MaxAuxiliaries > AuxSlotCount)
                 throw new InvalidOperationException("PackWarden: aux count table has " + AuxCountFirstLevels.Length + " rows but AuxSlotCount = " + AuxSlotCount);
-            if (AuxCountFirstLevels[0] != MinHunterLevel)
-                throw new InvalidOperationException("PackWarden: aux count table must start at hunter level " + MinHunterLevel + ", starts at " + AuxCountFirstLevels[0]);
+            if (AuxCountFirstLevels[0] <= MinHunterLevel)
+                throw new InvalidOperationException("PackWarden: aux count first mounted call must be above hunter level " + MinHunterLevel + ", starts at " + AuxCountFirstLevels[0]);
             for (int i = 1; i < AuxCountFirstLevels.Length; i++)
                 if (AuxCountFirstLevels[i] <= AuxCountFirstLevels[i - 1] || AuxCountFirstLevels[i] > MaxHunterLevel)
                     throw new InvalidOperationException("PackWarden: aux count table row " + i + " (level " + AuxCountFirstLevels[i] + ") is not ascending within " + MinHunterLevel + ".." + MaxHunterLevel);
@@ -91,14 +92,15 @@ namespace PackWarden
         // 표의 구간: 행마다 { 첫 레벨, 끝 레벨, 마릿수 }. 문자열·README 대조 시험용(새 배열을 돌려준다 — 표를 밖에서 못 바꾼다).
         public static int[][] AuxCountBands()
         {
-            var rows = new int[AuxCountFirstLevels.Length][];
-            for (int i = 0; i < rows.Length; i++)
-                rows[i] = new[] { AuxCountFirstLevels[i], i + 1 < AuxCountFirstLevels.Length ? AuxCountFirstLevels[i + 1] - 1 : MaxHunterLevel, i + 1 };
+            var rows = new int[AuxCountFirstLevels.Length + 1][];
+            rows[0] = new[] { MinHunterLevel, MountedCallLevel - 1, 0 };
+            for (int i = 1; i < rows.Length; i++)
+                rows[i] = new[] { AuxCountFirstLevels[i - 1], i < AuxCountFirstLevels.Length ? AuxCountFirstLevels[i] - 1 : MaxHunterLevel, i };
             return rows;
         }
 
         // 설계 4.5: 7레벨부터 탈것 게이트 사용
-        public static bool UsesMountGate(int hunterLevel) { return hunterLevel >= 7; }
+        public static bool UsesMountGate(int hunterLevel) { return hunterLevel >= MountedCallLevel; }
 
         // 설계 4.3: 기본 크기가 중형 이상이어야 탑승 가능 (Kingmaker.Enums.Size 서수를 int 로 전달)
         public static bool IsRideableBaseSize(int sizeOrdinal, int mediumOrdinal) { return sizeOrdinal >= mediumOrdinal; }
@@ -173,13 +175,14 @@ namespace PackWarden
         // 설계 4.5 해산 규칙 + 과제 8 IL 조사(task-8-report.md). 하차는 전부 private UnitPartRider.Dismount(bool force) 로 모인다.
         // 가장 바깥 호출의 진입로로 원인을 가른다(안쪽 호출 = ClearAndRemoveSelf 가 탑승 능력을 끄며 생기는 MountedBuff → ContextActionDismount 연쇄).
         // Preserve occupied slot numbers when survivors in a legacy pack are separated by empty slots.
-        public static int[] ExcessSlots<T>(System.Collections.Generic.IList<T> slots, Func<T, bool> occupied)
+        public static int[] ExcessSlots<T>(System.Collections.Generic.IList<T> slots, int target, Func<T, bool> occupied)
         {
             if (slots == null || slots.Count != AuxSlotCount) throw new ArgumentException("Invalid pack save slots", nameof(slots));
+            if (target < 0 || target > MaxAuxiliaries) throw new ArgumentOutOfRangeException(nameof(target));
             var excess = new System.Collections.Generic.List<int>();
             int count = 0;
             for (int i = 0; i < slots.Count; i++)
-                if (occupied(slots[i]) && ++count > MaxAuxiliaries) excess.Add(i);
+                if (occupied(slots[i]) && ++count > target) excess.Add(i);
             return excess.ToArray();
         }
 
@@ -431,7 +434,7 @@ namespace PackWarden
                 "고를 수 없는 동물: " + string.Join(", ", excluded.ToArray()) + "(기본 크기가 " + smallKo + "이라 제외). 다른 모드가 추가한 동물 동료도 고를 수 없다.",
                 "보조 동물의 수: 헌터 " + string.Join(", ", bands.ToArray()) + ". 레벨은 헌터 레벨 − " + offset + "(최소 " + minimum + ")이다.",
                 "보조 동물은 전투 중에만 나타나고, " + smallKo + "으로 나타나 자라지 않는다.",
-                "소집 조건: 헌터 " + PackRules.MinHunterLevel + "~" + (gate - 1) + "레벨에는 무리 소집 토글을 켜 두면, " + gate + "레벨부터는 전투 중 이 동물에 타고 있으면 보조 동물이 나타난다(탄 채 전투에 들어가도, 전투 중에 타도 된다).",
+                "소집 조건: 헌터 " + gate + "레벨부터 전투 중 이 동물에 타고 있으면 보조 동물이 나타난다(탄 채 전투에 들어가도, 전투 중에 타도 된다).",
             };
             foreach (var name in UnmountableCompanions)
                 lines.Add("주의: " + Row(UnmountableNames, name)[1] + "는 본편에서 탈 수 없는 동물이라, 헌터 " + gate + "레벨부터는 보조 동물을 부를 수 없다.");
@@ -456,7 +459,7 @@ namespace PackWarden
                 "Not available: " + string.Join(", ", excluded.GetRange(0, excluded.Count - 1).ToArray()) + " and " + excluded[excluded.Count - 1] + " (their base size is " + smallEn + "). Animal companions added by other mods are not available either.",
                 "Number of auxiliary animals: " + string.Join(", ", bands.GetRange(0, bands.Count - 1).ToArray()) + " and " + bands[bands.Count - 1] + ". Their level is hunter level − " + offset + " (minimum " + minimum + ").",
                 "Auxiliary animals appear only during combat, at " + smallEn + " size, and do not grow.",
-                "Call condition: at hunter levels " + PackRules.MinHunterLevel + "-" + (gate - 1) + " the Call the Pack toggle must be on; from level " + gate + " they appear while the hunter rides this animal in combat (entering combat mounted or mounting during combat both work).",
+                "Call condition: from hunter level " + gate + " they appear while the hunter rides this animal in combat (entering combat mounted or mounting during combat both work).",
             };
             foreach (var name in UnmountableCompanions)
                 lines.Add("Warning: the " + Row(UnmountableNames, name)[2] + " cannot be ridden in the base game, so from hunter level " + gate + " it cannot call auxiliary animals.");

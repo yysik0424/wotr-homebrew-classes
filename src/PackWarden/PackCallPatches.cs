@@ -96,7 +96,7 @@ namespace PackWarden
             if (!PackPatchState.Ready()) return;
             var leader = PackPatchState.MountGatedLeader(PackPatchState.RiderOwner(__instance));
             if (leader == null) return;
-            if (PackCall.ShouldSummon(leader)) PackCall.TrySummon(leader);
+            PackCall.TrySummon(leader);
         }
     }
 

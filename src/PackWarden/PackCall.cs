@@ -60,16 +60,20 @@ namespace PackWarden
             if (Auxiliaries == null) throw new InvalidOperationException("PackWarden: UnitPartPack.Auxiliaries is null after load (corrupt save?)");
             int saved = Auxiliaries.Count;
             Auxiliaries = new List<UnitReference>(PackRules.MigrateSavedSlots(Auxiliaries)); // 2칸(옛 저장)·4칸만 받는다. 그 밖은 던진다.
-            foreach (int index in PackRules.ExcessSlots(Auxiliaries, reference => !string.IsNullOrEmpty(reference.UniqueId)))
-            {
-                Auxiliaries[index] = default(UnitReference);
-                RetiredAuxiliariesPending = true;
-            }
             if (saved != PackRules.AuxSlotCount)
                 Main.Log("PackWarden: migrated a pre-2026-11-16 pack state of " + Owner + " from " + saved + " to " + PackRules.AuxSlotCount + " slots (old respawn timers are dropped)");
         }
 
         // 직렬화 사고로 길이가 다르면 조용히 맞추지 않고 실패(옛 저장의 2칸은 OnPostLoad 가 이미 늘렸다).
+        internal void TrimForLevel(int target)
+        {
+            foreach (int index in PackRules.ExcessSlots(Auxiliaries, target, reference => !string.IsNullOrEmpty(reference.UniqueId)))
+            {
+                Auxiliaries[index] = default(UnitReference);
+                RetiredAuxiliariesPending = true;
+            }
+        }
+
         public void Validate()
         {
             if (Auxiliaries == null)
@@ -219,7 +223,7 @@ namespace PackWarden
                 a.ActivationType = AbilityActivationType.Immediately;
                 a.DeactivateImmediately = true;
                 a.DoNotTurnOffOnRest = true;
-                a.IsOnByDefault = true;
+                a.IsOnByDefault = false;
                 a.ResourceAssetIds = new string[0];
                 SetField(a, "m_Buff", Ref<BlueprintBuffReference>(Guids.CallToggleBuff));
             });
@@ -244,8 +248,9 @@ namespace PackWarden
             AddComponents(CallFeature, new PackCallComponent(), new PackShadowStrikes(), new PackModeWatcher(), new PackEngageWatcher());
 
             Archetype.AddAt(1, CallFeature);
-            Archetype.AddAt(1, CallToggleFeature);
-            Archetype.AddAt(7, CallMountedFeature);
+            CallFeature.HideInUI = true;
+            CallFeature.HideInCharacterSheetAndLevelUp = true;
+            Archetype.AddAt(PackRules.MountedCallLevel, CallMountedFeature);
         }
 
         internal static void Names(BlueprintUnitFact f, string key, UnityEngine.Sprite icon)
@@ -287,14 +292,6 @@ namespace PackWarden
 
         public static bool ShouldSummon(UnitEntityData leader)
         {
-            if (ToggleBuff == null) throw new InvalidOperationException("PackWarden: PackCall.Build() has not run");
-            if (leader == null) throw new ArgumentNullException("leader");
-            return ShouldSummonCore(leader, leader.Buffs.GetBuff(ToggleBuff) != null);
-        }
-
-        // toggleOn 을 따로 받는 까닭: 토글 버프 자신의 OnTurnOn 안에서는 버프가 컬렉션에 이미 보이는지에 기대지 않는다.
-        public static bool ShouldSummonCore(UnitEntityData leader, bool toggleOn)
-        {
             int level = HunterLevel(leader);
             if (level <= 0)
             {
@@ -303,22 +300,18 @@ namespace PackWarden
                     Main.Entry.Logger.Warning("PackWarden: " + leader + " has the pack call feature but Hunter level 0; not summoning");
                 return false;
             }
-            if (!leader.IsInCombat) return false;
-            if (PackRules.UsesMountGate(level))
-            {
-                var pet = leader.GetPet(PetType.AnimalCompanion);
-                var saddled = leader.Get<UnitPartRider>()?.SaddledUnit; // 파트가 없으면 기승 중이 아님(게임이 기승 때 만든다)
-                return pet != null && saddled != null && ReferenceEquals(saddled, pet);
-            }
-            return toggleOn;
+            if (!leader.IsInCombat || !PackRules.UsesMountGate(level)) return false;
+            var pet = leader.GetPet(PetType.AnimalCompanion);
+            var mount = leader.Get<UnitPartRider>()?.SaddledUnit;
+            return pet != null && ReferenceEquals(mount, pet);
         }
 
         // 멱등: 살아 있는 보조가 목표 수에 이르면 아무것도 안 한다. 목표 = PackRules.AuxCount(헌터 레벨) − 이번 전투에서 죽은 수(PackRules.SlotsToFill).
         // 소유자 결정 2026-11-16: 재소집 대기 없음 — 죽은 보조는 그 전투에서는 안 돌아오고(내렸다 다시 타도), 다음 전투에서 바로 돌아온다.
         public static void TrySummon(UnitEntityData leader)
         {
+            if (!ShouldSummon(leader)) return;
             int level = HunterLevel(leader);
-            if (level <= 0) throw new InvalidOperationException("PackWarden: TrySummon on a unit with Hunter level 0: " + leader);
              
             if (!ShadowRules.SummonAllowed(ShadowPack.StateOf(leader))) { SummonSkippedWhileHidden++; return; }
             var part = leader.Ensure<UnitPartPack>();
@@ -375,11 +368,18 @@ namespace PackWarden
     // 이 델리게이트를 전역 구독자로 등록한다(EntityFactComponent.TurnOn → Subscribe, dnlib 확인). 이벤트마다 Owner 문맥이 설정된다.
     // 보조 사망은 전역 IUnitHandler.HandleUnitDeath 로 받는다. IUnitDieHandler 는 IUnitSubscriber(죽는 유닛 자신의 구독자에게만 감)라 못 쓴다.
     // 2026-11-16: 휴식 처리기(IRestFinishedHandler — 「휴식하면 대기 초기화」)는 재소집 대기와 함께 없앴다.
-    public class PackCallComponent : UnitFactComponentDelegate, IUnitCombatHandler, IUnitHandler, IPartyCombatHandler, IGlobalSubscriber
+    public class PackCallComponent : UnitFactComponentDelegate, IUnitCombatHandler, IUnitHandler, IPartyCombatHandler, IGlobalSubscriber, IUnitLevelUpHandler
     {
+        public void HandleUnitBeforeLevelUp(UnitEntityData unit) { }
+
+        public void HandleUnitAfterLevelUp(UnitEntityData unit, Kingmaker.UnitLogic.Class.LevelUp.LevelUpController controller)
+        {
+            if (ReferenceEquals(unit, Owner)) PackCall.TrySummon(Owner);
+        }
+
         public void HandleUnitJoinCombat(UnitEntityData unit)
         {
-            if (ReferenceEquals(unit, Owner) && PackCall.ShouldSummon(Owner)) PackCall.TrySummon(Owner);
+            if (ReferenceEquals(unit, Owner)) PackCall.TrySummon(Owner);
         }
 
         // 실시간 모드에서는 지도자가 의식을 잃어도 게임이 LeaveCombat 을 부른다(UnitLifeController.SetLifeState IL_0082~00A5).
@@ -428,18 +428,6 @@ namespace PackWarden
         public void HandleUnitSpawned(UnitEntityData unit) { }
     }
 
-    // ToggleBuff 에 붙는다. 토글을 켜는 순간 이미 전투 중이면 바로 소집.
-    public class PackToggleTurnOn : UnitBuffComponentDelegate
-    {
-        protected override void OnTurnOn()
-        {
-            Owner.Ensure<UnitPartPack>().ToggleOn = true;
-            if (PackCall.ShouldSummonCore(Owner, true)) PackCall.TrySummon(Owner);
-        }
-
-        protected override void OnTurnOff()
-        {
-            Owner.Ensure<UnitPartPack>().ToggleOn = false;
-        }
-    }
+    // Retained for existing saves that reference the retired toggle component.
+    public class PackToggleTurnOn : UnitBuffComponentDelegate { }
 }

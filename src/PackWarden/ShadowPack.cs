@@ -402,7 +402,17 @@ namespace PackWarden
             try
             {
                 RetiredStudy.AfterLoad(Owner);
+                var toggle = Owner.GetFact(PackCall.CallToggleFeature);
+                if (toggle != null) Owner.RemoveFact(toggle);
+                var ability = Owner.GetFact(PackCall.ToggleAbility);
+                if (ability != null) Owner.RemoveFact(ability);
+                Owner.Buffs.GetBuff(PackCall.ToggleBuff)?.Remove();
                 var pack = Owner.Get<UnitPartPack>();
+                if (pack != null)
+                {
+                    int level = PackCall.HunterLevel(Owner);
+                    pack.TrimForLevel(level > 0 ? PackRules.AuxCount(level) : 0);
+                }
                 if (pack != null && pack.RetiredAuxiliariesPending)
                 {
                     AuxUnits.DestroyUntracked(Owner);

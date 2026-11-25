@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.17.8-beta
+
+- Pack Wardens fight with their main companion at levels 1–6. Mounted Call brings one auxiliary at levels 7–12 and two from level 13 while riding that companion in combat.
+
 ## 0.17.7-beta
 
 - Pack Warden now calls up to two auxiliaries. Each still follows every eligible main-companion attack.

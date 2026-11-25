@@ -19,8 +19,8 @@ namespace PackWarden
 
         // 마릿수 구간 문구(소유자 결정 2026-11-16). 원천은 PackRules 의 표(AuxCountBands)이고 여기는 그 사본이다 — 설명이 컴파일 시점 상수여야 해서(시험이 DLL 의
         // 문자열 상수를 읽는다) 실행 중에 조립하지 않는다. 사본이 표와 어긋나면 시험(CheckRespawnWiring: 구간마다 「a~b레벨 n마리」·「n at levels a-b」 포함)이 실패한다.
-        const string AuxCountKo = "1~6레벨 1마리, 7~20레벨 2마리";
-        const string AuxCountEn = "1 at levels 1-6 and 2 at levels 7-20";
+        const string AuxCountKo = "1~6레벨 0마리, 7~12레벨 1마리, 13~20레벨 2마리";
+        const string AuxCountEn = "0 at levels 1-6, 1 at levels 7-12 and 2 at levels 13-20";
         // 재소집 규칙 1문장(소유자 결정 2026-11-16: 대기 삭제. 그 전 문구 = 「게임 시간 1시간 뒤에 다시 부를 수 있으며, 휴식하면 이 대기가 초기화된다」).
         const string RespawnRuleKo = "보조 동물이 죽으면 그 전투에서는 돌아오지 않고, 다음 전투에서 바로 다시 나타난다.";
         // 보조 동물의 본성(소유자 결정 2026-11-16): 소형 고정·자라지 않음, 적의 기회 공격을 받지 않음.
@@ -33,8 +33,8 @@ namespace PackWarden
         {
             ["Archetype.Name"] = ("무리 조련사", "Pack Warden"),
             ["Archetype.Description"] = (
-                "무리 조련사는 동물 여러 마리를 거느리고 다니는 헌터다. 본인은 거의 지휘만 하고, 짐승들이 대신 싸운다. 정식 동물 동료 한 마리에 같은 종의 보조 동물이 전투 중에만 함께하는데, 1~6레벨에는 무리 소집 토글을 켜 두면, 7레벨부터는 주 동물 동료에 탄 채 싸우면 나타나 함께 달려든다. 보조 동물의 수는 " + AuxCountKo + "다. 보조는 주 동물의 근접 공격마다 같은 적을 한 번씩 공격한다.",
-                "The Pack Warden is a hunter who travels with several animals at once. The hunter mostly gives orders while the beasts do the fighting. Auxiliary animals of the same species as the main animal companion join only during combat: at levels 1-6 they appear while the Call the Pack toggle is on, and from level 7 while the hunter fights mounted on the main companion. Their number is " + AuxCountEn + ". Each auxiliary follows an eligible melee attack by the main companion with one attack of its own."),
+                "무리 조련사는 동물 여러 마리를 거느리고 다니는 헌터다. 본인은 거의 지휘만 하고, 짐승들이 대신 싸운다. 1레벨부터 주 동물 동료와 싸운다. 7레벨부터 전투 중 주 동료에 타면 같은 종의 보조 동물이 합류한다. 보조 동물의 수는 " + AuxCountKo + "다. 보조는 주 동물의 근접 공격마다 같은 적을 한 번씩 공격한다.",
+                "The Pack Warden is a hunter who travels with several animals at once. The hunter mostly gives orders while the beasts do the fighting. You fight alongside your main companion from level 1. From level 7, riding that companion in combat calls auxiliaries of the same species. Their number is " + AuxCountEn + ". Each auxiliary follows an eligible melee attack by the main companion with one attack of its own."),
             ["Archetype.DescriptionShort"] = (
                 "동물 여러 마리를 거느리고 다니며, 표식을 찍은 적에게 무리가 함께 달려든다.",
                 "Leads a pack of animals that all fall upon the foe the hunter has marked."),
@@ -44,17 +44,13 @@ namespace PackWarden
                 "소집 조건을 만족한 채 전투에 들어가면 주 동물 동료와 같은 종의 보조 동물이 나타나 함께 싸운다. 전투가 끝나면 무리는 흩어진다.\n보조 동물의 수는 " + AuxCountKo + "이고, 레벨은 헌터 레벨 − 4(최소 1)이다.\n" + NatureRuleKo + "\n" + RespawnRuleKo + "\n" + ShadowRuleKo,
                 "Entering combat while the call condition is met summons auxiliary animals of the same species as the main animal companion to fight alongside it. The pack disperses when combat ends.\nThe number of auxiliary animals is " + AuxCountEn + ", each of level equal to hunter level − 4 (minimum 1).\n" + NatureRuleEn + "\n" + RespawnRuleEn + "\n" + ShadowRuleEn),
             ["CallToggle.Name"] = ("무리 소집: 토글", "Call the Pack: Toggle"),
-            ["CallToggle.Description"] = (
-                "6레벨까지의 소집 조건이다. 무리 소집 토글을 켜 두면 전투에 들어갈 때 무리를 부르고, 전투 중에 켜면 바로 부른다. 7레벨에 기승 소집으로 바뀌면서 사라진다.",
-                "The call condition up to level 6. With the Call the Pack toggle on, the pack is called on entering combat, and turning it on during combat calls it at once. Replaced by Mounted Call at level 7."),
+            ["CallToggle.Description"] = ("이전 버전의 소집 토글입니다.", "Legacy pack call toggle."),
             ["CallToggleAbility.Name"] = ("무리 소집", "Call the Pack"),
-            ["CallToggleAbility.Description"] = (
-                "켜 두면 전투에 들어갈 때 보조 동물을 부른다. 전투 중에 켜면 바로 부른다. 전투 중에 꺼도 이미 소집된 무리는 전투가 끝날 때까지 남는다.\n" + ShadowRuleKo,
-                "While on, auxiliary animals are called on entering combat. Turning it on during combat calls them at once. Turning it off during combat does not dismiss a pack already called; it stays until combat ends.\n" + ShadowRuleEn),
+            ["CallToggleAbility.Description"] = ("기승 소집은 7레벨부터 자동으로 발동합니다.", "Mounted Call takes effect automatically from level 7."),
             ["CallMounted.Name"] = ("기승 소집", "Mounted Call"),
             ["CallMounted.Description"] = (
-                "7레벨부터의 소집 조건이다. 주 동물 동료에 탄 채 전투에 들어가거나 전투 중에 타면 무리를 부른다. 무리 소집 토글은 사라진다.\n스스로 내리면 무리가 흩어지고, 다시 타면 곧바로 돌아온다(그 전투에서 죽은 보조 동물은 빼고). 탈것이나 기수가 쓰러져 강제로 내려진 경우에는 무리가 남는다.\n" + ShadowRuleKo,
-                "The call condition from level 7. Entering combat while riding the main animal companion, or mounting it during combat, calls the pack. The Call the Pack toggle is removed.\nDismounting by choice disperses the pack, and mounting again brings it back at once (except auxiliary animals that died in that combat). A forced dismount (the mount or the rider going down) leaves the pack in place.\n" + ShadowRuleEn),
+                "7레벨부터의 소집 조건이다. 주 동물 동료에 탄 채 전투에 들어가거나 전투 중에 타면 무리를 부른다. 7~12레벨에는 보조 1마리, 13레벨부터는 2마리를 부른다.\n스스로 내리면 무리가 흩어지고, 다시 타면 곧바로 돌아온다(그 전투에서 죽은 보조 동물은 빼고). 탈것이나 기수가 쓰러져 강제로 내려진 경우에는 무리가 남는다.\n" + ShadowRuleKo,
+                "The call condition from level 7. Entering combat while riding the main animal companion, or mounting it during combat, calls the pack. One auxiliary joins at levels 7–12 and two from level 13.\nDismounting by choice disperses the pack, and mounting again brings it back at once (except auxiliary animals that died in that combat). A forced dismount (the mount or the rider going down) leaves the pack in place.\n" + ShadowRuleEn),
             ["Aspects.Name"] = ("무리의 두 상", "Aspects of the Pack"),
             ["Aspects.Description"] = (
                 "사나운 상과 질긴 상 중 하나를 켠다. 한 상을 켜면 켜져 있던 다른 상은 꺼지고, 전환은 자유 행동이며 횟수 제한이 없다.\n사나운 상: 무리 전체의 명중과 피해에 보너스.\n질긴 상: 무리 전체의 방어도에 보너스. 보조 동물은 소환될 때 한 번 지혜 수정치 × 헌터 레벨의 임시 체력도 받는다.\n보너스는 지혜 수정치만큼이며(지혜 수정치가 0 이하이면 0, 깎이지는 않는다) 주 동물 동료와 보조 동물 모두에게 간다. 주인공은 영향 없음.",

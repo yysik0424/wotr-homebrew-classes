@@ -4,13 +4,13 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.7-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.7-beta/HomebrewClasses-0.17.7-beta.zip) · [Release notes and test coverage](release-notes-0.17.7-beta.md)
+> [Download 0.17.8-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.8-beta/HomebrewClasses-0.17.8-beta.zip) · [Release notes and test coverage](release-notes-0.17.8-beta.md)
 
 ## The classes
 
 | No | Archetype | Base class | What it does | Needs |
 |---|---|---|---|---|
-| 1 | [Pack Warden](#pack-warden) | Hunter | Commands a pack: up to two extra animals of your companion's kind join each fight, and pack-only spell effects replace spellcasting | — |
+| 1 | [Pack Warden](#pack-warden) | Hunter | Commands a pack: riding your main companion in combat calls one auxiliary at level 7 and two at level 13, and pack-only spell effects replace spellcasting | — |
 | 2 | [Phantom Blade](#phantom-blade) | Fighter | A guardian phantom strikes alongside you and absorbs half the damage you take | — |
 | 3 | [Blast Magus](#blast-magus) | Magus | Picks an element, fires blasts with Intelligence and detonates them through weapon hits | *KineticistElementsExpanded* (optional: 5 more elements) |
 | 4 | [Spellfist](#spellfist) | Brawler | Unarmed brawler with full arcane casting from three chosen schools | **BrawlerClassWrath** |
@@ -48,7 +48,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.7-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.8-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -59,7 +59,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.7-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.8-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -115,7 +115,7 @@ Click a class to expand it.
 
 ### Overview
 
-The Pack Warden is a Hunter who travels with several animals at once. You give up all spellcasting; in exchange, auxiliary animals of the same species as your main animal companion appear whenever a fight starts. The auxiliaries do not pick targets of their own. They trail the main companion (moving up beside its target while it fights), and every time it swings in melee each of them bites the same target once. Your own job is command: flip between the Fierce and Tough aspects, and use Pack Empowerment to put spell effects on the whole pack. From levels 1 to 6 a single toggle calls the pack; from level 7 you have to fight from the saddle of your main companion, and the pack grows from one auxiliary to as many as two as you level.
+The Pack Warden gives up Hunter spells to fight alongside an animal companion. At levels 1–6 the main companion is your only animal. Riding it in combat calls one auxiliary of the same species at level 7 and a second at level 13. Each follows up an eligible melee attack by the main companion with one attack against the same foe. You support them with aspects and Pack Empowerment.
 
 ### What you give up
 
@@ -135,15 +135,14 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 |---|---|---|
 | 1 | Pack's Main Animal Companion | Choose one of the base-game animal companions whose base size is Medium or larger. Its advancement, the mount toggle and the animal companion archetype choice work as for a base Hunter |
 | 1 | Aspects of the Pack | Two toggles, Fierce Aspect and Tough Aspect. The active aspect gives the main companion and every auxiliary a bonus equal to your Wisdom modifier. Switching is a free action with no limit |
-| 1 | Call the Pack | If the call condition is met when you enter combat, auxiliary animals of your main companion's species appear: 1 at levels 1–6 and 2 at levels 7–20. Auxiliary level = Hunter level − 4 (minimum 1). Auxiliaries appear at Small size and are immune to enemy attacks of opportunity. The pack disperses when combat ends |
-| 1 | Call the Pack: Toggle | The call condition for levels 1–6: the Call the Pack toggle is on (it is on by default) |
 | 4 | Tandem Executioner base feature | The base feature a Tandem Executioner receives at level 4, which the techniques below build on |
 | 4 | Tandem Executioner technique (1st) | Pick one technique from the Tandem Executioner list |
 | 4 | Pack Empowerment (1st) | Pick one pack empowerment, at this point from the six that correspond to Hunter spells of levels 1–2. Each one you pick can be used twice per day as a move action |
-| 7 | Mounted Call | The call condition changes: you must be riding your main animal companion when combat starts, or mount it during combat. The Call the Pack toggle is removed. Call the Pack now brings 2 auxiliaries |
+| 7 | Mounted Call | Riding your main companion in combat calls one auxiliary of the same species |
 | 7 | Tandem Executioner technique (2nd) | |
 | 10 | Tandem Executioner technique (3rd) | |
 | 10 | Pack Empowerment (2nd) | One not yet chosen from the seven up to Hunter spell level 3 |
+| 13 | Mounted Call | A second auxiliary joins the pack |
 | 13 | Tandem Executioner technique (4th) | |
 | 16 | Tandem Executioner technique (5th) | |
 | 16 | Pack Empowerment (3rd) | One not yet chosen from all ten, up to Hunter spell level 5 |
@@ -156,9 +155,9 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 
 - **Activation**: automatic. The moment you enter combat with the call condition met, the auxiliaries appear next to you. It costs no action and no resource.
 - **Call condition**
-  - Levels 1–6: the Call the Pack toggle is on. It starts on and resting does not turn it off. Turning it on in the middle of a fight calls the pack at once. Turning it off in the middle of a fight does not dismiss a pack that is already out.
+  - At levels 1–6 only the main animal companion joins you.
   - Level 7 and up: you are riding **your own main animal companion**. No other mount counts. Mounting up in the middle of a fight calls the pack at once.
-- **Pack size**: 1 auxiliary at Hunter levels 1–6, 2 at levels 7–20.
+- **Pack size**: 0 auxiliaries at Hunter levels 1–6, 1 at levels 7–12, and 2 from level 13.
 - **What an auxiliary is**
   - Species: the same as your main animal companion.
   - Level: Hunter level − 4, minimum 1. Only Hunter class levels count.
