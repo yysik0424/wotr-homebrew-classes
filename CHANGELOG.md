@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.21-beta
+
+- 스피릿스틸의 주문 방벽·방벽 관통·속박 해방을 16레벨에 해금한다.
+- Spiritsteel unlocks Spell Ward, Pierce Defenses, and Unfettered Spirit at level 16.
+
 ## 0.17.20-beta
 
 - 스피릿스틸의 심판의 일격 해금 레벨을 18에서 12로 낮췄다.

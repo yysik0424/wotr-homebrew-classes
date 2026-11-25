@@ -102,11 +102,11 @@ namespace Spiritsteel
                 "결속 무기를 든 동안 반사 내성 성공 시 피해가 절반이 되는 효과에 내성을 성공하면 피해를 받지 않습니다.", "While wielding the bound weapon, take no damage on a successful Reflex save against an effect that normally deals half damage on a success.", "576933720c440aa4d8d42b0c54b77e80"),
             new WeaponFeatRow(WeaponFeatKind.Judgment, 12, "심판의 일격", "Judgment Strike",
                 "결속 무기로 악 성향의 적을 명중시키면 신성 피해 2d6을 추가합니다. 치명타에도 한 번만 더합니다.", "Bound-weapon hits against evil targets deal an extra 2d6 holy damage, rolled once even on a critical hit.", "ad5ed5ea4ec52334a94e975a64dad336"),
-            new WeaponFeatRow(WeaponFeatKind.SpellWard, 18, "주문 방벽", "Spell Ward",
+            new WeaponFeatRow(WeaponFeatKind.SpellWard, 16, "주문 방벽", "Spell Ward",
                 "결속 무기를 든 동안 주문 저항 32를 얻습니다. 주문 저항이 여럿이면 가장 높은 값을 적용합니다.", "Gain spell resistance 32 while wielding the bound weapon. Use the highest applicable spell resistance.", "985d6dbff8c143e8b1ce5b96161b1ee0"),
-            new WeaponFeatRow(WeaponFeatKind.Sundering, 20, "방벽 관통", "Pierce Defenses",
+            new WeaponFeatRow(WeaponFeatKind.Sundering, 16, "방벽 관통", "Pierce Defenses",
                 "결속 무기의 물리 타격은 적의 피해 감소를 최대 10점 무시합니다. 본편 관통 타격 계열과 겹치면 높은 값만 적용합니다.", "Physical hits with the bound weapon ignore up to 10 points of damage reduction. Use the higher value when combined with the Penetrating Strike feats.", "eb6eb946c68ef094f89c7633f5bfdc9b"),
-            new WeaponFeatRow(WeaponFeatKind.Unfettered, 20, "속박 해방", "Unfettered Spirit",
+            new WeaponFeatRow(WeaponFeatKind.Unfettered, 16, "속박 해방", "Unfettered Spirit",
                 "결속 무기를 든 동안 마비, 얽힘, 감속 및 험지의 영향을 받지 않습니다.", "While wielding the bound weapon, gain immunity to paralysis, entanglement, slow, and difficult terrain.", "4c349361d720e844e846ad8c19959b1e"),
         };
 

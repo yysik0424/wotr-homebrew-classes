@@ -4,11 +4,11 @@
 
 *Pathfinder: Wrath of the Righteous*에 새 아키타입 21종을 더합니다. Unity Mod Manager 모드 하나로 설치합니다. 헌터로 동물 무리를 지휘하거나, 연금술사로 골렘을 입거나, 바바리안으로 부족에게 받은 무기의 신령과 함께 싸울 수 있습니다.
 
-> [Unity Mod Manager용 0.17.20-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.20-beta/HomebrewClasses-0.17.20-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.20-beta.md)
+> [Unity Mod Manager용 0.17.21-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.21-beta/HomebrewClasses-0.17.21-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.21-beta.md)
 
 스피릿스틸은 지혜로 일일 분노 라운드를 계산합니다. 지혜 18이면 1레벨에 8라운드, 20레벨에 46라운드이며, 신령을 함께 켜도 라운드당 1회만 소모합니다.
 
-스피릿스틸은 결속 무기 피트 40종 중 20레벨까지 10개를 고릅니다. 심판의 일격은 12레벨부터 결속 무기로 악 성향 적을 명중시킬 때 신성 피해 2d6을 더합니다. 20레벨에는 물리 피해 감소를 최대 10점 무시하는 방벽 관통과, 마비·얽힘·감속·험지 면역을 주는 속박 해방이 열립니다.
+스피릿스틸은 결속 무기 피트 40종 중 20레벨까지 10개를 고릅니다. 심판의 일격은 12레벨부터 결속 무기로 악 성향 적을 명중시킬 때 신성 피해 2d6을 더합니다. 16레벨부터 주문 방벽(주문 저항 32), 방벽 관통(물리 피해 감소 최대 10점 무시), 속박 해방(마비·얽힘·감속·험지 면역)을 고를 수 있습니다. 16·18·20레벨에 각각 하나씩 고릅니다.
 
 그림자 소서러가 그림자를 켜고 매직 미사일을 시전하면 원본과 메아리가 각각 1레벨 슬롯 1칸을 씁니다. 한 칸만 남으면 원본만 발사합니다.
 
@@ -54,7 +54,7 @@
 ## 설치
 
 1. 게임을 종료합니다. 기존 직업 단독 모드가 설치돼 있으면 12개 직업 폴더를 게임의 `Mods` 밖에 백업합니다. 번들과 단독 모드가 동시에 같은 직업을 등록하지 않도록 합니다.
-2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.20-beta.zip`을 준비합니다.
+2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.21-beta.zip`을 준비합니다.
 3. ZIP을 Unity Mod Manager에 끌어다 놓거나 게임의 `Mods` 폴더에 풉니다. `Mods/HomebrewClasses` 아래에는 `Info.json`, `HomebrewClasses.dll`, 직업 DLL 21개가 든 `classes` 폴더가 있어야 합니다.
 4. 게임을 실행합니다. 캐릭터 생성 화면에서 기반 직업의 아키타입 목록에 나타납니다.
 
@@ -65,7 +65,7 @@
 Windows PowerShell에서 `WOTR_MANAGED_DIR`을 게임의 `Wrath_Data/Managed` 폴더로, `WOTR_CSC`를 Visual Studio Roslyn의 `csc.exe` 경로로 설정합니다. Unity Mod Manager를 설치한 게임의 어셈블리가 필요합니다. 다음 명령은 비어 있는 출력 폴더를 사용합니다.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.20-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.21-beta -Out .\out -NoDevCompare
 ```
 
 ## 설정
@@ -3012,9 +3012,9 @@ DLC 유닛을 쓰는 칸: 심연 III(아브리칸딜루) 한 칸뿐이다. 나�
 | 14 | 신령의 요새 (Spirit Fortification) | 결속 무기를 든 동안 본편의 25% 요새화를 얻어 치명타와 암습을 일반 명중으로 바꿀 수 있습니다. |
 | 16 | 상급 무기 전문화 (Greater Weapon Specialization) | 결속 무기의 물리 피해에 +2를 더합니다. 무기나 전사가 해당 범주의 무기 전문화를 익혀야 합니다. 전사의 같은 범주 상급 무기 전문화와 겹치면 한 번만 적용합니다. |
 | 16 | 신령의 회피 (Spirit Evasion) | 결속 무기를 든 동안 반사 내성 성공 시 피해가 절반이 되는 효과에 내성을 성공하면 피해를 받지 않습니다. |
-| 18 | 주문 방벽 (Spell Ward) | 결속 무기를 든 동안 주문 저항 32를 얻습니다. 주문 저항이 여럿이면 가장 높은 값을 적용합니다. |
-| 20 | 방벽 관통 (Pierce Defenses) | 결속 무기의 물리 타격은 적의 피해 감소를 최대 10점 무시합니다. 본편 관통 타격 계열과 겹치면 높은 값만 적용합니다. |
-| 20 | 속박 해방 (Unfettered Spirit) | 결속 무기를 든 동안 마비, 얽힘, 감속 및 험지의 영향을 받지 않습니다. |
+| 16 | 주문 방벽 (Spell Ward) | 결속 무기를 든 동안 주문 저항 32를 얻습니다. 주문 저항이 여럿이면 가장 높은 값을 적용합니다. |
+| 16 | 방벽 관통 (Pierce Defenses) | 결속 무기의 물리 타격은 적의 피해 감소를 최대 10점 무시합니다. 본편 관통 타격 계열과 겹치면 높은 값만 적용합니다. |
+| 16 | 속박 해방 (Unfettered Spirit) | 결속 무기를 든 동안 마비, 얽힘, 감속 및 험지의 영향을 받지 않습니다. |
 
 결속 무기의 범주와 본체가 고른 범주가 같으면 같은 단계의 무기 집중·전문화는 한 번만 적용됩니다. 12레벨에 본체의 장검 전문화 +2와 결속 장검의 전문화 +3을 함께 갖추면 총 +3입니다. 일반판과 상급판은 합산합니다. 20레벨에 일반·상급 각인을 모두 갖추면 결속 무기의 집중은 명중 +2, 전문화는 물리 피해 +7입니다.
 
