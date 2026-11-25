@@ -22,15 +22,15 @@ Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod 
 | 10 | [Chimera Monk](#chimera-monk) | Monk | Reshapes the body with a new mutation every two levels | **DarkCodex** |
 | 11 | [Oathbound Revenant](#oathbound-revenant) | Paladin | An undead paladin whose smites knit the body back together | — |
 | 12 | [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | One shadow echoes your first harmful spell each round | — |
-| 13 | [Grey Seer](#grey-seer) | Arcanist | Wields sword and staff and follows a spell with a longsword strike | — |
-| 14 | [Blood Berserker](#blood-berserker) | Bloodrager | Pulls foes with a blood chain and coats melee weapons in blood | — |
-| 15 | [Sorrow Inquisitor](#sorrow-inquisitor) | Inquisitor | Gathers afflictions from allies and sentences an enemy to bear them | — |
-| 16 | [Spiritsteel](#spiritsteel) | Barbarian | Grows an ancestral weapon and fights alongside its spirit during rage | — |
-| 17 | [Dream Thief](#dream-thief) | Rogue | Throws a starknife to put enemies to sleep and strikes from a dreamwalk | — |
-| 18 | [Deathdealer](#deathdealer) | Slayer | Reacts to a studied enemy and uses nine personal arcane abilities | — |
-| 19 | [Falconer](#falconer) | Ranger | Coordinates a diving hawk with archery and an animal companion | — |
-| 20 | [Prophecy Breaker](#prophecy-breaker) | Oracle | Casts divine spells with Intelligence and studies a separate arcane spellbook | — |
-| 21 | [Hell Rider](#hell-rider) | Cavalier | Rides a nightmare and calls devils to strike from charges and a planted standard | — |
+| 13 | [Grey Seer](#grey-seer) | Arcanist | Cast on the front line with sword and staff, then strike a designated foe. Spend reservoir points according to the spell slot to secure a threatened cast. | — |
+| 14 | [Blood Berserker](#blood-berserker) | Bloodrager | Use a blood chain to reel in prey or pull yourself to a larger foe. Bloodrage coats your melee weapons, and their extra blood damage doubles on criticals from level 13. | — |
+| 15 | [Sorrow Inquisitor](#sorrow-inquisitor) | Inquisitor | Lift afflictions from allies into a lead rosary and sentence a foe to bear them. Returning one to its source raises its save DC, and from level 16 each bead that takes effect deals divine damage. | — |
+| 16 | [Spiritsteel](#spiritsteel) | Barbarian | Inscribe a new trait on one ancestral weapon every even level. Its spirit joins your rage, helps you flank and lends Wisdom to maneuvers such as trip. | — |
+| 17 | [Dream Thief](#dream-thief) | Rogue | Put enemies to sleep with Desna’s starknife, cross the battlefield through dreams and wake them with a critical hit. Spend starlight on sleep, a sudden strike or divine weapon damage. | — |
+| 18 | [Deathdealer](#deathdealer) | Slayer | Read a studied foe’s actions to riposte, trip a moving enemy or interrupt a spell. Intelligence improves reactions, and nine personal arcane abilities help you prepare for the fight. | — |
+| 19 | [Falconer](#falconer) | Ranger | Send a hawk to open a shot for your bow while an animal companion drives prey into its path. From level 8, the hawk can dive automatically after your weapon attack. | — |
+| 20 | [Prophecy Breaker](#prophecy-breaker) | Oracle | Defy a foretelling through study. Cast divine spells with Intelligence and keep a separate arcane book with four inscriptions, two prepared spells and two shared casts per tier. | — |
+| 21 | [Hell Rider](#hell-rider) | Cavalier | Charge on a nightmare to concentrate devil strikes, or plant a standard to hit several foes. Wield Charisma-based Hellfire Ray, Greater Command, Firebrand and Overwhelming Presence. | — |
 
 Full details for every archetype (what is removed, what is gained at each level, every choice) are in [Class details](#class-details) below.
 
@@ -2543,15 +2543,50 @@ The archetype adds no choices of its own. You pick a bloodline exactly as a base
 <details>
 <summary><b>Grey Seer</b></summary>
 
-### Sword and Staff
+### At a glance
 
-An arcanist who fights with a longsword and a quarterstaff, one in each hand. Both gain a melee attack bonus equal to the difference between fighter and arcanist base attack bonuses at your arcanist level (+5 at level 10, +10 at level 20). Rays and iterative attack counts use the usual rules.
+| Aspect | Details |
+|---|---|
+| Base class | Arcanist. Intelligence governs spellcasting. Wield a longsword and a quarterstaff together. |
+| Spellcasting | Standard arcanist preparation, casts per day and spell progression, reaching 9th-level spells at arcanist level 18. Consume Spells still lets you turn a spell slot into reservoir points. |
 
-Use **Designate for Spell and Sword** to choose a foe before casting. Your next arcanist spell may target yourself, another creature or a point. After a successful cast, spend 1 reservoir point to make one longsword attack if the designated foe is within reach and line of sight.
+### Overview
 
-**Designate for Guarded Casting** also guarantees success when a defensive casting check is required. The total cost, including the strike, is 1 point for slots of levels 0–3, 2 for 4–6, or 3 for 7–9. With insufficient points, the spell uses the normal check and the strike is canceled. Interruptions or a lost target after protection has triggered do not refund it.
+Pick the enemy you want to fence with before choosing where to cast. You can protect yourself with a spell or aim an area spell at a distant group, then cut the enemy standing beside you. The two targets are independent. When threatened, you decide how much of your arcane reservoir to commit to getting the spell off.
 
-Gain Two-Weapon Fighting, Improved Two-Weapon Fighting and Greater Two-Weapon Fighting at levels 1, 7 and 13. Select exploits at levels 3, 7, 11, 15 and 19. Consume Spells and standard arcanist casting progression are retained, including 9th-level spells at level 18.
+### What you give up
+
+| Level | Exchange |
+|---|---|
+| 1, 5, 9, 13, 17 | Give up the arcanist exploit at each listed level. Keep the picks at 3, 7, 11, 15 and 19. |
+
+### What you gain (by level)
+
+| Level | Feature | What it does |
+|---|---|---|
+| 1 | Sword and Staff, longsword proficiency, Two-Weapon Fighting | Wield the staff in one hand. Pair it with a longsword to improve melee accuracy with both and unlock the two ways to designate a foe. |
+| 7 | Improved Two-Weapon Fighting | Gain the second feat in the two-weapon chain. |
+| 13 | Greater Two-Weapon Fighting | Gain the third feat in the chain. |
+
+### Abilities in detail
+
+#### How the accuracy bonus works
+
+When both weapons are equipped, add the difference between a fighter’s and an arcanist’s base attack bonus at your arcanist level to melee attacks with either weapon. That is +5 at level 10 and +10 at level 20. Rays and the number of iterative attacks from base attack bonus still use their normal calculations.
+
+#### One spell, one follow-up
+
+**Designate for Spell and Sword** is a free action. Selecting a new foe replaces the old target. Complete a spell from your own arcanist casting and, if the foe is alive, visible and within longsword reach, spend 1 reservoir point for one attack without another action. Scrolls and wands do not trigger the follow-up.
+
+### Choices
+
+Choose **Designate for Guarded Casting** when an enemy threatens your casting position. If the spell calls for defensive casting, pay at the check to succeed automatically. The prices below include the follow-up attack.
+
+| Slot used | 0–3 | 4–6 | 7–9 |
+|---|---|---|---|
+| Total reservoir cost | 1 | 2 | 3 |
+
+For example, a threatened spell using a 5th-level slot costs 2 points to guard. With only 1 left, roll the normal defensive check and lose the follow-up. If nobody threatens the cast, even a guarded designation costs only 1 point when the strike goes ahead. Once protection has been paid for, a later interruption or a foe moving away does not refund it.
 
 </details>
 
@@ -2561,19 +2596,47 @@ Gain Two-Weapon Fighting, Improved Two-Weapon Fighting and Greater Two-Weapon Fi
 <details>
 <summary><b>Blood Berserker</b></summary>
 
-### Blood Chain and Blood-Coated Weapons
+### At a glance
 
-During bloodrage, spend a move action to fire a chain up to 30 feet. On a ranged touch hit, attempt a pull maneuver against an equal or smaller foe, or pull yourself toward a larger foe. Strike that foe with a melee weapon by the end of your next turn (within one round in real time) to collect the knot and gain temporary hit points equal to your bloodrager level for one round. Each berserker can keep one knot.
+| Aspect | Details |
+|---|---|
+| Base class | Bloodrager. Retains bloodrage, bloodline progression and Charisma-based spells. |
+| Combat style | A ranged touch attack sets up a pull maneuver and a close-range weapon hit. |
 
-| Bloodrager level | Extra physical damage per wielded melee weapon hit | On a confirmed critical | Ability |
-|---|---|---|---|
-| 1 | 1d6 | 1d6 | Blood Chain, Blood Knot and Blood-Coated Weapons |
-| 7 | 2d6 | 2d6 | Blood Price extends range to 60 feet for 5 actual hit points when firing beyond 30 feet |
-| 10 | 2d6 | 2d6 | Blood Conduction loads a known shocking grasp or vampiric touch as a swift action using one bloodrager spell slot |
-| 13 | 3d6 | 6d6 | A confirmed critical doubles the blood dice regardless of the weapon's critical multiplier |
-| 19 | 4d6 | 8d6 | Blood weapon damage increases |
+### Overview
 
-Both hands qualify when dual wielding. A loaded spell lasts until the next chain hit or the end of bloodrage. A miss leaves it loaded. These abilities replace fast movement and the bloodrager damage reduction at levels 7, 10, 13, 16 and 19.
+The chain changes who gets to choose the distance. Drag a smaller foe into your front line, or use a giant as an anchor to pull yourself into melee. Either hit leaves a Blood Knot that rewards staying on that particular enemy. Drawn blades take on a translucent red coating during bloodrage.
+
+### What you give up
+
+| Level | Exchange |
+|---|---|
+| 1 | Fast Movement. |
+| 7, 10, 13, 16, 19 | All five ranks of bloodrager damage reduction. |
+
+### What you gain (by level)
+
+| Level | Feature | Effect |
+|---|---|---|
+| 1 | Blood Chain, Blood Knot, Blood-Coated Weapons | A 30-foot chain as a move action. Wielded melee weapons deal +1d6 physical damage of the weapon’s form per hit. |
+| 7 | Blood Price | Extend the chain to 60 feet. Weapon damage rises to +2d6. |
+| 10 | Blood Conduction | Load Shocking Grasp or Vampiric Touch into the chain. |
+| 13 | Blood-Coated Weapons — Critical Wound | +3d6 on a hit, +6d6 on a confirmed critical. |
+| 19 | Blood weapon damage | +4d6 on a hit, +8d6 on a confirmed critical. |
+
+### Abilities in detail
+
+#### Choose which side of the chain moves
+
+During bloodrage, fire at a living enemy. A ranged touch hit attempts a pull maneuver against a foe of your size or smaller. A larger foe pulls you toward it. The **chain hit** ties the knot. Land a melee weapon hit on that enemy by the end of your next turn, or within one round in real time, to collect temporary hit points equal to your bloodrager level for one round. You can collect the knot once. Hitting a different enemy with the chain moves your claim.
+
+#### Reaching farther and loading a spell
+
+Launching from beyond 30 feet costs 5 actual hit points, payable even on a miss. You need more than 5 actual hit points to try. Blood Conduction uses a swift action and a slot for a spell you know from your bloodrager book. The next chain hit delivers the loaded spell once. A miss keeps the charge, and ending bloodrage clears it.
+
+#### Two weapons and critical hits
+
+Both wielded melee weapons can deliver the extra dice. At level 13, confirming a critical with a ×3 weapon applies its ordinary weapon multiplier and adds **6d6** from Blood-Coated Weapons. Before level 13, a critical uses the same blood dice as any other hit.
 
 </details>
 
@@ -2583,28 +2646,59 @@ Both hands qualify when dual wielding. A loaded spell lasts until the next chain
 <details>
 <summary><b>Sorrow Inquisitor</b></summary>
 
-### Gathering and sentencing
+### At a glance
 
-Use Gather Suffering on another ally within 30 feet and select the afflictions to store. Dominated party members qualify. Gathering is a standard action and costs one daily use for the whole selection. Daily uses equal 3 + Wisdom modifier, minimum one. Beads last one minute of game time. Examine the Rosary displays their names and remaining time and lets you discard selected beads.
+| Aspect | Details |
+|---|---|
+| Base class | Inquisitor. Wisdom supports divine spells, daily gathers and sentence save DCs. |
+| Retained features | Domain, judgment, bane, greater bane and the inquisitor spellbook. |
 
-| Level | Slots | Ordinary sentence | Bane weapon |
-|---|---:|---|---:|
-| 1–4 | 1 | Standard, 1 effect | — |
-| 5 | 2 | Standard, 1 effect | 1 effect |
-| 6–9 | 2 | Move, 2 effects | 1 effect |
-| 10 | 3 | Move, 2 effects | 1 effect |
-| 11–14 | 3 | Move or swift, 3 effects | 2 effects |
-| 15 | 4 | Move or swift, 3 effects | 2 effects |
-| 16–19 | 4 | Move or swift, 4 effects | 3 effects |
-| 20 | 5 | Move or swift, 4 effects | 3 effects |
+### Overview
 
-Sentence a single enemy within 30 feet, or load a bane-imbued weapon and release on its first hit this turn. All sentences share one discharge per round. Each effect checks immunities and its original save separately, using Will if there was no initial save. The DC is 10 + half inquisitor level + Wisdom modifier. Reprisal at level 7 adds 2 DC when an affliction returns to its original aggressor.
+A bead begins with something that actually happened to an ally. Free a paralyzed companion now, carry that paralysis in a lead rosary, and choose its recipient later. Returning it to the original aggressor makes the sentence harder to resist. Loading it onto a bane weapon lets a melee hit deliver the sentence while you keep fighting.
 
-At level 11, spend a move action to guard one ally for a round. The first eligible affliction that lands goes into a free bead and costs one gather. From level 16, each successfully applied affliction adds **2d10 divine damage** to a single damage roll. Two applied effects deal 4d10. The maximum is 8d10 for an ordinary sentence or 6d10 for a bane weapon. A critical hit uses the same dice.
+### What you give up
 
-Count one bead per cause. Blindness and paralysis are two beads, while a single curse affecting several combat stats is one. Direct ability loss, negative levels and dimensional anchor stay with the ally. Poison resumes its remaining progression. The previous ability damage stays with the ally. Transferred effects last for the captured remaining duration, up to three rounds.
+| Level | Exchange |
+|---|---|
+| 1 | Stern Gaze. |
+| 3 | Solo Tactics. |
+| 3, 6, 9, 12, 15, 18 | All six bonus teamwork feat selections. |
 
-This archetype trades stern gaze, solo tactics and six bonus teamwork feats for the rosary. It gains the inquisitor spellbook, domain, judgment, bane and greater bane.
+### What you gain (by level)
+
+| Level | Beads | Ordinary sentence | Sentence on the blade |
+|---|---|---|---|
+| 1–4 | 1 | Standard action, 1 bead | — |
+| 5 | 2 | Standard action, 1 bead | 1 bead |
+| 6–9 | 2 | Move action, up to 2. Gain Reprisal at level 7. | 1 bead |
+| 10 | 3 | Move action, up to 2 | 1 bead |
+| 11–14 | 3 | Move or swift action, up to 3. Gain Vow to Bear the Burden. | Up to 2 |
+| 15 | 4 | Move or swift action, up to 3 | Up to 2 |
+| 16–19 | 4 | Move or swift action, up to 4. Gain Reckoning of Sorrows. | Up to 3 |
+| 20 | 5 | Up to 4 | Up to 3 |
+
+### Abilities in detail
+
+#### What goes into a bead
+
+**Gather Suffering** is a standard action targeting another ally within 30 feet, including a dominated party member. Blindness and paralysis from separate effects occupy two beads. A single curse that penalizes several attributes occupies one. Gathering several effects together costs one daily use. Direct ability loss, negative levels and dimensional anchor stay with the bearer. Moving poison carries its remaining ticks and leaves damage already suffered in place.
+
+#### Saving throws and divine damage
+
+**Sentence of Suffering** targets one enemy within 30 feet. Each affliction checks immunity and its original save separately, using Will if it had no initial save. The DC is **10 + half inquisitor level (rounded down) + Wisdom modifier**. At level 7, Reprisal adds 2 to the DC of an affliction returned to its original aggressor. Duration is the shorter of its remaining time when gathered and three rounds. Ordinary and blade sentences share one discharge per round.
+
+From level 5, activate bane and use **Sentence on the Blade** to load beads as a free action. The first hit with your bane weapon that turn delivers the sentence. A miss leaves the beads in the rosary.
+
+At level 16, **Reckoning of Sorrows** rolls one pool of divine damage, 2d10 for each affliction that actually takes hold. If you spend four beads and two fail against the enemy’s immunity or saves, roll **4d10**. Four successful ordinary afflictions yield 8d10, and three delivered on a bane weapon yield 6d10. A weapon critical does not multiply these dice.
+
+### Choices
+
+At level 11, spend a move action on **Vow to Bear the Burden** to guard one ally for a round. The first eligible affliction that lands uses one empty bead and one daily gather. Keep a slot in reserve when an ally is about to face paralysis. **Examine the Rosary** shows remaining times and lets you empty selected beads as a free action.
+
+### Resources
+
+Daily gathers equal **3 + Wisdom modifier**, minimum one. A bead lasts one minute of game time. Rest clears the rosary and restores the daily uses.
 
 </details>
 
@@ -2614,23 +2708,73 @@ This archetype trades stern gaze, solo tactics and six bonus teamwork feats for 
 <details>
 <summary><b>Spiritsteel</b></summary>
 
-### An ancestral weapon
+### At a glance
 
-The **Spiritsteel** is a barbarian who uses Wisdom for spirit rage and combat maneuvers. At level 1, choose a weapon from the Weapon Spirit Shaman's list. You receive the weapon itself and proficiency in its category, including exotic options such as the fauchard. It goes into an empty hand when possible. If your hands are occupied, equip it from your inventory.
-
-| Barbarian level | Feature |
+| Aspect | Details |
 |---|---|
-| 1 | Gain a +1 bound weapon and Spirit Rage in exchange for Fast Movement. |
-| 2 | Gain Solo Tactics and one bonus teamwork feat in exchange for this level's rage power. |
-| 5, 9, 13, 17 | The same weapon improves to +2, +3, +4 and +5, respectively. |
-| 6 | During Spirit Rage, your first bound weapon hit each round attempts to trip its target. This replaces the level 6 rage power. |
-| 4, 8, 10, 12, 14, 16, 18, 20 | Choose a rage power or a teamwork feat whose prerequisites you meet. |
+| Base class | Barbarian. Strength supports weapon attacks. Wisdom is the secondary attribute for Spirit Rage and combat maneuvers. |
+| The bond | One physical ancestral weapon. You also gain proficiency with the category you choose. |
 
-You also gain one **weapon feat** at every even level, for ten choices from a list of twenty. Dodge grants the wielder a +2 dodge bonus to AC while the weapon is in hand. Choose up to two elements from acid, fire, cold, electricity and sonic. Each chosen element deals 1d6, 2d6, 3d6 or 4d6 on a hit at barbarian levels 2, 8, 14 and 20. Both ends of a double weapon carry the attack effects. Bound shield spikes apply them on a shield bash. If you lend the weapon to a companion, its equipment effects travel with it.
+### Overview
 
-**Spirit Rage** starts automatically when you enter barbarian rage in combat while wielding your bound weapon. Its base damage dice increase by one size step, and your positive Wisdom modifier adds to offensive combat maneuvers. You can use Spirit Rage for 1 + your Wisdom modifier rounds per combat, with a minimum of 2 and a maximum of 5. At Wisdom 14, that gives you 3 rounds and +2 to maneuvers. Toggle the spirit off to save remaining rounds and back on during the same rage. Switching away from the weapon or ending barbarian rage ends Spirit Rage.
+When the barbarian rages, the spirit in the weapon can rage alongside its bearer. The same weapon grows a stronger enhancement bonus and learns the traits you choose. A front-line fighter can inscribe Dodge and a trip bonus to hold an enemy in place. A damage-focused wielder can inscribe two elements and deliver both with each hit.
 
-Starting at level 2, wielding the bound weapon grants Solo Tactics. During Spirit Rage the spirit helps its owner flank in melee and use teamwork feats. Effects that require a companion's actual critical hit or shield still depend on that companion's actions and equipment.
+### What you give up
+
+| Level | Exchange |
+|---|---|
+| 1 | Fast Movement gives way to the bound weapon and Spirit Rage. |
+| 2, 6 | These rage power picks give way to spirit teamwork and Spirit Trip. |
+
+### What you gain (by level)
+
+| Level | Progression |
+|---|---|
+| 1 | Choose from the Weapon-Spirit Shaman weapon list. Receive the actual weapon, category proficiency, a +1 enhancement and Spirit Rage. |
+| 2 | Gain Solo Tactics while wielding the bound weapon. Choose a qualifying teamwork feat and, separately, your first weapon feat. |
+| Every even level, 2–20 | Inscribe one weapon feat per even level, for ten by level 20. |
+| 5, 9, 13, 17 | The weapon’s enhancement bonus rises to +2, +3, +4 and +5 respectively. |
+| 6 | Spirit Trip. During Spirit Rage, the first bound-weapon hit each round attempts a trip. |
+| 4, 8, 10, 12, 14, 16, 18, 20 | Choose a rage power or a qualifying teamwork feat at these levels. You still receive that level’s separate weapon feat. |
+
+### Abilities in detail
+
+#### Spirit Rage and fighting without a partner
+
+Enter barbarian rage in combat with the bound weapon equipped and the Spirit Rage toggle enabled to awaken the spirit. The weapon deals damage as if one size larger, and offensive combat maneuvers gain your positive Wisdom modifier. The spirit gets **1 + Wisdom modifier** rounds per encounter, minimum two and maximum five. Wisdom 14 gives three rounds and +2 on maneuvers. Switch the spirit off and back on during the same rage to conserve its rounds. Changing weapons or ending barbarian rage ends Spirit Rage.
+
+During Spirit Rage, the spirit counts as an adjacent ally for your teamwork feats and as a flanking partner for your bound melee weapon. A feat triggered by an ally scoring a critical or carrying a shield still needs that ally. If you lend the weapon to a companion, the inscribed equipment effects travel with it. Spirit Rage belongs to the bonded barbarian. Both heads of a double weapon carry its attack effects, and bound shield spikes apply them on a shield bash.
+
+### Choices
+
+Choose from the 20 weapon feats below at or above their minimum barbarian level. Up to two elemental traits can be active together. Each adds **1d6, 2d6, 3d6 or 4d6** on a hit at levels 2, 8, 14 or 20 respectively. The elemental dice apply once on a critical.
+
+| Minimum level | Weapon feat | Effect and requirements |
+|---|---|---|
+| 2 | Corrosive | Adds acid damage on a hit. |
+| 2 | Flaming | Adds fire damage on a hit. |
+| 2 | Frost | Adds cold damage on a hit. |
+| 2 | Shock | Adds electricity damage on a hit. |
+| 2 | Dodge | Gain a +2 dodge bonus to AC while wielding the bound weapon. |
+| 2 | Weapon Focus | Gain +1 on attack rolls with the bound weapon. This overlaps with Weapon Focus for its category. |
+| 2 | Great Fortitude | Gain +2 on Fortitude saves while wielding the bound weapon. This overlaps with Great Fortitude. |
+| 2 | Lightning Reflexes | Gain +2 on Reflex saves while wielding the bound weapon. This overlaps with Lightning Reflexes. |
+| 2 | Iron Will | Gain +2 on Will saves while wielding the bound weapon. This overlaps with Iron Will. |
+| 2 | Precise Shot | Remove the shooting-into-melee penalty with the bound weapon. Requires a ranged or thrown weapon and Point-Blank Shot. |
+| 2 | Shield Focus | Increase the shield bonus from the shield bearing the bound spikes by 1. This overlaps with Shield Focus. |
+| 4 | Ghost Touch | The bound weapon can strike incorporeal targets as a ghost touch weapon. |
+| 4 | Agile | With Weapon Finesse, use a higher Dexterity modifier for damage with a finesse-compatible melee bound weapon. |
+| 4 | Weapon Specialization | Add +2/+3/+4/+5 to bound weapon damage at barbarian levels 4/8/14/20. Requires bound Weapon Focus or Weapon Focus for this category. Use the higher bonus with ordinary Weapon Specialization. |
+| 4 | Combat Mobility | While wielding the bound weapon, gain +4 AC against attacks of opportunity provoked by movement. Requires Dodge from the weapon or the wielder. |
+| 4 | Improved Initiative | Gain +4 on initiative rolls while wielding the bound weapon. This overlaps with Improved Initiative. |
+| 6 | Trip | Gain +2 on trip checks with the bound weapon, including Spirit Rage’s trip. |
+| 8 | Thundering | Adds sonic damage on a hit. |
+| 8 | Keen | Double the bound weapon’s base critical threat range. This overlaps with Improved Critical. |
+| 10 | Critical Focus | Gain +4 on confirmation rolls with the bound weapon. This overlaps with Critical Focus. |
+
+#### Receiving the weapon
+
+An exotic choice such as a fauchard is usable from level 1. If a hand is free, the weapon can be equipped immediately. Otherwise, find it in your inventory. Category proficiency lets you use other weapons of that type, but equip the ancestral item itself to use its inscriptions and spirit tactics.
 
 </details>
 
@@ -2640,20 +2784,65 @@ Starting at level 2, wielding the bound weapon grants Solo Tactics. During Spiri
 <details>
 <summary><b>Dream Thief</b></summary>
 
-### Starlight and Dreamwalk
+### At a glance
 
-A rogue devoted to Desna. New characters choose the archetype first and select Desna at the deity step. The Dream Thief trades trapfinding and danger sense for starknife proficiency and the following abilities.
-
-| Rogue level | Ability |
+| Aspect | Details |
 |---|---|
-| 1 | Falling Star throws a wielded starknife up to 30 feet for free. Dream Throw costs 1 starlight and puts a target to sleep for 1d4 rounds on a hit and a failed Will save. Your starknife hits against sleeping enemies deal a confirmed critical and sneak attack. |
-| 3 | Spend 1 starlight as a swift action for Starlight Shroud. For 1 minute your starknife deals an extra 1d6 divine damage and gains an extra attack on full attacks. This extra attack does not stack with haste. |
-| 6, 9, 15 | Dreamwalk spends 1 starlight to step beside an enemy, deliver a sneak attack, and return. Its range increases from 30 to 50 feet at level 9. It becomes a move action at level 15. |
-| 12, 18 | Shrouded critical hits add 1d10 divine damage per point of critical multiplier above one. At level 18 gain 3 extra starlight per day. |
+| Base class and faith | A rogue devoted to Desna. Choose Desna at the deity step when creating a new character. |
+| Key abilities | Dexterity and Charisma both contribute to daily starlight. Charisma also sets the difficulty of dream talents and sleep effects. |
+| Weapon | Gain starknife proficiency. Equip a starknife to use the throws and Dreamwalk attack. |
 
-Daily starlight equals half your rogue level, rounded down, plus your Dexterity and Charisma modifiers (minimum 1). Saving against a Dream Thief sleep effect grants 1 minute of immunity to this archetype's sleep effects.
+### Overview
 
-At each even rogue level, choose a standard rogue talent or one of 15 dream talents, including Sleep, Deep Slumber, Restless Slumber, Lulling Aura, Nightmare and Weird. Your caster level is your rogue level. The save DC is 10 + three quarters of your rogue level (rounded down) + your Charisma modifier.
+A Dream Thief throws Desna’s star-shaped blade, then steps through a dream to deliver the waking blow. Put an enemy to sleep and let the party attack someone else until your starknife lands. Against a foe your allies are already hitting, sleep can end almost immediately. The same pool can instead sustain a minute of weapon damage or pay for an attack from across the field.
+
+### What you give up
+
+| Level | Exchange |
+|---|---|
+| 1 | Trapfinding. |
+| 3, 6, 9, 12, 15, 18 | Each rank of Danger Sense. |
+| Every even level | The rogue talent pick becomes a choice between a normal rogue talent and a dream talent. |
+
+### What you gain (by level)
+
+| Rogue level | Feature | Use |
+|---|---|---|
+| 1 | Falling Star, Dream Throw | Both are **standard actions** and make a 30-foot weapon attack. The blade returns. Falling Star costs no starlight. Dream Throw costs 1. |
+| 1 | Waking Strike | Hit a sleeping foe with a starknife for a confirmed critical and sneak attack. Critical immunity, precision immunity and fortification still apply. |
+| 3 | Starlight Shroud | Swift action, 1 point, one minute. Add 1d6 divine damage to the starknife and gain an extra attack at full bonus on a full attack. The extra attack overlaps with haste. |
+| 6, 9, 15 | Dreamwalk, Far Dreamwalk, Fleet Dreamwalk | Spend 1 to appear beside the foe, deal sneak damage on a hit and return. Starts as a 30-foot standard action, reaches 50 feet at level 9 and becomes a move action at level 15. |
+| 12, 18 | Starlight Burst, Deep Starlight | A confirmed critical under Starlight Shroud adds (critical multiplier − 1)d10 divine damage. Gain 3 additional daily starlight at level 18. |
+
+### Abilities in detail
+
+Dream Throw attempts sleep after the weapon hits. Its save DC is 10 + three quarters of rogue level (rounded down) + Charisma modifier. A failed Will save puts the target to sleep for **1d4 rounds**. Damage wakes it, and a successful save grants one minute of immunity to Dream Thief sleep effects. Dreamwalk also works on an awake enemy if there is space to stand beside it. At level 15 you can spend your move action on a round trip through a dream and still throw at a different enemy as your standard action.
+
+### Choices
+
+These dream talents share the even-level pick with ordinary rogue talents. The cost is paid when the ability is used. Caster level equals rogue level and the save DC is **10 + three quarters of rogue level (rounded down) + Charisma modifier**.
+
+| Min. level | Talent | Starlight | Effect |
+|---|---|---|---|
+| 2 | Lullaby | 1 | Make the target drowsy and weaken its saves against sleep. |
+| 2 | Sleep | 1 | Put creatures to sleep, up to a total number of Hit Dice equal to your rogue level. |
+| 2 | Slumber | 1 | On a failed Will save, the enemy sleeps for 1 round per rogue level and wakes on damage. |
+| 4 | Hypnotism | 1 | Hypnotize creatures in the area, leaving them fascinated. |
+| 6 | Deep Slumber | 1 | Put creatures to sleep, up to a total number of Hit Dice equal to your rogue level + 4. |
+| 6 | Haze of Dreams | 1 | Slow the target's movement with dreamlike visions. |
+| 8 | Rainbow Pattern | 2 | Fascinate creatures in the area with a shifting pattern of light. |
+| 8 | Phantasmal Killer | 2 | Confront a target with a potentially lethal illusion of its worst fear. |
+| 8 | Lulling Aura | 0 | Toggle a 30-foot aura that penalizes enemy saves against sleep by 2, increasing to 4 at level 12. |
+| 10 | Phantasmal Web | 2 | Ensnare enemies in an illusory web filled with spiders. |
+| 10 | Restless Slumber | 1 | On a failed Will save, the enemy sleeps for 1 round per rogue level, takes 1d10 damage each round, and is confused upon waking. |
+| 12 | Cloak of Dreams | 2 | Surround yourself with a haze that can put nearby creatures to sleep. |
+| 12 | Phantasmal Putrefaction | 2 | Weaken enemies with a terrifying illusion of decay. |
+| 16 | Nightmare | 3 | Within a 10-foot radius, a failed Will save causes sleep for 1d4 rounds and 2d10 damage each round, followed by 10 rounds of confusion on waking. |
+| 18 | Weird | 3 | Confront multiple enemies with potentially lethal apparitions. |
+
+### Resources
+
+Rest restores **half your rogue level (rounded down) + Dexterity modifier + Charisma modifier** starlight, minimum 1. A 10th-level rogue with Dexterity +4 and Charisma +3 has 12 points for the day. Add the level-18 bonus after calculating that pool.
 
 </details>
 
@@ -2663,13 +2852,57 @@ At each even rogue level, choose a standard rogue talent or one of 15 dream tale
 <details>
 <summary><b>Deathdealer</b></summary>
 
-### Deathdealer
+### At a glance
 
-A slayer who studies a single enemy and reacts to its attacks, movement and spellcasting. At levels 2, 6 and 10, trade a slayer talent for a riposte, a trip and a disruptive strike respectively. One reaction per round spends one attack of opportunity. Use the higher of Intelligence and your normal attack or maneuver ability for these reactions.
+| Aspect | Details |
+|---|---|
+| Base class | Slayer. Retains Studied Target, sneak attack and the normal attack and damage progression against a studied foe. |
+| Key abilities | Intelligence and Dexterity. Reactions use the better of Intelligence and the normal attack or maneuver ability. |
+| Magic | Nine personal arcane spell-like abilities, each with its own daily use. |
 
-At level 14, gain +2 on weapon attack rolls and confirm critical threats against your studied target. At level 19, increase your weapon's critical multiplier by one against it. These abilities replace quarry and improved quarry.
+### Overview
 
-From levels 1 through 17, each odd slayer level unlocks one personal arcane ability. Open the Arcane Abilities icon to choose True Strike, Mirror Image, Haste, Stoneskin, Geniekind, Greater Heroism, Legendary Proportions, Seamantle or Foresight in that order. Each is a standard action, once per day, at your slayer caster level. The four Geniekind forms share one use.
+Study the enemy whose turn matters most, then stay close enough to threaten it. A weapon swing leaves an opening for a riposte, a step away exposes its footing, and a spell invites a blow before it resolves. Position and an unspent attack of opportunity matter as much as what you do on your own turn.
+
+### What you give up
+
+| Level | Base feature | Replacement |
+|---|---|---|
+| 2, 6, 10 | Slayer talent at each level | Studied Riposte, Intercept Movement, Disrupt Casting |
+| 14 | Quarry | Intensive Study |
+| 19 | Improved Quarry | Improved Intensive Study |
+
+### What you gain (by level)
+
+| Level | Trigger | Response |
+|---|---|---|
+| 2 | A threatened studied foe makes a weapon attack. | **Studied Riposte** makes one counterattack after the attack, whether it hit or missed. |
+| 6 | The foe starts moving voluntarily. | **Intercept Movement** attempts a trip before it leaves. Success stops the movement. |
+| 10 | The foe casts a spell. | **Disrupt Casting** strikes before the spell resolves. A hit threatens a critical, and damage can break the caster’s concentration. |
+| 14 | You attack your own studied target with a weapon. | Gain +2 to hit and automatically confirm critical threats, on top of normal Studied Target bonuses. |
+| 19 | You score a weapon critical against the studied target. | Increase the critical multiplier by one. A ×2 weapon becomes ×3 against that enemy. |
+
+### Abilities in detail
+
+The three responses share **one reaction per round** and consume an attack of opportunity. Having more attacks of opportunity in reserve does not grant a second studied reaction that round. Disrupt Casting must hit to threaten a critical. At level 14 that threat confirms automatically against your studied foe, but spell interruption still depends on concentration. Intelligence can improve the reaction attack or maneuver roll. Normal weapon damage keeps its usual ability.
+
+### Choices
+
+Open the **Arcane Abilities** icon to select a learned power. Each is a **standard action, self only, once per day**. Caster level equals slayer level. Each effect keeps the original spell’s duration and discharge rules.
+
+| Slayer level | Power | What it offers |
+|---|---|---|
+| 1 | True Strike | Improve the accuracy of the next attack. |
+| 3 | Mirror Image | Create images that can take attacks meant for you. |
+| 5 | Haste | Hasten yourself. The effect applies only to you. |
+| 7 | Stoneskin | Gain damage reduction against physical attacks. |
+| 9 | Geniekind | Choose one of four forms from the submenu. All four draw on the same daily Geniekind use. |
+| 11 | Greater Heroism | Bolster attacks and saves before engaging a dangerous foe. |
+| 13 | Legendary Proportions | Increase your size for melee combat. |
+| 15 | Seamantle | Surround yourself with water for cover. |
+| 17 | Foresight | Anticipate danger before an enemy catches you off guard. |
+
+Spending Haste leaves Mirror Image and Stoneskin available if their uses remain. Preparing a defense before combat frees your own turn to move into reach of the enemy you studied.
 
 </details>
 
@@ -2679,9 +2912,46 @@ From levels 1 through 17, each odd slayer level unlocks one personal arcane abil
 <details>
 <summary><b>Falconer</b></summary>
 
-### Falconer (Ranger)
+### At a glance
 
-Send a growing hawk against your prey and follow with a coordinated shot. At level 8 it can dive automatically when you attack. Hawk's Eye grants true strike on the first strike of each round's dive. Keep your animal companion, quarry and improved quarry. Beneficial spells on your animal companion also affect the hawk.
+| Aspect | Details |
+|---|---|
+| Base class | Ranger. Keeps favored enemy, ranger spells, quarry and improved quarry. |
+| Hunting partners | The hawk joins at level 1. Choose an animal companion such as a wolf through Hunter's Bond at level 4 to hunt with both. |
+| Key abilities | Wisdom governs the hawk's accuracy and Hawk's Eye duration. Dexterity helps the ranger land bow shots. |
+
+### Overview
+
+Let the wolf drive prey into the open, send the hawk in from its blind side, then loose an arrow as the target turns. The hawk responds to your commands and attacks. You can position your companion on the ground and choose a different enemy for the hawk to dive on this round.
+
+### What you give up
+
+The falconer gives up Endurance at level 3 and the additional favored terrain selections and increases at levels 8, 13 and 18. You still pick your first favored terrain at level 3.
+
+### What you gain (by level)
+
+| Level | Feature | What it does |
+|---|---|---|
+| 1 | Hunting Hawk / Command Dive | Send the hawk as a swift action. After it hits, your next longbow or shortbow attack against that enemy gains a +2 circumstance bonus. |
+| 4 | Drive Prey | A companion hit grants a +2 circumstance bonus to the next dive against that foe. Beneficial spell effects on the companion also apply to the hawk. |
+| 8 | Automatic Dive | After your weapon attack against a surviving enemy, the hawk dives even if you missed. The automatic dive costs no action and shares the manual command's one sortie per round. |
+| 10 | Wing Cover | For one round, an enemy hit by the hawk cannot make movement attacks of opportunity against your animal companion. This gives the wolf an opening to change targets. |
+| 11, 19 | Hawk's Eye | Activate as a swift action for rounds equal to your Wisdom modifier (minimum one). The first strike of each dive gains a +20 insight bonus and ignores concealment. Once per day, rising to twice at level 19. |
+| 16 | Threefold Hunt | If hawk and companion hit the same foe within a round, your next coordinated arrow deals +2d6 piercing precision damage on a hit. This can trigger once per round and a missed arrow spends the opportunity. |
+
+### Abilities in detail
+
+| Ranger level | Attacks per dive | Base die per strike |
+|---|---|---|
+| 1–7 | Talon | 1d4 |
+| 8–14 | Talon, then the other talon | 1d6 |
+| 15–20 | Both talons, then beak | 1d8 |
+
+Each strike adds half your ranger level (rounded down) to damage. The hawk grows visibly from level 1, reaching 1.3 times its starting scale at level 10 and 1.6 times at level 20.
+
+The first strike starts at **ranger level + Wisdom modifier + 2 for the dive**. The second and third attacks take −5 and −10. Applicable favored enemy and positive attack buffs on the ranger also contribute, subject to normal stacking rules.
+
+At level 20 with a +8 Wisdom modifier, the three attacks start at **+30 / +25 / +20** before other bonuses. Spend your swift action on Hawk's Eye, then fire your bow to trigger the automatic dive. For eight rounds, each dive opens at +50 under those conditions, while its second talon and beak keep their usual bonuses.
 
 </details>
 
@@ -2691,17 +2961,41 @@ Send a growing hawk against your prey and follow with a coordinated shot. At lev
 <details>
 <summary><b>Prophecy Breaker</b></summary>
 
-### Prophecy Breaker
+### At a glance
 
-An oracle who studies failed prophecies prepares for the future by learning arcane magic. The Prophecy Breaker trades mysteries, their bonus spells and class skills, all six revelations and the final revelation for an Intelligence-based divine spellbook and a separate arcane research book. Oracle proficiencies, curse and cure or inflict choice carry over.
-
-| Ability | Progression and use |
+| Aspect | Details |
 |---|---|
-| Divine spellbook | Cast oracle spells and orisons with Intelligence, with the normal spontaneous progression through 9th-tier spells. |
-| Arcane research book | Unlock tiers 1–9 at oracle levels 1, 4, 6, 8, 10, 12, 14, 16 and 18. Learn two spells per oracle level and copy eligible scrolls. |
-| Inscription | Record four spells per tier. When a tier is full, choose one inscription to erase or cancel to keep the scroll and existing spells. |
-| Preparation | Prepare two spells per tier. Rest to ready them. Both share two daily casts per tier, including repeated casts of one spell. Intelligence does not grant more inscriptions, preparations or daily casts. |
-| Spell parameters | Research caster level equals oracle level. Base save DC equals 10 + half oracle level (rounded down) + Intelligence modifier. |
+| Base class | Oracle. Keeps the oracle's curse, the choice of cure or inflict spells, and normal weapon and armor proficiencies. |
+| Key ability | Intelligence powers divine spellcasting and sets the save DC of arcane research spells. |
+| Spellcasting | Cast divine spells spontaneously as an oracle. For arcane magic, inscribe spells from the wizard list, prepare a small selection at rest, then cast flexibly from that selection. |
+
+### Overview
+
+Your oracle’s curse is the mark the prophecy left on you. You follow the trail of failed predictions and copy what you learn from arcane scrolls into a research book. Before a dungeon, the question is which spells to ready. Once inside, you decide whether the same spell is worth both of that tier's casts.
+
+### What you give up
+
+| Oracle feature surrendered | What changes |
+|---|---|
+| Level 1 mystery and its benefits | The mystery's bonus spells and class skills go with it. You gain the arcane research book alongside your divine spellbook. |
+| Revelations at 1, 3, 7, 11, 15 and 19, and the final revelation at 20 | Each oracle level brings arcane research choices. Your divine spellcasting still progresses through 9th-tier spells. |
+
+### Abilities in detail
+
+| Aspect | Divine spellbook | Arcane research book |
+|---|---|---|
+| Spell list | Oracle orisons and divine spells of tiers 1–9 | Arcane spells of tiers 1–9 from the wizard list |
+| Spells available today | Cast spontaneously from known divine spells | Inscribe up to four distinct spells per tier and prepare two of them |
+| Daily allowance | The oracle's divine spell slots | Two casts per tier, shared by both prepared spells of that tier |
+| Role of Intelligence | Intelligence takes over as the divine casting ability | Raises save DC. The limits of four inscribed, two prepared and two daily casts stay fixed. |
+
+Arcane tiers 1 through 9 unlock at oracle levels **1, 4, 6, 8, 10, 12, 14, 16 and 18**. Arcane caster level equals oracle class level. Base save DC is **10 + half oracle level (rounded down) + Intelligence modifier**. A level 12 oracle with +5 Intelligence unlocks tier 6 and has a base research DC of 21 for both tier 1 and tier 6 spells.
+
+### Choices
+
+1. **Inscribe.** Choose two arcane spells per oracle level or learn from a scroll. When a tier already contains four spells, choose an existing spell of *that tier* to replace. Cancelling a scroll replacement keeps both the old spell and the scroll.
+2. **Prepare.** Pick two inscriptions from the tier for the next outing. Preparation changes take effect after rest and leave the other inscriptions available for a later day.
+3. **Cast.** If you ready *shield* and *true strike* at tier 1, you can cast *shield* twice or cast each spell once. Either choice spends both tier 1 research casts for the day. Higher arcane tiers and divine spell slots have their own allowances.
 
 </details>
 
@@ -2711,14 +3005,51 @@ An oracle who studies failed prophecies prepares for the future by learning arca
 <details>
 <summary><b>Hell Rider</b></summary>
 
-### Hell Rider (Cavalier)
+### At a glance
 
-Choose a nightmare at level 1. It grows as a horse companion, deals an extra 1d4 fire damage on hoof hits, and gains a 15-foot fire breath at level 8. You retain your order, challenge, tactician and ordinary cavalier charge.
+| Aspect | Details |
+|---|---|
+| Base class | Cavalier. Retains order, challenge, tactician and the level 3 Cavalier's Charge. |
+| Key abilities | Strength supports the rider's melee attacks. Charisma governs the devils' save DC, the ray's accuracy and uses, and the standard's daily uses. |
+| Mount | The nightmare advances as a horse companion. Each successful hoof attack adds 1d4 fire damage, and it learns to breathe fire at level 8. |
 
-At level 3, the first weapon attack of a charge calls a devil even if you miss. At levels 11 and 20 you call two and three devils. Each deals 1d6 per three cavalier levels, split between fire and unholy damage. A Reflex save halves the total. Devils first strike other enemies within 10 feet of your target, then concentrate any remaining attacks on that target.
+### Overview
 
-At level 5, plant a standard as a standard action up to medium range, 3 + Charisma modifier times per day. For five rounds it attacks a different enemy for each devil within 20 feet. At level 14 its radius grows to 30 feet and allies inside gain +2 morale to attack and immunity to fear. These abilities exchange the ordinary mount selection, banner, greater banner, mighty charge and supreme charge.
+A Hell Rider picks a charge target and a place to plant the standard for different reasons. Charge an isolated enemy to concentrate the devils' blows. Against a group holding a passage, the standard can pressure that ground for five rounds while the nightmare breathes fire across the front line. The devils appear for their strikes, while the nightmare stays at your side as a companion.
 
-Greater command at level 9, firebrand at level 13 and overwhelming presence at level 17 each have one daily use. Hellfire ray at level 11 uses Charisma for ranged touch attacks and grants one daily use plus one for every two points of positive Charisma modifier. It fires a second ray at level 15 and a third at level 19. Use cavalier level as caster level.
+### What you give up
+
+| Level | Base feature | Replacement |
+|---|---|---|
+| 1 | Standard mount selection | Nightmare Mount |
+| 5, 14 | Banner and Greater Banner | Infernal Standard and Greater Infernal Standard, planted at a chosen point |
+| 11, 20 | Mighty Charge and Supreme Charge | The charge and the standard call two devils at level 11 and three at level 20 |
+
+### What you gain (by level)
+
+| Level | Feature | How it plays |
+|---|---|---|
+| 1, 3 | Nightmare Mount / Infernal Charge | From level 3, the first weapon attack of a mounted or unmounted charge calls devils, hit or miss. They strike other enemies within 10 feet of the charge target first. Any remaining devils strike the original target. |
+| 5, 14 | Infernal Standard | Plant it within medium range as a standard action. For five rounds, each devil strikes a different enemy within 20 feet each round. At level 14 the radius grows to 30 feet, and allies inside gain a +2 morale bonus on attacks and immunity to fear. |
+| 8 | Nightmare's Fire Breath | The mount spends its own standard action to breathe a 15-foot cone dealing 1d6 fire per two cavalier levels. A Reflex save halves damage. It recharges in 1d4 rounds. |
+| 9 | Greater Command | Issue one command to enemies in the area. The four command options share one daily use. |
+| 11, 15, 19 | Hellfire Ray | Make a ranged touch attack using Charisma. Fire one ray at level 11, two at 15, and three at 19 at the same foe. Each deals 1d6 per cavalier level, up to 15d6, split between fire and unholy damage. |
+| 13 | Firebrand | Allies add 1d6 fire damage to weapon and natural attacks. Each bearer can expend their own brand to fire a ray. |
+| 17 | Overwhelming Presence | Enemies that fail their Will save prostrate themselves and cower. Even an enemy that succeeds on the initial save is staggered for one round. |
+| 20 | Third Devil | Charge and standard now call three devils. A charge can concentrate all three strikes on an isolated target. The standard can strike up to three different foes per round. |
+
+### Abilities in detail
+
+Each devil rolls **1d6 per three cavalier levels** and splits the result between fire and unholy damage. A Reflex save halves the total. Its DC is **10 + half cavalier level (rounded down) + Charisma modifier**. The nightmare's breath uses the same level progression with the mount's own Constitution modifier.
+
+### Resources
+
+| Ability | Daily uses |
+|---|---|
+| Infernal Standard | 3 + Charisma modifier |
+| Hellfire Ray | One plus one per two points of positive Charisma modifier. A volley spends a single use. |
+| Greater Command / Firebrand / Overwhelming Presence | Once per day each. All three and Hellfire Ray take a standard action and use cavalier level as caster level. |
+
+At level 19 with +6 Charisma, you can plant nine standards and cast Hellfire Ray four times per day. One casting makes three ranged touch attacks against the same foe, each hit dealing 15d6. You still have separate uses of Greater Command to control enemies and Firebrand to support allies.
 
 </details>
