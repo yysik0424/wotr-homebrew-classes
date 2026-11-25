@@ -8,29 +8,29 @@ Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod 
 
 ## The classes
 
-| Archetype | Base class | What it does | Needs | 0.17.5-beta combat retest |
+| No | Archetype | Base class | What it does | Needs |
 |---|---|---|---|---|
-| [Pack Warden](#pack-warden) | Hunter | Commands a pack: up to four extra animals of your companion's kind join each fight, and pack-only spell effects replace spellcasting | — | In-game check pending |
-| [Phantom Blade](#phantom-blade) | Fighter | A guardian phantom strikes alongside you and absorbs half the damage you take | — | In-game check pending |
-| [Blast Magus](#blast-magus) | Magus | Picks an element, fires blasts with Intelligence and detonates them through weapon hits | *KineticistElementsExpanded* (optional: 5 more elements) | In-game check pending |
-| [Spellfist](#spellfist) | Brawler | Unarmed brawler with full arcane casting from three chosen schools | **BrawlerClassWrath** | In-game check pending |
-| [Golemancer](#golemancer) | Alchemist | Builds a golem tank, changes its material, and later wears it | DLC 3 | In-game check pending |
-| [Warlock](#warlock) | Witch | Unlimited patron blasts that build Overheat and call summons | — | In-game check pending |
-| [Weapon-Spirit Shaman](#weapon-spirit-shaman) | Shaman | A floating spirit weapon fights on its own and borrows the magic of stored weapons | — | In-game check pending |
-| [Bulwark Mage](#bulwark-mage) | Wizard | Full caster in heavy armor behind a tower shield that strikes back | — | In-game check pending |
-| [Chaos Warrior](#chaos-warrior) | Warpriest | Rages, mutates at random (claws, fangs and more), drives enemies mad with stacking pain, and casts the first spell of each rage as a swift action | — | In-game check pending |
-| [Chimera Monk](#chimera-monk) | Monk | Reshapes the body with a new mutation every two levels | **DarkCodex** | In-game check pending |
-| [Oathbound Revenant](#oathbound-revenant) | Paladin | An undead paladin whose smites knit the body back together | — | In-game check pending |
-| [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | One shadow echoes your first harmful spell each round | — | In-game check pending |
-| [Grey Seer](#grey-seer) | Arcanist | Wields sword and staff and follows a spell with a longsword strike | — | In-game check pending |
-| [Blood Berserker](#blood-berserker) | Bloodrager | Pulls foes with a blood chain and coats melee weapons in blood | — | In-game check pending |
-| [Sorrow Inquisitor](#sorrow-inquisitor) | Inquisitor | Gathers afflictions from allies and sentences an enemy to bear them | — | In-game check pending |
-| [Spiritsteel](#spiritsteel) | Barbarian | Grows an ancestral weapon and fights alongside its spirit during rage | — | In-game check pending |
-| [Dream Thief](#dream-thief) | Rogue | Throws a starknife to put enemies to sleep and strikes from a dreamwalk | — | In-game check pending |
-| [Deathdealer](#deathdealer) | Slayer | Reacts to a studied enemy and uses nine personal arcane abilities | — | In-game check pending |
-| [Falconer](#falconer) | Ranger | Coordinates a diving hawk with archery and an animal companion | — | In-game check pending |
-| [Prophecy Breaker](#prophecy-breaker) | Oracle | Casts divine spells with Intelligence and studies a separate arcane spellbook | — | In-game check pending |
-| [Hell Rider](#hell-rider) | Cavalier | Rides a nightmare and calls devils to strike from charges and a planted standard | — | In-game check pending |
+| 1 | [Pack Warden](#pack-warden) | Hunter | Commands a pack: up to four extra animals of your companion's kind join each fight, and pack-only spell effects replace spellcasting | — |
+| 2 | [Phantom Blade](#phantom-blade) | Fighter | A guardian phantom strikes alongside you and absorbs half the damage you take | — |
+| 3 | [Blast Magus](#blast-magus) | Magus | Picks an element, fires blasts with Intelligence and detonates them through weapon hits | *KineticistElementsExpanded* (optional: 5 more elements) |
+| 4 | [Spellfist](#spellfist) | Brawler | Unarmed brawler with full arcane casting from three chosen schools | **BrawlerClassWrath** |
+| 5 | [Golemancer](#golemancer) | Alchemist | Builds a golem tank, changes its material, and later wears it | DLC 3 |
+| 6 | [Warlock](#warlock) | Witch | Unlimited patron blasts that build Overheat and call summons | — |
+| 7 | [Weapon-Spirit Shaman](#weapon-spirit-shaman) | Shaman | A floating spirit weapon fights on its own and borrows the magic of stored weapons | — |
+| 8 | [Bulwark Mage](#bulwark-mage) | Wizard | Full caster in heavy armor behind a tower shield that strikes back | — |
+| 9 | [Chaos Warrior](#chaos-warrior) | Warpriest | Rages, mutates at random (claws, fangs and more), drives enemies mad with stacking pain, and casts the first spell of each rage as a swift action | — |
+| 10 | [Chimera Monk](#chimera-monk) | Monk | Reshapes the body with a new mutation every two levels | **DarkCodex** |
+| 11 | [Oathbound Revenant](#oathbound-revenant) | Paladin | An undead paladin whose smites knit the body back together | — |
+| 12 | [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | One shadow echoes your first harmful spell each round | — |
+| 13 | [Grey Seer](#grey-seer) | Arcanist | Wields sword and staff and follows a spell with a longsword strike | — |
+| 14 | [Blood Berserker](#blood-berserker) | Bloodrager | Pulls foes with a blood chain and coats melee weapons in blood | — |
+| 15 | [Sorrow Inquisitor](#sorrow-inquisitor) | Inquisitor | Gathers afflictions from allies and sentences an enemy to bear them | — |
+| 16 | [Spiritsteel](#spiritsteel) | Barbarian | Grows an ancestral weapon and fights alongside its spirit during rage | — |
+| 17 | [Dream Thief](#dream-thief) | Rogue | Throws a starknife to put enemies to sleep and strikes from a dreamwalk | — |
+| 18 | [Deathdealer](#deathdealer) | Slayer | Reacts to a studied enemy and uses nine personal arcane abilities | — |
+| 19 | [Falconer](#falconer) | Ranger | Coordinates a diving hawk with archery and an animal companion | — |
+| 20 | [Prophecy Breaker](#prophecy-breaker) | Oracle | Casts divine spells with Intelligence and studies a separate arcane spellbook | — |
+| 21 | [Hell Rider](#hell-rider) | Cavalier | Rides a nightmare and calls devils to strike from charges and a planted standard | — |
 
 Full details for every archetype (what is removed, what is gained at each level, every choice) are in [Class details](#class-details) below.
 
