@@ -3,7 +3,8 @@ using System.Linq;
 using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.Classes;
 using Kingmaker.Designers.Mechanics.Facts;
-using Kingmaker.EntitySystem.Stats;
+using Kingmaker.PubSubSystem;
+using Kingmaker.UnitLogic;
 using Kingmaker.UnitLogic.FactLogic;
 using WotrClassMod.Common;
 using static WotrClassMod.Common.BlueprintUtil;
@@ -11,9 +12,6 @@ using static WotrClassMod.Common.BlueprintUtil;
 namespace Spellfist
 {
     // 저수지 특성(설계 §4.4, §11-7, §11-13). 본편 아카니스트 저수지 자원(cac948cb…)을 재사용한다: 자원 정의의 m_MaxAmount 는 BaseValue 3 + 레벨 가산(클래스 [아카니스트·위저드·슬레이어])이라 순수 브롤러는 3 — 이 전제는 CheckResourceShape 가 BaseValue == SpellfistRules.ReservoirBase, IncreasedByStat 거짓, m_Class/m_ClassDiv 에 브롤러 없음을 코드로 검사한다.
-    // 최대 = 3 + 브롤러 레벨 + 지능 수정치 (설계 §11-13, 2026-11-16 소유자 결정 — §11-11 의 2배를 되돌림):
-    //   IncreaseResourcesByClass.CalculateMaxResourceAmount(IL, 정찰 §4-1) = += BaseValue + Stat.Bonus (IL_0016~IL_0039), += GetClassLevel(m_CharacterClass) (IL_0040~IL_005E).
-    //   → 컴포넌트 1개(Stat=Intelligence): +Int +L. 합 = 3 + L + Int. 레벨 항은 컴포넌트 1개당 한 번이므로 컴포넌트 수 = SpellfistRules.ReservoirLevelMultiplier(아래 가드).
     // 아카니스트 저수지 특성(55db1859…)과 휴식 버프는 주지 않는다: 휴식 때 ResourceBuff 가 절반만 채우는 대신, AddAbilityResources(RestoreAmount) 만 있으면 휴식 시 가득 찬다(설계 §11-7).
     public static class Reservoir
     {
@@ -25,7 +23,6 @@ namespace Spellfist
             if (Feature != null) throw new InvalidOperationException("Spellfist: Reservoir.Build() called twice");
             var resource = ResourcesLibrary.TryGetBlueprint<BlueprintAbilityResource>(Guids.Game.ArcanistReservoirResource);
             if (resource == null) throw new InvalidOperationException("Spellfist: arcanist reservoir resource " + Guids.Game.ArcanistReservoirResource + " not in cache");
-            var brawler = Archetype.Brawler();
             CheckResourceShape(resource);
 
             var f = Create<BlueprintFeature>("SpellfistReservoirFeature", Guids.ReservoirFeature, x => Spellbook.Names(x, "Reservoir.Name", "Reservoir.Description"));
@@ -35,27 +32,13 @@ namespace Spellfist
             SetField(add, "m_Resource", Ref<BlueprintAbilityResourceReference>(Guids.Game.ArcanistReservoirResource));
             if (add.Resource != resource || !add.RestoreAmount || !add.RestoreOnLevelUp) throw new InvalidOperationException("Spellfist: Reservoir AddAbilityResources readback failed");
 
-            // (2) 지능 수정치 + 브롤러 레벨
-            var incInt = new IncreaseResourcesByClass { Stat = StatType.Intelligence, BaseValue = 0 };
-            SetField(incInt, "m_Resource", Ref<BlueprintAbilityResourceReference>(Guids.Game.ArcanistReservoirResource));
-            SetField(incInt, "m_CharacterClass", Ref<BlueprintCharacterClassReference>(Guids.Game.BrawlerClass));
-            SetField(incInt, "m_Archetype", null);
-
-            if (incInt.Resource != resource || incInt.CharacterClass != brawler || Util.GetF(incInt, "m_Archetype") != null || incInt.Archetype != null || incInt.BaseValue != 0)
-                throw new InvalidOperationException("Spellfist: Reservoir IncreaseResourcesByClass resource/class/archetype/BaseValue readback failed");
-            if (incInt.Stat != StatType.Intelligence)
-                throw new InvalidOperationException("Spellfist: Reservoir IncreaseResourcesByClass Stat readback failed (" + incInt.Stat + "), expected Intelligence");
-
-            // 레벨 가산 컴포넌트 수 = SpellfistRules.ReservoirLevelMultiplier (설계 §11-13, SpellfistRules.cs:22). 상수가 바뀌면 여기서 던진다.
-            var levelTerms = new[] { incInt };
-            if (levelTerms.Length != SpellfistRules.ReservoirLevelMultiplier)
-                throw new InvalidOperationException("Spellfist: Reservoir builds " + levelTerms.Length + " IncreaseResourcesByClass components but SpellfistRules.ReservoirLevelMultiplier = " + SpellfistRules.ReservoirLevelMultiplier);
-            AddComponents(f, add, incInt);
+            var capacity = new SpellfistReservoirCapacity();
+            AddComponents(f, add, capacity);
             var types = f.ComponentsArray.Select(c => c.GetType()).ToArray();
-            var expect = new[] { typeof(AddAbilityResources), typeof(IncreaseResourcesByClass) };
+            var expect = new[] { typeof(AddAbilityResources), typeof(SpellfistReservoirCapacity) };
             if (!types.SequenceEqual(expect))
                 throw new InvalidOperationException("Spellfist: Reservoir feature components [" + string.Join(", ", types.Select(t => t.Name)) + "] != [" + string.Join(", ", expect.Select(t => t.Name)) + "]");
-            if (!ReferenceEquals(f.ComponentsArray[0], add) || !ReferenceEquals(f.ComponentsArray[1], incInt))
+            if (!ReferenceEquals(f.ComponentsArray[0], add) || !ReferenceEquals(f.ComponentsArray[1], capacity))
                 throw new InvalidOperationException("Spellfist: Reservoir feature component order/instances readback failed");
             Feature = f;
 
@@ -80,7 +63,7 @@ namespace Spellfist
                 throw new InvalidOperationException("Spellfist: arcanist reservoir m_MaxAmount.IncreasedByLevelStartPlusDivStep is " + divStep + " (expected false: extra level term would change the maximum)");
             var useMax = (bool)Util.GetF(resource, "m_UseMax");
             if (useMax)
-                throw new InvalidOperationException("Spellfist: arcanist reservoir m_UseMax is " + useMax + " (expected false: a cap would silently clip 3 + L + Int)");
+                throw new InvalidOperationException("Spellfist: arcanist reservoir m_UseMax is " + useMax + " (expected false: a cap would silently clip 3 + L/2 + Int)");
             var brawlerGuid = BlueprintGuid.Parse(Guids.Game.BrawlerClass);
             CheckNoBrawler(Util.GetF(amt, "m_Class"), "m_Class", brawlerGuid);
             CheckNoBrawler(Util.GetF(amt, "m_ClassDiv"), "m_ClassDiv", brawlerGuid);
@@ -94,6 +77,26 @@ namespace Spellfist
                 throw new InvalidOperationException("Spellfist: arcanist reservoir m_MaxAmount." + field + " is " + arr.GetType().FullName + ", expected BlueprintCharacterClassReference[] (cannot check for the brawler class)");
             if (refs.Any(r => r != null && r.Guid == brawlerGuid))
                 throw new InvalidOperationException("Spellfist: arcanist reservoir m_MaxAmount." + field + " already contains the brawler class (level term would be added twice)");
+        }
+    }
+
+    public sealed class SpellfistReservoirCapacity : UnitFactComponentDelegate, IResourceAmountBonusHandler, IAreaHandler, IGlobalSubscriber
+    {
+        public void CalculateMaxResourceAmount(BlueprintAbilityResource resource, ref int bonus)
+        {
+            if (resource.AssetGuid.ToString() != Guids.Game.ArcanistReservoirResource) return;
+            int level = Owner.Progression.GetClassLevel(Archetype.Brawler());
+            if (level > 0)
+                bonus += SpellfistRules.ReservoirMax(level, Owner.Stats.Intelligence.Bonus) - SpellfistRules.ReservoirBase;
+        }
+
+        public void OnAreaBeginUnloading() { }
+
+        public void OnAreaDidLoad()
+        {
+            var resource = Get<BlueprintAbilityResource>(Guids.Game.ArcanistReservoirResource);
+            if (Owner.Resources.GetResourceAmount(resource) > resource.GetMaxAmount(Owner))
+                Owner.Resources.Restore(resource);
         }
     }
 }

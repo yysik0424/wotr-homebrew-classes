@@ -385,7 +385,13 @@ namespace PhantomBlade
         protected override void OnTurnOff() { Handle(SpiritRules.LifecycleEvent.TurnOff); }
         protected override void OnDeactivate() { Handle(SpiritRules.LifecycleEvent.Deactivate); }
         public void OnAreaBeginUnloading() { Handle(SpiritRules.LifecycleEvent.AreaBeginUnloading); }
-        public void OnAreaDidLoad() { Handle(SpiritRules.LifecycleEvent.AreaDidLoad); }
+        public void OnAreaDidLoad()
+        {
+            var pool = StandBlueprints.PoolResource;
+            int excess = Owner.Resources.GetResourceAmount(pool) - pool.GetMaxAmount(Owner);
+            if (excess > 0) Owner.Resources.Spend(pool, excess);
+            Handle(SpiritRules.LifecycleEvent.AreaDidLoad);
+        }
         // 전역 이벤트: 모든 유닛·엔티티의 변화가 온다. 주인 것이 아니면 계획 표가 Ignore(정당한 무동작) — null 은 주인일 수 없다(주인은 null 이 아님, Handle 첫 줄).
         public void HandleUnitLifeStateChanged(UnitEntityData unit, UnitLifeState prevLifeState) { Handle(ReferenceEquals(unit, Owner) ? SpiritRules.LifecycleEvent.OwnerLifeStateChanged : SpiritRules.LifecycleEvent.OtherUnitLifeStateChanged); }
         public void HandleObjectInGameChanged(EntityDataBase entityData) { Handle(ReferenceEquals(entityData, Owner) ? SpiritRules.LifecycleEvent.OwnerInGameChanged : SpiritRules.LifecycleEvent.OtherEntityInGameChanged); }

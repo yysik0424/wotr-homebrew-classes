@@ -99,6 +99,7 @@ namespace Falconer
             Auto = Feature("Auto", dive);
             Cover = Feature("Cover", dive);
             Hunt = Feature("Hunt", quarry);
+            AddComponents(Hunt, new LegacyEvasion());
             Eye = Buff("EyeBuff", "Eye", eye);
             Shot = Buff("ShotBuff", "Hawk", quarry, true);
             Driven = Buff("DrivenBuff", "Drive", quarry, true);
@@ -161,15 +162,9 @@ namespace Falconer
             {
                 Row(3, Get<BlueprintFeature>(Rules.Endurance))
             };
-            foreach (int l in new[]
-            {
-                8,
-                13,
-                18
-            }
-
-            )
-                removed.Add(Row(l, Get<BlueprintFeature>(Rules.Terrain), Get<BlueprintFeature>(Rules.TerrainRank)));
+            foreach (int level in new[] { 8, 13, 18 })
+                removed.Add(Row(level, Get<BlueprintFeature>(Rules.Terrain), Get<BlueprintFeature>(Rules.TerrainRank)));
+            removed.Add(Row(Rules.ImprovedEvasionLevel, Get<BlueprintFeature>(Rules.ImprovedEvasion)));
             foreach (var row in removed)
                 if (!row.Features.All(f => Ranger.Progression.LevelEntries.Any(e => e.Level == row.Level && e.Features.Contains(f))))
                     throw new InvalidOperationException("Ranger exchange missing at level " + row.Level);
@@ -185,7 +180,7 @@ namespace Falconer
                     StatType.Wisdom
                 };
                 a.NotRecommendedAttributes = new StatType[0];
-                a.RemoveFeatures = removed.ToArray();
+                a.RemoveFeatures = removed.OrderBy(row => row.Level).ToArray();
                 a.AddFeatures = new[]
                 {
                     Row(1, Hawk),

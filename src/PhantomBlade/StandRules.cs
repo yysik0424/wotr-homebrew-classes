@@ -19,10 +19,9 @@ namespace PhantomBlade
         public const int RangedGuardLevel = 6;     // 설계 §4.4: 6레벨 원거리 회피 +2
         public const int RangedGuard2Level = 14;   // 설계 §4.4: 14레벨 원거리 회피 +4
         // (소유자 결정 2026-11-16, 설계 §14: 10레벨 「재충전」(전투 종료 시 풀 회복)은 폐지 — RefillLevel 상수 삭제. 풀은 휴식·레벨업 때만 가득 찬다.)
-        public const int Absorb75Level = 18;       // 설계 §4.4: 18레벨 흡수 75%
-        // 소유자 결정 2026-11-16: 전투 뒤 회복을 없애는 대신 3배 (설계 §14). 풀 최대치 = 레벨 × max(1, 매력 수정치) × 이 값.
+        // 흡수 풀 최대치 = 전사 레벨 × max(1, 매력 수정치) × 2.
         // 읽는 곳: PoolMax(아래), StandBlueprints.BuildProperties(PoolProperty 의 곱셈 시작값), 문구 시험(CheckStringNumbers), 점검 S2·S5·S9 리터럴 대조.
-        public const int PoolMultiplier = 3;
+        public const int PoolMultiplier = 2;
          
         public const int ArmorMasteryRemovedLevel = 19;
 
@@ -309,8 +308,7 @@ namespace PhantomBlade
         // 명중 하나가 일으킬 수 있는 최대 타수(령 동작의 같은 프레임 상한 SpiritRules.MaxSwingsPerBurst 가 읽는다).
         public static int MaxStrikesPerHit { get { return Math.Max(NormalStrikesPerHit, FullAttackStrikesPerHit); } }
 
-        // 설계 §4.4: 흡수 비율 — 2~17: 50%, 18+: 75%
-        public static int AbsorbPercent(int level) { Require(level >= StandLevel, "level", level); return level >= Absorb75Level ? 75 : 50; }
+        public static int AbsorbPercent(int level) { Require(level >= StandLevel, "level", level); return 25; }
 
         // 설계 §4.4: 흡수량 = min(풀, 받은 피해 × 비율 / 100) 내림
         public static int AbsorbAmount(int incoming, int percent, int pool)

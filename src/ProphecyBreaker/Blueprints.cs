@@ -103,7 +103,7 @@ namespace ProphecyBreaker
             var rank = new ContextRankConfig();
             SetField(rank,"m_BaseValueType",ContextRankBaseValueType.ClassLevel);
             SetField(rank,"m_Class",new[]{Ref<BlueprintCharacterClassReference>(Ids.OracleClass)});
-            AddComponents(grant,rank,bookGrant,new ResearchParameters());
+            AddComponents(grant,rank,bookGrant,new ResearchParameters(),new LegacyBaseAttack());
 
             var removed = new[] {Row(1,mystery,revelation,orisons), Row(3,revelation),Row(7,revelation),
                 Row(11,revelation),Row(15,revelation),Row(19,revelation),Row(20,final)};
@@ -111,6 +111,7 @@ namespace ProphecyBreaker
                 throw new InvalidOperationException("Oracle exchanges disagree with the installed progression");
             Archetype = Make<BlueprintArchetype>("Archetype", a => {
                 SetField(a,"m_ParentClass",Oracle);
+                SetField(a,"m_BaseAttackBonus",Ref<BlueprintStatProgressionReference>(Ids.LowBaseAttack));
                 SetField(a,"m_ReplaceSpellbook",Ref<BlueprintSpellbookReference>(Divine.AssetGuid.ToString()));
                 a.LocalizedName = Strings.L("Archetype.name");
                 a.LocalizedDescription = a.LocalizedDescriptionShort = Strings.L("Archetype.desc");

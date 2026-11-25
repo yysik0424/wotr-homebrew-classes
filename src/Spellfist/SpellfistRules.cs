@@ -19,8 +19,7 @@ namespace Spellfist
         public const int FistSpellstrikeLevel = 2;
         // 설계 §11-11: 저장고 기본 3
         public const int ReservoirBase = 3;
-        // 설계 §11-13(2026-11-16 소유자 결정, §11-11 의 2배를 되돌림): 저장고 = 3 + 1 x 레벨 + 지능 수정치
-        public const int ReservoirLevelMultiplier = 1;
+        public const int ReservoirLevelDivisor = 2;
         // 설계 §4.5: 상위 비법 11레벨
         public const int GreaterExploitsLevel = 11;
 
@@ -63,11 +62,10 @@ namespace Spellfist
             if (!ok) throw new ArgumentOutOfRangeException(name, value, name + " out of range");
         }
 
-        // 설계 §11-13: 최대 저장고 = ReservoirBase + ReservoirLevelMultiplier*레벨 + 지능 수정치 (음수 수정치도 그대로 더함, 엔진 IncreaseResourcesByClass 와 동일)
         public static int ReservoirMax(int brawlerLevel, int intMod)
         {
             Require(brawlerLevel >= 1, "brawlerLevel", brawlerLevel);
-            return ReservoirBase + ReservoirLevelMultiplier * brawlerLevel + intMod;
+            return ReservoirBase + brawlerLevel / ReservoirLevelDivisor + intMod;
         }
 
         // 설계 §4.4: 신속화 비용 = max(1, 주문 레벨) (0레벨도 1)

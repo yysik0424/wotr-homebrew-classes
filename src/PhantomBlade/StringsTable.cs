@@ -10,20 +10,20 @@ namespace PhantomBlade
         {
             ["Archetype.Name"] = ("귀검사", "Phantom Blade"),
             ["Archetype.Description"] = (
-                "귀검사는 수호령을 부리는 전사다. 본체는 앞에서 검을 휘두르고, 본체를 둘러싼 반투명한 거대 형상 「귀검(鬼劍)」이 본체의 매 라운드 첫 몇 번의 근접 명중마다 주먹을 꽂아 넣으며(레벨이 오를수록 늘어난다) 본체가 맞을 피해의 절반을 대신 받아 준다. 10레벨부터는 매 라운드 정해진 횟수만큼 본체의 첫 근접 공격들에 맞춰, 빗나가도 귀검이 스스로 접촉 공격을 한다. 용맹·갑옷 훈련·갑옷 숙달 대신 수호령 능력을 얻는다. 주능력치는 매력이다.",
-                "The Phantom Blade is a fighter accompanied by a Guardian Phantom. The body fights with a sword in front while a vast translucent figure, the Phantom Blade, surrounds it: it lands extra fist blows on its master's first few melee hits each round (more as it grows) and takes half of the damage its master would suffer; from level 10 it makes its own touch attack on the first eligible melee attacks each round, even when its master misses. It replaces bravery, armor training and armor mastery with Guardian Phantom abilities. Charisma is the key ability."),
+                "귀검사는 수호령을 부리는 전사다. 본체는 앞에서 검을 휘두르고, 본체를 둘러싼 반투명한 거대 형상 「귀검(鬼劍)」이 본체의 매 라운드 첫 몇 번의 근접 명중마다 주먹을 꽂아 넣으며(레벨이 오를수록 늘어난다) 본체가 맞을 피해의 25%를 대신 받아 준다. 10레벨부터는 매 라운드 정해진 횟수만큼 본체의 첫 근접 공격들에 맞춰, 빗나가도 귀검이 스스로 접촉 공격을 한다. 용맹·갑옷 훈련·갑옷 숙달 대신 수호령 능력을 얻는다. 주능력치는 매력이다.",
+                "The Phantom Blade is a fighter accompanied by a Guardian Phantom. The body fights with a sword in front while a vast translucent figure, the Phantom Blade, surrounds it: it lands extra fist blows on its master's first few melee hits each round (more as it grows) and takes 25% of the damage its master would suffer; from level 10 it makes its own touch attack on the first eligible melee attacks each round, even when its master misses. It replaces bravery, armor training and armor mastery with Guardian Phantom abilities. Charisma is the key ability."),
             ["Archetype.DescriptionShort"] = (
-                "수호령이 본체의 라운드 첫 근접 명중들에 주먹을 꽂고 피해의 절반을 대신 받는다.",
-                "A Guardian Phantom lands extra fist blows on the round's first melee hits and absorbs half the damage."),
+                "수호령이 본체의 라운드 첫 근접 명중들에 주먹을 꽂고 피해의 25%를 대신 받는다.",
+                "A Guardian Phantom lands extra fist blows on the round's first melee hits and absorbs 25% of the damage."),
             ["Stand.Name"] = ("귀검 / Phantom Blade", "Phantom Blade"),
             ["Stand.Description"] = (
-                // 소유자 결정 2026-11-16(설계 §14): 풀 ×3(StandRules.PoolMultiplier — 시험이 이 숫자를 상수와 대조), 전투가 끝나도 차지 않음(휴식·레벨업만).
-                "본체를 둘러싼 반투명한 거대 형상 「귀검」. 켜져 있는 동안 본체가 받는 피해의 절반을 흡수 풀이 대신 받는다(18레벨부터 4분의 3). 풀 최대치는 귀검사 레벨 × 매력 수정치(최소 1) × 3 이다. 풀은 휴식을 마치거나 레벨이 오르면 가득 차고, 전투가 끝나도 차지 않는다.",
-                "A vast translucent figure, the Phantom Blade, surrounds its master. While it is manifest, its absorption pool takes half of the damage its master would suffer (three quarters from level 18). The pool holds Phantom Blade level × Charisma modifier (minimum 1) × 3 points. It refills when you finish a rest and on level-up; it does not refill when combat ends."),
+                // 소유자 결정 2026-11-16(설계 §14): 풀 ×2(StandRules.PoolMultiplier — 시험이 이 숫자를 상수와 대조), 전투가 끝나도 차지 않음(휴식·레벨업만).
+                "본체를 둘러싼 반투명한 거대 형상 「귀검」. 켜져 있는 동안 본체가 받는 피해의 25%를 흡수 풀이 대신 받는다. 풀 최대치는 귀검사 레벨 × 매력 수정치(최소 1) × 2 이다. 풀은 휴식을 마치거나 레벨이 오르면 가득 차고, 전투가 끝나도 차지 않는다.",
+                "A vast translucent figure, the Phantom Blade, surrounds its master. While it is manifest, its absorption pool takes 25% of the damage its master would suffer. The pool holds Phantom Blade level × Charisma modifier (minimum 1) × 2 points. It refills when you finish a rest and on level-up; it does not refill when combat ends."),
             ["Pool.Name"] = ("귀검 흡수 풀", "Phantom Blade Absorption Pool"),
             ["Pool.Description"] = (
-                "수호령이 대신 받을 수 있는 피해의 남은 양. 최대치는 귀검사 레벨 × 매력 수정치(최소 1) × 3 이고, 휴식을 마치거나 레벨이 오르면 가득 찬다.",
-                "How much more damage the Guardian Phantom can take in your place. The maximum is Phantom Blade level × Charisma modifier (minimum 1) × 3; it refills when you finish a rest and on level-up."),
+                "수호령이 대신 받을 수 있는 피해의 남은 양. 최대치는 귀검사 레벨 × 매력 수정치(최소 1) × 2 이고, 휴식을 마치거나 레벨이 오르면 가득 찬다.",
+                "How much more damage the Guardian Phantom can take in your place. The maximum is Phantom Blade level × Charisma modifier (minimum 1) × 2; it refills when you finish a rest and on level-up."),
             ["StandToggle.Name"] = ("수호령 발현", "Manifest Guardian Phantom"),
             ["StandToggle.Description"] = (
                 "자유 행동으로 수호령을 불러내거나 거둔다. 켜져 있는 동안 수호령의 러시와 방어가 작동하며, 비용은 없고 휴식해도 꺼지지 않는다.",
@@ -60,8 +60,8 @@ namespace PhantomBlade
                 "This feature no longer has any effect. The Guardian Phantom's absorption pool refills only when you finish a rest or gain a level."),
             ["Absorb18.Name"] = ("수호령 완전 흡수", "Guardian Phantom Greater Absorption"),
             ["Absorb18.Description"] = (
-                "수호령이 대신 받는 피해의 비율이 절반에서 4분의 3으로 늘어난다.",
-                "The share of damage the Guardian Phantom takes in your place rises from one half to three quarters."),
+                "수호령은 모든 레벨에서 피해의 25%를 대신 받는다.",
+                "The Guardian Phantom absorbs 25% of damage at every level."),
              
             ["Absorb.LogLine"] = ("귀신이 {0} 피해를 흡수했다 (남은 풀 {1})", "The phantom absorbed {0} damage (pool left {1})"),
             // 흡수 때 본체 머리 위 짧은 글(엔진 UIAccess.Bark, Task 6e ③): {0} = 흡수량. 채우기 = AbsorbText.Overhead.

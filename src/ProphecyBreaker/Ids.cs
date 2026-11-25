@@ -2,6 +2,7 @@ namespace ProphecyBreaker
 {
     internal static class Ids
     {
+        internal const string LowBaseAttack = "0538081888b2d8c41893d25d098dee99"; // Classes/Basic/BABLow
         internal const string OracleClass = "20ce9bf8af32bee4c8557a045ab499b1";
         internal const string OracleSpellbook = "6c03364712b415941a98f74522a81273";
         internal const string ArcanistSpellbook = "33903fe5c4abeaa45bc249adb9d98848";

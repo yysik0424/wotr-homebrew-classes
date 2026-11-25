@@ -41,8 +41,8 @@ namespace Spellfist
 
                 ["Reservoir.Name"] = ("비전 저수지", "Arcane Reservoir"),
                 ["Reservoir.Description"] = (
-                    "주문 격투가는 비전 에너지를 담는 저수지를 가진다. 최대치는 3 + 브롤러 레벨 + 지능 수정치이며, 휴식하면 가득 찬다. 이 저수지로 주문을 신속 시전하고 익스플로잇을 쓴다.",
-                    "The Spellfist holds arcane energy in a reservoir. Its maximum is 3 + your brawler level + your Intelligence modifier, and it refills fully when you rest. It pays for quickened spells and for exploits."),
+                    "주문 격투가는 비전 에너지를 담는 저수지를 가진다. 최대치는 3 + 브롤러 레벨의 절반(내림) + 지능 수정치이며, 휴식하면 가득 찬다. 이 저수지로 주문을 신속 시전하고 익스플로잇을 쓴다.",
+                    "The Spellfist holds arcane energy in a reservoir. Its maximum is 3 + half your brawler level (rounded down) + your Intelligence modifier, and it refills fully when you rest. It pays for quickened spells and for exploits."),
 
                 ["Quicken.Name"] = ("저수지 신속 시전", "Reservoir Quicken"),
                 ["Quicken.Description"] = (

@@ -6,6 +6,7 @@ namespace ProphecyBreaker
         static ReflectionLookup F(string type, string field) => new ReflectionLookup("Assembly-CSharp",type,field,LookupKind.Field,LookupMode.Walk);
         public static readonly ReflectionLookup[] All = {
             F("Kingmaker.Blueprints.Classes.BlueprintArchetype","m_ParentClass"),
+            F("Kingmaker.Blueprints.Classes.BlueprintArchetype","m_BaseAttackBonus"),
             F("Kingmaker.Blueprints.Classes.BlueprintArchetype","m_ReplaceSpellbook"),
             F("Kingmaker.Blueprints.Classes.BlueprintCharacterClass","m_Archetypes"),
             F("Kingmaker.Blueprints.Classes.Spells.BlueprintSpellbook","m_CharacterClass"),

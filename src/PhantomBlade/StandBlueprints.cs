@@ -176,6 +176,8 @@ namespace PhantomBlade
             Rush15 = MakeFeature("PhantomBladeRush15", Guids.RushFeature15, "Rush15.Name", "Rush15.Description", standIcon);
             Rush19 = MakeFeature("PhantomBladeRush19", Guids.RushFeature19, "Rush19.Name", "Rush19.Description", standIcon);
             Absorb18 = MakeFeature("PhantomBladeAbsorb18", Guids.Absorb18Feature, "Absorb18.Name", "Absorb18.Description", standIcon);
+            Absorb18.HideInUI = true;
+            Absorb18.HideInCharacterSheetAndLevelUp = true;
             // 폐지된 10레벨 「재충전」(소유자 결정 2026-11-16, 설계 §14 ①). 블루프린트는 같은 GUID 로 남긴다 — 이미 이 특성을 가진 캐릭터의 세이브가 사실로 참조하고,
             //   엔진은 블루프린트 없는 사실을 「saves-support」 실행 인자가 있을 때만 지운다(EntityFactsManager.PostLoad IL 0044~0088: 없으면 null 블루프린트로 EntityFact.PostLoad).
             //   컴포넌트 0(효과 없음), 진행표에 넣지 않음, UI 숨김. 옛 세이브의 StandRefill 런타임 컴포넌트는 로드 때 엔진이 경고 1줄과 함께 버린다
@@ -192,7 +194,7 @@ namespace PhantomBlade
             RangedGuard6 = MakeFeature("PhantomBladeRangedGuard6", Guids.RangedGuard6, "RangedGuard.Name", "RangedGuard.Description", guardIcon);
             RangedGuard14 = MakeFeature("PhantomBladeRangedGuard14", Guids.RangedGuard14, "RangedGuard.Name", "RangedGuard.Description", guardIcon);
 
-            // 흡수·원거리 방어는 스탠드 버프에(토글을 끄면 함께 꺼진다). 흡수 비율(50/75%)은 StandAbsorb 가 실행 시 레벨로 읽는다(Absorb18 은 설명용).
+            // 흡수·원거리 방어는 스탠드 버프에(토글을 끄면 함께 꺼진다). 받는 피해의 25%를 흡수한다. Absorb18은 이전 저장에서만 참조한다.
             // (전투 종료 재충전 컴포넌트 StandRefill 은 2026-11-16 폐지 — 풀을 채우는 것은 엔진의 휴식·레벨업뿐이다.)
             // StandRushState: 러시 라운드당 N 타 상태(F1, Task 6b 카운터). 상태는 유닛 것 — 토글을 꺼도 지우지 않는다(fix round 1 ①).
             AddComponents(StandBuff, new StandAbsorb(), new StandRangedGuard(), new StandRushState());
@@ -228,7 +230,6 @@ namespace PhantomBlade
             // (10레벨 재충전 특성은 2026-11-16 부터 진행표에 없다 — 위 폐지 주석.)
             Archetype.AddAt(StandRules.RangedGuard2Level, RangedGuard14);
             Archetype.AddAt(StandRules.FullAttackLevel, FullAttackFeature);
-            Archetype.AddAt(StandRules.Absorb75Level, Absorb18);
             AddGhostSlashFeatures(new[] { GhostSlash5, GhostSlash10, GhostSlash15, GhostSlash20 });
         }
 

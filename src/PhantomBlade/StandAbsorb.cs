@@ -9,7 +9,7 @@ using WotrClassMod.Common;
 
 namespace PhantomBlade
 {
-    // 스탠드 흡수(설계 §4.4): 스탠드가 켜져 있는 동안(StandBuff 컴포넌트) 본체가 받는 피해의 50%(18레벨부터 75%)를 흡수 풀이 대신 받는다.
+    // 스탠드 흡수(설계 §4.4): 스탠드가 켜져 있는 동안(StandBuff 컴포넌트) 본체가 받는 피해의 25%를 흡수 풀이 대신 받는다.
     // 훅 위치(컨트롤러 판정 Y, 2026-11-07):
     // - 계산·감산 = ITargetRulebookHandler<RuleCalculateDamage>.OnEventDidTrigger. RuleCalculateDamage.OnTrigger 의 IUnitApplyDamageReduction 이벤트(IL 006D)에서는
     //   UnitPartDamageReduction(DR·저항·경도)이 구독 순서대로 같은 이벤트에서 감산하므로 그 뒤에 오는 DR 을 못 본다. DidTrigger 는 OnTrigger 뒤에

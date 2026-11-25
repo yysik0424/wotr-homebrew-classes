@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.9-beta
+
+- Falconers gain Threefold Hunt in place of Improved Evasion at ranger level 16. They keep Evasion at level 9.
+
+- Prophecy Breakers use half BAB. Spellfists gain one reservoir point per two brawler levels. Phantom Blades absorb 25% at every level and use a pool multiplier of two.
+
 ## 0.17.8-beta
 
 - Pack Wardens fight with their main companion at levels 1–6. Mounted Call brings one auxiliary at levels 7–12 and two from level 13 while riding that companion in combat.
