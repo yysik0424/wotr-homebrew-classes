@@ -17,12 +17,13 @@ namespace ShadowSorcerer
         public override string ToString() { return Action + (Count > 0 ? " x" + Count : "") + (Reason == null ? "" : " (" + Reason + ")"); }
     }
 
-    public enum FireOutcome { Ok, TargetDead, TargetInvalid, CasterDown, EchoCastFailed, ResultMissing, TargetUnknown }
+    public enum FireOutcome { Ok, TargetDead, TargetInvalid, CasterDown, EchoCastFailed, ResultMissing, TargetUnknown, NoEchoSlot }
 
     public static class DudReasons
     {
         public const string TargetDead = "TargetDead", TargetInvalid = "TargetInvalid", CasterDown = "CasterDown", WaitTimeout = "WaitTimeout", EchoCastFailed = "EchoCastFailed", Reloaded = "Reloaded";
-        public static readonly string[] All = { TargetDead, TargetInvalid, CasterDown, WaitTimeout, EchoCastFailed, Reloaded };
+        public const string NoEchoSlot = "NoEchoSlot";
+        public static readonly string[] All = { TargetDead, TargetInvalid, CasterDown, WaitTimeout, EchoCastFailed, Reloaded, NoEchoSlot };
     }
 
     // EchoQueueCore.Step 의 바깥(생산 = EchoQueue.StepHost, 시험 = 가짜). 연출 훅 셋(Stage*)은 돌려주는 값이 없다 — 대기열 결정에 들어갈 길이 없다.
@@ -130,6 +131,7 @@ namespace ShadowSorcerer
                 case FireOutcome.EchoCastFailed: return Drop(j, 1, DudReasons.EchoCastFailed);
                 case FireOutcome.TargetDead: return Drop(j, j.Remaining, DudReasons.TargetDead);
                 case FireOutcome.TargetInvalid: return Drop(j, j.Remaining, DudReasons.TargetInvalid);
+                case FireOutcome.NoEchoSlot: return Drop(j, j.Remaining, DudReasons.NoEchoSlot);
                 case FireOutcome.CasterDown: return Drop(j, j.Remaining, DudReasons.CasterDown);
                 case FireOutcome.ResultMissing: case FireOutcome.TargetUnknown:
                     j.Aborted = true;

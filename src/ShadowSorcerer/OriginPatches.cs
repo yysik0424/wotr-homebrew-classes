@@ -20,7 +20,7 @@ namespace ShadowSorcerer
 
 
 
-        static void Prefix(UnitUseAbility __instance, out bool __state)
+        static void Prefix(UnitUseAbility __instance, AbilityData ___m_AbilityOriginal, out bool __state)
         {
             __state = false;
             try
@@ -31,7 +31,7 @@ namespace ShadowSorcerer
 
                 ShadowErrors.MaybeFault(ErrorLedger.SiteOriginMarker);
                 if (data == null) { ShadowErrors.Report(ErrorLedger.SiteOriginMarker, "UnitUseAbility.OnAction without ability data - scope not opened"); return; }
-                EchoRegistry.Claims.Open(OriginKind.Command, data);
+                EchoRegistry.Claims.Open(OriginKind.Command, data, ___m_AbilityOriginal);
                 __state = true;
             }
             catch (Exception e) { ShadowErrors.ReportException(ErrorLedger.SiteOriginMarker, e); }
@@ -64,7 +64,12 @@ namespace ShadowSorcerer
 
         static void Postfix(RuleCastSpell __instance, ClaimToken __state)
         {
-            try { EchoRegistry.Claims.CompleteCtor(__state, __instance, (rule, kind) => EchoRegistry.MarkOrigin((RuleCastSpell)rule, kind)); }
+            try
+            {
+                if (EchoRegistry.Claims.CompleteCtor(__state, __instance, (rule, kind) => EchoRegistry.MarkOrigin((RuleCastSpell)rule, kind))
+                    && __state.OriginalAbility != null)
+                    __instance.SetCustomData(EchoRegistry.OriginalAbilityKey, (AbilityData)__state.OriginalAbility);
+            }
             catch (Exception e) { ShadowErrors.ReportException(ErrorLedger.SiteOriginMarker, e); }
         }
     }

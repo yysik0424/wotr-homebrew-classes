@@ -21,16 +21,17 @@ namespace ShadowSorcerer
         public readonly AbilityData Data;
         public readonly TargetWrapper Wrapper;
         public readonly AbilityData ParameterSource;
+        public readonly AbilityData Slot;
         public readonly bool NeedsFrozenCenter;
         public readonly Vector3? FrozenCenter;
         public readonly AbilityExecutionProcess Original;
         public readonly EchoJobState State;
 
-        public EchoJob(UnitEntityData caster, AbilityData data, TargetWrapper wrapper, AbilityData parameterSource, bool needsCenter, Vector3? center, AbilityExecutionProcess original, int count)
+        public EchoJob(UnitEntityData caster, AbilityData data, TargetWrapper wrapper, AbilityData parameterSource, AbilityData slot, bool needsCenter, Vector3? center, AbilityExecutionProcess original, int count)
         {
-            if (caster == null || data == null || wrapper == null || parameterSource == null || original == null) throw new ArgumentNullException("ShadowSorcerer: echo job with a missing part");
+            if (caster == null || data == null || wrapper == null || parameterSource == null || slot == null || original == null) throw new ArgumentNullException("ShadowSorcerer: echo job with a missing part");
             if (needsCenter && !center.HasValue) throw new ArgumentException("ShadowSorcerer: echo job needs a frozen centre but has none");
-            Caster = caster; Data = data; Wrapper = wrapper; ParameterSource = parameterSource; NeedsFrozenCenter = needsCenter; FrozenCenter = center; Original = original;
+            Caster = caster; Data = data; Wrapper = wrapper; ParameterSource = parameterSource; Slot = slot; NeedsFrozenCenter = needsCenter; FrozenCenter = center; Original = original;
             State = new EchoJobState(Now(), count);
         }
 
@@ -129,6 +130,8 @@ namespace ShadowSorcerer
             ParamsCopy.Apply(rule.Context, j.ParameterSource);
             // 연출(보이는 출발점)만 묶는다 — 던지지 않고 규칙에 쓰지 않는다. 묶이지 않으면 이 메아리는 본체에서 나간다(EchoVisuals.Bind).
             EchoVisuals.Bind(rule.Context, j, tag.Index);
+            // Native Spend takes exactly one spontaneous slot. Check again now that the original has paid.
+            if (!j.Slot.Spellbook.Spend(j.Slot)) return FireOutcome.NoEchoSlot;
             Rulebook.Trigger(rule);
             Fired++;
 

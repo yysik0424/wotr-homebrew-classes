@@ -21,6 +21,7 @@ namespace ShadowSorcerer
     public static class EchoRegistry
     {
         static readonly RulebookEvent.CustomDataKey originKey = new RulebookEvent.CustomDataKey("ShadowSorcerer.Origin");
+        internal static readonly RulebookEvent.CustomDataKey OriginalAbilityKey = new RulebookEvent.CustomDataKey("ShadowSorcerer.OriginalAbility");
         static readonly WeakKeyTable<object, EchoTag> tags = new WeakKeyTable<object, EchoTag>();
 
         // 명령 범위·생성자 claim 상태기계(순수 OriginClaimRule) — 게임 메인 스레드 하나.

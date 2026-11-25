@@ -12,12 +12,13 @@ namespace ShadowSorcerer
     public sealed class ClaimToken
     {
         public readonly OriginKind Kind;
-        internal ClaimToken(OriginKind kind) { Kind = kind; }
+        internal readonly object OriginalAbility;
+        internal ClaimToken(OriginKind kind, object originalAbility) { Kind = kind; OriginalAbility = originalAbility; }
     }
 
     public sealed class OriginClaimRule
     {
-        sealed class Scope { public OriginKind Kind; public object Data; public bool Claimed; }
+        sealed class Scope { public OriginKind Kind; public object Data, OriginalAbility; public bool Claimed; }
         readonly List<Scope> stack = new List<Scope>();
 
 
@@ -27,11 +28,11 @@ namespace ShadowSorcerer
 
 
 
-        public void Open(OriginKind kind, object data)
+        public void Open(OriginKind kind, object data, object originalAbility = null)
         {
             if (kind == OriginKind.None) throw new ArgumentException("ShadowSorcerer: OriginClaimRule.Open with OriginKind.None");
             if (data == null) throw new ArgumentNullException("data", "ShadowSorcerer: OriginClaimRule.Open without ability data");
-            stack.Add(new Scope { Kind = kind, Data = data });
+            stack.Add(new Scope { Kind = kind, Data = data, OriginalAbility = originalAbility });
         }
 
         public void Close()
@@ -54,7 +55,7 @@ namespace ShadowSorcerer
             var top = stack[stack.Count - 1];
             if (top.Claimed || !ReferenceEquals(top.Data, data)) return null;
             top.Claimed = true;
-            return new ClaimToken(top.Kind);
+            return new ClaimToken(top.Kind, top.OriginalAbility);
         }
 
         public bool CompleteCtor(ClaimToken token, object instance, Action<object, OriginKind> mark)

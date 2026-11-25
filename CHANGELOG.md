@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.16-beta
+
+- A Shadow Sorcerer pays one extra slot for an echo. With only one slot left, the original spell still fires on its own.
+- 그림자 소서러의 메아리를 발사할 때 같은 단계 슬롯을 1칸 더 쓴다. 한 칸만 남으면 원본 주문만 시전한다.
+
 ## 0.17.15-beta
 
 - Oathbound Revenant tracks death transfers per mark and replaces the same caster’s lesser fear aura on upgrade. Pack Warden uses actual melee reach to judge arrival. Loading a Warlock with an ambiguous first patron preserves the pact and logs a warning.

@@ -84,6 +84,22 @@ namespace ShadowSorcerer
             return f;
         }
 
+        // UnitUseAbility pays the original after the rule returns. Touch delivery already paid at charge time.
+        // Keep the slot tier separately from the base spell the echo casts without metamagic.
+        internal static AbilityData ExtraSlot(AbilityData spell, AbilityData commandOriginal, bool spendsOriginal)
+        {
+            var charge = spell.StickyTouch;
+            var original = charge ?? commandOriginal ?? spell;
+            int reserved = charge == null && spendsOriginal ? original.SpellSlotCost : 0;
+            var source = original;
+            while (source.ConvertedFrom != null) source = source.ConvertedFrom;
+            var book = source.Spellbook;
+            if (book == null || !book.Blueprint.Spontaneous || book.Blueprint.AssetGuid.ToString() != Guids.Game.SorcererSpellbook) return null;
+            int level = book.GetSpellLevel(source);
+            if (level <= 0 || book.GetSpontaneousSlots(level) <= reserved) return null;
+            return new AbilityData(source.Blueprint, book, level);
+        }
+
         static void Enqueue(RuleCastSpell evt, UnitEntityData caster, CastFacts facts, int count)
         {
             var data = evt.Spell;
@@ -106,8 +122,12 @@ namespace ShadowSorcerer
                     ShadowErrors.Report(ErrorLedger.SiteEchoHandler, "unsupported area shape for " + data.Blueprint.name + " (anchor " + data.TargetAnchor + ", TargetsAround " + ff.UsesTargetsAround + ") - no echo (J17)");
                     return;
             }
+            AbilityData commandOriginal;
+            evt.TryGetCustomData(EchoRegistry.OriginalAbilityKey, out commandOriginal);
+            var slot = ExtraSlot(data, commandOriginal, evt.ShouldSpendResource);
+            if (slot == null) { ShadowErrors.CountSkip(DudReasons.NoEchoSlot); return; }
             RoundLedger.Commit(caster, facts.Round);
-            EchoQueue.Enqueue(new EchoJob(caster, clean, wrapper, parameterSource, kind == FreezeKind.KeepWrapperFrozenCenter, center, evt.Result, count));
+            EchoQueue.Enqueue(new EchoJob(caster, clean, wrapper, parameterSource, slot, kind == FreezeKind.KeepWrapperFrozenCenter, center, evt.Result, count));
             ShadowDoubles.Watch(caster); // 연출 전용(던지지 않는다): 불러온 직후처럼 특성 켜짐 이벤트를 놓친 본체도 첫 메아리에서 묶음을 갖게 한다
         }
 
