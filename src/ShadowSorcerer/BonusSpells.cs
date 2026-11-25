@@ -63,11 +63,10 @@ namespace ShadowSorcerer
         }
     }
 
-    // 하루 −1 표시 특성(L1). 판정은 아키타입으로 한다(SpellsPerDayPatch) — 이 특성은 레벨표에 보이는 설명일 뿐이다.
+    // Grants the echo toggle at level one. The spellbook handles the original cast.
     public static class SlotsFeature
     {
         public static BlueprintFeature Feature;
-        internal static readonly BlueprintGuid SorcererBook = BlueprintGuid.Parse(Guids.Game.SorcererSpellbook);
         internal static BlueprintBuff Buff;
         internal static BlueprintActivatableAbility Toggle;
         internal static bool Active(UnitEntityData owner) => Buff != null && owner != null && owner.Buffs.HasFact(Buff);

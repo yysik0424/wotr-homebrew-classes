@@ -4,7 +4,7 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.13-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.13-beta/HomebrewClasses-0.17.13-beta.zip) · [Release notes and test coverage](release-notes-0.17.13-beta.md)
+> [Download 0.17.14-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.14-beta/HomebrewClasses-0.17.14-beta.zip) · [Release notes and test coverage](release-notes-0.17.14-beta.md)
 
 ## The classes
 
@@ -21,7 +21,7 @@ Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod 
 | 9 | [Chaos Warrior](#chaos-warrior) | Warpriest | Rages, mutates at random (claws, fangs and more), drives enemies mad with stacking pain, and casts one spell as a swift action while raging each combat | — |
 | 10 | [Chimera Monk](#chimera-monk) | Monk | Reshapes the body with a new mutation every two levels | **DarkCodex** |
 | 11 | [Oathbound Revenant](#oathbound-revenant) | Paladin | An undead paladin whose smites knit the body back together | — |
-| 12 | [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | Toggle a shadow to echo a harmful spell each round. Paid sorcerer spells cost one extra slot | — |
+| 12 | [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | Toggle a shadow to echo the first eligible spell each round. The original and echo cost one slot in total | — |
 | 13 | [Grey Seer](#grey-seer) | Arcanist | Cast on the front line with sword and staff, then strike a designated foe. Spend reservoir points according to the spell slot to secure a threatened cast. | — |
 | 14 | [Blood Berserker](#blood-berserker) | Bloodrager | Use a blood chain to reel in prey or pull yourself to a larger foe. Bloodrage coats your melee weapons, and their extra blood damage doubles on criticals from level 13. | — |
 | 15 | [Sorrow Inquisitor](#sorrow-inquisitor) | Inquisitor | Lift afflictions from allies into a lead rosary and sentence a foe to bear them. Returning one to its source raises its save DC, and from level 16 each bead that takes effect deals divine damage. | — |
@@ -48,7 +48,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.13-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.14-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -59,7 +59,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.13-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.14-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -2383,20 +2383,20 @@ Channel Negative Energy draws on lay on hands uses, not on the base paladin's ch
 |---|---|
 | Base class | Sorcerer |
 | Key ability | Charisma. Recommended abilities are the same as the base Sorcerer's |
-| Spellcasting | Standard sorcerer daily slots and nine additional shadow or illusion spells. While the shadow is on, a paid sorcerer cast uses one additional slot of its level. |
+| Spellcasting | Standard sorcerer daily slots and nine additional shadow or illusion spells. An ordinary spell and its echo together use one slot. |
 | Required mods | None |
 | Optional integrations | None |
 | Alignment / deity restrictions | None added by the archetype |
 
 ### Overview
 
-With the shadow toggled on, paid sorcerer spells cost one additional slot of the same tier. One shadow repeats your first eligible harmful sorcerer spell each round. It recasts the same spell at the same target or point 0.5 seconds after the original effect ends. For example, if you maximize a fireball, the original deals maximum damage and the echo rolls the ordinary fireball dice.
+With the shadow toggled on, one shadow repeats your first eligible harmful sorcerer spell each round. It recasts the same spell at the same target or point 0.5 seconds after the original effect ends. For example, if you maximize a fireball, the original deals maximum damage and the echo rolls the ordinary fireball dice.
 
 ### What you give up
 
 | Level | Base feature | Notes |
 |---|---|---|
-| 1 | Spells Given to Shadow | Turning on the shadow increases the cost of an ordinary sorcerer spell from one slot to two. |
+| 1 | Spells Given to Shadow | An ordinary sorcerer spell uses one slot with the shadow on or off. |
 | 7 | Bloodline Feat Selection | Removed |
 | 13 | Bloodline Feat Selection | Removed |
 | 19 | Bloodline Feat Selection | Removed |
@@ -2409,7 +2409,7 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 |---|---|---|
 | 1 | Shadow Echo | While the toggle is on, one shadow repeats the first eligible harmful sorcerer spell each round after a 0.5-second delay. |
 | 1 | Shadow Double | One shadow casts your echo from Sorcerer level 1 through 20 |
-| 1 | Spells Given to Shadow | Turn off the shadow to cast at the ordinary slot cost. |
+| 1 | Spells Given to Shadow | Choose when your spells produce an echo. |
 | 3 | Shadow Arcana: Vanish | You learn Vanish (1st level) as an extra spell |
 | 5 | Shadow Arcana: Mirror Image | You learn Mirror Image (2nd level) as an extra spell |
 | 7 | Shadow Arcana: Displacement | You learn Displacement (3rd level) as an extra spell |
@@ -2424,7 +2424,7 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 
 #### Shadow Echo
 
-- **Shadow toggle.** Turn it on to echo the first eligible harmful spell each round. Turn it off to cast at the ordinary slot cost.
+- **Shadow toggle.** Turn it on to echo the first eligible harmful spell each round. Turn it off to cast without an echo.
 - **Which spells echo** — all of the following must hold.
   - The spell is cast from your Sorcerer spellbook. Mythic spells merged into that spellbook count. Other classes' spellbooks, items such as scrolls, wands and potions, and abilities that are not spells do not.
   - It is cast by a direct casting command (yours or the AI's). Spells that some other effect casts automatically do not echo.
@@ -2441,7 +2441,7 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
   - Area spells aimed at a point: on the original point. Even if you aimed by clicking an enemy, the echoes land where the spell was first placed, not where that enemy has moved to.
   - Area spells centred on the caster or on a target: on the centre the original cast used.
 - **Echo strength** uses the selected spell variant, base spell level, caster level, casting ability and normal bonuses such as Spell Focus. It makes fresh damage and saving throw rolls. Maximize, Heighten and Persistent on the original never maximize the echo’s damage, raise its DC or force its targets to reroll their saves.
-- **Slot cost.** With the toggle on, the original sorcerer cast pays the additional slot. The echo uses no further slot or action. On-cast effects and metamagic buffs for the next spell apply once, to the original cast.
+- **Slot cost.** The original sorcerer spell uses its normal slot. The echo uses no further slot or action. On-cast effects and metamagic buffs for the next spell apply once, to the original cast.
 - **Echoes never produce echoes.**
 - **Ordinary damage spells** roll fresh damage without metamagic. The echo deals 50% on failed disbelief or 25% on successful disbelief.
 - **Disbelief** gives each affected target one Will save against the echo’s base spell DC.
@@ -2481,9 +2481,8 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 
 #### Spells Given to Shadow
 
-- With the shadow on, casting Magic Missile spends two 1st-level slots once, regardless of the number of missiles. Turn it off to cast with only one slot remaining.
-- Support spells and spells cast after the echo for that round also pay the additional slot. Cantrips and scrolls use no sorcerer slots.
-- Turning the shadow off restores the ordinary cost on your next cast.
+- Magic Missile and its echo together use one 1st-level slot, regardless of the number of missiles. A single remaining slot is enough to cast it.
+- Support spells and subsequent spells in the same round use their normal slot cost. Cantrips and scrolls use no sorcerer slots.
 - Cantrips (level 0) and spell levels you have not unlocked yet are unaffected.
 - It applies only to this archetype's Sorcerer spellbook, not to any other spellbook the character has.
 
@@ -2527,7 +2526,7 @@ The archetype adds no choices of its own. You pick a bloodline exactly as a base
 - **TabletopTweaks, ExpandedContent, BrawlerClassWrath**: these mods add entries to the bloodline feat selection. The Shadow Sorcerer loses that selection altogether, so there is no conflict.
 - **Merged mythic spellbooks**: mythic spells merged into the Sorcerer spellbook (the base game's Lich merge, and Angel, Aeon, Azata, Demon and Trickster spells merged by mods that extend merging) are Sorcerer spellbook spells, so they echo when they qualify.
 - The **ToyBox** daily-slot multiplier applies as it does to a standard sorcerer.
-- The toggle also applies when a prestige class advances the same sorcerer book.
+- When a prestige class advances the same sorcerer spellbook, only the original spell spends its normal slot.
 - **Spells that do not echo**: teleports and utility spells that do no harm (Dimension Door and the like) are excluded. A few area spells that travel with the caster or a target cannot keep their original centre and are excluded as well: Zone of Predetermination, the Angel spell Repel the Profane and the Trickster spell Breath of Money.
 - **Spells excluded from echoing (15)**: the spells below are harmful to enemies but never echo. The original cast is unchanged.
   - 14 spells with an effect that would still reach an enemy that disbelieved: Inflict Moderate Wounds, Mass / Baleful Polymorph / Prismatic Spray / Clashing Rocks / Force Punch / Hideous Laughter / Slow / Crushing Despair / Cause Fear / Scare / Mortal Terror / the Azata spell Water Torrent / the Lich spell Siphon Time / the Aeon spell Relativity.

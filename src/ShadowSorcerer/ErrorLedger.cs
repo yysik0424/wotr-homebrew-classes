@@ -36,12 +36,11 @@ namespace ShadowSorcerer
         public const string SiteOriginMarker = "origin-marker";
         public const string SiteParamsCopy = "params-copy";
         public const string SiteFrozenCenter = "frozen-center";
-        public const string SiteSpellsPerDay = "spells-per-day";
         public const string SiteShadowFactor = "shadow-factor";
         public const string SiteTriggerGuard = "trigger-guard";
         public const string SiteReadback = "readback";
         public const string SiteBuilder = "builder";
-        public static readonly IReadOnlyList<string> Sites = new[] { SiteEchoHandler, SiteEchoQueue, SiteOriginMarker, SiteParamsCopy, SiteFrozenCenter, SiteSpellsPerDay, SiteShadowFactor, SiteTriggerGuard, SiteReadback, SiteBuilder };
+        public static readonly IReadOnlyList<string> Sites = new[] { SiteEchoHandler, SiteEchoQueue, SiteOriginMarker, SiteParamsCopy, SiteFrozenCenter, SiteShadowFactor, SiteTriggerGuard, SiteReadback, SiteBuilder };
 
         const string Prefix = "ShadowSorcerer: ";
 

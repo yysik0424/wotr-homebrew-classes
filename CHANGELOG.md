@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.14-beta
+
+- 그림자 소서러의 매직 미사일은 그림자를 켜도 1레벨 슬롯 1칸을 쓴다. 메아리는 추가 슬롯을 쓰지 않는다.
+- Magic Missile costs one 1st-level slot even with the shadow on. Its echo costs no additional slot.
+
 ## 0.17.13-beta
 
 - 블라스트 메이거스는 방어 효과로 무효화된 치명타를 폭발에 적용하지 않는다. 키네티시스트와의 번 충돌 시 블라스트 비활성화 사유를 기록한다.

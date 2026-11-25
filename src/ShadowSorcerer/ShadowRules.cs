@@ -19,8 +19,6 @@ namespace ShadowSorcerer
         // 아키타입이 지우는 혈통 특기 선택 레벨. 출처: 설계 §5 + SorcererProgression.jbp L7/L13/L19 = SorcererFeatSelection 3a60f0c0…(T1 Step 0 직독).
         public static readonly IReadOnlyList<int> RemovedFeatSelectionLevels = new[] { 7, 13, 19 };
 
-        public static readonly int ExtraSlotWhileActive = 1;
-
         // 메아리 그림자 계수(%). 본편 MechanicsContext.ShadowFactorPercents 한 필드가 피해 배율(½)과 버프·디버프 확률(50%)을 함께 낸다.
          
         // 2026-11-16 소유자 결정 뒤: 메아리에서는 이 계수가 「불신 성공 시 피해 추가 배율」로만 쓰인다 — 버프·디버프 확률은 굴리지 않는다(H8 EchoNoChancePatch, 불신 성공 = 무효).
