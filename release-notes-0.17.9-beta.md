@@ -9,6 +9,8 @@
 
 - 카오스 워리어는 본편 무한한 격노의 선행 조건을 읽어 혼돈의 분노를 선택 자격에 추가한다. 분노 재진입 시 변이 재추첨과 전투당 한 번의 광란의 시전을 적용한다.
 
+**검증 범위.** 최종 배포본의 오프라인 전체 검사 44,457건이 통과했다. 앞선 빌드의 게임 점검은 20개 직업에서 1,801건 통과, 28건 실패, 34건 건너뜀을 기록했다. 나머지 카오스 워리어는 초기화 단계에서 중단됐다. 최종 빌드의 카오스 워리어 등록 수정과 귀검사 공유 횟수는 게임 재실행 없이 오프라인에서 검증했다.
+
 ## English
 
 - Falconers gain Threefold Hunt in place of Improved Evasion at ranger level 16. They keep Evasion at level 9 and take full damage on a failed Reflex save when Evasion applies. On area load, existing Falconers lose the old level-16 grant unless there is evidence of a separate source.
@@ -16,3 +18,5 @@
 - The Spellfist's Arcane Reservoir holds 3 + half brawler level (rounded down) + Intelligence modifier. At level 20 with Intelligence 28, that is 22 points alongside 42 daily spell slots.
 - A manifested Guardian Phantom absorbs 25% at every level. Its pool holds twice fighter level times Charisma modifier (minimum modifier 1), or 200 points at level 20 with a +5 modifier. Ghost Slash and Guardian Phantom Full Assault share daily uses equal to the Charisma modifier (minimum 1). Either technique spends one use. Ghost Slash keeps its damage and projectile count.
 - Fixed Chaos Warrior registration against the native Limitless Rage prerequisite. Re-entering rage rerolls mutations, and Frenzied Casting remains available once per combat.
+
+**Verification.** All 44,457 offline checks passed on the final source. An in-game run of the preceding build completed 20 class suites with 1,801 passes, 28 failures and 34 skips. Chaos Warrior failed during initialization. Its registration fix and the shared Guardian Phantom uses received offline verification on the final build.
