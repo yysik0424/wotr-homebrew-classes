@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.18-beta
+
+- Spiritsteel uses Wisdom for daily barbarian rage rounds.
+- 스피릿스틸의 일일 분노 라운드를 지혜 수정치로 계산한다.
+
 ## 0.17.17-beta
 
 - Spiritsteel now chooses from 30 bound-weapon feats. The ten additions cover materials, scouting, charges, attacks of opportunity, and four creature types. Pick one every even level for ten total by level 20.

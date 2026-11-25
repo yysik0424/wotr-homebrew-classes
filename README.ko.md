@@ -4,7 +4,9 @@
 
 *Pathfinder: Wrath of the Righteous*에 새 아키타입 21종을 더합니다. Unity Mod Manager 모드 하나로 설치합니다. 헌터로 동물 무리를 지휘하거나, 연금술사로 골렘을 입거나, 바바리안으로 부족에게 받은 무기의 신령과 함께 싸울 수 있습니다.
 
-> [Unity Mod Manager용 0.17.17-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.17-beta/HomebrewClasses-0.17.17-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.17-beta.md)
+> [Unity Mod Manager용 0.17.18-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.18-beta/HomebrewClasses-0.17.18-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.18-beta.md)
+
+스피릿스틸은 지혜로 일일 분노 라운드를 계산합니다. 지혜 18이면 1레벨에 8라운드, 20레벨에 46라운드이며, 신령을 함께 켜도 라운드당 1회만 소모합니다.
 
 스피릿스틸은 결속 무기 피트 30종 중 20레벨까지 10개를 고릅니다. 새 각인으로 냉철·아다만틴 피해 감소를 돌파하거나, 데몬을 상대할 때처럼 조건이 맞는 공격의 명중을 높일 수 있습니다.
 
@@ -52,7 +54,7 @@
 ## 설치
 
 1. 게임을 종료합니다. 기존 직업 단독 모드가 설치돼 있으면 12개 직업 폴더를 게임의 `Mods` 밖에 백업합니다. 번들과 단독 모드가 동시에 같은 직업을 등록하지 않도록 합니다.
-2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.17-beta.zip`을 준비합니다.
+2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.18-beta.zip`을 준비합니다.
 3. ZIP을 Unity Mod Manager에 끌어다 놓거나 게임의 `Mods` 폴더에 풉니다. `Mods/HomebrewClasses` 아래에는 `Info.json`, `HomebrewClasses.dll`, 직업 DLL 21개가 든 `classes` 폴더가 있어야 합니다.
 4. 게임을 실행합니다. 캐릭터 생성 화면에서 기반 직업의 아키타입 목록에 나타납니다.
 
@@ -63,7 +65,7 @@
 Windows PowerShell에서 `WOTR_MANAGED_DIR`을 게임의 `Wrath_Data/Managed` 폴더로, `WOTR_CSC`를 Visual Studio Roslyn의 `csc.exe` 경로로 설정합니다. Unity Mod Manager를 설치한 게임의 어셈블리가 필요합니다. 다음 명령은 비어 있는 출력 폴더를 사용합니다.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.17-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.18-beta -Out .\out -NoDevCompare
 ```
 
 ## 설정
@@ -2910,7 +2912,7 @@ DLC 유닛을 쓰는 칸: 심연 III(아브리칸딜루) 한 칸뿐이다. 나�
 
 | 항목 | 내용 |
 |---|---|
-| 기반 직업 | 바바리안. 힘은 무기 공격에, 건강은 일일 분노 라운드에, 지혜는 신령의 분노 중 공격 전법에 쓰인다. |
+| 기반 직업 | 바바리안. 힘은 무기 공격에, 지혜는 일일 분노 라운드와 신령의 분노 중 공격 전법에 쓰인다. |
 | 결속 대상 | 부족에게 받은 실물 무기 한 자루. 처음 고른 범주의 숙련을 함께 얻는다. |
 | 주문·장비 | 바바리안의 분노와 기본 장비 숙련을 유지한다. 결속 무기에 새기는 피트와 전사가 얻는 팀워크 피트는 따로 고른다. |
 | 직업 모드 요구 사항 | 홈브류 아키타입 통합 모드에 포함된다. 별도의 직업 모드 설치는 필요 없다. |
@@ -3036,7 +3038,7 @@ DLC 유닛을 쓰는 칸: 심연 III(아브리칸딜루) 한 칸뿐이다. 나�
 
 기본 분노와 신령은 바바리안의 일일 분노 라운드를 공유한다. 두 효과가 켜져 있어도 라운드당 1회만 차감된다. 신령만 꺼 둔 동안에도 기본 분노는 라운드를 소모한다. 다음 전투에는 남은 라운드를 가져가고, 휴식하면 회복한다.
 
-단일 직업 바바리안의 기본 일일 라운드는 **2 + 바바리안 레벨 × 2 + 건강 수정치**다. 건강 14일 때 1레벨은 6라운드, 5레벨은 14라운드다. ‘추가 격노’로 늘어난 라운드도 신령과 함께 쓸 수 있다. 미씩 ‘끝없는 격노’가 있으면 두 효과를 라운드 소모 없이 유지한다.
+스피릿스틸의 기본 일일 라운드는 **2 + 바바리안 레벨 × 2 + 지혜 수정치**다. 지혜 18이면 1레벨에 8라운드, 5레벨에 16라운드, 20레벨에 46라운드다. ‘추가 격노’로 늘어난 라운드도 신령과 함께 쓸 수 있다. 미씩 ‘끝없는 격노’가 있으면 두 효과를 라운드 소모 없이 유지한다.
 
 ### 호환과 주의
 

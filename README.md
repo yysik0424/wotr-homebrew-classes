@@ -4,9 +4,11 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.17-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.17-beta/HomebrewClasses-0.17.17-beta.zip) · [Release notes and test coverage](release-notes-0.17.17-beta.md)
+> [Download 0.17.18-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.18-beta/HomebrewClasses-0.17.18-beta.zip) · [Release notes and test coverage](release-notes-0.17.18-beta.md)
 
-Spiritsteel now chooses ten bound-weapon feats from a pool of thirty by level 20. New inscriptions help overcome cold iron or adamantine damage reduction, or improve accuracy on attacks such as those against demons.
+Spiritsteel uses Wisdom for daily rage rounds. With Wisdom 18, you get 8 rounds at level 1 and 46 at level 20. Keeping the spirit awake costs one round per round in total.
+
+Spiritsteel chooses ten bound-weapon feats from a pool of thirty by level 20. New inscriptions help overcome cold iron or adamantine damage reduction, or improve accuracy on attacks such as those against demons.
 
 With the shadow on, Magic Missile and its echo each spend one 1st-level slot. With one slot left, only the original fires.
 
@@ -52,7 +54,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.17-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.18-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -63,7 +65,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.17-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.18-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -2910,7 +2912,7 @@ Gather paralysis with one round remaining and you can sentence an enemy in any e
 
 | Aspect | Details |
 |---|---|
-| Base class | Barbarian. Strength supports weapon attacks. Constitution contributes to daily rage rounds. Wisdom improves offensive maneuvers during Spirit Rage. |
+| Base class | Barbarian. Strength supports weapon attacks. Wisdom determines daily rage rounds and improves offensive maneuvers during Spirit Rage. |
 | The bond | One physical ancestral weapon. You also gain proficiency with the category you choose. |
 | Spells and equipment | Keeps normal barbarian rage and equipment training. Weapon inscriptions and the warrior’s teamwork feats are separate selections. |
 | Class mod requirement | Included in Homebrew Classes. No separate class mod is required. |
@@ -3036,7 +3038,7 @@ The teamwork selection draws from native lists including hunter, cavalier tactic
 
 Barbarian rage and Spirit Rage share the barbarian’s daily rage rounds. Keeping both active costs one round per round. Switching off only the spirit leaves barbarian rage running at its usual cost. Unspent rounds carry into the next encounter and refresh on rest.
 
-A single-class barbarian has **2 + twice their barbarian level + their Constitution modifier** rounds per day. With Constitution 14, that gives 6 rounds at level 1 or 14 at level 5. Extra Rage extends the time you can spend with the spirit, and Limitless Rage lets you sustain both effects without spending rounds.
+A single-class Spiritsteel has **2 + twice their barbarian level + their Wisdom modifier** rounds per day. With Wisdom 18, that gives 8 rounds at level 1, 16 at level 5, and 46 at level 20. Extra Rage extends the time you can spend with the spirit, and Limitless Rage lets you sustain both effects without spending rounds.
 
 ### Compatibility and notes
 

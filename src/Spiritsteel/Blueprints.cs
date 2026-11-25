@@ -19,6 +19,8 @@ namespace Spiritsteel
     internal static class Blueprints
     {
         internal static BlueprintBuff Native, Spirit;
+        internal static BlueprintAbilityResource RageRounds;
+        internal static BlueprintArchetype Archetype;
         internal static PrefabLink RageBurst;
         internal static BlueprintFeature Tactics, Trip;
         internal static BlueprintActivatableAbility Toggle;
@@ -58,7 +60,10 @@ namespace Spiritsteel
             var powers = Get<BlueprintFeatureSelection>(Guids.RagePowers);
             var fast = Get<BlueprintFeature>(Guids.Fast);
             Native = Get<BlueprintBuff>(Guids.NativeRage);
-            var icon = Get<BlueprintActivatableAbility>(Guids.NativeToggle).Icon;
+            var nativeToggle = Get<BlueprintActivatableAbility>(Guids.NativeToggle);
+            RageRounds = nativeToggle.ComponentsArray.OfType<ActivatableAbilityResourceLogic>().Single().RequiredResource
+                ?? throw new InvalidOperationException("Barbarian rage has no daily resource.");
+            var icon = nativeToggle.Icon;
             RageBurst = Native.ComponentsArray.OfType<Kingmaker.UnitLogic.Mechanics.Components.AddFactContextActions>()
                 .Where(c => c.Activated?.Actions != null).SelectMany(c => c.Activated.Actions)
                 .OfType<Kingmaker.UnitLogic.Mechanics.Actions.ContextActionSpawnFx>()
@@ -123,6 +128,7 @@ namespace Spiritsteel
             SetField(barbarian, "m_Archetypes", old.Concat(new[] {Ref<BlueprintArchetypeReference>(Guids.Archetype)}).ToArray());
             Registered = barbarian.Archetypes.Count(a => a == archetype) == 1;
             if (!Registered) throw new InvalidOperationException("Spiritsteel registration failed.");
+            Archetype = archetype;
         }
     }
 }
