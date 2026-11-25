@@ -142,8 +142,30 @@ namespace Spiritsteel
                 case WeaponFeatKind.Shield: return WearerStat(row.Kind, StatType.AC, 1);
                 case WeaponFeatKind.Mobility: return new WeaponFeatMobility();
                 case WeaponFeatKind.Trip: return new WeaponFeatTrip();
-                default: return new WeaponFeatAttack { Kind = row.Kind, Value = tier + 1 };
+                case WeaponFeatKind.ColdIron: return new WeaponMaterial { Material = PhysicalDamageMaterial.ColdIron };
+                case WeaponFeatKind.Adamantine: return new WeaponMaterial { Material = PhysicalDamageMaterial.Adamantite };
+                case WeaponFeatKind.Watchful: return new AddStatBonusEquipment { Stat = StatType.SkillPerception, Descriptor = ModifierDescriptor.Competence, Value = 3 };
+                case WeaponFeatKind.Silent: return new AddStatBonusEquipment { Stat = StatType.SkillStealth, Descriptor = ModifierDescriptor.Competence, Value = 3 };
+                case WeaponFeatKind.Charging:
+                case WeaponFeatKind.Opportunist:
+                    return new WeaponFeatTacticalAttack { Kind = row.Kind };
+                case WeaponFeatKind.UndeadHunter: return AgainstCreature("734a29b693e9ec346ba2951b27987e33");
+                case WeaponFeatKind.ConstructHunter: return AgainstCreature("fd389783027d63343b4a5634bd81645f");
+                case WeaponFeatKind.DragonHunter: return AgainstCreature("455ac88e22f55804ab87c2467deff1d6");
+                case WeaponFeatKind.DemonHunter: return AgainstCreature("dc960a234d365cb4f905bdc5937e623a");
+                case WeaponFeatKind.Focus:
+                case WeaponFeatKind.Specialization:
+                case WeaponFeatKind.Critical:
+                case WeaponFeatKind.Precise:
+                    return new WeaponFeatAttack { Kind = row.Kind, Value = tier + 1 };
+                default: throw new ArgumentOutOfRangeException(nameof(row.Kind), row.Kind, "Unexpected weapon inscription");
             }
+        }
+
+        private static WeaponFeatHunter AgainstCreature(string typeId)
+        {
+            var target = Get<BlueprintFeature>(typeId);
+            return new WeaponFeatHunter { TargetType = Ref<BlueprintFeatureReference>(target.AssetGuid.ToString()) };
         }
 
         private static WeaponFeatWearerStat WearerStat(WeaponFeatKind kind, StatType stat, int value)

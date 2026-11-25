@@ -6,7 +6,8 @@ namespace Spiritsteel
 {
     public enum WeaponFeatKind
     {
-        Acid, Fire, Cold, Electricity, Sonic, Ghost, Agile, Keen, Dodge, Focus, Specialization, Critical, Trip, Mobility, Fortitude, Reflex, Will, Initiative, Precise, Shield
+        Acid, Fire, Cold, Electricity, Sonic, Ghost, Agile, Keen, Dodge, Focus, Specialization, Critical, Trip, Mobility, Fortitude, Reflex, Will, Initiative, Precise, Shield,
+        ColdIron, Adamantine, Watchful, Silent, Charging, Opportunist, UndeadHunter, ConstructHunter, DragonHunter, DemonHunter
     }
 
     // Level thresholds and scope are from the approved 2026-11-24 weapon-feats design.
@@ -66,6 +67,26 @@ namespace Spiritsteel
                 "근접 교전 중인 적을 쏠 때 결속 무기의 명중 페널티를 없앱니다. 원거리·투척 무기와 근거리 사격이 필요합니다.", "Remove the shooting-into-melee penalty with the bound weapon. Requires a ranged or thrown weapon and Point-Blank Shot.", "8f3d1e6b4be006f4d896081f2f889665"),
             new WeaponFeatRow(WeaponFeatKind.Shield, 2, "방패 집중", "Shield Focus",
                 "방패 가시를 결속했을 때 그 방패가 주는 방패 보너스가 1 증가합니다. 전사의 방패 집중과는 한 번만 적용됩니다.", "Increase the shield bonus from the shield bearing the bound spikes by 1. This overlaps with Shield Focus.", "ac57069b6bf8c904086171683992a92a"),
+            new WeaponFeatRow(WeaponFeatKind.ColdIron, 2, "냉철 각인", "Cold Iron Inscription",
+                "결속 무기의 물리 타격을 냉철로 취급해 해당 피해 감소를 돌파합니다.", "Physical hits with the bound weapon count as cold iron for overcoming damage reduction.", "779179912e6c6fe458fa4cfb90d96e10"),
+            new WeaponFeatRow(WeaponFeatKind.Adamantine, 6, "아다만틴 각인", "Adamantine Inscription",
+                "결속 무기의 물리 타격을 아다만틴으로 취급해 해당 피해 감소를 돌파합니다.", "Physical hits with the bound weapon count as adamantine for overcoming damage reduction.", "9719015edcbf142409592e2cbaab7fe1"),
+            new WeaponFeatRow(WeaponFeatKind.Watchful, 2, "신령의 눈", "Watchful Spirit",
+                "결속 무기를 든 동안 지각 판정에 +3 역량 보너스를 받습니다.", "Gain a +3 competence bonus on Perception checks while wielding the bound weapon.", "f74c6bdf5c5f5374fb9302ecdc1f7d64"),
+            new WeaponFeatRow(WeaponFeatKind.Silent, 2, "고요한 발걸음", "Quiet Step",
+                "결속 무기를 든 동안 은신 판정에 +3 역량 보너스를 받습니다.", "Gain a +3 competence bonus on Stealth checks while wielding the bound weapon.", "3a8d34905eae4a74892aae37df3352b9"),
+            new WeaponFeatRow(WeaponFeatKind.Charging, 4, "돌격의 선봉", "Vanguard Charge",
+                "결속 무기로 돌격 공격을 할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on charge attack rolls with the bound weapon.", "c78506dd0e14f7c45a599990e4e65038"),
+            new WeaponFeatRow(WeaponFeatKind.Opportunist, 6, "빈틈 찌르기", "Opening Strike",
+                "결속 무기로 기회공격을 할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attacks of opportunity with the bound weapon.", "0f8939ae6f220984e8fb568abbdfba95"),
+            new WeaponFeatRow(WeaponFeatKind.UndeadHunter, 4, "언데드 사냥꾼", "Undead Hunter",
+                "결속 무기로 언데드를 공격할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attack rolls with the bound weapon against undead.", "6ab3056345b78164fa34b2c947b52083"),
+            new WeaponFeatRow(WeaponFeatKind.ConstructHunter, 4, "구조물 사냥꾼", "Construct Hunter",
+                "결속 무기로 구조물을 공격할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attack rolls with the bound weapon against constructs.", "9719015edcbf142409592e2cbaab7fe1"),
+            new WeaponFeatRow(WeaponFeatKind.DragonHunter, 6, "용 사냥꾼", "Dragon Hunter",
+                "결속 무기로 드래곤 유형의 적을 공격할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attack rolls with the bound weapon against dragons.", "f4201c85a991369408740c6888362e20"),
+            new WeaponFeatRow(WeaponFeatKind.DemonHunter, 8, "데몬 사냥꾼", "Demon Hunter",
+                "결속 무기로 데몬 하위 유형의 적을 공격할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attack rolls with the bound weapon against creatures with the demon subtype.", "831e942864e924846a30d2e0678e438b"),
         };
 
         internal bool Element { get { return Kind <= WeaponFeatKind.Sonic; } }
@@ -75,7 +96,11 @@ namespace Spiritsteel
             {
                 return Element || Kind == WeaponFeatKind.Ghost || Kind == WeaponFeatKind.Agile ||
                     Kind == WeaponFeatKind.Keen || Kind == WeaponFeatKind.Focus || Kind == WeaponFeatKind.Specialization ||
-                    Kind == WeaponFeatKind.Critical || Kind == WeaponFeatKind.Precise;
+                    Kind == WeaponFeatKind.Critical || Kind == WeaponFeatKind.Precise ||
+                    Kind == WeaponFeatKind.ColdIron || Kind == WeaponFeatKind.Adamantine ||
+                    Kind == WeaponFeatKind.Charging || Kind == WeaponFeatKind.Opportunist ||
+                    Kind == WeaponFeatKind.UndeadHunter || Kind == WeaponFeatKind.ConstructHunter ||
+                    Kind == WeaponFeatKind.DragonHunter || Kind == WeaponFeatKind.DemonHunter;
             }
         }
 

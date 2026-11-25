@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.Items.Ecnchantments;
 using Kingmaker.EntitySystem;
 using Kingmaker.EntitySystem.Stats;
@@ -8,6 +9,7 @@ using Kingmaker.Items;
 using Kingmaker.PubSubSystem;
 using Kingmaker.RuleSystem;
 using Kingmaker.RuleSystem.Rules;
+using Kingmaker.UnitLogic;
 
 namespace Spiritsteel
 {
@@ -48,6 +50,38 @@ namespace Spiritsteel
         public void OnEventDidTrigger(RuleCalculateAttackBonusWithoutTarget evt) { }
         public void OnEventDidTrigger(RuleCalculateWeaponStats evt) { }
         public void OnEventDidTrigger(RuleAttackRoll evt) { }
+        public void OnEventDidTrigger(RuleCalculateAttackBonus evt) { }
+    }
+
+    public class WeaponFeatHunter : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RuleCalculateAttackBonus>
+    {
+        public BlueprintFeatureReference TargetType;
+
+        public void OnEventAboutToTrigger(RuleCalculateAttackBonus evt)
+        {
+            if (evt.Weapon == Owner && evt.Target.Descriptor.HasFact(TargetType.Get()))
+                evt.AddModifier(2, Fact, ModifierDescriptor.Insight);
+        }
+
+        public void OnEventDidTrigger(RuleCalculateAttackBonus evt) { }
+    }
+
+    public class WeaponFeatTacticalAttack : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RuleCalculateAttackBonus>
+    {
+        public WeaponFeatKind Kind;
+
+        public void OnEventAboutToTrigger(RuleCalculateAttackBonus evt)
+        {
+            if (evt.Weapon != Owner) return;
+            // Match this calculation to its own roll. A triggered secondary attack may be on the same target.
+            var roll = Rulebook.CurrentContext?.EventStack.OfType<RuleAttackRoll>()
+                .FirstOrDefault(r => ReferenceEquals(r.AttackBonusRule, evt));
+            var attack = roll?.RuleAttackWithWeapon;
+            if (attack != null && ((Kind == WeaponFeatKind.Charging && attack.IsCharge) ||
+                (Kind == WeaponFeatKind.Opportunist && attack.IsAttackOfOpportunity)))
+                evt.AddModifier(2, Fact, ModifierDescriptor.Insight);
+        }
+
         public void OnEventDidTrigger(RuleCalculateAttackBonus evt) { }
     }
 

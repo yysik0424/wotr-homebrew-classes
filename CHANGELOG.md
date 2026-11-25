@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.17-beta
+
+- Spiritsteel now chooses from 30 bound-weapon feats. The ten additions cover materials, scouting, charges, attacks of opportunity, and four creature types. Pick one every even level for ten total by level 20.
+- 스피릿스틸의 결속 무기 피트를 20종에서 30종으로 늘렸다. 재질·정찰·돌격·기회공격·사냥꾼 각인을 추가했다. 짝수 레벨마다 하나씩 골라 20레벨까지 총 10개를 배운다.
+
 ## 0.17.16-beta
 
 - A Shadow Sorcerer pays one extra slot for an echo. With only one slot left, the original spell still fires on its own.
