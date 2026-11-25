@@ -88,10 +88,9 @@ namespace PackWarden
             var icon = Get<BlueprintUnitFact>(Guids.Game.HunterAnimalFocusFeature).Icon;
             if (icon == null) throw new InvalidOperationException("PackWarden: HunterAnimalFocusFeature has no icon");
 
-            // 설계 4.7: 연구 대상(TandemStudyTargetBuff / 60피트 판)에 대한 보조의 명중 +2. Bonus 는 ContextValue 라 null 이면
-            // OnEventAboutToTrigger 가 Calculate 에서 NRE → 기본값(Simple, 0)을 채운다(dnlib: AttackBonus*rank + Bonus.Calculate).
+            // Resolve the old fact for saved auxiliaries without granting its attack bonus.
             StudiedBonusFeature = PackCall.Feature("PackWardenAuxStudiedBonusFeature", Guids.AuxStudiedBonusFeature, "AuxStudiedBonus", icon);
-            AddComponents(StudiedBonusFeature, StudiedBonus(Guids.Game.TandemStudyTargetBuff), StudiedBonus(Guids.Game.TandemStudyTargetBuff60Feet));
+            StudiedBonusFeature.HideInUI = StudiedBonusFeature.HideInCharacterSheetAndLevelUp = true;
 
             NatureFeature = BuildNature(icon);
             foreach (var row in Guids.AuxDiceRestoreFeatures)
@@ -353,19 +352,6 @@ namespace PackWarden
 
 
 
-        static AttackBonusAgainstFactOwner StudiedBonus(string buffGuid)
-        {
-            var c = new AttackBonusAgainstFactOwner
-            {
-                AttackBonus = PackRules.AuxStudiedTargetAttackBonus,
-                Bonus = new ContextValue(),
-                Descriptor = ModifierDescriptor.UntypedStackable,
-            };
-            SetField(c, "m_CheckedFact", Ref<BlueprintUnitFactReference>(buffGuid));
-            if (c.CheckedFact == null) throw new InvalidOperationException("PackWarden: studied bonus fact unresolved " + buffGuid);
-            return c;
-        }
-
         // 복제 위생(판정 1·3): 복제본에서 바꾸는 것은 m_AddFacts(새 배열)와 ComponentsArray(AllowDyingCondition 만 뺀 새 배열)뿐.
         // 컴포넌트는 추가하지 않으므로 복제본 배열은 원본의 나머지 인스턴스를 같은 순서로 담아야 하고, 원본 배열은 그대로여야 한다.
         // Body 공유는 MemberwiseClone 의 사실이며 그대로임을 단언해 문서화한다.
@@ -394,7 +380,7 @@ namespace PackWarden
             clone.ComponentsArray = clone.ComponentsArray.Where(c => !(c is AllowDyingCondition)).ToArray();
             var facts = (BlueprintUnitFactReference[])AddFactsField.GetValue(clone);
             if (ReferenceEquals(facts, srcFacts)) throw new InvalidOperationException("PackWarden: clone shares m_AddFacts array with " + src.name);
-            AddFactsField.SetValue(clone, facts.Concat(new[] { Ref<BlueprintUnitFactReference>(Guids.AuxStudiedBonusFeature), Ref<BlueprintUnitFactReference>(Guids.AuxNatureFeature) }).ToArray());
+            AddFactsField.SetValue(clone, facts.Concat(new[] { Ref<BlueprintUnitFactReference>(Guids.AuxNatureFeature) }).ToArray());
 
             var comps = clone.ComponentsArray;
             if (!ReferenceEquals(src.ComponentsArray, srcComps)) throw new InvalidOperationException("PackWarden: source unit " + src.name + " ComponentsArray was replaced while cloning");
@@ -408,7 +394,7 @@ namespace PackWarden
             if (!ReferenceEquals(clone.LocalizedName, src.LocalizedName)) throw new InvalidOperationException("PackWarden: clone " + name + " name string changed");
             var srcAfter = (BlueprintUnitFactReference[])AddFactsField.GetValue(src);
             if (!ReferenceEquals(srcAfter, srcFacts) || srcAfter.Length != srcFactCount) throw new InvalidOperationException("PackWarden: source unit " + src.name + " m_AddFacts was modified");
-            if (!clone.AddFacts.Contains(StudiedBonusFeature)) throw new InvalidOperationException("PackWarden: clone " + name + " AddFacts readback failed");
+            if (clone.AddFacts.Contains(StudiedBonusFeature) || !clone.AddFacts.Contains(NatureFeature)) throw new InvalidOperationException("PackWarden: clone " + name + " AddFacts readback failed");
             if (!clone.AddFacts.Contains(NatureFeature)) throw new InvalidOperationException("PackWarden: clone " + name + " AddFacts lacks the auxiliary nature feature (Small size, AoO immunity)");
             // 두뇌 되읽기: 원본 참조 객체·해소 결과 불변, 복제본 = 그림자 두뇌(같은 객체), 행동 집합 = 그림자 모드 기대.
             if (!ReferenceEquals(BrainField.GetValue(src), srcBrainRef)) throw new InvalidOperationException("PackWarden: source unit " + src.name + " m_Brain reference object was replaced");

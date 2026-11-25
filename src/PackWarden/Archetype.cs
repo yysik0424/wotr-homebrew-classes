@@ -175,15 +175,11 @@ namespace PackWarden
             RemoveAt(8, Get<BlueprintFeatureBase>(Guids.Game.HunterExtraAnimalFocus));
              
 
-            var tandemStudy = Get<BlueprintFeatureBase>(Guids.Game.TandemStudyTarget);
             var tandemBase = Get<BlueprintFeatureBase>(Guids.Game.TandemBase);
             var tandemTech = Get<BlueprintFeatureBase>(Guids.Game.TandemTechniques);
-            var swift = Get<BlueprintFeatureBase>(Guids.Game.SlayerSwiftStudyTarget);
             AddAt(1, CompanionSelection);
-            AddAt(1, tandemStudy);
             AddAt(4, tandemBase);
             AddAt(4, tandemTech);
-            AddAt(7, swift);
             AddAt(7, tandemTech);
             AddAt(10, tandemTech);
             AddAt(13, tandemTech);

@@ -4,7 +4,7 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.5-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.5-beta/HomebrewClasses-0.17.5-beta.zip) · [Release notes and test coverage](release-notes-0.17.5-beta.md)
+> [Download 0.17.6-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.6-beta/HomebrewClasses-0.17.6-beta.zip) · [Release notes and test coverage](release-notes-0.17.6-beta.md)
 
 ## The classes
 
@@ -48,7 +48,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.5-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.6-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -59,7 +59,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.5-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.6-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -115,7 +115,7 @@ Click a class to expand it.
 
 ### Overview
 
-The Pack Warden is a Hunter who travels with several animals at once. You give up all spellcasting; in exchange, auxiliary animals of the same species as your main animal companion appear whenever a fight starts. The auxiliaries do not pick targets of their own. They trail the main companion (moving up beside its target while it fights), and every time it swings in melee each of them bites the same target once. Your own job is command: mark a studied target, flip between the Fierce and Tough aspects, and use Pack Empowerment to put spell effects on the whole pack. From levels 1 to 6 a single toggle calls the pack; from level 7 you have to fight from the saddle of your main companion, and the pack grows from one auxiliary to as many as four as you level.
+The Pack Warden is a Hunter who travels with several animals at once. You give up all spellcasting; in exchange, auxiliary animals of the same species as your main animal companion appear whenever a fight starts. The auxiliaries do not pick targets of their own. They trail the main companion (moving up beside its target while it fights), and every time it swings in melee each of them bites the same target once. Your own job is command: flip between the Fierce and Tough aspects, and use Pack Empowerment to put spell effects on the whole pack. From levels 1 to 6 a single toggle calls the pack; from level 7 you have to fight from the saddle of your main companion, and the pack grows from one auxiliary to as many as four as you level.
 
 ### What you give up
 
@@ -134,7 +134,6 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 | Level | Feature | Effect |
 |---|---|---|
 | 1 | Pack's Main Animal Companion | Choose one of the base-game animal companions whose base size is Medium or larger. Its advancement, the mount toggle and the animal companion archetype choice work as for a base Hunter |
-| 1 | Studied Target | The level 1 Studied Target of the base game's Tandem Executioner hunter archetype, unchanged |
 | 1 | Aspects of the Pack | Two toggles, Fierce Aspect and Tough Aspect. The active aspect gives the main companion and every auxiliary a bonus equal to your Wisdom modifier. Switching is a free action with no limit |
 | 1 | Call the Pack | If the call condition is met when you enter combat, auxiliary animals of your main companion's species appear: 1 at levels 1–6, 2 at levels 7–12, 3 at levels 13–18 and 4 at levels 19–20. Auxiliary level = Hunter level − 4 (minimum 1). Auxiliaries appear at Small size and are immune to enemy attacks of opportunity. The pack disperses when combat ends |
 | 1 | Call the Pack: Toggle | The call condition for levels 1–6: the Call the Pack toggle is on (it is on by default) |
@@ -142,7 +141,6 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 | 4 | Tandem Executioner technique (1st) | Pick one technique from the Tandem Executioner list |
 | 4 | Pack Empowerment (1st) | Pick one pack empowerment, at this point from the six that correspond to Hunter spells of levels 1–2. Each one you pick can be used twice per day as a move action |
 | 7 | Mounted Call | The call condition changes: you must be riding your main animal companion when combat starts, or mount it during combat. The Call the Pack toggle is removed. Call the Pack now brings 2 auxiliaries |
-| 7 | Swift Studied Target | The base game's Slayer feature |
 | 7 | Tandem Executioner technique (2nd) | |
 | 10 | Tandem Executioner technique (3rd) | |
 | 10 | Pack Empowerment (2nd) | One not yet chosen from the seven up to Hunter spell level 3 |
@@ -170,7 +168,6 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
   - Species upgrade: once the auxiliary's level reaches that species' upgrade level (the same value the base game uses for animal companions), it receives the species upgrade feature, minus the size increase; the ability score bonuses, natural armor and the rest are kept. The pre-order bonus horse has no upgrade feature in the base game and so gets none.
   - Pack's Fangs: despite the Small body, natural weapon damage dice are rolled as for the original size (the size it would have had at that level without being fixed at Small). Attack, AC and reach stay those of a Small creature.
   - Immunity to attacks of opportunity: enemies cannot make attacks of opportunity against auxiliaries.
-  - Pack's Quarry: +2 on attack rolls against a foe you have marked as your studied target.
   - It receives the bonus of whichever aspect is active as soon as it appears.
   - It counts as a summoned creature, and it dies outright at 0 hit points instead of dropping into a dying state.
 - **When the pack disperses**
@@ -216,11 +213,9 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 - It can be used while riding the main animal companion, and using it does not dismount you.
 - It does not affect you yourself.
 
-#### Studied Target and Tandem Executioner techniques
+#### Tandem Executioner techniques
 
-- Studied Target at level 1, the base feature at level 4 and the technique picks at levels 4, 7, 10, 13, 16 and 19 are taken unchanged from the base game's Tandem Executioner. Their effects and numbers are the base game's.
-- Swift Studied Target at level 7 is the base game's Slayer feature.
-- What the auxiliaries get out of your studied target is the +2 attack bonus from Pack's Quarry.
+You gain the Tandem Executioner’s base feature at level 4 and choose techniques at levels 4, 7, 10, 13, 16 and 19.
 
 ### Choices
 
@@ -646,8 +641,8 @@ Offered only while the KineticistElementsExpanded mod is enabled:
 ### Feats
 
 - Feats granted automatically: none.
+- Blast Pool qualifies for Extra Arcane Pool and Abundant Arcane Pool. DarkCodex’s Limitless Arcane Pool also removes Blast Strike’s arcane pool cost.
 - Feats you can no longer take:
-  - Extra Arcane Pool and Abundant Arcane Pool, because they require the Arcane Pool feature.
   - Extra Arcana (a DLC feat), because it requires the base Magus Arcana selection.
 - Feats added specifically for this archetype: none.
 
@@ -691,6 +686,8 @@ Offered only while the KineticistElementsExpanded mod is enabled:
 ### Overview
 
 The Spellfist is a brawler who carries arcane spells in the same body as the fists. At 1st level you pick three arcane schools, then prepare and cast only wizard spells of those schools the way an arcanist does, reaching 9th-level spells at 18th level. A single arcane reservoir lets you pull spells forward as swift actions and powers a set of arcanist exploits. From 2nd level you hold a touch spell in your hand and discharge it through your unarmed flurry. You keep the brawler's bonus combat feats and flurry, and give up maneuver training, Knockout and Awesome Blow.
+
+The main book can merge on the same mythic paths as the Arcanist book. Select Spellfist to advance arcane casting through a prestige class. Brawler Martial Training counts Brawler levels as Fighter and Monk levels for feat prerequisites.
 
 ### What you give up
 
@@ -1357,14 +1354,13 @@ Cells that use a DLC unit: only Abyss III (Abrikandilu). The other 53 cells use 
 - Warlock and Stigmatized Witch cannot be taken together, and neither can any other witch archetype that replaces the same features.
 - Only the Stigmatized Witch's spellbook and cantrips are borrowed; you do not receive the Stigmatized Witch's curse.
 
-**Prestige classes (base game)**
-- A warlock cannot pick the "witch spellbook" option of the base game's prestige classes.
-- Arcane Trickster, Mystic Theurge: the spellbook selection is mandatory, so a warlock cannot finish leveling up in these classes.
-- Eldritch Knight, Hellknight Signifer, Loremaster, Winter Witch: you gain class levels, but your spellbook does not advance.
+**Prestige and mythic spellbooks**
+
+Select the Warlock option to advance your Charisma-based Stigmatized Witch book, including on the arcane side of Mystic Theurge. Each prestige class retains its entry requirements. Spellbook Merge 1.7.1 paths that support the Witch book can also merge the Warlock’s main book.
 
 **Other mods**
-- TabletopTweaks-Base: in a game where it replaces Loremaster's spellbook selection with its own, a warlock should be able to advance her own (Stigmatized Witch) spellbook through Loremaster (this follows from how that mod builds its selection; it has not been tested in game). Its alternate witch capstone selection at level 20 contains no hexes, so warlocks keep it. A patron gained through its Second Patron option does not change your group.
-- PrestigePlus: the prestige classes it adds offer a Stigmatized Witch spellbook option, so a warlock should be able to advance her own spellbook through them (not tested in game).
+- With TabletopTweaks-Base’s Loremaster, select the Stigmatized Witch book. Its alternate witch capstone selection at level 20 contains no hexes, so warlocks keep it. A patron gained through its Second Patron option does not change your group.
+- PrestigePlus spellbook selections recognize an owned Stigmatized Witch book.
 - ExpandedContent: the Stargazer's "witch spellbook" option is blocked for warlocks (picking it would create a separate witch spellbook instead of advancing the warlock's own). Nothing happens if ExpandedContent is not installed.
 - CharacterOptionsPlus: works alongside the Winter Witch archetype restriction that mod adds to the prestige spellbook options.
 - If another mod adds witch patrons, those patrons are not on the group table; a warlock whose only patron is one of them gets no blast, summons or ward.
@@ -1755,6 +1751,8 @@ The "once per round" limit on Shield Rebuke is not a resource. It clears when yo
 ### Overview
 
 The Chaos Warrior is a warrior priest touched by divine madness. You give up one blessing, fervor, channel energy and sacred armor, and in return you can fly into a chaos rage from 1st level. Every rage warps your body at random with several of 32 mutations: fangs, claws, tails and other natural attacks may sprout, mixed with helpful, harmful and two-sided mutations, and a mutation drawn twice stacks. Every melee weapon hit you land on an enemy while raging stacks pain, and at eight stacks the enemy must make a Will save or become confused. You can still cast spells while raging, and the first warpriest spell of each rage is cast as a swift action, so you buff up, wade straight into the front line and grind the enemy formation into chaos.
+
+Chaos Rage qualifies for Limitless Rage. With it, you can start Chaos Rage even with no charges left. Ending and restarting rage rolls a new set of mutations.
 
 ### What you give up
 
@@ -3372,6 +3370,8 @@ Automatic Dive checks for a surviving enemy after the ranger's own weapon attack
 ### Overview
 
 Your oracle’s curse is the mark the prophecy left on you. You follow the trail of failed predictions and copy what you learn from arcane scrolls into a research book. Before a dungeon, the question is which spells to ready. Once inside, you decide whether the same spell is worth both of that tier's casts.
+
+Mythic merging and divine prestige advancement apply to the Intelligence-based Oracle book. The arcane research book grows with Oracle levels. Mystic Theurge requires a separate class that can cast 2nd-level arcane spells.
 
 ### What you give up
 

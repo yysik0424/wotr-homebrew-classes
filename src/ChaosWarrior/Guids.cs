@@ -103,6 +103,8 @@ namespace ChaosWarrior
         // 본편 블루프린트(시험 `jbp: game guids` 가 blueprints.zip 의 AssetId·파일 이름과 대조한다).
         public static class Game
         {
+            // Mythic/MythicAbilities/LimitlessRage.jbp
+            public const string LimitlessRage = "5cb58e6e406525342842a073fb70d068";
             // Classes/Warpriest/WarpriestClass.jbp
             public const string WarpriestClass = "30b5e47d47a0e37438cc5a80c96cfb99";
             // Classes/Warpriest/WarpriestProgression.jbp

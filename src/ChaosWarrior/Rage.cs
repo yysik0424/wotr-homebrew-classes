@@ -7,6 +7,8 @@ using Kingmaker.Designers.Mechanics.Facts;
 using Kingmaker.ElementsSystem;
 using Kingmaker.EntitySystem.Stats;
 using Kingmaker.Enums;
+using Kingmaker.UnitLogic;
+using Kingmaker.Blueprints.Classes.Prerequisites;
 using Kingmaker.UnitLogic.ActivatableAbilities;
 using Kingmaker.UnitLogic.Buffs.Blueprints;
 using Kingmaker.UnitLogic.Commands.Base;
@@ -24,6 +26,7 @@ namespace ChaosWarrior
     // 피로·시전 금지 부품 0개(시험 `copy: no spell ban no fatigue`). 빌드 뒤 되읽기(자원·활성 플래그·CRC 2개) — 다르면 던진다(BuildFailed).
     public static class Rage
     {
+        internal static BlueprintFeature Limitless;
         public static BlueprintAbilityResource Resource;
         public static BlueprintBuff Buff;
         public static BlueprintActivatableAbility Ability;
@@ -117,6 +120,8 @@ namespace ChaosWarrior
             });
             var logic = Comp(new ActivatableAbilityResourceLogic { SpendType = E<ActivatableAbilityResourceLogic.ResourceSpendType>(RageSpec.SpendType) });
             SetField(logic, "m_RequiredResource", Ref<BlueprintAbilityResourceReference>(Guids.RageResource));
+            Limitless = Get<BlueprintFeature>(Guids.Game.LimitlessRage);
+            SetField(logic, "m_FreeBlueprint", Ref<BlueprintUnitFactReference>(Guids.Game.LimitlessRage));
             AddComponents(Ability, logic, new RageStartCost());
 
             Feature = BuildKit.Feature("ChaosWarriorRageFeature", Guids.RageFeature, "rage.name", "rage.desc", false);
@@ -127,6 +132,7 @@ namespace ChaosWarrior
             SetField(res, "m_Resource", Ref<BlueprintAbilityResourceReference>(Guids.RageResource));
             var featureComps = new List<BlueprintComponent> { facts, res };
             AddComponents(Feature, featureComps.ToArray());
+            AllowLimitlessRage(Limitless, Feature);
             GreaterFeature = BuildKit.Feature("ChaosWarriorGreaterRageFeature", Guids.RageGreaterFeature, "rage.greater.name", "rage.greater.desc", false);
             MightyFeature = BuildKit.Feature("ChaosWarriorMightyRageFeature", Guids.RageMightyFeature, "rage.mighty.name", "rage.mighty.desc", false);
 
@@ -139,6 +145,16 @@ namespace ChaosWarrior
         }
 
         // 단계 버프(숨김) + 그 단계의 게이트 행동. 반환 = 분노 버프 Activated 끝에 붙일 게이트(Tiers 순서).
+        static void AllowLimitlessRage(BlueprintFeature mythic, BlueprintFeature rage)
+        {
+            var gate = mythic.ComponentsArray.OfType<PrerequisiteFeaturesFromList>().Single(p => p.Amount == 1 && p.Features.Any());
+            var before = (BlueprintFeatureReference[])FindField(gate.GetType(),"m_Features").GetValue(gate);
+            if (!before.Any(r => r.Guid == rage.AssetGuid))
+                SetField(gate, "m_Features", before.Concat(new[] { Ref<BlueprintFeatureReference>(rage.AssetGuid.ToString()) }).ToArray());
+            if (rage.IsPrerequisiteFor == null) rage.IsPrerequisiteFor = new List<BlueprintFeatureReference>();
+            if (!rage.IsPrerequisiteFor.Any(r => r.Guid == mythic.AssetGuid)) rage.IsPrerequisiteFor.Add(Ref<BlueprintFeatureReference>(mythic.AssetGuid.ToString()));
+        }
+
         static List<GameAction> BuildStrike()
         {
             if (strikeBuffs.Count != 0) throw new InvalidOperationException("ChaosWarrior: Rage.BuildStrike() called twice");
@@ -299,8 +315,9 @@ namespace ChaosWarrior
     // Native TryStart sets IsStarted before spending. A paid activation lasts until the player or combat ends it.
     public sealed class RageStartCost : Kingmaker.UnitLogic.ActivatableAbilities.Restrictions.ActivatableAbilityRestriction, IActivatableAbilitySpendResourceLogic
     {
-        protected override bool IsAvailable() { return Fact.IsStarted || Owner.Resources.HasEnoughResource(Rage.Resource, 1); }
-        public void OnStart() { Owner.Resources.Spend(Rage.Resource, 1); }
+        bool Free => Owner.HasFact(Rage.Limitless);
+        protected override bool IsAvailable() { return Fact.IsStarted || Free || Owner.Resources.HasEnoughResource(Rage.Resource, 1); }
+        public void OnStart() { if (!Free) Owner.Resources.Spend(Rage.Resource, 1); }
         public void OnAbilityTurnOn() { }
         public void OnNewRound() { }
         public void OnAttack(Kingmaker.Blueprints.Items.Weapons.BlueprintItemWeapon weapon) { }

@@ -50,7 +50,7 @@ namespace BlastMagus
 
             // ---- (2) 블라스트 풀 = 새 특성 + AddAbilityResources 새 인스턴스(값은 본편에서 복사·되읽기) ----
             Pool = BlastBlueprints.MakeFeature("BlastMagusBlastPoolFeature", Guids.BlastPoolFeature, "BlastPool.Name", "BlastPool.Description", IconOf(vPool));
-            // 본편은 Extra/Abundant Arcane Pool 을 가리킨다 — 우리는 그 특기의 전제조건이 아니다(수용된 부수 효과, 설계 §11-B).
+            // Pool upgrades reference this feature as an alternative prerequisite.
             Pool.IsPrerequisiteFor = new List<BlueprintFeatureReference>();
             var res = new AddAbilityResources
             {
@@ -67,7 +67,8 @@ namespace BlastMagus
             if (res.Resource == null || res.Resource != vRes.Resource || res.UseThisAsResource != vRes.UseThisAsResource || res.Amount != vRes.Amount
                 || res.RestoreAmount != vRes.RestoreAmount || res.RestoreOnLevelUp != vRes.RestoreOnLevelUp)
                 throw new InvalidOperationException("BlastMagus: BlastPoolFeature AddAbilityResources readback differs from ArcanePoolFeature's (resource/UseThisAsResource/Amount/RestoreAmount/RestoreOnLevelUp)");
-            if (Pool.IsPrerequisiteFor == null || Pool.IsPrerequisiteFor.Count != 0) throw new InvalidOperationException("BlastMagus: BlastPoolFeature.IsPrerequisiteFor readback is not empty");
+            foreach (var id in new[] { Guids.Game.ExtraArcanePool, Guids.Game.AbundantArcanePool })
+                PoolCompatibility.AllowUpgrade(Get<BlueprintFeature>(id), vPool, Pool);
 
             // ---- (3) 비전 선택지 = 본편 선택지 값 복사 + m_Features [] + m_AllFeatures = ArcanaFilter(본편, 4종).kept ----
             var vSel = Get<BlueprintFeatureSelection>(Guids.Game.MagusArcanaSelection);

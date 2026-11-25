@@ -26,6 +26,7 @@ namespace BlastMagus
         [HarmonyPostfix]
         static void Postfix()
         {
+            PoolCompatibility.SyncAfterBlueprints();
             try { KeeStage.Run(); }
             catch (Exception e) { KeeStage.Crashed(e); }
         }

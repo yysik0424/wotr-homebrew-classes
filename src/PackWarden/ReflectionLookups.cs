@@ -40,7 +40,6 @@ namespace PackWarden
             F("Kingmaker.Designers.Mechanics.Facts.AddFeatureOnApply", "m_Feature", LookupMode.Walk),
             F("Kingmaker.UnitLogic.FactLogic.AddFacts", "m_Facts", LookupMode.Walk),
             F("Kingmaker.UnitLogic.ActivatableAbilities.BlueprintActivatableAbility", "m_Buff", LookupMode.Walk),
-            F("Kingmaker.Designers.Mechanics.Facts.AttackBonusAgainstFactOwner", "m_CheckedFact", LookupMode.Walk),
             F("Kingmaker.Designers.Mechanics.Facts.RemoveFeatureOnApply", "m_Feature", LookupMode.Walk),
             F("Kingmaker.Blueprints.Classes.AddClassLevels", "m_CharacterClass", LookupMode.Walk),
             F("Kingmaker.Blueprints.Classes.AddClassLevels", "m_Archetypes", LookupMode.Walk),

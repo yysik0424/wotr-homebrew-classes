@@ -399,7 +399,7 @@ namespace PackWarden
 
         public void OnAreaDidLoad()
         {
-            try { ShadowPack.Reconcile(Owner); }
+            try { RetiredStudy.AfterLoad(Owner); ShadowPack.Reconcile(Owner); }
             catch (Exception e) { ShadowPack.CountFailure("OnAreaDidLoad", Owner, e); throw; }
         }
 

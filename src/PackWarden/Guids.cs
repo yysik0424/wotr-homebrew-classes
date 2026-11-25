@@ -79,11 +79,9 @@ namespace PackWarden
             public const string TandemBase = "7a5dea90412e48d982a8d609365f4362";
             public const string TandemTechniques = "d03312858cd5420e8bad2756ce4a72ba";
             public const string SlayerSwiftStudyTarget = "40d4f55a5ac0e4f469d67d36c0dfc40b";
-            public const string TandemStudyTargetBuff = "1a4ca04c05034cdbbfaf82d9b7db387a";
-            public const string TandemStudyTargetBuff60Feet = "f29c1c8f38a44ac08e9f55358b03450c";
             internal static string MissingTandemSource(System.Func<string, bool> available)
             {
-                foreach (var guid in new[] { TandemStudyTarget, TandemBase, TandemTechniques, TandemStudyTargetBuff, TandemStudyTargetBuff60Feet })
+                foreach (var guid in new[] { TandemBase, TandemTechniques })
                     if (!available(guid)) return guid;
                 return null;
             }

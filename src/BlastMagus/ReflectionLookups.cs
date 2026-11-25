@@ -13,6 +13,7 @@ namespace BlastMagus
 
         public static readonly ReflectionLookup[] All =
         {
+            F("Kingmaker.Blueprints.Classes.Prerequisites.PrerequisiteFeature", "m_Feature"),
             // Archetype
             F("Kingmaker.Blueprints.Classes.BlueprintArchetype", "m_ParentClass"),
             F("Kingmaker.Blueprints.Classes.BlueprintCharacterClass", "m_Archetypes"),

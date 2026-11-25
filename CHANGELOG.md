@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.6-beta
+
+- Added main spellbook support for mythic merging and prestige advancement across the bundle, including Spellbook Merge 1.7.1 and replacement spellbook selections.
+- Added Blast Pool feat eligibility and Limitless Rage support for Chaos Rage.
+- Removed Studied Target, Swift Studied Target and Pack’s Quarry from Pack Warden.
+
 ## 0.17.5-beta
 
 - Falconer finds the hawk's bite in its native primary-hand slot and both talons in its additional limbs.

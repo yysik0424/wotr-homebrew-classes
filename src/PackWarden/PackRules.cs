@@ -173,8 +173,6 @@ namespace PackWarden
             return result;
         }
 
-        // 설계 4.7: 연구 대상에 대한 보조 동물 공격 보너스 +2
-        public const int AuxStudiedTargetAttackBonus = 2;
 
         // 설계 4.5 해산 규칙 + 과제 8 IL 조사(task-8-report.md). 하차는 전부 private UnitPartRider.Dismount(bool force) 로 모인다.
         // 가장 바깥 호출의 진입로로 원인을 가른다(안쪽 호출 = ClearAndRemoveSelf 가 탑승 능력을 끄며 생기는 MountedBuff → ContextActionDismount 연쇄).

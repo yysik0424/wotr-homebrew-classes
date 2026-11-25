@@ -67,6 +67,9 @@ namespace BlastMagus
         // MagusClass 는 여기 두지 않는다: 공용 코드가 읽으므로 WotrClassMod.Common.GameGuids.MagusClass 에 있다(두 곳에 두면 시험이 실패시킨다).
         public static class Game
         {
+            // Stock ExtraArcanePool and AbundantArcanePool features and DarkCodex blueprints.txt.
+            public const string ExtraArcanePool = "42f96fc8d6c80784194262e51b0a1d25";
+            public const string AbundantArcanePool = "8acebba92ada26043873cae5b92cef7b";
             public const string MagusProgression = "1b912721a7e075d4f9cfe8dafa39414c"; // Classes/Magus/MagusProgression.jbp
             public const string MagusSpellbook = "5d8d04e76dff6c5439de99af0d57be63"; // Classes/Magus/MagusSpellbook.jbp
             public const string MagusCantripsFeature = "fa5799fb32844e94e88d4cb3430610ff"; // Classes/Magus/MagusCantripsFeature.jbp

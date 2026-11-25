@@ -82,10 +82,7 @@ namespace PackWarden
                 "이 보조 동물은 몸이 소형이어도 자연 무기의 피해 주사위를 원래 크기 기준으로 굴린다. 명중, 방어도, 사거리는 소형 그대로다.",
                 "This auxiliary animal rolls its natural weapon damage dice as for its original size even though its body is Small. Attack, AC and reach stay those of a Small creature."),
             ["AuxStudiedBonus.Name"] = ("무리의 사냥감", "Pack's Quarry"),
-            // 숫자는 PackRules.AuxStudiedTargetAttackBonus 한 곳에서(AuxUnits.StudiedBonus 와 같은 원천)
-            ["AuxStudiedBonus.Description"] = (
-                "보조 동물은 헌터가 연구 대상으로 표식을 찍은 적을 공격할 때 명중 굴림에 +" + PackRules.AuxStudiedTargetAttackBonus + " 보너스를 받는다.",
-                "This auxiliary animal gains a +" + PackRules.AuxStudiedTargetAttackBonus + " bonus on attack rolls against a foe the hunter has marked as a studied target."),
+            ["AuxStudiedBonus.Description"] = ("이전 버전의 특성입니다. 현재 효과가 없습니다.", "Retired feature. It has no effect."),
         };
 
         // 무리 강화(소유자 결정 2026-11-16): 문구는 순수 EmpowerRules 가 만든다(시험 exe 가 직접 실행). 키도 EmpowerRules 가 준다.

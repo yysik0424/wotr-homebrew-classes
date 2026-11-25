@@ -34,6 +34,7 @@ namespace HomebrewClasses.Loader
                 classes.Add(host);
                 entry.Logger.Log(module.Id + " — " + host.Describe());
             }
+            SpellbookIntegration.Install(classes.Where(host => host.State == LoadState.Loaded).Select(host => host.Module.Id), entry.Logger.Error);
             entry.OnUpdate = (e, dt) => { foreach (var host in classes) host.Tick(dt); };
             bool hasModMenu = UMM.FindMod("ModMenu") != null;
             entry.OnGUI = e =>
