@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Linq;
 using HarmonyLib;
@@ -25,48 +24,29 @@ namespace Spiritsteel
 {
     public sealed class SpiritState : UnitPart
     {
-        [JsonProperty] public bool InBattle, Paid, Tripped, Running;
-        [JsonProperty] public int Remaining;
+        // Keep the saved trip flag and round boundary when loading an existing combat.
+        [JsonProperty] public bool Tripped;
         [JsonProperty] public long Boundary;
         internal static readonly long Round = new Rounds(1).Seconds.Ticks;
         internal static long Now => Game.Instance.TimeController.GameTime.Ticks;
 
-        internal void Begin(int wisdom)
+        internal void UpdateTripRound(long now)
         {
-            if (InBattle) return;
-            InBattle = true; Remaining = Rules.Rounds(wisdom);
-            Paid = Running = Tripped = false; Boundary = 0;
-        }
-        internal bool Pay()
-        {
-            if (Paid) return true;
-            if (Remaining <= 0) return false;
-            Remaining--; Paid = true;
-            return true;
-        }
-        internal void RealTime(long now)
-        {
-            if (!Paid || now < Boundary) return;
-            int elapsed = checked((int)((now - Boundary) / Round + 1));
-            Paid = false; Tripped = false;
-            if (Running && Remaining >= elapsed)
+            if (Boundary == 0) Boundary = now + Round;
+            else if (now >= Boundary)
             {
-                Remaining -= elapsed; Boundary += elapsed * Round; Paid = true;
+                Boundary += ((now - Boundary) / Round + 1) * Round;
+                Tripped = false;
             }
-            else if (Running) Remaining = 0;
-        }
-        internal bool Available(UnitEntityData u)
-        {
-            if (!u.IsInCombat || !u.Buffs.HasFact(Blueprints.Native) || !BoundWeapons.IsEquipped(u)) return false;
-            Begin(u.Stats.Wisdom.Bonus);
-            if (!CombatController.IsInTurnBasedCombat()) RealTime(Now);
-            return Paid || Remaining > 0;
         }
     }
 
     public sealed class RageGate : ActivatableAbilityRestriction
     {
-        protected override bool IsAvailable() { return Owner.Ensure<SpiritState>().Available(Owner); }
+        internal static bool CanAwaken(UnitEntityData unit) =>
+            unit.IsInCombat && unit.Buffs.GetBuff(Blueprints.Native) != null && BoundWeapons.IsEquipped(unit);
+
+        protected override bool IsAvailable() { return CanAwaken(Owner); }
     }
     public sealed class RageKeeper : UnitFactComponentDelegate, IUnitBuffHandler, IUnitCombatHandler, IUnitEquipmentHandler,
         IUnitActiveEquipmentSetHandler, IUnitNewCombatRoundHandler, ITurnBasedModeEnabledHandler
@@ -77,7 +57,7 @@ namespace Spiritsteel
             if (toggle == null) return;
             if (on)
             {
-                if (!u.Ensure<SpiritState>().Available(u)) return;
+                if (!RageGate.CanAwaken(u)) return;
                 toggle.IsOn = true;
                 toggle.TryStart();
             }
@@ -94,14 +74,14 @@ namespace Spiritsteel
         public void HandleUnitJoinCombat(UnitEntityData u)
         {
             if (u != Owner) return;
-            u.Ensure<SpiritState>().Begin(u.Stats.Wisdom.Bonus);
             if (u.Buffs.HasFact(Blueprints.Native)) Set(u, true);
         }
         public void HandleUnitLeaveCombat(UnitEntityData u)
         {
             if (u != Owner) return;
             Set(u, false);
-            u.Ensure<SpiritState>().InBattle = false;
+            var state = u.Get<SpiritState>();
+            if (state != null) { state.Tripped = false; state.Boundary = 0; }
         }
         public void HandleEquipmentSlotUpdated(ItemSlot slot, ItemEntity previousItem)
         {
@@ -114,21 +94,16 @@ namespace Spiritsteel
         public void HandleNewCombatRound(UnitEntityData u)
         {
             if (u != Owner || !CombatController.IsInTurnBasedCombat()) return;
-            var state = u.Ensure<SpiritState>();
-            state.Paid = state.Tripped = false;
-            if (state.Running && !state.Pay()) Set(u, false);
+            var state = u.Get<SpiritState>();
+            if (state != null) state.Tripped = false;
         }
         public void UpdateMandatoryTurnBasedModeState() { }
         public void HandleTurnBasedModeStateChanged(bool enabled)
         {
             var state = Owner.Get<SpiritState>();
-            if (state == null || !state.InBattle) return;
-            if (enabled) state.RealTime(SpiritState.Now);
-            else if (state.Paid) state.Boundary = SpiritState.Now + SpiritState.Round;
-            var buff = Owner.Buffs.GetBuff(Blueprints.Spirit);
-            if (buff == null) return;
-            if (!state.Paid && !state.Pay()) { Set(Owner, false); return; }
-            SpiritEffects.SetClock(buff, state, enabled);
+            if (state == null || !Owner.IsInCombat) return;
+            if (enabled) state.UpdateTripRound(SpiritState.Now);
+            else state.Boundary = SpiritState.Now + SpiritState.Round;
         }
     }
 
@@ -156,26 +131,17 @@ namespace Spiritsteel
     public sealed class SpiritEffects : UnitBuffComponentDelegate, IInitiatorRulebookHandler<RuleCalculateCMB>,
         IInitiatorRulebookHandler<RuleAttackWithWeapon>
     {
-        internal static void SetClock(Buff b, SpiritState state, bool turns)
-        {
-            if (turns) b.MakePermanent();
-            else b.SetDuration(TimeSpan.FromTicks(Math.Max(0, state.Boundary - SpiritState.Now) + state.Remaining * SpiritState.Round));
-        }
         protected override void OnActivate()
         {
-            var s = Owner.Ensure<SpiritState>();
-            bool turns = CombatController.IsInTurnBasedCombat();
-            if (!s.Available(Owner)) { Buff.Remove(); return; }
-            if (!s.Paid) s.Boundary = SpiritState.Now + SpiritState.Round;
-            s.Pay(); s.Running = true;
-            SetClock(Buff, s, turns);
+            if (!RageGate.CanAwaken(Owner)) { Buff.Remove(); return; }
+            if (!CombatController.IsInTurnBasedCombat()) Owner.Ensure<SpiritState>().UpdateTripRound(SpiritState.Now);
             if (Owner.View != null) Owner.View.StartCoroutine(Pulse(Owner, Buff));
         }
-        protected override void OnDeactivate()
+        protected override void OnPostLoad()
         {
-            var s = Owner.Ensure<SpiritState>();
-            if (!CombatController.IsInTurnBasedCombat()) s.RealTime(SpiritState.Now);
-            s.Running = false;
+            base.OnPostLoad();
+            // Earlier real-time saves gave the spirit its own expiry date.
+            if (!Buff.IsPermanent) Buff.MakePermanent();
         }
         static IEnumerator Pulse(UnitEntityData u, Buff active)
         {
@@ -198,8 +164,8 @@ namespace Spiritsteel
         {
             if (evt.AttackRoll?.IsHit != true || !Owner.Descriptor.HasFact(Blueprints.Trip) || !BoundWeapons.IsBound(Owner, evt.Weapon)) return;
             var s = Owner.Ensure<SpiritState>();
-            if (!CombatController.IsInTurnBasedCombat()) s.RealTime(SpiritState.Now);
-            if (!s.Paid || s.Tripped) return;
+            if (!CombatController.IsInTurnBasedCombat()) s.UpdateTripRound(SpiritState.Now);
+            if (s.Tripped) return;
             s.Tripped = true;
             if (evt.Target.State.IsDead || evt.Target.State.Prone.Active) return;
             var trip = new RuleCombatManeuver(Owner, evt.Target, CombatManeuver.Trip, null);

@@ -4,7 +4,7 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.10-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.10-beta/HomebrewClasses-0.17.10-beta.zip) · [Release notes and test coverage](release-notes-0.17.10-beta.md)
+> [Download 0.17.11-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.11-beta/HomebrewClasses-0.17.11-beta.zip) · [Release notes and test coverage](release-notes-0.17.11-beta.md)
 
 ## The classes
 
@@ -48,7 +48,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.10-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.11-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -59,7 +59,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.10-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.11-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -2899,7 +2899,7 @@ Gather paralysis with one round remaining and you can sentence an enemy in any e
 
 | Aspect | Details |
 |---|---|
-| Base class | Barbarian. Strength supports weapon attacks. Wisdom is the secondary attribute for Spirit Rage and combat maneuvers. |
+| Base class | Barbarian. Strength supports weapon attacks. Constitution contributes to daily rage rounds. Wisdom improves offensive maneuvers during Spirit Rage. |
 | The bond | One physical ancestral weapon. You also gain proficiency with the category you choose. |
 | Spells and equipment | Keeps normal barbarian rage and equipment training. Weapon inscriptions and the warrior’s teamwork feats are separate selections. |
 | Class mod requirement | Included in Homebrew Classes. No separate class mod is required. |
@@ -2930,7 +2930,7 @@ When the barbarian rages, the spirit in the weapon can rage alongside its bearer
 
 #### Spirit Rage and fighting without a partner
 
-Enter barbarian rage in combat with the bound weapon equipped and the Spirit Rage toggle enabled to awaken the spirit. The weapon deals damage as if one size larger, and offensive combat maneuvers gain your positive Wisdom modifier. The spirit gets **1 + Wisdom modifier** rounds per encounter, minimum two and maximum five. Wisdom 14 gives three rounds and +2 on maneuvers. Switch the spirit off and back on during the same rage to conserve its rounds. Changing weapons or ending barbarian rage ends Spirit Rage.
+Entering barbarian rage in combat with your bound weapon equipped awakens its spirit. **Spirit Rage** can last for the entire rage. Your bound weapon deals damage as if one size larger, and you add your positive Wisdom modifier to offensive combat maneuvers. With Wisdom 14, the bonus is +2 while the spirit is awake. You can switch the spirit off and back on while raging. Putting the weapon away or ending barbarian rage ends Spirit Rage.
 
 During Spirit Rage, the spirit counts as an adjacent ally for your teamwork feats and as a flanking partner for your bound melee weapon. A feat triggered by an ally scoring a critical or carrying a shield still needs that ally. If you lend the weapon to a companion, the inscribed equipment effects travel with it. Spirit Rage belongs to the bonded barbarian. Both heads of a double weapon carry its attack effects, and bound shield spikes apply them on a shield bash.
 
@@ -2954,7 +2954,7 @@ At level 6 Spirit Trip triggers on the first **hit** of the round. If your first
 
 #### Recognizing Spirit Rage after a weapon swap
 
-Barbarian rage produces the first burst, followed shortly by a second burst as the weapon's spirit answers. The two pulses accompany two different effects and spend only one activation of barbarian rage. Switching away from the bound weapon ends the spirit effect even during the same underlying rage. In a prolonged fight track your barbarian rage and remaining spirit rounds separately.
+Barbarian rage produces the first burst, followed shortly by a second burst as the weapon's spirit answers. The two pulses accompany two different effects and spend only one activation of barbarian rage. Switching away from the bound weapon ends the spirit effect even during the same underlying rage.
 
 ### Choices
 
@@ -3013,11 +3013,9 @@ The teamwork selection draws from native lists including hunter, cavalier tactic
 
 ### Resources
 
-| Wisdom modifier at combat start | 0 or less | +1 | +2 | +3 | +4 or more |
-|---|---|---|---|---|---|
-| Spirit rounds this combat | 2 | 2 | 3 | 4 | 5 |
+Barbarian rage and Spirit Rage share the barbarian’s daily rage rounds. Keeping both active costs one round per round. Switching off only the spirit leaves barbarian rage running at its usual cost. Unspent rounds carry into the next encounter and refresh on rest.
 
-Barbarian rage spends daily rounds. Spirit Rage spends its combat allowance. Switching it off and on within an already paid round does not charge twice or refund that round. A new combat sets a new allowance from your current Wisdom. A positive Wisdom modifier continues to benefit offensive maneuvers even after reaching the five-round duration cap.
+A single-class barbarian has **2 + twice their barbarian level + their Constitution modifier** rounds per day. With Constitution 14, that gives 6 rounds at level 1 or 14 at level 5. Extra Rage extends the time you can spend with the spirit, and Limitless Rage lets you sustain both effects without spending rounds.
 
 ### Compatibility and notes
 

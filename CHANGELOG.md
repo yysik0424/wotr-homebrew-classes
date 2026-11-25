@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.11-beta
+
+- 스피릿스틸의 신령의 분노가 바바리안의 일일 분노 라운드를 공유한다. 결속 무기를 들면 기본 분노가 지속되는 만큼 신령도 유지할 수 있고, 미씩 끝없는 격노도 두 효과에 적용된다.
+- Spiritsteel’s Spirit Rage now shares the barbarian’s daily rage rounds. With the bound weapon equipped, the spirit can stay active for the full rage, including with Limitless Rage.
+
 ## 0.17.10-beta
 
 - 골렘술사의 폭주 중 합체 형태가 바뀌면 버프 알림이 끝난 뒤 추가 사지와 학파 효과를 맞춘다.
