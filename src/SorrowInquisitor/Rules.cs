@@ -5,7 +5,7 @@ namespace SorrowInquisitor
     internal static class Rules
     {
         // Design 9, 2026-11-23. Times use the game's clock.
-        internal const int RangeFeet = 30, StorageSeconds = 60, ReleaseSeconds = 18, RoundSeconds = 6;
+        internal const int RangeFeet = 30, ReleaseSeconds = 18, RoundSeconds = 6;
         internal static int Slots(int level) => Math.Min(5, 1 + level / 5);
         internal static int Limit(int level, Rite rite)
         {

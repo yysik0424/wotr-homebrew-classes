@@ -20,6 +20,8 @@ namespace ShadowSorcerer
         public const string Bonus7 = "63ac9cb82cde40038676f2b4c8a22fc9";
         public const string Bonus8 = "a111bbad0f004ab891bc6957befcdd6a";
         public const string Bonus9 = "6a05747fe7684766a6602b32f87883fe";
+        public const string EchoToggle = "7d857025ba984fe48cd74d1e925bcb31";
+        public const string EchoBuff = "ccdc336a72f34148a149a82eb89291dc";
         public const string SlotsFeature = "3d8bc0c6c8fb43e78e57a65fa0f0e01f";
         public static readonly string[] BonusFeatures = { Bonus1, Bonus2, Bonus3, Bonus4, Bonus5, Bonus6, Bonus7, Bonus8, Bonus9 };
         // 2026-11-17 그림자 메아리 연출: 시각 전용 그림자 유닛의 껍데기 특성(숨김 — 대상 불가·AI 없음·전투 제외). 발급 2026-11-17.

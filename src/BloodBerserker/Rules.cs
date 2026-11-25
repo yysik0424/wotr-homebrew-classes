@@ -5,6 +5,7 @@ namespace BloodBerserker
     // Owner-approved combat values, 2026-11-23. Distances are in feet.
     internal static class Rules
     {
+        internal const int KnotWardRounds = 2;
         internal const int ChainFeet = 30, ExtendedFeet = 60, BloodPrice = 5;
         internal const int ReachLevel = 7, ConductionLevel = 10, CriticalLevel = 13;
         internal static readonly int[] ReductionLevels = { 7, 10, 13, 16, 19 };

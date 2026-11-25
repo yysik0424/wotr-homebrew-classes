@@ -19,8 +19,8 @@ namespace PackWarden
 
         // 마릿수 구간 문구(소유자 결정 2026-11-16). 원천은 PackRules 의 표(AuxCountBands)이고 여기는 그 사본이다 — 설명이 컴파일 시점 상수여야 해서(시험이 DLL 의
         // 문자열 상수를 읽는다) 실행 중에 조립하지 않는다. 사본이 표와 어긋나면 시험(CheckRespawnWiring: 구간마다 「a~b레벨 n마리」·「n at levels a-b」 포함)이 실패한다.
-        const string AuxCountKo = "1~6레벨 1마리, 7~12레벨 2마리, 13~18레벨 3마리, 19~20레벨 4마리";
-        const string AuxCountEn = "1 at levels 1-6, 2 at levels 7-12, 3 at levels 13-18 and 4 at levels 19-20";
+        const string AuxCountKo = "1~6레벨 1마리, 7~20레벨 2마리";
+        const string AuxCountEn = "1 at levels 1-6 and 2 at levels 7-20";
         // 재소집 규칙 1문장(소유자 결정 2026-11-16: 대기 삭제. 그 전 문구 = 「게임 시간 1시간 뒤에 다시 부를 수 있으며, 휴식하면 이 대기가 초기화된다」).
         const string RespawnRuleKo = "보조 동물이 죽으면 그 전투에서는 돌아오지 않고, 다음 전투에서 바로 다시 나타난다.";
         // 보조 동물의 본성(소유자 결정 2026-11-16): 소형 고정·자라지 않음, 적의 기회 공격을 받지 않음.
@@ -33,8 +33,8 @@ namespace PackWarden
         {
             ["Archetype.Name"] = ("무리 조련사", "Pack Warden"),
             ["Archetype.Description"] = (
-                "무리 조련사는 동물 여러 마리를 거느리고 다니는 헌터다. 본인은 거의 지휘만 하고, 짐승들이 대신 싸운다. 정식 동물 동료 한 마리에 같은 종의 보조 동물이 전투 중에만 함께하는데, 1~6레벨에는 무리 소집 토글을 켜 두면, 7레벨부터는 주 동물 동료에 탄 채 싸우면 나타나 함께 달려든다. 보조 동물의 수는 " + AuxCountKo + "다. 헌터가 표식을 찍은 적에게 무리가 한꺼번에 덤벼드는 장면이 가장 큰 무기다.",
-                "The Pack Warden is a hunter who travels with several animals at once. The hunter mostly gives orders while the beasts do the fighting. Auxiliary animals of the same species as the main animal companion join only during combat: at levels 1-6 they appear while the Call the Pack toggle is on, and from level 7 while the hunter fights mounted on the main companion. Their number is " + AuxCountEn + ". The pack falling together upon the foe the hunter has marked is the archetype's greatest weapon."),
+                "무리 조련사는 동물 여러 마리를 거느리고 다니는 헌터다. 본인은 거의 지휘만 하고, 짐승들이 대신 싸운다. 정식 동물 동료 한 마리에 같은 종의 보조 동물이 전투 중에만 함께하는데, 1~6레벨에는 무리 소집 토글을 켜 두면, 7레벨부터는 주 동물 동료에 탄 채 싸우면 나타나 함께 달려든다. 보조 동물의 수는 " + AuxCountKo + "다. 보조는 주 동물의 근접 공격마다 같은 적을 한 번씩 공격한다.",
+                "The Pack Warden is a hunter who travels with several animals at once. The hunter mostly gives orders while the beasts do the fighting. Auxiliary animals of the same species as the main animal companion join only during combat: at levels 1-6 they appear while the Call the Pack toggle is on, and from level 7 while the hunter fights mounted on the main companion. Their number is " + AuxCountEn + ". Each auxiliary follows an eligible melee attack by the main companion with one attack of its own."),
             ["Archetype.DescriptionShort"] = (
                 "동물 여러 마리를 거느리고 다니며, 표식을 찍은 적에게 무리가 함께 달려든다.",
                 "Leads a pack of animals that all fall upon the foe the hunter has marked."),

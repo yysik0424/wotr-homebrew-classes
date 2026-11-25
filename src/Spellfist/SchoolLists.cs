@@ -10,8 +10,8 @@ using static WotrClassMod.Common.BlueprintUtil;
 namespace Spellfist
 {
     // 학파별 주문 목록 8개 + 빈 기본 목록(설계 §11-1, 정찰 §0-1·§0-2·§1-2).
-    // 본편 타실로니아 학파 목록은 「위저드 − 반대 학파 2개」라 못 쓰고, BlueprintSpellList 의 Filter* 필드는 에디터 전용이라
-    // 우리가 위저드 목록을 학파로 갈라 m_Spells 를 직접 채운다.
+    // 본편 타실로니아 학파 목록은 「메이거스 − 반대 학파 2개」라 못 쓰고, BlueprintSpellList 의 Filter* 필드는 에디터 전용이라
+    // 우리가 메이거스 목록을 학파로 갈라 m_Spells 를 직접 채운다.
     // 런타임 GetSpells = SpellsByLevel[lvl].SpellsFiltered = m_Spells 중 !IsDlcRestricted(DlcCondition 미충족 제외, null 은 통과)이고, 개수>0 이면 영구 캐시(핫픽스 2 정찰).
     // → 빌드(BlueprintsCache.Init) 중에는 GetSpells 를 부르지 않는다: 그때는 DLCCache 상태가 없어 DLC 주문이 걸러지고, 그 보기가 캐시에 굳는다.
     public static class SchoolLists
@@ -40,19 +40,19 @@ namespace Spellfist
             if (Empty != null) throw new InvalidOperationException("Spellfist: SchoolLists.Build() called twice");
             var schools = Schools();
             int nLevels = SpellfistRules.SpellListLevels;
-            var wizard = Get<BlueprintSpellList>(Guids.Game.WizardSpellList);
+            var magus = Get<BlueprintSpellList>(Guids.Game.MagusSpellList);
             List<(BlueprintGuid guid, string school, int level, string name)> placed;
             List<(BlueprintAbilityReference r, int level)> dups;
-            var buckets = Split(wizard, schools, nLevels, out placed, out dups);
+            var buckets = Split(magus, schools, nLevels, out placed, out dups);
             // 같은 레벨 안 같은 GUID 중복(다른 모드가 두 번 넣은 경우)은 첫 등장만 쓴다(SchoolListRules.DedupeKeepFirst, Split 안) — 버린 것은 INFO 로 남긴다.
             foreach (var d in dups)
             {
                 var ds = d.r.Get();
-                ModContext.Log("Spellfist: INFO duplicate wizard spell reference removed (rule: keep first per level) " + (ds == null ? "<unresolved>" : ds.name) + " " + d.r.Guid + " L" + d.level);
+                ModContext.Log("Spellfist: INFO duplicate magus spell reference removed (rule: keep first per level) " + (ds == null ? "<unresolved>" : ds.name) + " " + d.r.Guid + " L" + d.level);
             }
             var ledgerKeys = CheckLedger(placed);
             foreach (var p in placed.Where(p => !ledgerKeys.Contains(p.guid)))
-                ModContext.Log("Spellfist: INFO wizard spell not in SchoolLedger (another mod's addition) " + p.name + " " + p.guid + " " + p.school + " L" + p.level
+                ModContext.Log("Spellfist: INFO magus spell not in SchoolLedger (another mod's addition) " + p.name + " " + p.guid + " " + p.school + " L" + p.level
                     + (p.school == "Universalist" ? " - dropped (universalist)" : " - added to our " + p.school + " list"));
 
             var built = new BlueprintSpellList[schools.Length];
@@ -64,7 +64,7 @@ namespace Spellfist
             var empty = MakeList("SpellfistEmptySpellList", Guids.EmptySpellList, l => new List<BlueprintAbilityReference>());
             // BlueprintSpellList.get_MaxLevel(IL @0x0000~0x0060) = m_MaxLevel>0 이면 그 값, 아니면 SpellsFiltered.Count>0 인 레벨의 Max → 전부 빈 목록이면
             // Enumerable.Max 가 InvalidOperationException. HasSpells(= SpellsByLevel.Length>0)가 true 라 AbilityData.get_VoiceIntensity(@0x003B, 주문 시전 때
-            // UnitUseAbility.SpawnPrecastFx 가 부름)가 이 값을 읽는다 → 미리 채운다. 값 = 아카니스트/위저드 목록의 최고 레벨과 같은 9(목소리 세기 판정만 쓴다).
+            // UnitUseAbility.SpawnPrecastFx 가 부름)가 이 값을 읽는다 → 미리 채운다. 값 = 아카니스트/메이거스 목록의 최고 레벨과 같은 9(목소리 세기 판정만 쓴다).
             SetField(empty, "m_MaxLevel", SpellfistRules.MaxSpellLevel);
             if ((int)Util.GetF(empty, "m_MaxLevel") != SpellfistRules.MaxSpellLevel || empty.MaxLevel != SpellfistRules.MaxSpellLevel)
                 throw new InvalidOperationException("Spellfist: Empty spell list m_MaxLevel readback failed");
@@ -73,8 +73,8 @@ namespace Spellfist
             // GetSpells(=DLC 로 거른 보기)는 부르지 않는다: Init 시점엔 DLCCache 상태가 없어 DLC 주문이 빠지고(두 번째 게임 실행: Abjuration L6 Repulsion DLC5), 그 보기가 m_SpellsFiltered 에 굳는다.
             var sourceOf = new Dictionary<string, string>(SchoolListRules.GuidComparer);
             foreach (var p in placed)
-                sourceOf[p.guid.ToString()] = "WizardSpellList L" + p.level + " " + p.school + (ledgerKeys.Contains(p.guid) ? " (base game, SchoolLedger)" : " (not in SchoolLedger: another mod's addition)");
-            Func<string, string> describe = g => { string d; return sourceOf.TryGetValue(g, out d) ? d : "not from WizardSpellList"; };
+                sourceOf[p.guid.ToString()] = "MagusSpellList L" + p.level + " " + p.school + (ledgerKeys.Contains(p.guid) ? " (base game, SchoolLedger)" : " (not in SchoolLedger: another mod's addition)");
+            Func<string, string> describe = g => { string d; return sourceOf.TryGetValue(g, out d) ? d : "not from MagusSpellList"; };
             var dlcConditioned = new List<string>();
             for (int s = 0; s < schools.Length; s++)
                 for (int l = 0; l < nLevels; l++)
@@ -104,11 +104,11 @@ namespace Spellfist
                 if (Util.GetF(empty.SpellsByLevel[l], "m_SpellsFiltered") != null) throw new InvalidOperationException("Spellfist: Empty spell list level " + l + " m_SpellsFiltered was filled during build");
             }
             if (dlcConditioned.Count > 0)
-                ModContext.Log("Spellfist: INFO " + dlcConditioned.Count + " school-list spells carry DlcCondition (kept; the engine hides them at use time when the DLC is unavailable, same as the wizard list): " + string.Join(", ", dlcConditioned));
+                ModContext.Log("Spellfist: INFO " + dlcConditioned.Count + " school-list spells carry DlcCondition (kept; the engine hides them at use time when the DLC is unavailable, same as the magus list): " + string.Join(", ", dlcConditioned));
 
             lists = built;
             Empty = empty;
-            // 최종 개수 INFO(정찰 C6: 우리 빌드 뒤에 위저드 목록에 더해진 주문은 여기 없다 → 첫 프레임 Resync 가 다시 맞추고, 점검 S1 school-list-resync·S2/S3/S7 이 현재 위저드 목록과 대조한다).
+            // 최종 개수 INFO(정찰 C6: 우리 빌드 뒤에 메이거스 목록에 더해진 주문은 여기 없다 → 첫 프레임 Resync 가 다시 맞추고, 점검 S1 school-list-resync·S2/S3/S7 이 현재 메이거스 목록과 대조한다).
             int total = 0;
             var lines = new List<string>();
             for (int s = 0; s < schools.Length; s++)
@@ -129,26 +129,27 @@ namespace Spellfist
             return schools;
         }
 
-        // 위저드 목록 m_Spells(SpellsRefs — DLC 로 거른 보기 아님)를 학파 × 레벨로 가른다. Build 와 첫 프레임 Resync 가 같은 규칙을 쓴다(한 곳).
+        // 메이거스 목록 m_Spells(SpellsRefs — DLC 로 거른 보기 아님)를 학파 × 레벨로 가른다. Build 와 첫 프레임 Resync 가 같은 규칙을 쓴다(한 곳).
         // 판독 불가(레벨 배열 길이·레벨 번호·null 참조·해석 안 되는 참조·SpellComponent 없음·모르는 학파)는 던진다. Universalist 는 placed 에만 적고 버린다.
-        static List<BlueprintAbilityReference>[,] Split(BlueprintSpellList wizard, School[] schools, int nLevels,
+        static List<BlueprintAbilityReference>[,] Split(BlueprintSpellList magus, School[] schools, int nLevels,
             out List<(BlueprintGuid guid, string school, int level, string name)> placed, out List<(BlueprintAbilityReference r, int level)> dups)
         {
-            if (wizard.SpellsByLevel == null || wizard.SpellsByLevel.Length != nLevels)
-                throw new InvalidOperationException("Spellfist: WizardSpellList.SpellsByLevel length " + (wizard.SpellsByLevel == null ? "null" : wizard.SpellsByLevel.Length.ToString()) + ", expected " + nLevels);
+            if (magus.SpellsByLevel == null || magus.SpellsByLevel.Length != nLevels)
+                throw new InvalidOperationException("Spellfist: MagusSpellList.SpellsByLevel length " + (magus.SpellsByLevel == null ? "null" : magus.SpellsByLevel.Length.ToString()) + ", expected " + nLevels);
             var buckets = new List<BlueprintAbilityReference>[schools.Length, nLevels];
             for (int s = 0; s < schools.Length; s++) for (int l = 0; l < nLevels; l++) buckets[s, l] = new List<BlueprintAbilityReference>();
-            // 위저드 목록의 모든 주문이 어디에 놓였는지(학파 이름 = SpellSchool 이름, Universalist 포함) — 원장 대조용.
+            // 메이거스 목록의 모든 주문이 어디에 놓였는지(학파 이름 = SpellSchool 이름, Universalist 포함) — 원장 대조용.
             placed = new List<(BlueprintGuid guid, string school, int level, string name)>();
             dups = new List<(BlueprintAbilityReference r, int level)>();
             for (int l = 0; l < nLevels; l++)
             {
-                var lvl = wizard.SpellsByLevel[l];
-                if (lvl == null || lvl.SpellLevel != l) throw new InvalidOperationException("Spellfist: WizardSpellList.SpellsByLevel[" + l + "] is null or has SpellLevel " + (lvl == null ? "-" : lvl.SpellLevel.ToString()));
+                if (l > SpellfistRules.NativeMaxSpellLevel) continue;
+                var lvl = magus.SpellsByLevel[l];
+                if (lvl == null || lvl.SpellLevel != l) throw new InvalidOperationException("Spellfist: MagusSpellList.SpellsByLevel[" + l + "] is null or has SpellLevel " + (lvl == null ? "-" : lvl.SpellLevel.ToString()));
                 // SpellsRefs = m_Spells 그대로(캐시 SpellsFiltered 를 건드리지 않는다).
                 var refsRaw = lvl.SpellsRefs;
-                if (refsRaw == null) throw new InvalidOperationException("Spellfist: WizardSpellList level " + l + " m_Spells is null");
-                if (refsRaw.Any(r => r == null)) throw new InvalidOperationException("Spellfist: WizardSpellList level " + l + " has an unresolved spell reference null");
+                if (refsRaw == null) throw new InvalidOperationException("Spellfist: MagusSpellList level " + l + " m_Spells is null");
+                if (refsRaw.Any(r => r == null)) throw new InvalidOperationException("Spellfist: MagusSpellList level " + l + " has an unresolved spell reference null");
                 List<BlueprintAbilityReference> dupRefs;
                 var refs = SchoolListRules.DedupeKeepFirst(refsRaw, r => r.Guid.ToString(), out dupRefs);
                 foreach (var d in dupRefs) dups.Add((d, l));
@@ -156,7 +157,7 @@ namespace Spellfist
                 {
                     var spell = r.Get();
                     if (spell == null && SchoolLedger.IsDlcSpell(r.Guid.ToString())) continue;
-                    if (spell == null) throw new InvalidOperationException("Spellfist: WizardSpellList level " + l + " has an unresolved spell reference " + r.Guid);
+                    if (spell == null) throw new InvalidOperationException("Spellfist: MagusSpellList level " + l + " has an unresolved spell reference " + r.Guid);
                     var sc = spell.GetComponent<SpellComponent>();
                     if (sc == null) throw new InvalidOperationException("Spellfist: 학파 미상 — " + spell.name + " (" + spell.AssetGuid + ") has no SpellComponent");
                     placed.Add((spell.AssetGuid, sc.School.ToString(), l, spell.name));
@@ -171,7 +172,7 @@ namespace Spellfist
             return buckets;
         }
 
-        // 원장 대조(SchoolLedger — 본편 위저드 주문 281개). (a) 원장의 모든 주문이 같은 학파·같은 레벨에 있어야 한다: 빠지거나 옮겨지면 throw(C1/C5).
+        // 원장 대조(SchoolLedger — 본편 메이거스 주문 281개). (a) 원장의 모든 주문이 같은 학파·같은 레벨에 있어야 한다: 빠지거나 옮겨지면 throw(C1/C5).
         // (b) 원장 밖 주문(다른 모드가 추가)은 허용 — 돌려주는 원장 키 집합으로 호출자가 INFO 를 남긴다.
          
         static HashSet<BlueprintGuid> CheckLedger(List<(BlueprintGuid guid, string school, int level, string name)> placed)
@@ -184,11 +185,11 @@ namespace Spellfist
                 ledgerKeys.Add(g);
                 var at = placed.Where(p => p.guid == g).ToList();
                 if (at.Count == 0 && SchoolLedger.IsDlcSpell(e.guid) && ResourcesLibrary.TryGetBlueprint(g) == null) continue;
-                if (at.Count == 0) problems.Add(e.guid + " (" + e.school + " L" + e.level + ") missing from WizardSpellList");
+                if (at.Count == 0) problems.Add(e.guid + " (" + e.school + " L" + e.level + ") missing from MagusSpellList");
                 else if (!at.Any(p => p.school == e.school && p.level == e.level))
                     problems.Add(at[0].name + " " + e.guid + " moved: ledger " + e.school + " L" + e.level + ", now " + string.Join("/", at.Select(p => p.school + " L" + p.level)));
             }
-            if (problems.Count > 0) throw new InvalidOperationException("Spellfist: WizardSpellList differs from SchoolLedger (base-game wizard spells): " + string.Join("; ", problems));
+            if (problems.Count > 0) throw new InvalidOperationException("Spellfist: MagusSpellList differs from SchoolLedger (base-game magus spells): " + string.Join("; ", problems));
             return ledgerKeys;
         }
 
@@ -208,7 +209,7 @@ namespace Spellfist
             gate.Run(ModContext.BuildAttempted, ModContext.BuildFailed, Resync, ModContext.Log, ModContext.LogError);
         }
 
-        // 지금 위저드 목록을 Build 와 같은 규칙(Split · CheckLedger)으로 다시 갈라, 우리 학파 목록 8개 × 11레벨의 m_Spells 를 그 결과로 바꾼다. 돌려주는 값 = 로그 1줄.
+        // 지금 메이거스 목록을 Build 와 같은 규칙(Split · CheckLedger)으로 다시 갈라, 우리 학파 목록 8개 × 11레벨의 m_Spells 를 그 결과로 바꾼다. 돌려주는 값 = 로그 1줄.
         // 원자성: ① 계산(판독 불가면 던짐 — 아무것도 바꾸지 않았다) → ② 적용(각 m_Spells 리스트를 제자리에서 바꾼다: m_SpellsProxy 가 같은 리스트 객체를 감싸므로 객체를 갈아 끼우지 않는다)
         // → ③ 되읽기(CompareLevel). ②·③ 에서 던지면 원래 내용·캐시로 되돌린 뒤 다시 던진다(호출자 ResyncGate 가 Failed + 오류 줄).
         // 캐시: m_SpellsFiltered(DLC 로 거른 보기, 개수>0 이면 영구 — get_SpellsFiltered IL_0000~0013)·m_SpellsProxy(get_Spells IL_0000~0018)·목록의 m_MaxLevel(get_MaxLevel IL_0058~005A 가 처음 계산값을 저장)
@@ -218,10 +219,10 @@ namespace Spellfist
             if (lists == null || Empty == null) throw new InvalidOperationException("Spellfist: SchoolLists.Resync before SchoolLists.Build()");
             var schools = Schools();
             int nLevels = SpellfistRules.SpellListLevels;
-            var wizard = Get<BlueprintSpellList>(Guids.Game.WizardSpellList);
+            var magus = Get<BlueprintSpellList>(Guids.Game.MagusSpellList);
             List<(BlueprintGuid guid, string school, int level, string name)> placed;
             List<(BlueprintAbilityReference r, int level)> dups;
-            var buckets = Split(wizard, schools, nLevels, out placed, out dups);
+            var buckets = Split(magus, schools, nLevels, out placed, out dups);
             CheckLedger(placed);
 
             // ① 계산: 지금 목록(전)과 새로 가른 것(후)을 칸 목록으로.

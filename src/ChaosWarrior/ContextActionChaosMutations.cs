@@ -62,6 +62,7 @@ namespace ChaosWarrior
             parent = rage;
         }
 
+        public bool QuickenSpent { get { return caster.Buffs.HasFact(Quicken.Spent); } }
         public bool HasCaster { get { return caster != null; } }
         public bool ParentIsActiveRage { get { return parent != null && parent.Blueprint == Rage.Buff && parent.IsAttached && !parent.IsDisposed && parent.Owner == caster.Descriptor; } }
         public int WarpriestLevel { get { return caster.Descriptor.Progression.GetClassLevel(Get<BlueprintCharacterClass>(Guids.Game.WarpriestClass)); } }

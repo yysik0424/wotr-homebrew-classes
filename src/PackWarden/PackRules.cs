@@ -12,14 +12,10 @@ namespace PackWarden
         // 헌터 클래스 레벨 범위. 출처: 본편 헌터 = 20레벨 클래스(이 모드의 20레벨 능력 Aspects「두 상 동시 활성」, Checks\TestUnit 의 「20 을 넘으면 실패」와 같은 상한).
         public const int MinHunterLevel = 1, MaxHunterLevel = 20;
 
-        // 소유자 결정 2026-11-16: 헌터 레벨 1~6 → 1마리, 7~12 → 2마리, 13~18 → 3마리, 19~20 → 4마리.
-        // i 번째 값 = 보조가 (i+1)마리가 되는 첫 헌터 레벨. 마릿수의 유일한 원천 — AuxCount·AuxCountBands·AuxSlotCount 가 여기서 나온다.
-        // (그 전 규칙 = 설계 4.5 「7레벨 이상이면 2, 아니면 1」 은 폐기.) 문자열·README 의 구간 문구는 시험이 AuxCountBands 와 대조한다.
-        static readonly int[] AuxCountFirstLevels = { 1, 7, 13, 19 };
 
-        // 소유자 결정 2026-11-16: 자리(슬롯) 수 = 표의 최대 마릿수. const 라서 표 길이에서 직접 못 얻는다 → 정적 생성자가 표와 대조해 어긋나면 던진다.
-        // UnitPartPack.Auxiliaries 길이와 같아야 한다(UnitPartPack.Validate).
-        public const int AuxSlotCount = 4;
+        static readonly int[] AuxCountFirstLevels = { 1, 7 };
+        public static int MaxAuxiliaries => AuxCountFirstLevels.Length;
+        public const int AuxSlotCount = 4; // 0.17.6 전투 저장의 참조 네 칸과 호환
 
         // 보조 자리 하나의 상태(검토 2026-11-17 지적 2). Empty = UniqueId 없음, Live = 해석된 유닛이 살아 있고 파괴되지 않았고 게임 안,
         // Gone = 해석은 됐는데 죽음·파괴·게임 밖(확인된 「대상 아님」), Unresolved = UniqueId 는 있는데 엔진이 유닛을 돌려주지 않음
@@ -73,7 +69,7 @@ namespace PackWarden
 
         static PackRules()
         {
-            if (AuxCountFirstLevels.Length != AuxSlotCount)
+            if (MaxAuxiliaries > AuxSlotCount)
                 throw new InvalidOperationException("PackWarden: aux count table has " + AuxCountFirstLevels.Length + " rows but AuxSlotCount = " + AuxSlotCount);
             if (AuxCountFirstLevels[0] != MinHunterLevel)
                 throw new InvalidOperationException("PackWarden: aux count table must start at hunter level " + MinHunterLevel + ", starts at " + AuxCountFirstLevels[0]);
@@ -130,7 +126,7 @@ namespace PackWarden
             // 보조 1마리 사망. 자리 수보다 많이 죽을 수는 없다 → 넘으면 사망 사건을 두 번 센 것이므로 던진다.
             public void RecordDeath()
             {
-                if (fallen >= AuxSlotCount)
+                if (fallen >= MaxAuxiliaries)
                     throw new InvalidOperationException("PackWarden: more auxiliary deaths recorded in one combat than slots (" + AuxSlotCount + ")");
                 fallen++;
             }
@@ -147,8 +143,8 @@ namespace PackWarden
             if (live == null) throw new ArgumentNullException("live");
             if (live.Length != AuxSlotCount)
                 throw new ArgumentException("PackWarden: expected " + AuxSlotCount + " slots, got live=" + live.Length);
-            if (target < 0 || target > AuxSlotCount)
-                throw new ArgumentOutOfRangeException("target", target, "PackWarden: target must be 0.." + AuxSlotCount);
+            if (target < 0 || target > MaxAuxiliaries)
+                throw new ArgumentOutOfRangeException("target", target, "PackWarden: target must be 0.." + MaxAuxiliaries);
             // 죽은 수가 목표보다 많다 = 있을 수 없는 상태(목표보다 많이 소집된 적이 없다). 0 으로 내리누르지 않고 던진다.
             if (fallenThisCombat < 0 || fallenThisCombat > target)
                 throw new ArgumentOutOfRangeException("fallenThisCombat", fallenThisCombat, "PackWarden: fallen-this-combat must be 0.." + target + " (target)");
@@ -176,6 +172,17 @@ namespace PackWarden
 
         // 설계 4.5 해산 규칙 + 과제 8 IL 조사(task-8-report.md). 하차는 전부 private UnitPartRider.Dismount(bool force) 로 모인다.
         // 가장 바깥 호출의 진입로로 원인을 가른다(안쪽 호출 = ClearAndRemoveSelf 가 탑승 능력을 끄며 생기는 MountedBuff → ContextActionDismount 연쇄).
+        // Preserve occupied slot numbers when survivors in a legacy pack are separated by empty slots.
+        public static int[] ExcessSlots<T>(System.Collections.Generic.IList<T> slots, Func<T, bool> occupied)
+        {
+            if (slots == null || slots.Count != AuxSlotCount) throw new ArgumentException("Invalid pack save slots", nameof(slots));
+            var excess = new System.Collections.Generic.List<int>();
+            int count = 0;
+            for (int i = 0; i < slots.Count; i++)
+                if (occupied(slots[i]) && ++count > MaxAuxiliaries) excess.Add(i);
+            return excess.ToArray();
+        }
+
         public enum DismountCause
         {
             Voluntary,    // 탑승 토글(MountTargetSwitch) 끔 → MountedBuff Deactivated → ContextActionDismount → DismountForce()

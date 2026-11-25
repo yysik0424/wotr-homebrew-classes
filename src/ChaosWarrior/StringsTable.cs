@@ -236,7 +236,7 @@ namespace ChaosWarrior
                 F("분노할 때마다 몸이 무작위로 뒤틀리고(변이 {0}가지), 분노 중 근접 무기로 적을 칠 때마다 고통이 쌓여 {1}겹에서 적이 미쳐 버릴 수 있다.",
                   "Each rage twists the body at random ({0} mutations), and every melee weapon hit on an enemy while raging stacks pain; at {1} stacks the enemy may go mad.",
                   Dl.MutationOptions, Dl.PainConfusionThreshold),
-                new P("분노마다 처음 시전하는 조건에 맞는 워프리스트 주문은 신속 행동으로 나간다. 지혜는 주문과 분노 횟수, 고통의 내성 DC를 결정한다.", "The first eligible warpriest spell in each rage is cast as a swift action. Wisdom determines spellcasting, daily rage uses and the save DC for pain.")));
+                new P("전투당 한 번, 분노 중 처음 시전하는 조건에 맞는 워프리스트 주문은 신속 행동으로 나간다. 지혜는 주문과 분노 횟수, 고통의 내성 DC를 결정한다.", "Once per combat, the first eligible warpriest spell cast while raging is cast as a swift action. Wisdom determines spellcasting, daily rage uses and the save DC for pain.")));
 
             // ---- 혼돈의 분노
             int[] tiers = ChaosRules.Levels.RageTierLevels;
@@ -264,9 +264,9 @@ namespace ChaosWarrior
                 F("분노 중 자연 무기 공격(손에 든 무기·비무장 타격 제외)은 {0} 무기로 취급된다(본인 성향과 무관). 피해 감소·비실체·재생처럼 무기 속성을 보는 판정에만 쓰이며, 명중·피해 보너스는 없다.",
                   "While raging, your natural weapon attacks (not manufactured weapons or unarmed strikes) are treated as {0}, whatever your own alignment. It matters for damage reduction, incorporeal creatures and regeneration; there is no bonus on attack or damage rolls.",
                   new P(strikeKo, strikeEn)),
-                F("광란의 시전: 분노마다 처음 시전하는 워프리스트 주문 하나가 신속 행동으로 나간다(대상 무관, 주문 슬롯은 평소대로 쓴다). 주문 레벨 상한(주문 슬롯 레벨 — 메타매직 비용 포함): {0}.",
-                  "Frenzied Casting: the first warpriest spell you cast in each rage is cast as a swift action (any target; it still uses its spell slot). Spell level cap (the slot level, metamagic cost included): {0}.", QuickenRanges()),
-                new P("분노 중 저장한 게임을 불러오면 이 효과가 다시 채워진다. 자세한 규칙은 분노 중 붙는 「광란의 시전」 효과의 설명.", "Loading a game saved during a rage refills it. Full rules: the Frenzied Casting effect shown while raging.")));
+                F("광란의 시전: 전투당 한 번, 분노 중 처음 시전하는 워프리스트 주문 하나가 신속 행동으로 나간다(대상 무관, 주문 슬롯은 평소대로 쓴다). 주문 레벨 상한(주문 슬롯 레벨 — 메타매직 비용 포함): {0}.",
+                  "Frenzied Casting: once per combat, the first eligible warpriest spell you cast while raging is cast as a swift action (any target; it still uses its spell slot). Spell level cap (the slot level, metamagic cost included): {0}.", QuickenRanges()),
+                new P("이 효과를 쓴 뒤에는 다음 전투에서 다시 쓸 수 있다. 자세한 규칙은 분노 중 붙는 「광란의 시전」 효과의 설명.", "Frenzied Casting refreshes in your next combat.")));
             Put(d, "rage.greater.desc", F("{0}레벨부터 분노 보너스: 힘·건강 {1}, 의지 내성 {2}.", "From level {0} the rage bonus becomes {1} Strength and Constitution and {2} Will.", tiers[1], Signed(Dl.RageStrCon[1]), Signed(Dl.RageWill[1])));
             Put(d, "rage.mighty.desc", F("{0}레벨부터 분노 보너스: 힘·건강 {1}, 의지 내성 {2}.", "From level {0} the rage bonus becomes {1} Strength and Constitution and {2} Will.", tiers[2], Signed(Dl.RageStrCon[2]), Signed(Dl.RageWill[2])));
 
@@ -319,15 +319,15 @@ namespace ChaosWarrior
             // ---- 신속 시전 권리 6개(상한마다)
             foreach (var r in QuickenSpec.Rights)
                 Put(d, QuickenSpec.DescKey(r.MaxSpellLevel), Lines(
-                    F("이번 혼돈의 분노에서 처음 시전하는 {0}레벨 이하 워프리스트 주문 하나가 신속 행동으로 나간다(대상 무관, 주문 슬롯은 평소대로 쓴다).",
-                      "The first warpriest spell of level {0} or lower you cast during this chaos rage is cast as a swift action (any target; it still uses its spell slot).", r.MaxSpellLevel),
+                    F("전투당 한 번, 혼돈의 분노 중 처음 시전하는 {0}레벨 이하 워프리스트 주문 하나가 신속 행동으로 나간다(대상 무관, 주문 슬롯은 평소대로 쓴다).",
+                      "Once per combat, the first warpriest spell of level {0} or lower you cast during this chaos rage is cast as a swift action (any target; it still uses its spell slot).", r.MaxSpellLevel),
                     new P("레벨은 주문 슬롯의 레벨이다(메타매직 비용 포함). 여러 형태 가운데 고르는 주문은 고르기 전 주문의 레벨로 본다.",
                           "The level is the level of the spell slot (metamagic cost included). A spell with variants counts at the level of the spell you choose the variant from."),
                     new P("워프리스트 주문 = 워프리스트 주문 목록에 든 주문이다. 다른 주문서로 시전해도 해당하고 이 효과를 쓴다. 원래 신속 행동인 주문, 신속 주문으로 준비한 주문에도 이 효과를 쓴다.",
                           "A warpriest spell is any spell on the warpriest spell list: cast from another spellbook it still counts and spends this effect. A spell that is already a swift action, or one prepared with Quicken Spell, also spends it."),
                     new P("그 라운드에 신속 행동을 이미 썼으면, 일반 행동이 남아 있을 때는 일반 행동으로 나가고 이 효과는 사라진다(일반 행동도 썼으면 신속 행동을 기다린다).",
                           "If you have already used your swift action this round and still have your standard action, it is cast as a standard action and this effect is still spent (if both are used, it waits for your swift action)."),
-                    new P("분노 중 저장한 게임을 불러오면 다시 채워진다. 분노가 끝나면 사라진다.", "Loading a game saved during the rage refills it. It ends with the rage.")));
+                    new P("분노를 다시 켜면 변이를 다시 뽑는다. 소모한 신속화는 다음 전투에서 돌아온다.", "Starting another rage rerolls mutations. A spent quicken becomes available in the next combat.")));
         }
 
         static T Throw<T>(string what) { throw new InvalidOperationException("ChaosWarrior: description: " + what); }

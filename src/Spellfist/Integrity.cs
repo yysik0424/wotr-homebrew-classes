@@ -52,7 +52,7 @@ namespace Spellfist
                 Add("brawler archetype " + a.name + ".AddFeatures", a, b => b.AddFeatures);
                 Add("brawler archetype " + a.name + ".RemoveFeatures", a, b => b.RemoveFeatures);
             }
-            Add("WizardSpellList.SpellsByLevel", Get<BlueprintSpellList>(Guids.Game.WizardSpellList), b => b.SpellsByLevel);
+            Add("MagusSpellList.SpellsByLevel", Get<BlueprintSpellList>(Guids.Game.MagusSpellList), b => b.SpellsByLevel);
             captured = true;
         }
 

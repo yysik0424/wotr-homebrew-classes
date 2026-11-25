@@ -97,7 +97,7 @@ namespace Spellfist
             public List<SpellAt> Removed = new List<SpellAt>();
         }
 
-        // [순수] 재동기화 전(지금 우리 목록) · 뒤(지금 위저드 목록을 다시 가른 것)의 차이. 같은 칸 = (학파, 레벨, GUID 대소문자 무시).
+        // [순수] 재동기화 전(지금 우리 목록) · 뒤(지금 메이거스 목록을 다시 가른 것)의 차이. 같은 칸 = (학파, 레벨, GUID 대소문자 무시).
         // GUID·학파가 비었거나 레벨이 음수면 판정 불가 → 던진다(조용히 빼지 않는다). 같은 칸이 한쪽에 두 번이면 던진다(가르기 전에 DedupeKeepFirst 가 돌아야 한다).
         public static ResyncDiff Diff(IList<SpellAt> before, IList<SpellAt> after)
         {
@@ -112,7 +112,7 @@ namespace Spellfist
             var b = new Dictionary<string, SpellAt>();
             foreach (var s in before) { var k = key(s); if (b.ContainsKey(k)) throw new InvalidOperationException("Spellfist: ResyncDiff: " + k + " twice in the current lists"); b[k] = s; }
             var a = new Dictionary<string, SpellAt>();
-            foreach (var s in after) { var k = key(s); if (a.ContainsKey(k)) throw new InvalidOperationException("Spellfist: ResyncDiff: " + k + " twice in the re-split wizard list"); a[k] = s; }
+            foreach (var s in after) { var k = key(s); if (a.ContainsKey(k)) throw new InvalidOperationException("Spellfist: ResyncDiff: " + k + " twice in the re-split magus list"); a[k] = s; }
             var d = new ResyncDiff();
             foreach (var s in after) if (!b.ContainsKey(key(s))) d.Added.Add(s);
             foreach (var s in before) if (!a.ContainsKey(key(s))) d.Removed.Add(s);
@@ -124,7 +124,7 @@ namespace Spellfist
         {
             if (d == null) throw new ArgumentNullException("d");
             Func<IEnumerable<SpellAt>, string> list = xs => xs.Any() ? string.Join(", ", xs.Select(s => s.Name + " " + s.Guid + " " + s.School + " L" + s.Level).ToArray()) : "none";
-            return "Spellfist: INFO school lists re-synced from WizardSpellList on the first frame (after all mods' blueprint patches): "
+            return "Spellfist: INFO school lists re-synced from MagusSpellList on the first frame (after all mods' blueprint patches): "
                 + "added " + d.Added.Count + " [" + list(d.Added) + "], removed " + d.Removed.Count + " [" + list(d.Removed) + "], total " + totalBefore + " -> " + totalAfter;
         }
 
@@ -162,7 +162,7 @@ namespace Spellfist
                 catch (Exception e)
                 {
                     State = ResyncState.Failed;
-                    LastLine = "Spellfist: school lists re-sync failed - the school lists stay as built (spells another mod added to WizardSpellList after our build are missing from them): " + e;
+                    LastLine = "Spellfist: school lists re-sync failed - the school lists stay as built (spells another mod added to MagusSpellList after our build are missing from them): " + e;
                     logError(LastLine);
                     return;
                 }

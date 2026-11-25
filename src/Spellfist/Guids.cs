@@ -78,7 +78,8 @@ namespace Spellfist
             public const string ArcanistSpellbook = "33903fe5c4abeaa45bc249adb9d98848"; // Classes/Arcanist/ArcanistSpellbook.jbp
             public const string ArcanistSpellsPerDayTable = "d1d296ca4bf8449409fc330a54ad58e1"; // Classes/Arcanist/ArcanistSpellsPerDayTable.jbp
             public const string ArcanistSpellSlots = "44be796c5d37bb244aae59d0a005530f"; // Classes/Arcanist/ArcanistSpellSlots.jbp
-            public const string WizardSpellList = "ba0401fdeb4062f40a7aa95b6f07fe89"; // Classes/Wizard/WizardSpellList.jbp
+            public const string MagusSpellList = "4d72e1e7bd6bc4f4caaea7aa43a14639"; // Classes/Magus/MagusSpellList.jbp
+            public const string MagusSpellLevels = "6326b540f7c6a604f9d6f82cc0e2293c"; // Classes/Magus/MagusSpellLevels.jbp
             // 2026-11-15 생성 불변식 ③: 점검 유닛 배경을 명시(엔진 기본값 금지). BackgroundNone = 목록 첫 항목, 효과 없음.
             public const string BackgroundsBaseSelection = "f926dabeee7f8a54db8f2010b323383c"; // Backgrounds/BackgroundsSelection/BackgroundsBaseSelection.jbp
             public const string BackgroundNone = "7d300f497584d9245ac24c062dce0bd6"; // Backgrounds/BackgroundsSelection/BackgroundNone.jbp
@@ -91,7 +92,7 @@ namespace Spellfist
             public const string SpellStrikeAbility = "e958891ef90f7e142a941c06c811181e"; // Classes/Magus/SpellStrike/SpellStrikeAbility.jbp
              
             public const string ExpeditiousRetreat = "4f8181e7a7f1d904fbaea64220e83379"; // Spells/Level1/ExpeditiousRetreat.jbp (S4 신속 1레벨, 자기 대상)
-            public const string FalseLife = "7a5b5bf845779a941a67251539545762"; // Spells/Level2/FalseLife.jbp (S4 캡 1 > 2레벨, 자기 대상)
+            public const string BullsStrength = "4c3d08935262b6544ae97599b3a9556d"; // Spells/Level2/BullsStrength.jbp (S4 캡 1 > 2레벨, 자기 대상)
             public const string ShockingGraspCast = "ab395d2335d3f384e99dddee8562978f"; // Spells/Level1/ShockingGraspCast.jbp (S12 접촉 주문)
             public const string ShockingGraspEffect = "17451c1327c571641a1345bd31155209"; // Spells/Level1/ShockingGraspEffect.jbp (S12 전달 능력)
             // 익스플로잇 복제본의 ContextRankConfig 에서 걷어내는 아카니스트 계열 클래스·아키타입(되읽기: 복제본 전수에 이 GUID 참조 0건). 출처 = 같은 jbp 의 m_Class/Archetype/m_AdditionalArchetypes 값(2026-11-08 직독).

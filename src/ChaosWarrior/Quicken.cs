@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Kingmaker.Blueprints;
+using Kingmaker.PubSubSystem;
+using Kingmaker.RuleSystem.Rules.Abilities;
+using Kingmaker.UnitLogic.Buffs.Components;
 using Kingmaker.Blueprints.Classes.Spells;
 using Kingmaker.Designers.Mechanics.Facts;
 using Kingmaker.UnitLogic.Abilities;
@@ -31,8 +34,37 @@ namespace ChaosWarrior
     //   · School · CheckSpellbook · m_Spellbook(비공개) · m_IncludeClasses · m_ExcludeClasses(비공개 배열). new AutoMetamagic 은 Abilities · 두 배열이 null 이다(주문 격투가 함정 문서 2026-11-08) —
     //   ShouldApplyTo @00B2·@01E3·@0211 이 LinqExtensions.Empty 로 읽고, get_IncludeClasses @0001~000B 는 null 을 그대로 돌려준다 → 빈 컬렉션을 명시적으로 넣고 되읽는다.
     // Step 0 (d) 슬롯 소모: 준비 칸 소모는 시전 명령의 AbilityData.Spend @001E~0023(SpendFromSpellbook)이고 AutoMetamagic 은 능력치 계산에 메타매직만 더한다 — 칸은 평소대로 1개(추정 — 게임 안 S13 first-spell-quickened-slot-minus-1 이 값으로 본다).
+    public sealed class FrenziedMetamagic : AutoMetamagic, IInitiatorRulebookHandler<RuleCastSpell>
+    {
+        void IRulebookHandler<RuleCastSpell>.OnEventAboutToTrigger(RuleCastSpell evt)
+        {
+            // Match the native Once consumption, after previews and before the right detaches.
+            if (Once && evt.Spell == Data.Spell && !Owner.Buffs.HasFact(Quicken.Spent))
+            {
+                var marker = Owner.Buffs.AddBuff(Quicken.Spent, Owner, null);
+                if (marker == null) throw new InvalidOperationException("ChaosWarrior: could not record Frenzied Casting use");
+                marker.IsNotDispelable = true;
+            }
+            base.OnEventAboutToTrigger(evt);
+        }
+    }
+
+    public sealed class FrenziedCastingEncounter : UnitBuffComponentDelegate, IPartyCombatHandler, IUnitCombatHandler
+    {
+        public void HandlePartyCombatStateChanged(bool inCombat)
+        {
+            if (!inCombat && Owner.IsPlayerFaction) Buff.Remove();
+        }
+        public void HandleUnitJoinCombat(Kingmaker.EntitySystem.Entities.UnitEntityData unit) { }
+        public void HandleUnitLeaveCombat(Kingmaker.EntitySystem.Entities.UnitEntityData unit)
+        {
+            if (unit == Owner && !Owner.IsPlayerFaction) Buff.Remove();
+        }
+    }
+
     public static class Quicken
     {
+        internal static BlueprintBuff Spent { get; private set; }
         static readonly List<BlueprintBuff> rights = new List<BlueprintBuff>();
 
 
@@ -48,11 +80,14 @@ namespace ChaosWarrior
             if (book.SpellList == null) throw new InvalidOperationException("ChaosWarrior: spellbook " + QuickenSpec.SpellbookGuid + " has no spell list (AutoMetamagic.CheckSpellbook would throw on every spell)");
             // 독립 검토 R4-F1: 상한마다 주문 목록(살아 있는 목록 — 우리 빌드 앞에 다른 모드가 더한 주문 포함). 판독 불가 · 빈 목록이면 SpellListEntries / AbilitiesFor 가 던진다.
             if (!QuickenSpec.AbilitiesFromSpellList) throw new InvalidOperationException("ChaosWarrior: QuickenSpec.AbilitiesFromSpellList is false but no other ability list is defined (R4-F1: an empty list lets variant spells skip the cap)");
+            Spent = BuildKit.Buff("ChaosWarriorFrenziedCastingSpent", Guids.FrenziedCastingSpent, QuickenSpec.NameKey, QuickenSpec.DescKey(1), true, QuickenSpec.Stacking);
+            SetField(Spent, "m_Flags", Enum.Parse(FindField(typeof(BlueprintBuff), "m_Flags").FieldType, "HiddenInUi, StayOnDeath"));
+            AddComponents(Spent, new FrenziedCastingEncounter());
             var entries = SpellListEntries(book.SpellList);
             foreach (var row in QuickenSpec.Rights)
             {
                 var b = BuildKit.Buff("ChaosWarriorQuickenRight" + row.MaxSpellLevel, row.BuffGuid, QuickenSpec.NameKey, QuickenSpec.DescKey(row.MaxSpellLevel), false, QuickenSpec.Stacking);
-                var am = new AutoMetamagic
+                var am = new FrenziedMetamagic
                 {
                     Metamagic = BuildKit.E<Metamagic>(QuickenSpec.Metamagic),
                     Once = QuickenSpec.Once,

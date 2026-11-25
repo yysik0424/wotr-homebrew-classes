@@ -40,7 +40,6 @@ namespace SorrowInquisitor
 
         internal void Prune(long now, bool turns)
         {
-            Beads.RemoveAll(b => b.Expires <= now);
             if (!turns && now >= ArmedUntil) Armed = Array.Empty<string>();
         }
         protected override void OnPostLoad()

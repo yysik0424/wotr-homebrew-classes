@@ -142,6 +142,7 @@ namespace ChaosWarrior
             Action<string, string> add = (g, r) => { if (n.ContainsKey(g)) throw new InvalidOperationException("ChaosWarrior: IconTable no-icon listed twice: " + g); n.Add(g, r); };
             add(Guids.Archetype, ReasonArchetype);
             add(Guids.HorrorArea, ReasonNoIconField);
+            add(Guids.FrenziedCastingSpent, ReasonHidden);
             add(Guids.PainProbeBuff, ReasonHidden);    // Pain.cs: BuildKit.Buff(..., hidden: true) — 내부 판정용
             add(Guids.PainSaveSource, ReasonHidden);   // Pain.cs: BuildKit.Buff(..., hidden: true) — 내성 이유 출처
             add(Guids.PainOverflowBuff, ReasonHidden); // 개편 O7 Pain.cs: BuildKit.Buff(..., hidden: true) — 옛 세이브 전용 초과 버프(R3-F1 재구성 뒤 새로 붙지 않음)

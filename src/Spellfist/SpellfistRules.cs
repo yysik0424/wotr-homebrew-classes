@@ -12,6 +12,7 @@ namespace Spellfist
         public const int SchoolPicks = 3;
         // 설계 §4.4: 신속화 캡/비용의 주문 레벨 상한 9
         public const int MaxSpellLevel = 9;
+        public const int NativeMaxSpellLevel = 6;
         // 설계 §4.5: 비전 비법(Exploit) 획득 레벨
         public static readonly int[] ExploitLevels = { 3, 7, 11, 15, 19 };
         // 설계 §11-9/§11-10: 주먹 주문강타 2레벨 해금 (기습 공격 없음)
@@ -24,22 +25,22 @@ namespace Spellfist
         public const int GreaterExploitsLevel = 11;
 
          
-        // (WizardSpellList ba0401fd 의 각 주문 jbp SpellComponent.School, blueprints.zip 2026-11-07 직독).
+        // (MagusSpellList 4d72e1e7 의 각 주문 jbp SpellComponent.School, blueprints.zip 2026-11-07 직독).
          
         public static readonly int[,] SchoolCounts =
         {
-            { 1, 4, 3, 5, 4, 4, 2, 2, 2, 2 },   // Abjuration 29
-            { 2, 5, 7, 4, 5, 5, 4, 4, 4, 3 },   // Conjuration 43
-            { 0, 1, 2, 1, 1, 1, 1, 1, 1, 1 },   // Divination 10 (캔트립 0)
-            { 1, 2, 2, 4, 3, 5, 3, 4, 2, 5 },   // Enchantment 31
-            { 3, 5, 4, 5, 5, 3, 5, 4, 4, 3 },   // Evocation 41
-            { 0, 2, 4, 1, 4, 2, 1, 2, 2, 2 },   // Illusion 20 (캔트립 0)
-            { 2, 3, 8, 3, 7, 3, 5, 6, 5, 2 },   // Necromancy 44
-            { 1, 7, 7, 7, 6, 8, 13, 7, 4, 2 },  // Transmutation 62
+            { 0, 1, 0, 1, 2, 0, 1, 0, 0, 0 }, // Abjuration
+            { 2, 3, 4, 2, 1, 2, 2, 0, 0, 0 }, // Conjuration
+            { 0, 1, 0, 0, 0, 0, 1, 0, 0, 0 }, // Divination
+            { 1, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // Enchantment
+            { 3, 4, 3, 4, 5, 2, 3, 0, 0, 0 }, // Evocation
+            { 0, 2, 3, 1, 2, 0, 0, 0, 0, 0 }, // Illusion
+            { 2, 1, 0, 2, 0, 1, 1, 0, 0, 0 }, // Necromancy
+            { 0, 5, 5, 7, 4, 3, 9, 0, 0, 0 }, // Transmutation
         };
         // 같은 표의 Universalist 행(버리는 주문 — 몇 개를 버리는지도 원장으로 고정).
         public static readonly int[] UniversalistCounts = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        // WizardSpellList.SpellsByLevel 길이 = 11(0..10, 10레벨은 신화용 빈 칸; jbp 직독 2026-11-07). 우리 목록 9개도 같은 길이로 만든다.
+        // MagusSpellList.SpellsByLevel 길이 = 11(0..10, 10레벨은 신화용 빈 칸; jbp 직독 2026-11-07). 우리 목록 9개도 같은 길이로 만든다.
         public const int SpellListLevels = 11;
 
         // 설계 §4.7 교환표의 RemoveFeatures (레벨, 브롤러 모드 특성 GUID). 출처: 정찰 §8-1 표(모드 IL 정적 필드 대입 직독). Archetype.Build 가 진행표에서 되읽는다.
@@ -87,9 +88,7 @@ namespace Spellfist
         public static int SpellLevelAt(int casterLevel)
         {
             Require(casterLevel >= 1, "casterLevel", casterLevel);
-            if (casterLevel >= 18) return MaxSpellLevel;
-            if (casterLevel <= 3) return 1;
-            return casterLevel / 2;
+            return Math.Min(NativeMaxSpellLevel, 1 + (casterLevel - 1) / 3);
         }
     }
 }

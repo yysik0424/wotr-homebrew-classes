@@ -311,7 +311,7 @@ namespace BlastMagus
                 bool composite = BlastBlueprints.HasCompositeBlast(Owner, ElementOfOwner());
                 int intMod = Owner.Stats.Intelligence.Bonus;
                 // 치명타 ×2(설계 §4.4). 본편 GetDamageRule @0x0215~0x0241 과 같은 판독.
-                bool crit = roll.IsCriticalConfirmed;
+                bool crit = roll.IsCriticalConfirmed && BlastRules.StrikeCanCrit(Owner.Progression.GetClassLevel(BlastBlueprints.MagusClass));
                 return new StrikeNumbers(rank, composite, intMod, crit);
             }
 

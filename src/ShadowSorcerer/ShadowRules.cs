@@ -19,10 +19,7 @@ namespace ShadowSorcerer
         // 아키타입이 지우는 혈통 특기 선택 레벨. 출처: 설계 §5 + SorcererProgression.jbp L7/L13/L19 = SorcererFeatSelection 3a60f0c0…(T1 Step 0 직독).
         public static readonly IReadOnlyList<int> RemovedFeatSelectionLevels = new[] { 7, 13, 19 };
 
-        // 하루 주문 횟수 조정. 주문 레벨 1~9마다 기본 슬롯을 최대 2개 줄인다. 능력치 보너스는 유지한다.
-        public static readonly int SpellsPerDayDelta = -2;
-        public static readonly int SpellsPerDayMinLevel = 1;
-        public static readonly int SpellsPerDayMaxLevel = 9;
+        public static readonly int ExtraSlotWhileActive = 1;
 
         // 메아리 그림자 계수(%). 본편 MechanicsContext.ShadowFactorPercents 한 필드가 피해 배율(½)과 버프·디버프 확률(50%)을 함께 낸다.
          

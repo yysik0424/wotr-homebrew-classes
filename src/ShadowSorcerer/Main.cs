@@ -48,7 +48,7 @@ namespace ShadowSorcerer
             ShadowUnitBlueprint.BuildShell();
             ShadowUnitBlueprint.TryBuildUnit();
             // 2026-11-17(Buff.OnRemove @00B0 NRE): 만든 버프 전부의 FxOnRemove null 금지(BlueprintUtil.EmptyFxOnRemove 머리말). 이 모드는 빌드에서 버프를 만들지 않는다(버프 자리 = 점검 전용 2, 시험 buff fx:) → false.
-            BlueprintUtil.RequireOwnBuffFx(false);
+            BlueprintUtil.RequireOwnBuffFx(true);
             // 2026-11-15: 우리가 만든 블루프린트 전부에 IconTable 아이콘(보이는 것에 없으면 빌드 실패).
             Icons.Apply();
             // 2026-11-17(특성 툴팁 짧은 설명 `<null>` 결함): 위에서 만든 모든 블루프린트(BlueprintUtil.Create)의 LocalizedString 필드가 null 이 아닌지. 등록 전에 — 어긋나면 아키타입을 올리지 않는다.

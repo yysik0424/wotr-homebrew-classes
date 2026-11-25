@@ -399,7 +399,17 @@ namespace PackWarden
 
         public void OnAreaDidLoad()
         {
-            try { RetiredStudy.AfterLoad(Owner); ShadowPack.Reconcile(Owner); }
+            try
+            {
+                RetiredStudy.AfterLoad(Owner);
+                var pack = Owner.Get<UnitPartPack>();
+                if (pack != null && pack.RetiredAuxiliariesPending)
+                {
+                    AuxUnits.DestroyUntracked(Owner);
+                    pack.RetiredAuxiliariesPending = false;
+                }
+                ShadowPack.Reconcile(Owner);
+            }
             catch (Exception e) { ShadowPack.CountFailure("OnAreaDidLoad", Owner, e); throw; }
         }
 

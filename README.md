@@ -4,13 +4,13 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.6-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.6-beta/HomebrewClasses-0.17.6-beta.zip) · [Release notes and test coverage](release-notes-0.17.6-beta.md)
+> [Download 0.17.7-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.7-beta/HomebrewClasses-0.17.7-beta.zip) · [Release notes and test coverage](release-notes-0.17.7-beta.md)
 
 ## The classes
 
 | No | Archetype | Base class | What it does | Needs |
 |---|---|---|---|---|
-| 1 | [Pack Warden](#pack-warden) | Hunter | Commands a pack: up to four extra animals of your companion's kind join each fight, and pack-only spell effects replace spellcasting | — |
+| 1 | [Pack Warden](#pack-warden) | Hunter | Commands a pack: up to two extra animals of your companion's kind join each fight, and pack-only spell effects replace spellcasting | — |
 | 2 | [Phantom Blade](#phantom-blade) | Fighter | A guardian phantom strikes alongside you and absorbs half the damage you take | — |
 | 3 | [Blast Magus](#blast-magus) | Magus | Picks an element, fires blasts with Intelligence and detonates them through weapon hits | *KineticistElementsExpanded* (optional: 5 more elements) |
 | 4 | [Spellfist](#spellfist) | Brawler | Unarmed brawler with full arcane casting from three chosen schools | **BrawlerClassWrath** |
@@ -18,10 +18,10 @@ Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod 
 | 6 | [Warlock](#warlock) | Witch | Unlimited patron blasts that build Overheat and call summons | — |
 | 7 | [Weapon-Spirit Shaman](#weapon-spirit-shaman) | Shaman | A floating spirit weapon fights on its own and borrows the magic of stored weapons | — |
 | 8 | [Bulwark Mage](#bulwark-mage) | Wizard | Full caster in heavy armor behind a tower shield that strikes back | — |
-| 9 | [Chaos Warrior](#chaos-warrior) | Warpriest | Rages, mutates at random (claws, fangs and more), drives enemies mad with stacking pain, and casts the first spell of each rage as a swift action | — |
+| 9 | [Chaos Warrior](#chaos-warrior) | Warpriest | Rages, mutates at random (claws, fangs and more), drives enemies mad with stacking pain, and casts one spell as a swift action while raging each combat | — |
 | 10 | [Chimera Monk](#chimera-monk) | Monk | Reshapes the body with a new mutation every two levels | **DarkCodex** |
 | 11 | [Oathbound Revenant](#oathbound-revenant) | Paladin | An undead paladin whose smites knit the body back together | — |
-| 12 | [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | One shadow echoes your first harmful spell each round | — |
+| 12 | [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | Toggle a shadow to echo a harmful spell each round. Paid sorcerer spells cost one extra slot | — |
 | 13 | [Grey Seer](#grey-seer) | Arcanist | Cast on the front line with sword and staff, then strike a designated foe. Spend reservoir points according to the spell slot to secure a threatened cast. | — |
 | 14 | [Blood Berserker](#blood-berserker) | Bloodrager | Use a blood chain to reel in prey or pull yourself to a larger foe. Bloodrage coats your melee weapons, and their extra blood damage doubles on criticals from level 13. | — |
 | 15 | [Sorrow Inquisitor](#sorrow-inquisitor) | Inquisitor | Lift afflictions from allies into a lead rosary and sentence a foe to bear them. Returning one to its source raises its save DC, and from level 16 each bead that takes effect deals divine damage. | — |
@@ -48,7 +48,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.6-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.7-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -59,7 +59,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.6-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.7-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -115,7 +115,7 @@ Click a class to expand it.
 
 ### Overview
 
-The Pack Warden is a Hunter who travels with several animals at once. You give up all spellcasting; in exchange, auxiliary animals of the same species as your main animal companion appear whenever a fight starts. The auxiliaries do not pick targets of their own. They trail the main companion (moving up beside its target while it fights), and every time it swings in melee each of them bites the same target once. Your own job is command: flip between the Fierce and Tough aspects, and use Pack Empowerment to put spell effects on the whole pack. From levels 1 to 6 a single toggle calls the pack; from level 7 you have to fight from the saddle of your main companion, and the pack grows from one auxiliary to as many as four as you level.
+The Pack Warden is a Hunter who travels with several animals at once. You give up all spellcasting; in exchange, auxiliary animals of the same species as your main animal companion appear whenever a fight starts. The auxiliaries do not pick targets of their own. They trail the main companion (moving up beside its target while it fights), and every time it swings in melee each of them bites the same target once. Your own job is command: flip between the Fierce and Tough aspects, and use Pack Empowerment to put spell effects on the whole pack. From levels 1 to 6 a single toggle calls the pack; from level 7 you have to fight from the saddle of your main companion, and the pack grows from one auxiliary to as many as two as you level.
 
 ### What you give up
 
@@ -135,7 +135,7 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 |---|---|---|
 | 1 | Pack's Main Animal Companion | Choose one of the base-game animal companions whose base size is Medium or larger. Its advancement, the mount toggle and the animal companion archetype choice work as for a base Hunter |
 | 1 | Aspects of the Pack | Two toggles, Fierce Aspect and Tough Aspect. The active aspect gives the main companion and every auxiliary a bonus equal to your Wisdom modifier. Switching is a free action with no limit |
-| 1 | Call the Pack | If the call condition is met when you enter combat, auxiliary animals of your main companion's species appear: 1 at levels 1–6, 2 at levels 7–12, 3 at levels 13–18 and 4 at levels 19–20. Auxiliary level = Hunter level − 4 (minimum 1). Auxiliaries appear at Small size and are immune to enemy attacks of opportunity. The pack disperses when combat ends |
+| 1 | Call the Pack | If the call condition is met when you enter combat, auxiliary animals of your main companion's species appear: 1 at levels 1–6 and 2 at levels 7–20. Auxiliary level = Hunter level − 4 (minimum 1). Auxiliaries appear at Small size and are immune to enemy attacks of opportunity. The pack disperses when combat ends |
 | 1 | Call the Pack: Toggle | The call condition for levels 1–6: the Call the Pack toggle is on (it is on by default) |
 | 4 | Tandem Executioner base feature | The base feature a Tandem Executioner receives at level 4, which the techniques below build on |
 | 4 | Tandem Executioner technique (1st) | Pick one technique from the Tandem Executioner list |
@@ -145,11 +145,9 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 | 10 | Tandem Executioner technique (3rd) | |
 | 10 | Pack Empowerment (2nd) | One not yet chosen from the seven up to Hunter spell level 3 |
 | 13 | Tandem Executioner technique (4th) | |
-| 13 | (Call the Pack) | No separate feature. Call the Pack now brings 3 auxiliaries |
 | 16 | Tandem Executioner technique (5th) | |
 | 16 | Pack Empowerment (3rd) | One not yet chosen from all ten, up to Hunter spell level 5 |
 | 19 | Tandem Executioner technique (6th) | |
-| 19 | (Call the Pack) | No separate feature. Call the Pack now brings 4 auxiliaries |
 | 20 | Both Aspects | Fierce Aspect and Tough Aspect can be active at the same time |
 
 ### Abilities in detail
@@ -160,7 +158,7 @@ Every Hunter feature not listed here is kept as in the base game, including Hunt
 - **Call condition**
   - Levels 1–6: the Call the Pack toggle is on. It starts on and resting does not turn it off. Turning it on in the middle of a fight calls the pack at once. Turning it off in the middle of a fight does not dismiss a pack that is already out.
   - Level 7 and up: you are riding **your own main animal companion**. No other mount counts. Mounting up in the middle of a fight calls the pack at once.
-- **Pack size**: 1 auxiliary at Hunter levels 1–6, 2 at levels 7–12, 3 at levels 13–18 and 4 at levels 19–20.
+- **Pack size**: 1 auxiliary at Hunter levels 1–6, 2 at levels 7–20.
 - **What an auxiliary is**
   - Species: the same as your main animal companion.
   - Level: Hunter level − 4, minimum 1. Only Hunter class levels count.
@@ -510,7 +508,7 @@ The absorption pool is spent only on absorbing damage. Ghost Slash and Guardian 
 
 ### Overview
 
-The Blast Magus fits elemental detonations between blade and spell. At 1st level you pick one element, fire a kineticist-style ranged blast driven by Intelligence, and keep your melee weapon charged with extra damage of the same element. From 4th level you can spend 1 arcane pool point to load your next melee hit with a full blast's worth of damage. Spell Combat and Spellstrike are untouched, so a single hit can carry weapon damage, Energize Weapon, a touch spell and Blast Strike at once. The price is your cantrips, spell recall and the arcane pool's weapon enhancement.
+The Blast Magus fits elemental detonations between blade and spell. At 1st level you pick one element, fire a kineticist-style ranged blast driven by Intelligence, and keep your melee weapon charged with extra damage of the same element. From 4th level you can spend 1 arcane pool point to load your next melee hit with a full blast's worth of damage. Spell Combat and Spellstrike are untouched, so a single hit can carry weapon damage, Energize Weapon, a touch spell and Blast Strike at once. The price is your cantrips, spell recall and the arcane pool's weapon enhancement. From level 20, the blast from Blast Strike deals its ordinary damage even when the weapon critically hits.
 
 ### What you give up
 
@@ -586,7 +584,7 @@ Everything else is unchanged, including Spell Combat, Spellstrike and spellcasti
 | Physical (air, earth, water; telekinetic, gravity, wood) | Number of Blast Strike dice + your Intelligence modifier | Does not apply | Counts as magic (bypasses DR/magic) |
 
 - Examples: at 8th level (rank 4) with a +4 Intelligence modifier, fire deals 4d6+2 fire damage and earth deals 4d6+8 physical damage. At 20th level (rank 10, composite), fire deals 20d6 + half Intelligence and earth deals 20d6 + 20 + Intelligence.
-- Critical hits: if the triggering hit is a confirmed critical, the Blast Strike damage is doubled (always x2, regardless of the weapon's critical multiplier).
+- Critical hits: a confirmed weapon critical doubles Blast Strike damage through magus level 19. From level 20 the blast deals normal damage. The weapon and any delivered touch spell follow their own critical rules.
 - The caster level used for the spell resistance check is your magus level.
 - Blast Strike damage is not weapon damage. Effects that add damage to weapon hits, and precision damage, are not applied to it a second time.
 
@@ -678,16 +676,16 @@ Offered only while the KineticistElementsExpanded mod is enabled:
 |---|---|
 | Base class | Brawler — a class added by the external mod BrawlerClassWrath |
 | Key ability | Intelligence (spellcasting, reservoir, exploit DCs). Recommended abilities are Intelligence, Strength, Dexterity |
-| Spellcasting | Changed — the non-casting brawler gains an arcanist-style arcane spellbook (Intelligence, up to 9th-level spells) |
+| Spellcasting | Changed — the non-casting brawler gains an arcanist-style arcane spellbook (Intelligence, up to 6th-level spells) |
 | Required mods | BrawlerClassWrath (without it this archetype does not appear) |
-| Optional integrations | None |
+| Optional integrations | Spellbook Merge 1.7.1 |
 | Alignment, deity and other restrictions | None. It cannot be combined with the brawler mod's eight other archetypes (Wild Child, Venomfist, Snakebite Striker, Steel-Breaker, Turfer, Beast Wrestler, Exemplar, Mutagenic Mauler) |
 
 ### Overview
 
-The Spellfist is a brawler who carries arcane spells in the same body as the fists. At 1st level you pick three arcane schools, then prepare and cast only wizard spells of those schools the way an arcanist does, reaching 9th-level spells at 18th level. A single arcane reservoir lets you pull spells forward as swift actions and powers a set of arcanist exploits. From 2nd level you hold a touch spell in your hand and discharge it through your unarmed flurry. You keep the brawler's bonus combat feats and flurry, and give up maneuver training, Knockout and Awesome Blow.
+The Spellfist is a brawler who carries arcane spells in the same body as the fists. At 1st level you pick three arcane schools, then prepare and cast only magus spells of those schools the way an arcanist does, reaching 6th-level spells at 16th level. A single arcane reservoir lets you pull spells forward as swift actions and powers a set of arcanist exploits. From 2nd level you hold a touch spell in your hand and discharge it through your unarmed flurry. You keep the brawler's bonus combat feats and flurry, and give up maneuver training, Knockout and Awesome Blow.
 
-The main book can merge on the same mythic paths as the Arcanist book. Select Spellfist to advance arcane casting through a prestige class. Brawler Martial Training counts Brawler levels as Fighter and Monk levels for feat prerequisites.
+The main book can merge on the same mythic paths as the Magus book. Select Spellfist to advance arcane casting through a prestige class. Brawler Martial Training counts Brawler levels as Fighter and Monk levels for feat prerequisites.
 
 ### What you give up
 
@@ -708,41 +706,40 @@ Nothing else is removed from the brawler.
 
 | Level | Feature | Effect |
 |---|---|---|
-| 1 | Arcane School ×3 | Choose three different schools out of eight. Only wizard spells of those schools enter your spellbook. The choice is permanent. |
+| 1 | Arcane School ×3 | Choose three different schools out of eight. Only magus spells of those schools enter your spellbook. The choice is permanent. |
 | 1 | Spellfist spellbook | Arcanist-style arcane spellbook. Intelligence-based, cantrips included, caster level equals brawler level. |
 | 1 | Arcane Reservoir | Maximum = 3 + brawler level + Intelligence modifier. Refills fully on rest. |
 | 1 | Reservoir Quicken | Toggle. In combat, spells are cast as swift actions; each successful cast drains points equal to the spell level (minimum 1). |
 | 2 | Fist Spellstrike | Hold a touch spell from your Spellfist spellbook and deliver it with an unarmed strike (flurry included) or a melee weapon attack. |
 | 3 | Spellfist Exploits | Choose one exploit (1st) |
 | 4 | — | 2nd-level spells |
-| 6 | — | 3rd-level spells |
+| 7 | — | 3rd-level spells |
 | 7 | Spellfist Exploits | Choose one exploit (2nd) |
-| 8 | — | 4th-level spells |
-| 10 | — | 5th-level spells |
+| 10 | — | 4th-level spells |
 | 11 | Spellfist Exploits | Choose one exploit (3rd) |
 | 11 | Greater Exploits | Greater Spell Resistance becomes available |
-| 12 | — | 6th-level spells |
-| 14 | — | 7th-level spells |
+| 13 | — | 5th-level spells |
 | 15 | Spellfist Exploits | Choose one exploit (4th) |
-| 16 | — | 8th-level spells |
-| 18 | — | 9th-level spells |
+| 16 | — | 6th-level spells |
 | 19 | Spellfist Exploits | Choose one exploit (5th) |
 
 ### Abilities in detail
 
 #### Spellfist spellbook
 
-- It works like the base game's arcanist spellbook: you prepare spells each day and then spend spell slots freely among the spells you prepared. Spell slots per day and the number of spells you can prepare follow the arcanist tables for the same level.
+- It works like the base game's arcanist spellbook: you prepare spells each day and then spend spell slots freely among the spells you prepared. Spell slots per day and the number of spells you can prepare follow the Magus progression for the same level.
 - It is an arcane spellbook, the casting ability is Intelligence, and your caster level equals your brawler level.
-- You do not pick spells known. You automatically know every wizard spell of your three schools, up to the highest spell level you can cast. When a new spell level opens, all spells of that level from your three schools arrive at once.
+- You do not pick spells known. You automatically know every magus spell of your three schools, up to the highest spell level you can cast. When a new spell level opens, all spells of that level from your three schools arrive at once.
 - There are no spell picks on level-up and you cannot copy scrolls into this spellbook. Spells outside your three schools, and universal spells, never enter it.
 - The archetype grants nothing that removes arcane spell failure from armor.
 
 When spell levels open:
 
-| Brawler level | 1–3 | 4–5 | 6–7 | 8–9 | 10–11 | 12–13 | 14–15 | 16–17 | 18–20 |
-|---|---|---|---|---|---|---|---|---|---|
-| Highest spell level | 1st | 2nd | 3rd | 4th | 5th | 6th | 7th | 8th | 9th |
+| Brawler level | 1–3 | 4–6 | 7–9 | 10–12 | 13–15 | 16–20 |
+|---|---|---|---|---|---|---|
+| Highest spell level | 1st | 2nd | 3rd | 4th | 5th | 6th |
+
+Existing characters keep spells they already learned. Retraining and selecting schools again builds the book from the new Magus list.
 
 Cantrips are available from 1st level, but only if one of your schools has any (see the table under Choices).
 
@@ -787,20 +784,20 @@ Cantrips are available from 1st level, but only if one of your schools has any (
 
 #### Arcane School (level 1, choose three)
 
-You make the same choice three times at 1st level and cannot pick a school twice. The universal school is not offered. The numbers below are for the base game's wizard spell list with no other mods, and show how many spells each school brings at each spell level.
+You make the same choice three times at 1st level and cannot pick a school twice. The universal school is not offered. The numbers below are for the base game's magus spell list with no other mods, and show how many spells each school brings at each spell level.
 
-| School | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | Total |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| Abjuration | 1 | 4 | 3 | 5 | 4 | 4 | 2 | 2 | 2 | 2 | 29 |
-| Conjuration | 2 | 5 | 7 | 4 | 5 | 5 | 4 | 4 | 4 | 3 | 43 |
-| Divination | 0 | 1 | 2 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 10 |
-| Enchantment | 1 | 2 | 2 | 4 | 3 | 5 | 3 | 4 | 2 | 5 | 31 |
-| Evocation | 3 | 5 | 4 | 5 | 5 | 3 | 5 | 4 | 4 | 3 | 41 |
-| Illusion | 0 | 2 | 4 | 1 | 4 | 2 | 1 | 2 | 2 | 2 | 20 |
-| Necromancy | 2 | 3 | 8 | 3 | 7 | 3 | 5 | 6 | 5 | 2 | 44 |
-| Transmutation | 1 | 7 | 7 | 7 | 6 | 8 | 13 | 7 | 4 | 2 | 62 |
+| School | 0 | 1 | 2 | 3 | 4 | 5 | 6 | Total |
+|---|---|---|---|---|---|---|---|---|
+| Abjuration | 0 | 1 | 0 | 1 | 2 | 0 | 1 | 5 |
+| Conjuration | 2 | 3 | 4 | 2 | 1 | 2 | 2 | 16 |
+| Divination | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 2 |
+| Enchantment | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 2 |
+| Evocation | 3 | 4 | 3 | 4 | 5 | 2 | 3 | 24 |
+| Illusion | 0 | 2 | 3 | 1 | 2 | 0 | 0 | 8 |
+| Necromancy | 2 | 1 | 0 | 2 | 0 | 1 | 1 | 7 |
+| Transmutation | 0 | 5 | 5 | 7 | 4 | 3 | 9 | 33 |
 
-- Divination and illusion have no cantrips in this game, so those two schools grant none.
+- The Magus list has no abjuration, divination, illusion or transmutation cantrips.
 - Universal spells (one cantrip in the base game) belong to no school and cannot be learned.
 - The choice cannot be undone.
 
@@ -839,7 +836,7 @@ These eleven are the whole list. Other arcanist exploits (the ones that convert 
 | Resource | Maximum | Recovery | Spent on |
 |---|---|---|---|
 | Arcane Reservoir | 3 + brawler level + Intelligence modifier | Fully on rest, fully on level-up | Reservoir Quicken (spell level, minimum 1), exploits (1 point; Arcane Barrier 1 to 3) |
-| Spell slots | Arcanist table for the same level | Rest | Casting spells |
+| Spell slots | Magus table for the same level | Rest | Casting spells |
 
 The reservoir is the same resource as the base game arcanist's arcane reservoir. Unlike the arcanist's, it refills completely on rest rather than halfway.
 
@@ -847,8 +844,8 @@ The reservoir is the same resource as the base game arcanist's arcane reservoir.
 
 - **Without BrawlerClassWrath**: the game starts normally and only this archetype is left unregistered (it does not appear at character creation). One error line is written to the mod log.
 - **Other mods that add brawler archetypes**: this archetype knows, and blocks combination with, only the brawler mod's eight original archetypes. If the brawler class has any other archetype added to it, this archetype is not registered.
-- **Mods that change the wizard spell list**: spells another mod adds to the wizard list are sorted into the Spellfist school lists by their school (universal spells are skipped). This includes mods that add spells after this one (for example CharacterOptionsPlus): on the first frame after the game starts, the school lists are rebuilt from the wizard list as it is then. The spells added or removed are logged in one line in the mod log; if the wizard list cannot be read, the school lists built at load are kept and one error line is written to the mod log. If a mod removes a base-game wizard spell from the list or moves it to another level or school, this archetype is not registered.
-- **DLC spells**: DLC spells on the wizard list are included in the school lists. Without the DLC the game hides them, exactly as it does for a wizard.
+- **Mods that change the magus spell list**: spells another mod adds to the magus list are sorted into the Spellfist school lists by their school (universal spells are skipped). This includes mods that add spells after this one (for example CharacterOptionsPlus): on the first frame after the game starts, the school lists are rebuilt from the magus list as it is then. The spells added or removed are logged in one line in the mod log; if the magus list cannot be read, the school lists built at load are kept and one error line is written to the mod log. If a mod removes a base-game magus spell from the list or moves it to another level or school, this archetype is not registered.
+- **DLC spells**: DLC spells on the magus list are included in the school lists. Without the DLC the game hides them, exactly as it does for a magus.
 - **Multiclassing and Reservoir Quicken**: the quicken effect applies to the caster as a whole. A multiclass character with another spellbook gets that book's spells quickened too while the toggle is on, and those casts do not drain the reservoir. The drain and the spell-level cap line up exactly only on a single-class character.
 - **Magus multiclass**: not supported. With magus levels, Fist Spellstrike is not attached to the Spellfist spellbook and the magus's own Spellstrike is used as is.
 - **Other mods that alter Spellstrike**: when another mod has already allowed a spell for Spellstrike, that result is kept. This mod only adds spells from the Spellfist spellbook on top.
@@ -1750,9 +1747,9 @@ The "once per round" limit on Shield Rebuke is not a resource. It clears when yo
 
 ### Overview
 
-The Chaos Warrior is a warrior priest touched by divine madness. You give up one blessing, fervor, channel energy and sacred armor, and in return you can fly into a chaos rage from 1st level. Every rage warps your body at random with several of 32 mutations: fangs, claws, tails and other natural attacks may sprout, mixed with helpful, harmful and two-sided mutations, and a mutation drawn twice stacks. Every melee weapon hit you land on an enemy while raging stacks pain, and at eight stacks the enemy must make a Will save or become confused. You can still cast spells while raging, and the first warpriest spell of each rage is cast as a swift action, so you buff up, wade straight into the front line and grind the enemy formation into chaos.
+The Chaos Warrior is a warrior priest touched by divine madness. You give up one blessing, fervor, channel energy and sacred armor, and in return you can fly into a chaos rage from 1st level. Every rage warps your body at random with several of 32 mutations: fangs, claws, tails and other natural attacks may sprout, mixed with helpful, harmful and two-sided mutations, and a mutation drawn twice stacks. Every melee weapon hit you land on an enemy while raging stacks pain, and at eight stacks the enemy must make a Will save or become confused. You can still cast spells while raging, and once per combat, the first eligible warpriest spell cast while raging is cast as a swift action, so you buff up, wade straight into the front line and grind the enemy formation into chaos.
 
-Chaos Rage qualifies for Limitless Rage. With it, you can start Chaos Rage even with no charges left. Ending and restarting rage rolls a new set of mutations.
+Chaos Rage qualifies for Limitless Rage. With it, you can start Chaos Rage even with no charges left. Ending and restarting rage rolls a new set of mutations. Re-entering rage rerolls mutations. Frenzied Casting quickens one eligible spell per combat.
 
 ### What you give up
 
@@ -1773,7 +1770,7 @@ Kept: spellcasting, the first blessing, bonus feats (levels 3, 6, 9, 12, 15, 18)
 | Level | Feature | Effect |
 |---|---|---|
 | 1 | Chaos Rage | Free action, in combat only. +4 Strength and Constitution, +2 Will saves, -2 AC. Uses per day: max(1, half warpriest level + Wisdom modifier). You can cast spells while raging and are not fatigued afterwards |
-| 1 | Frenzied Casting (part of Chaos Rage) | The first warpriest spell you cast in each rage is cast as a swift action. Spell level cap 1 (2 at 7th level, 3 at 10th, 4 at 13th, 5 at 16th, 6 at 19th) |
+| 1 | Frenzied Casting (part of Chaos Rage) | Once per combat, the first eligible warpriest spell you cast while raging is cast as a swift action. Spell level cap 1 (2 at 7th level, 3 at 10th, 4 at 13th, 5 at 16th, 6 at 19th) |
 | 1 | Pain (part of Chaos Rage) | Each melee weapon hit on an enemy while raging adds 1 stack: -1 attack rolls, saves and skill checks per stack (at most -5) for 3 rounds. At 8 stacks the target makes a Will save (DC 10 + half warpriest level + Wisdom modifier) or is confused for 1d4 rounds |
 | 1 | Mutations of Madness | Each time you start a rage, 1-3 mutations (up to 4-8 at higher levels) are drawn at random from 32. A mutation drawn again stacks. All end with the rage |
 | 3 | Chaos Rage: magic natural weapons | While raging, your natural weapon attacks count as magic |
@@ -1811,12 +1808,12 @@ Kept: spellcasting, the first blessing, bonus feats (levels 3, 6, 9, 12, 15, 18)
 
 #### Frenzied Casting
 
-- Starting a rage gives you the Frenzied Casting effect. The first warpriest spell at or below the cap that you cast during this rage is cast as a swift action, and casting it uses up the effect. The effect also ends with the rage.
+- Starting a rage gives you Frenzied Casting if you have not spent it this combat. The first warpriest spell at or below the cap that you cast during this rage is cast as a swift action, and casting it uses up the effect. The effect also ends with the rage.
 - Any target is fine (the spell need not target yourself). The spell still uses its spell slot.
 - Spell level cap by warpriest level: 1 at levels 1-6, 2 at 7-9, 3 at 10-12, 4 at 13-15, 5 at 16-18, 6 at 19-20. The level is the level of the spell slot (metamagic cost included). A spell with variants counts at the level of the spell you choose the variant from. A spell above the cap is cast normally and the effect remains.
 - A warpriest spell is any spell on the warpriest spell list: cast from another spellbook it still counts and uses up the effect. A spell that is already a swift action, or one prepared with Quicken Spell, also uses it up.
 - If you have already used your swift action this round and still have your standard action, the spell is cast as a standard action and the effect is still used up (if both are used, it waits for your swift action).
-- A rage that is suppressed and then resumes does not grant it again. Loading a game saved during a rage refills it, even if you had already used it.
+- Ending an unused rage preserves the opportunity. After you spend it, restarting rage or loading a mid-combat save leaves it spent until the next combat.
 
 #### Mutations of Madness
 
@@ -1938,7 +1935,6 @@ Two-sided mutations (5) - the upside and the downside come together, and drawing
 - Rage uses, the pain DC, the number and scaling of mutations, the natural weapon tiers and the Frenzied Casting cap count warpriest levels only. Levels in other classes or prestige classes do not add to them.
 - The natural attack limits (one bite, gore and tail each; two claws and pincers combined) are the base game's values. If another mod changes those limits, the changed values are used.
 - The "magic" natural weapon property raises the total enhancement of a +0 natural weapon by 1. A natural weapon whose total is already 4 or 5 from other effects can then bypass good and lawful damage reduction or count as epic. The "evil" property applies even if you are chaotic neutral (it bypasses DR/evil and switches off regeneration that evil weapons suppress).
-- Loading a game saved during a rage refills Frenzied Casting, so repeated save and load can give several quickened casts (the same as the base game's greater bloodrage). The refill happens only for party members, companions and pets.
 - Spells that another mod adds to the warpriest spell list after this mod loads are not quickened by Frenzied Casting.
 - The pain penalty does not stack with other penalties of the same type; only the largest applies.
 - The natural weapons are copies of base-game weapons, so the combat log shows the base-game names (the Neuro-Stinger also appears as "Sting").
@@ -2377,20 +2373,20 @@ Channel Negative Energy draws on lay on hands uses, not on the base paladin's ch
 |---|---|
 | Base class | Sorcerer |
 | Key ability | Charisma. Recommended abilities are the same as the base Sorcerer's |
-| Spellcasting | Sorcerer spellbook with up to two fewer base daily slots at each unlocked spell level from 1st to 9th and nine extra shadow and illusion spells |
+| Spellcasting | Standard sorcerer daily slots and nine additional shadow or illusion spells. While the shadow is on, a paid sorcerer cast uses one additional slot of its level. |
 | Required mods | None |
 | Optional integrations | None |
 | Alignment / deity restrictions | None added by the archetype |
 
 ### Overview
 
-One shadow repeats your first eligible harmful sorcerer spell each round. It recasts the same spell at the same target or point 0.5 seconds after the original effect ends. For example, if you maximize a fireball, the original deals maximum damage and the echo rolls the ordinary fireball dice.
+With the shadow toggled on, paid sorcerer spells cost one additional slot of the same tier. One shadow repeats your first eligible harmful sorcerer spell each round. It recasts the same spell at the same target or point 0.5 seconds after the original effect ends. For example, if you maximize a fireball, the original deals maximum damage and the echo rolls the ordinary fireball dice.
 
 ### What you give up
 
 | Level | Base feature | Notes |
 |---|---|---|
-| 1 | Spells Given to Shadow | Lose up to two base daily slots at each unlocked spell level from 1st to 9th |
+| 1 | Spells Given to Shadow | Turning on the shadow increases the cost of an ordinary sorcerer spell from one slot to two. |
 | 7 | Bloodline Feat Selection | Removed |
 | 13 | Bloodline Feat Selection | Removed |
 | 19 | Bloodline Feat Selection | Removed |
@@ -2401,9 +2397,9 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 
 | Level | Feature | Effect |
 |---|---|---|
-| 1 | Shadow Echo | One echo follows the first eligible harmful sorcerer spell each round after its effect ends. The echo casts the base spell without metamagic at the same target or point and costs no action or slot |
+| 1 | Shadow Echo | While the toggle is on, one shadow repeats the first eligible harmful sorcerer spell each round after a 0.5-second delay. |
 | 1 | Shadow Double | One shadow casts your echo from Sorcerer level 1 through 20 |
-| 1 | Spells Given to Shadow | Subtract two base slots at each unlocked spell level from 1st to 9th, to a minimum of zero. Add all bonus slots |
+| 1 | Spells Given to Shadow | Turn off the shadow to cast at the ordinary slot cost. |
 | 3 | Shadow Arcana: Vanish | You learn Vanish (1st level) as an extra spell |
 | 5 | Shadow Arcana: Mirror Image | You learn Mirror Image (2nd level) as an extra spell |
 | 7 | Shadow Arcana: Displacement | You learn Displacement (3rd level) as an extra spell |
@@ -2475,9 +2471,9 @@ Your bloodline choice, bloodline powers, bloodline spells and bloodline arcana a
 
 #### Spells Given to Shadow
 
-- Subtract two base daily slots at each unlocked Sorcerer spell level from 1st to 9th. Three base slots plus one bonus yield two slots, as do one base slot plus two bonus slots.
-- Only the base number from the Sorcerer table is reduced. Bonus spells from your casting ability and extra slots from other effects are untouched.
-- The reduction never takes more than the base number, and the result never goes below 0.
+- With the shadow on, casting Magic Missile spends two 1st-level slots once, regardless of the number of missiles. Turn it off to cast with only one slot remaining.
+- Support spells and spells cast after the echo for that round also pay the additional slot. Cantrips and scrolls use no sorcerer slots.
+- Turning the shadow off restores the ordinary cost on your next cast.
 - Cantrips (level 0) and spell levels you have not unlocked yet are unaffected.
 - It applies only to this archetype's Sorcerer spellbook, not to any other spellbook the character has.
 
@@ -2513,15 +2509,15 @@ The archetype adds no choices of its own. You pick a bloodline exactly as a base
 ### Resources
 
 - Shadow Echo uses no resource. Its only limit is one echoed spell per round.
-- At each affected spell level, subtract two from the base slots (minimum zero), then add every bonus slot. Resting restores spent slots.
+- Daily slots follow the standard sorcerer table. Existing remaining slots are preserved until rest refills the full allowance.
 
 ### Compatibility and notes
 
 - No other mod is required. If the game data is not what the archetype expects (another mod has moved the bloodline feat slots in the Sorcerer progression, or one of the nine extra spells is not on the Sorcerer spell list at the expected level), the archetype does not appear in character creation and the rest of the game runs normally.
 - **TabletopTweaks, ExpandedContent, BrawlerClassWrath**: these mods add entries to the bloodline feat selection. The Shadow Sorcerer loses that selection altogether, so there is no conflict.
 - **Merged mythic spellbooks**: mythic spells merged into the Sorcerer spellbook (the base game's Lich merge, and Angel, Aeon, Azata, Demon and Trickster spells merged by mods that extend merging) are Sorcerer spellbook spells, so they echo when they qualify.
-- The **ToyBox** spells-per-day multiplier applies after the base slot reduction.
-- **Multiclassing and prestige classes** can advance the Sorcerer spellbook. Spells cast from that book still use the same echo conditions and daily slot reduction. There is one shadow at every level.
+- The **ToyBox** daily-slot multiplier applies as it does to a standard sorcerer.
+- The toggle also applies when a prestige class advances the same sorcerer book.
 - **Spells that do not echo**: teleports and utility spells that do no harm (Dimension Door and the like) are excluded. A few area spells that travel with the caster or a target cannot keep their original centre and are excluded as well: Zone of Predetermination, the Angel spell Repel the Profane and the Trickster spell Breath of Money.
 - **Spells excluded from echoing (15)**: the spells below are harmful to enemies but never echo. The original cast is unchanged.
   - 14 spells with an effect that would still reach an enemy that disbelieved: Inflict Moderate Wounds, Mass / Baleful Polymorph / Prismatic Spray / Clashing Rocks / Force Punch / Hideous Laughter / Slow / Crushing Despair / Cause Fear / Scare / Mortal Terror / the Azata spell Water Torrent / the Lich spell Siphon Time / the Aeon spell Relativity.
@@ -2684,7 +2680,7 @@ Casting mage armor on yourself illustrates three different defenses and rolls. G
 
 ### Overview
 
-The chain changes who gets to choose the distance. Drag a smaller foe into your front line, or use a giant as an anchor to pull yourself into melee. Either hit leaves a Blood Knot that rewards staying on that particular enemy. Drawn blades take on a translucent red coating during bloodrage.
+The chain changes who gets to choose the distance. Drag a smaller foe into your front line, or use a giant as an anchor to pull yourself into melee. Either hit leaves a Blood Knot that rewards staying on that particular enemy. Drawn blades take on a translucent red coating during bloodrage. Collecting a blood knot grants temporary hit points equal to your bloodrager level for two rounds. Another knot refreshes this protection.
 
 ### What you give up
 
@@ -2722,7 +2718,7 @@ Shocking Grasp is tier 1 and Vampiric Touch is tier 3. A level 10 bloodrager who
 
 #### Choose which side of the chain moves
 
-During bloodrage, fire at a living enemy. A ranged touch hit attempts a pull maneuver against a foe of your size or smaller. A larger foe pulls you toward it. The **chain hit** ties the knot. Land a melee weapon hit on that enemy by the end of your next turn, or within one round in real time, to collect temporary hit points equal to your bloodrager level for one round. You can collect the knot once. Hitting a different enemy with the chain moves your claim.
+During bloodrage, fire at a living enemy. A ranged touch hit attempts a pull maneuver against a foe of your size or smaller. A larger foe pulls you toward it. The **chain hit** ties the knot. Land a melee weapon hit on that enemy by the end of your next turn, or within one round in real time, to collect temporary hit points equal to your bloodrager level for two rounds. Collecting another knot replaces and refreshes these hit points. You can collect the knot once. Hitting a different enemy with the chain moves your claim.
 
 #### Reaching farther and loading a spell
 
@@ -2756,7 +2752,7 @@ The chain and weapon make separate rolls. Landing a touch attack on an armored f
 | Choice | Effect carried by the chain | When to load it |
 |---|---|---|
 | Shocking Grasp | 1d6 electricity per caster level, up to 5d6. | Add an immediate electrical hit to your move-action chain. The target's electricity resistance still matters. |
-| Vampiric Touch | 1d6 per two caster levels, up to 10d6. Gain temporary hit points equal to damage dealt, with the spell's one-hour duration. | The spell resolves as you close. The knot's one-round temporary hit points have their own trigger on the subsequent melee hit. |
+| Vampiric Touch | 1d6 per two caster levels, up to 10d6. Gain temporary hit points equal to damage dealt, with the spell's one-hour duration. | The spell resolves as you close. The knot's two-round temporary hit points have their own trigger on the subsequent melee hit. |
 
 The spell must be known in your bloodrager book. Loading spends a slot for the unmodified spell and requires an empty chain. One turn can contain a swift load, a move-action chain and a standard-action melee attack. Starting beside your foe lets you forgo the chain and make a full attack with both weapons instead.
 
@@ -2800,7 +2796,7 @@ When immunity or fortification negates a critical, use the ordinary hit dice. At
 
 ### Overview
 
-A bead begins with something that actually happened to an ally. Free a paralyzed companion now, carry that paralysis in a lead rosary, and choose its recipient later. Returning it to the original aggressor makes the sentence harder to resist. Loading it onto a bane weapon lets a melee hit deliver the sentence while you keep fighting.
+A bead begins with something that actually happened to an ally. Free a paralyzed companion now, carry that paralysis in a lead rosary, and choose its recipient later. Returning it to the original aggressor makes the sentence harder to resist. Loading it onto a bane weapon lets a melee hit deliver the sentence while you keep fighting. A gathered affliction stays in its bead until your next rest.
 
 ### What you give up
 
@@ -2872,18 +2868,18 @@ The bonus teamwork picks and Solo Tactics are both exchanged. You can still spen
 
 ### Resources
 
-Daily gathers equal **3 + Wisdom modifier**, minimum one. A bead lasts one minute of game time. Rest clears the rosary and restores the daily uses.
+Daily gathers equal **3 + Wisdom modifier**, minimum one. Unused beads stay in the rosary between encounters until your next rest. Rest clears the rosary and restores the daily uses.
 
 | Situation | Gather uses | Stored beads |
 |---|---|---|
 | Gather three effects into three free slots at once | Spend one use | Add three beads |
 | The vow expires without a qualifying affliction | No use spent | No change |
-| Load the blade and miss for the turn | No further cost | Beads remain stored and their timers continue. |
+| Load the blade and miss for the turn | No further cost | Beads remain available until your next rest. |
 | An enemy saves against an ordinary sentence | No further cost | Released beads are spent. The next discharge must wait for the next round. |
 
 ### Compatibility and notes
 
-The minute in storage is separate from duration on the victim. Gather paralysis with one round remaining and you can hold the bead for up to a minute, but it can paralyze its new target for only one round. Long-lasting afflictions also cap at three rounds on the foe. Examine the Rosary lets you spend a bead that is about to expire or clear space for the next rescue.
+Gather paralysis with one round remaining and you can sentence an enemy in any encounter before your next rest. The paralysis lasts one round on the new target. Long-lasting afflictions also cap at three rounds on the foe. Examine the Rosary lets you choose the bead to discharge or clear space for the next rescue.
 
 </details>
 
@@ -3371,7 +3367,7 @@ Automatic Dive checks for a surviving enemy after the ranger's own weapon attack
 
 Your oracle’s curse is the mark the prophecy left on you. You follow the trail of failed predictions and copy what you learn from arcane scrolls into a research book. Before a dungeon, the question is which spells to ready. Once inside, you decide whether the same spell is worth both of that tier's casts.
 
-Mythic merging and divine prestige advancement apply to the Intelligence-based Oracle book. The arcane research book grows with Oracle levels. Mystic Theurge requires a separate class that can cast 2nd-level arcane spells.
+Mythic merging and divine prestige advancement apply to the Intelligence-based Oracle book. The arcane research book grows with Oracle levels. Mystic Theurge requires a separate class that can cast 2nd-level arcane spells. Research spells use a base save DC of 10 + spell level + Intelligence modifier, including the usual adjustments for Spell Focus and Heighten Spell.
 
 ### What you give up
 
@@ -3397,7 +3393,7 @@ Each oracle level offers two arcane spell picks. The fourth column is the **maxi
 | 16 | 8 | 4 / 2 / 2 | 32 | 16 |
 | 18 | 9 | 4 / 2 / 2 | 36 | 18 |
 
-Caster level keeps increasing at 19 and 20. At level 20 the base research DC is 20 + your Intelligence modifier, and tier 9 still has two casts. The total assumes you use both casts at every tier. Unspent tier 1 uses cannot pay for another tier 9 spell.
+Caster level keeps increasing at 19 and 20. At level 20 research DC still depends on spell level, and tier 9 still has two casts. The total assumes you use both casts at every tier. Unspent tier 1 uses cannot pay for another tier 9 spell.
 
 ### Abilities in detail
 
@@ -3410,7 +3406,7 @@ Caster level keeps increasing at 19 and 20. At level 20 the base research DC is 
 | Daily allowance | The oracle's divine spell slots | Two casts per tier, shared by both prepared spells of that tier |
 | Role of Intelligence | Intelligence takes over as the divine casting ability | Raises save DC. The limits of four inscribed, two prepared and two daily casts stay fixed. |
 
-Arcane tiers 1 through 9 unlock at oracle levels **1, 4, 6, 8, 10, 12, 14, 16 and 18**. Arcane caster level equals oracle class level. Base save DC is **10 + half oracle level (rounded down) + Intelligence modifier**. A level 12 oracle with +5 Intelligence unlocks tier 6 and has a base research DC of 21 for both tier 1 and tier 6 spells.
+Arcane tiers 1 through 9 unlock at oracle levels **1, 4, 6, 8, 10, 12, 14, 16 and 18**. Arcane caster level equals oracle class level. Base save DC is **10 + spell level + Intelligence modifier**. A level 12 oracle with +5 Intelligence unlocks tier 6 and has base DC 16 for a tier 1 spell and DC 21 for a tier 6 spell. Spell Focus and Heighten Spell follow the usual spell rules.
 
 #### From character creation to the first rest
 
@@ -3461,7 +3457,7 @@ Mystery-dependent revelations lose their selection slots. Regular feat picks fol
 
 ### Compatibility and notes
 
-Highest research tier, caster level and base DC use **oracle class level**. An oracle 8 / other class 4 has tier 4 research, caster level 8 and DC 14 + Intelligence modifier. A single-class level 12 oracle has tier 6 and caster level 12. Normal oracle weapon and armor proficiencies remain, the research book is arcane and orisons remain Intelligence-based divine magic.
+Highest research tier and caster level use **oracle class level**. An oracle 8 / other class 4 has tier 4 research, caster level 8 and a tier 4 base DC of 14 + Intelligence modifier. A single-class level 12 oracle has tier 6 and caster level 12. Normal oracle weapon and armor proficiencies remain, the research book is arcane and orisons remain Intelligence-based divine magic.
 
 </details>
 

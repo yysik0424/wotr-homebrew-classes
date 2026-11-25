@@ -32,7 +32,7 @@ namespace SorrowInquisitor
     public sealed class Bead
     {
         [JsonProperty] public string Id, MarkerId, BuffId, SourceSpell, Aggressor, Ally, AllyName, AggressorName;
-        [JsonProperty] public long Expires, Duration, TickDelay, Interval;
+        [JsonProperty] public long Duration, TickDelay, Interval;
         [JsonProperty] public int Rank, CasterLevel, SpellLevel;
         [JsonProperty] public SavingThrowType Save;
         [JsonProperty] public int[] Ranks, Shared;
@@ -146,7 +146,6 @@ namespace SorrowInquisitor
             var bead = new Bead { Id = b.UniqueId, BuffId = b.Blueprint.AssetGuid.ToString(),
                 SourceSpell = spell?.AssetGuid.ToString(), Aggressor = ctx.MaybeCaster?.UniqueId, Ally = b.Owner.Unit.UniqueId,
                 AllyName = b.Owner.CharacterName, AggressorName = ctx.MaybeCaster?.CharacterName,
-                Expires = Now + TimeSpan.FromSeconds(Rules.StorageSeconds).Ticks,
                 Duration = b.IsPermanent ? long.MaxValue : b.TimeLeft.Ticks, Rank = b.Rank,
                 Interval = ((TimeSpan)tick.GetValue(b)).Ticks,
                 TickDelay = (TimeSpan)nextTick.GetValue(b) == TimeSpan.MaxValue ? long.MaxValue : Math.Max(0L, ((TimeSpan)nextTick.GetValue(b)).Ticks - Now),

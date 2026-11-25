@@ -75,9 +75,7 @@ namespace ProphecyBreaker
         {
             var b = evt.AbilityData?.Spellbook ?? evt.Spellbook;
             if (!Study.Own(b?.Blueprint)) return;
-            int level = Study.Level(b);
-            evt.ReplaceCasterLevel = level;
-            evt.ReplaceDC = Rules.SaveDC(level,b.Owner.Stats.Intelligence.Bonus);
+            evt.ReplaceCasterLevel = Study.Level(b);
         }
         public void OnEventDidTrigger(RuleCalculateAbilityParams evt) {}
     }

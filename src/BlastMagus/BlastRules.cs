@@ -18,6 +18,11 @@ namespace BlastMagus
         public const int BlastStrikeCritMultiplier = 2;
         // 설계 §4.5: 복합 블라스트 20레벨
         public const int CompositeLevel = 20;
+        public static bool StrikeCanCrit(int magusLevel)
+        {
+            if (magusLevel < 1) throw new System.ArgumentOutOfRangeException("magusLevel");
+            return magusLevel < CompositeLevel;
+        }
         // 설계 §4.5: 복합 블라스트 번(Burn) 비용 감소량
         public const int CompositeBurnReduction = 2;
         // 설계 §5 레벨표: 에너자이즈 주사위가 늘어나는 레벨. EnergizeDice 와 Archetype 레벨표가 모두 이 배열을 읽는다(C4).

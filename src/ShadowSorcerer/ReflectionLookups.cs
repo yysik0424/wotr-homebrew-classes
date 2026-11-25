@@ -42,6 +42,8 @@ namespace ShadowSorcerer
             // 2026-11-17 메아리 연출 — ShadowUnitBlueprint(시각 전용 그림자 유닛): 껍데기 특성의 짧은 설명(선언 BlueprintUnitFact) · AddMechanicsFeature 의 종류 · 유닛 사본의 진영·두뇌·시작 인벤토리(BlueprintUtil.SetField / FindField = Walk).
             F("Kingmaker.Blueprints.Classes.BlueprintFeature", "m_DescriptionShort"),
             F("Kingmaker.UnitLogic.FactLogic.AddMechanicsFeature", "m_Feature"),
+            F("Kingmaker.UnitLogic.FactLogic.AddFacts", "m_Facts"),
+            F("Kingmaker.UnitLogic.ActivatableAbilities.BlueprintActivatableAbility", "m_Buff"),
             F("Kingmaker.Blueprints.BlueprintUnit", "m_Faction"),
             F("Kingmaker.Blueprints.BlueprintUnit", "m_Brain"),
             F("Kingmaker.Blueprints.BlueprintUnit", "m_StartingInventory"),

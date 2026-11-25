@@ -205,7 +205,7 @@ namespace BlastMagus
 
         static P CritLine()
         {
-            return F("무기 공격이 치명타로 확정되면 폭발 피해도 {0}배가 된다.", "A confirmed critical hit of the weapon attack multiplies the Blast Strike damage by {0}.", BlastRules.BlastStrikeCritMultiplier);
+            return F("{0}레벨까지 무기 치명타 시 폭발 피해는 {1}배다. {2}레벨부터 폭발은 일반 피해를 준다.", "Through level {0} a weapon critical multiplies Blast Strike damage by {1}. From level {2} the blast deals normal damage.", BlastRules.CompositeLevel - 1, BlastRules.BlastStrikeCritMultiplier, BlastRules.CompositeLevel);
         }
 
         static P EnergizeRanges() { return Ranges(l => Dice(BlastRules.EnergizeDice(l))); }

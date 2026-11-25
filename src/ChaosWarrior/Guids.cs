@@ -93,6 +93,7 @@ namespace ChaosWarrior
         public const string WeaponNeuroStinger = "3af57349b7a8487ab5f611838ad08554";
         // 개편 O8(계획 2026-11-16 Task O8): 분노 중 신속 시전 권리 버프 6(상한 1~6 — QuickenSpec.Rights 순서 = ChaosRules.QuickenCaps 의 서로 다른 상한 오름차순).
         // 발급 2026-11-17: python -I -c "import uuid;print(uuid.uuid4().hex)" 하나씩, 발급 직후 git grep 0건 확인.
+        public const string FrenziedCastingSpent = "8ea88d067b2e41408b7a81e3c952a594";
         public const string QuickenRight1 = "71ef90ff9fc048bfbdf996344ce3d9e8";
         public const string QuickenRight2 = "954147c2231f41c3b4c3db275e3b4f35";
         public const string QuickenRight3 = "e5e0b586a9fe4478ba6bd07eda892f81";

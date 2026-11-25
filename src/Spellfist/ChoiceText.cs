@@ -254,8 +254,8 @@ namespace Spellfist
                 if (totals[i] <= 0) throw new InvalidOperationException("Spellfist: school " + schools[i] + " has no spells");
                 int cantrips = counts[0];
                 var body = new Body()
-                    .Add(F("{0}의 위저드 주문을 주문서에 더한다. 모두 {1}개다.", "Adds the wizard spells of the {0} school to your spellbook: {1} in all.", name, totals[i]), 0)
-                    .Add(F("주문 레벨별 개수({0}레벨부터 {1}레벨까지 차례로): {2}.", "Spells per spell level (level {0} through {1}, in order): {2}.", 0, SpellfistRules.MaxSpellLevel, string.Join(", ", counts)), 0)
+                    .Add(F("{0}의 메이거스 주문을 주문서에 더한다. 모두 {1}개다.", "Adds the magus spells of the {0} school to your spellbook: {1} in all.", name, totals[i]), 0)
+                    .Add(F("주문 레벨별 개수({0}레벨부터 {1}레벨까지 차례로): {2}.", "Spells per spell level (level {0} through {1}, in order): {2}.", 0, SpellfistRules.NativeMaxSpellLevel, string.Join(", ", counts.Take(SpellfistRules.NativeMaxSpellLevel + 1))), 0)
                     .Add(cantrips > 0
                         ? F("캔트립 {0}개가 포함된다.", "This includes {0} cantrip(s).", cantrips)
                         : F("이 게임의 {0}에는 캔트립이 {1}개라, 이 학파는 캔트립을 주지 않는다.", "{0} has no cantrips in this game (count {1}), so this school grants no cantrips.", name, cantrips), 0)
@@ -271,8 +271,8 @@ namespace Spellfist
             var listEn = string.Join(", ", schools.Select((s, i) => NameOf(d, "School" + s).En + " " + totals[i]));
             var sel = new Body()
                 .Add(F("브롤러 첫 레벨에 비전 학파 {0}개를 고른다(이 선택 화면이 {0}번 이어진다).", "At your first brawler level you choose {0} arcane schools (this screen comes up {0} times).", SpellfistRules.SchoolPicks), 0)
-                .Add(new P("고른 학파의 위저드 주문만 주문서에 들어온다. 쓸 수 있는 주문 레벨의 주문은 전부 자동으로 알게 되므로 레벨업 때 주문을 따로 고르지 않는다.",
-                    "Only wizard spells of the chosen schools enter your spellbook. You automatically know all of them for every spell level you can cast, so you do not pick spells on level-up."), 0)
+                .Add(new P("고른 학파의 메이거스 주문만 주문서에 들어온다. 쓸 수 있는 주문 레벨의 주문은 전부 자동으로 알게 되므로 레벨업 때 주문을 따로 고르지 않는다.",
+                    "Only magus spells of the chosen schools enter your spellbook. You automatically know all of them for every spell level you can cast, so you do not pick spells on level-up."), 0)
                 .Add(F("고르지 않은 학파 {0}개의 주문과 범용 주문은 배울 수 없다(두루마리로도 배울 수 없다).", "Spells of the {0} schools you did not choose, and universal spells, cannot be learned, not even from scrolls.", schools.Length - SpellfistRules.SchoolPicks), 0)
                 .Add(F("학파별 주문 수: {0}.", "Spells per school: {0}.", new P(listKo, listEn)), 0)
                 .Add(new P("한번 고르면 바꿀 수 없다.", "The choice cannot be changed later."), 0);

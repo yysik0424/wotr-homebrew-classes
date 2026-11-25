@@ -14,6 +14,32 @@ using static WotrClassMod.Common.BlueprintUtil;
 namespace Spellfist
 {
     // 아카니스트 주문서 복제(설계 §4.3, §11-4) + 학파 특성 8개·학파 선택(설계 §4.2, §11-1, §11-5; 정찰 §1, §2).
+    // Stock LearnSpellList adds missing entries at their current list levels without removing existing grants.
+    public sealed class SchoolSpellGrant : LearnSpellList
+    {
+        protected override void OnApplyPostLoadFixes()
+        {
+            base.OnApplyPostLoadFixes();
+            HandleLevelUpComplete(Owner, false);
+        }
+    }
+
+    public sealed class SchoolFeature : BlueprintFeature
+    {
+        public override string Description
+        {
+            get
+            {
+                var list = this.GetComponent<LearnSpellList>()?.SpellList;
+                if (list == null) return base.Description;
+                var tiers = list.SpellsByLevel.Where(row => row.SpellLevel <= SpellfistRules.NativeMaxSpellLevel)
+                    .Select(row => row.SpellLevel + " · " + (row.SpellsFiltered.Count == 0 ? "—" :
+                        string.Join(", ", row.SpellsFiltered.Select(spell => spell.Name).OrderBy(name => name).ToArray())));
+                return base.Description + "\n\n" + string.Join("\n", tiers.ToArray());
+            }
+        }
+    }
+
     public static class Spellbook
     {
         public static BlueprintSpellbook Bp { get; private set; }
@@ -69,13 +95,9 @@ namespace Spellfist
                 || src.AllSpellsKnown || src.IsMythic || src.CasterLevelModifier != 0 || src.HasSpecialSpellList || src.IsIgnoreAddSpellKnownTemporary)
                 throw new InvalidOperationException("Spellfist: ArcanistSpellbook flags differ from recon §1-1 (Spontaneous/IsArcanist/IsArcane/Intelligence/Cantrips/...)");
             if (src.ComponentsArray != null && src.ComponentsArray.Length != 0) throw new InvalidOperationException("Spellfist: ArcanistSpellbook has components (recon §1-1 says none) — clone would drop them");
-            // 두 표는 원본 참조를 그대로 쓴다(정찰 §0-4: IsArcanist 면 GetSpellSlotsCount 가 m_SpellSlots 를 읽는다 — 비면 NullReference).
-            var perDay = Util.GetF(src, "m_SpellsPerDay") as BlueprintReferenceBase;
-            var slots = Util.GetF(src, "m_SpellSlots") as BlueprintReferenceBase;
-            if (perDay == null || perDay.IsEmpty() || perDay.Guid != BlueprintGuid.Parse(Guids.Game.ArcanistSpellsPerDayTable))
-                throw new InvalidOperationException("Spellfist: ArcanistSpellbook m_SpellsPerDay is null/empty or not ArcanistSpellsPerDayTable");
-            if (slots == null || slots.IsEmpty() || slots.Guid != BlueprintGuid.Parse(Guids.Game.ArcanistSpellSlots))
-                throw new InvalidOperationException("Spellfist: ArcanistSpellbook m_SpellSlots is null/empty or not ArcanistSpellSlots");
+            // The hybrid caster prepares a repertoire and spends daily casts using the native Magus progression.
+            var perDay = Ref<BlueprintSpellsTableReference>(Guids.Game.MagusSpellLevels);
+            var slots = perDay;
             var known = Util.GetF(src, "m_SpellsKnown");
             var mythic = Util.GetF(src, "m_MythicSpellList");
 
@@ -108,9 +130,9 @@ namespace Spellfist
             });
 
             if (!ReferenceEquals(Util.GetF(Bp, "m_SpellsPerDay"), perDay) || Bp.SpellsPerDay == null)
-                throw new InvalidOperationException("Spellfist: spellbook m_SpellsPerDay readback is null or not the ArcanistSpellbook reference");
+                throw new InvalidOperationException("Spellfist: spellbook m_SpellsPerDay readback is null or not the Magus table reference");
             if (!ReferenceEquals(Util.GetF(Bp, "m_SpellSlots"), slots) || Bp.SpellSlots == null)
-                throw new InvalidOperationException("Spellfist: spellbook m_SpellSlots readback is null or not the ArcanistSpellbook reference");
+                throw new InvalidOperationException("Spellfist: spellbook m_SpellSlots readback is null or not the Magus table reference");
             if (Bp.SpellList != SchoolLists.Empty || Bp.CharacterClass != brawler || !ReferenceEquals(Bp.Name, name))
                 throw new InvalidOperationException("Spellfist: spellbook m_SpellList/m_CharacterClass/Name readback failed");
             if (Bp.SpellsPerLevel != 0 || Bp.CanCopyScrolls || !Bp.Spontaneous || !Bp.IsArcanist || !Bp.IsArcane || Bp.CastingAttribute != StatType.Intelligence
@@ -129,14 +151,14 @@ namespace Spellfist
             {
                 var s = schools[i];
                 var list = SchoolLists.For(s);
-                var f = Create<BlueprintFeature>("SpellfistSchool" + s + "Feature", FeatureGuids[i], x =>
+                var f = Create<SchoolFeature>("SpellfistSchool" + s + "Feature", FeatureGuids[i], x =>
                 {
                     Names(x, "School" + s + ".Name", "School" + s + ".Description");
                     x.IsClassFeature = true;
                     x.Ranks = 1;
                 });
                 // 정찰 §2: LearnList 는 ClassData(brawler) + 아키타입 소속 확인 뒤 DemandSpellbook(brawler) 에 MaxSpellLevel 이하 레벨을 AddKnown.
-                var c = new LearnSpellList();
+                var c = new SchoolSpellGrant();
                 SetField(c, "m_CharacterClass", Ref<BlueprintCharacterClassReference>(Guids.Game.BrawlerClass));
                 SetField(c, "m_Archetype", Ref<BlueprintArchetypeReference>(Guids.Archetype));
                 SetField(c, "m_SpellList", Ref<BlueprintSpellListReference>(list.AssetGuid.ToString()));

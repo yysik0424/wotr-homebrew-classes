@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.17.7-beta
+
+- Pack Warden now calls up to two auxiliaries. Each still follows every eligible main-companion attack.
+
+- Shadow Sorcerers toggle the echo and pay one additional slot per paid cast while active. Daily slots use the standard sorcerer table.
+- Research spell DC now follows normal Intelligence-based spellcasting.
+- Sorrow Inquisitors keep stored afflictions until their next rest. Sentencing uses the duration recorded at capture.
+- Spellfists prepare Magus spells from three chosen schools and cast flexibly. The sixth spell tier opens at level 16. Daily slots and mythic merge eligibility follow the Magus.
+- From magus level 20, Blast Strike deals normal blast damage on a weapon critical.
+- Chaos Warriors can quicken one eligible spell per combat with Frenzied Casting. Limitless Rage still permits charge-free rage activations and mutation rerolls.
+- Blood Berserkers gain their bloodrager level in temporary hit points for two rounds when they collect a knot. Collecting another knot replaces and refreshes the protection.
+
 ## 0.17.6-beta
 
 - Added main spellbook support for mythic merging and prestige advancement across the bundle, including Spellbook Merge 1.7.1 and replacement spellbook selections.

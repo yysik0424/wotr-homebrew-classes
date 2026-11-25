@@ -22,7 +22,7 @@ namespace SorrowInquisitor
         internal static void Show(UnitEntityData u, Bead bead)
         {
             var ctx = new MechanicsContext(u,u,Blueprints.Stored,null,u);
-            var marker = new Buff(Blueprints.Stored,ctx,TimeSpan.FromSeconds(Rules.StorageSeconds)) { IsNotDispelable = true };
+            var marker = new Buff(Blueprints.Stored,ctx,null) { IsNotDispelable = true };
             marker.UIDataProviderOverride = new Display(bead);
             var added = u.Facts.Add(marker);
             if (ReferenceEquals(added,marker)) bead.MarkerId = marker.UniqueId;
@@ -34,9 +34,10 @@ namespace SorrowInquisitor
         }
         internal static void RestoreDisplay(UnitEntityData u, Bead bead)
         {
-            if (bead.MarkerId == null) return;
             var marker = u.Buffs.Enumerable.FirstOrDefault(b => b.UniqueId == bead.MarkerId);
-            if (marker != null) marker.UIDataProviderOverride = new Display(bead);
+            if (marker == null) { Show(u, bead); return; }
+            if (!marker.IsPermanent) marker.MakePermanent();
+            marker.UIDataProviderOverride = new Display(bead);
         }
         protected override void OnTurnOn()
         {

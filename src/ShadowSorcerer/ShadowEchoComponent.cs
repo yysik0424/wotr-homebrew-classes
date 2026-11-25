@@ -21,7 +21,6 @@ namespace ShadowSorcerer
         public void OnEventAboutToTrigger(RuleCastSpell evt) { } // 정당한 무동작: 결과(Success·Params)가 정해진 뒤만 본다
 
         // 2026-11-17 메아리 연출: 특성이 켜져 있는 동안 본체의 그림자 유닛 묶음을 미리 만들어 숨겨 둔다(ShadowDoubles — 던지지 않고 규칙에 쓰지 않는다).
-        protected override void OnActivate() { SpellsPerDayPatch.MarkNewCaster(Owner.Descriptor); }
         protected override void OnTurnOn() { ShadowDoubles.Watch(Owner); }
         protected override void OnTurnOff() { ShadowDoubles.Unwatch(Owner); }
 
@@ -116,7 +115,7 @@ namespace ShadowSorcerer
         public static void Attach()
         {
             if (Archetype.EchoFeature == null) throw new InvalidOperationException("ShadowSorcerer: ShadowEchoComponent.Attach before Archetype.Build");
-            AddComponents(Archetype.EchoFeature, new ShadowEchoComponent());
+            AddComponents(SlotsFeature.Buff, new ShadowEchoComponent());
         }
     }
 }

@@ -52,12 +52,19 @@ namespace PackWarden
 
         // 엔진: EntityDataBase.PostLoad @0095 → EntityPartsManager.PostLoad @0039 → EntityPart.PostLoad @0028 callvirt OnPostLoad(try 안 — 예외는 PFLog 로 기록되고 삼켜진다),
         // 그 뒤 @00BA TurnOn. 즉 구독자가 이 파트를 읽기 전에 돈다(dnlib 2026-11-16).
+        [JsonIgnore] internal bool RetiredAuxiliariesPending;
+
         protected override void OnPostLoad()
         {
             base.OnPostLoad();
             if (Auxiliaries == null) throw new InvalidOperationException("PackWarden: UnitPartPack.Auxiliaries is null after load (corrupt save?)");
             int saved = Auxiliaries.Count;
             Auxiliaries = new List<UnitReference>(PackRules.MigrateSavedSlots(Auxiliaries)); // 2칸(옛 저장)·4칸만 받는다. 그 밖은 던진다.
+            foreach (int index in PackRules.ExcessSlots(Auxiliaries, reference => !string.IsNullOrEmpty(reference.UniqueId)))
+            {
+                Auxiliaries[index] = default(UnitReference);
+                RetiredAuxiliariesPending = true;
+            }
             if (saved != PackRules.AuxSlotCount)
                 Main.Log("PackWarden: migrated a pre-2026-11-16 pack state of " + Owner + " from " + saved + " to " + PackRules.AuxSlotCount + " slots (old respawn timers are dropped)");
         }

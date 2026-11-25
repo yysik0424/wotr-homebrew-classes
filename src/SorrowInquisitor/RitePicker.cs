@@ -92,7 +92,7 @@ namespace SorrowInquisitor
             }
             else foreach (var b in p.Beads)
                 rows.Add(new KeyValuePair<string,string>(b.Id,b.Blueprint.Name + "   " + (b.AggressorName ?? Rosary.Text("environment")) +
-                    " → " + b.AllyName + "   " + Math.Ceiling(TimeSpan.FromTicks(b.Expires - Afflictions.Now).TotalSeconds) + " s"));
+                    " → " + b.AllyName + "   " + Rosary.Text("until.rest")));
             picked.IntersectWith(rows.Select(r => r.Key));
             GUILayout.BeginArea(new Rect(16,30,rect.width-32,rect.height-42));
             GUILayout.Label(string.Format(Rosary.Text("counts"),u.CharacterName,p.Beads.Count,Rules.Slots(Rosary.Level(u)),Rosary.Uses(u,p),limit));

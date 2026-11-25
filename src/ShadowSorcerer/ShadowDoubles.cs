@@ -128,7 +128,7 @@ namespace ShadowSorcerer
                 // 지역 주 상태가 바뀐 것을 처음 본 틱에 파티를 한 번 훑는다 — 지역 이벤트 구독이 첫 지역 로드보다 늦게 붙어도(구독은 첫 틱) 불러온 본체를 놓치지 않는다.
                 var las = Game.Instance.LoadedAreaState;
                 var mainNow = las == null ? null : las.MainState;
-                if (mainNow != null && !ReferenceEquals(mainNow, scannedFor)) { scannedFor = mainNow; WatchParty(Game.Instance, !Game.Instance.IsLoadingSave); }
+                if (mainNow != null && !ReferenceEquals(mainNow, scannedFor)) { scannedFor = mainNow; WatchParty(Game.Instance); }
                 if (ShadowUnitBlueprint.Unit == null) return; // 정당한 무동작: 블루프린트 없음(빌드 때 이미 보고)
                 if (watched.Count == 0) return; // 정당한 무동작: 대상 없음
                 foreach (var owner in WatchedOwners())
@@ -243,7 +243,7 @@ namespace ShadowSorcerer
             f.OwnerInState = owner.HoldingState != null ? Tri.Yes : Tri.No;
             var st = owner.Descriptor == null ? null : owner.Descriptor.State;
             f.OwnerDead = st == null ? Tri.Unknown : st.IsDead ? Tri.Yes : Tri.No;
-            var echo = Archetype.EchoFeature;
+            var echo = SlotsFeature.Buff;
             f.HasEchoFeature = echo == null || owner.Descriptor == null ? Tri.Unknown : owner.Descriptor.HasFact(echo) ? Tri.Yes : Tri.No;
             if (f.HasEchoFeature == Tri.Yes) f.WantCount = ShadowRules.EchoCount(owner.Progression.GetClassLevel(Archetype.SorcererClass));
             return f;
@@ -611,18 +611,17 @@ namespace ShadowSorcerer
                 if (doomed.Count > 0) ShadowErrors.Report(EchoVisuals.Site, "shadow doubles: " + doomed.Count + " shadow unit(s) were present right after an area load (a shadow unit escaped save exclusion or tracking) - destroyed");
             }
             scannedFor = game.LoadedAreaState == null ? null : game.LoadedAreaState.MainState;
-            WatchParty(game, true);
+            WatchParty(game);
         }
 
         // 파티(동료 전원)에서 메아리 특성 보유자를 감시 목록에 올린다. 지역 밖 동료는 감시만 되고 묶음은 만들지 않는다(OwnerInGame = No).
-        static void WatchParty(Game game, bool reconcileSlots)
+        static void WatchParty(Game game)
         {
-            var echo = Archetype.EchoFeature;
+            var echo = SlotsFeature.Buff;
             if (echo == null) return; // 정당한 무동작: 아키타입 빌드 전·실패(메아리 자체가 없다)
             foreach (var c in game.Player.AllCharacters)
                 if ((object)c != null && !Going(c) && c.Descriptor != null)
                 {
-                    if (reconcileSlots) SpellsPerDayPatch.ClampLoadedSlots(c.Descriptor);
                     if (c.Descriptor.HasFact(echo)) Watch(c);
                 }
         }

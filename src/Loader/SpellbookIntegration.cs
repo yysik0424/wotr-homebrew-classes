@@ -24,9 +24,10 @@ namespace HomebrewClasses.Loader
         // Archetype IDs come from the three modules. Donor IDs are the stock books they copy or reuse.
         internal const string Prophecy = "09cc446731088be7719c00cb30609661", Research = "3475e29082e736adda61bc596f0f97d2";
         internal const string Fist = "06c043db412b4e0d930d37ab19146992", Pact = "d74096f01a884dd5b33aff12cb86b36f";
-        internal const string Oracle = "6c03364712b415941a98f74522a81273", Arcanist = "33903fe5c4abeaa45bc249adb9d98848";
+        internal const string Oracle = "6c03364712b415941a98f74522a81273", Magus = "5d8d04e76dff6c5439de99af0d57be63";
         internal const string Stigma = "b897fe0947e4b804082b1a687c21e6e2", StigmaArchetype = "c5f6e53e71059fb4d802ce81a277a12d";
         internal const string Witch = "dd04f9239f655ea438976742728e4909";
+        const string LegacyArcanist = "33903fe5c4abeaa45bc249adb9d98848";
         const string Angel = "e1fbb0e0e610a3a4d91e5e5284587939", Lich = "3f16e9caf7c683c40884c7c455ed26af";
 
         internal sealed class Family
@@ -85,7 +86,7 @@ namespace HomebrewClasses.Loader
         {
             var families = new List<Family>();
             Collect(families, "ProphecyBreaker", Prophecy, Oracle);
-            Collect(families, "Spellfist", Fist, Arcanist);
+            Collect(families, "Spellfist", Fist, Magus);
             Collect(families, "Warlock", Pact, Stigma);
             if (families.Count == 0) return;
             var mythics = new HashSet<BlueprintFeatureSelectMythicSpellbook> {
@@ -96,6 +97,9 @@ namespace HomebrewClasses.Loader
             var cachedSelections = new List<BlueprintFeatureSelection>();
             var donorOptions = new HashSet<BlueprintGuid>();
             var donorIds = new HashSet<BlueprintGuid>(families.Select(f => f.Donor.AssetGuid));
+            var fist = families.FirstOrDefault(f => f.Archetype.AssetGuid == BlueprintGuid.Parse(Fist));
+            Family legacyFist = fist == null ? null : new Family { Archetype = fist.Archetype, Main = fist.Main, Donor = Get<BlueprintSpellbook>(LegacyArcanist) };
+            if (legacyFist != null) donorIds.Add(legacyFist.Donor.AssetGuid);
             var bookField = AccessTools.Field(typeof(BlueprintFeatureReplaceSpellbook), "m_Spellbook");
             ResourcesLibrary.BlueprintsCache.ForEachLoaded((id, bp) => {
                 if (bp is BlueprintFeatureSelectMythicSpellbook mythic) mythics.Add(mythic);
@@ -116,6 +120,10 @@ namespace HomebrewClasses.Loader
             {
                 var options = selection.AllFeatures.OfType<BlueprintFeatureReplaceSpellbook>().ToArray();
                 if (options.Length == 0) continue;
+                // Old saves may reference an option derived from an Arcanist template. Keep its blueprint resolvable.
+                if (legacyFist != null)
+                    foreach (var old in options.Where(o => o.Spellbook == legacyFist.Donor && !o.ComponentsArray.OfType<PrerequisiteArchetypeLevel>().Any()))
+                        CreateOption(old, legacyFist);
                 foreach (var family in families)
                 {
                     try { ExtendPrestige(selection, options, family); }

@@ -6,6 +6,9 @@ using Kingmaker.Blueprints.Classes;
 using Kingmaker.Blueprints.Classes.Spells;
 using Kingmaker.UnitLogic.Abilities.Blueprints;
 using Kingmaker.UnitLogic.FactLogic;
+using Kingmaker.UnitLogic.ActivatableAbilities;
+using Kingmaker.UnitLogic.Buffs.Blueprints;
+using Kingmaker.EntitySystem.Entities;
 using WotrClassMod.Common;
 using static WotrClassMod.Common.BlueprintUtil;
 
@@ -64,6 +67,11 @@ namespace ShadowSorcerer
     public static class SlotsFeature
     {
         public static BlueprintFeature Feature;
+        internal static readonly BlueprintGuid SorcererBook = BlueprintGuid.Parse(Guids.Game.SorcererSpellbook);
+        internal static BlueprintBuff Buff;
+        internal static BlueprintActivatableAbility Toggle;
+        internal static bool Active(UnitEntityData owner) => Buff != null && owner != null && owner.Buffs.HasFact(Buff);
+
 
         public static void Build()
         {
@@ -75,6 +83,27 @@ namespace ShadowSorcerer
                 SetField(x, "m_DescriptionShort", NoText()); // 2026-11-17: 위 보너스 특성과 같음(빈 키 = 설명으로 대체)
                 x.IsClassFeature = true;
             });
+            Buff = Create<BlueprintBuff>("ShadowSorcererEchoBuff", Guids.EchoBuff, b => {
+                SetField(b, "m_DisplayName", Strings.L("echo.name"));
+                SetField(b, "m_Description", Strings.L("slots.desc"));
+                SetField(b, "m_DescriptionShort", Strings.L("slots.desc"));
+                b.IsClassFeature = true;
+                b.Stacking = StackingType.Replace;
+                EmptyFxOnRemove(b);
+            });
+            Toggle = Create<BlueprintActivatableAbility>("ShadowSorcererEchoToggle", Guids.EchoToggle, t => {
+                SetField(t, "m_DisplayName", Strings.L("echo.name"));
+                SetField(t, "m_Description", Strings.L("slots.desc"));
+                SetField(t, "m_DescriptionShort", Strings.L("slots.desc"));
+                SetField(t, "m_Buff", Ref<BlueprintBuffReference>(Guids.EchoBuff));
+                t.ActivationType = AbilityActivationType.Immediately;
+                t.Group = ActivatableAbilityGroup.None;
+                t.DeactivateImmediately = true;
+                t.DoNotTurnOffOnRest = true;
+            });
+            var facts = new AddFacts();
+            SetField(facts, "m_Facts", new BlueprintUnitFactReference[] { Ref<BlueprintUnitFactReference>(Guids.EchoToggle) });
+            AddComponents(Feature, facts);
             Archetype.AddAt(ShadowRules.MinLevel, Feature);
         }
     }

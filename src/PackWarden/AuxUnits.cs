@@ -101,7 +101,7 @@ namespace PackWarden
 
             Pool = Create<BlueprintSummonPool>("PackWardenAuxSummonPool", Guids.AuxSummonPool, p =>
             {
-                p.Limit = PackRules.AuxSlotCount;   // 자리 수 = 표의 최대 마릿수(소유자 결정 2026-11-16: 4). 등록(Register)은 이 값을 강제하지 않는다(ContextActionSpawnMonster 만 읽음).
+                p.Limit = PackRules.MaxAuxiliaries;
                 p.DoNotRemoveDeadUnits = false;     // 죽은 유닛은 SummonPoolsManager.HandleUnitDeath 가 풀에서 뺀다(시체 파괴는 안 함 → DestroyUntracked).
             });
 

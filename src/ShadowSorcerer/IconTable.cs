@@ -57,6 +57,8 @@ namespace ShadowSorcerer
             add(Guids.EchoFeature, "Echo");
             add(Guids.Doubles1, "Doubles"); add(Guids.Doubles2, "Doubles"); add(Guids.Doubles3, "Doubles");
             add(Guids.SlotsFeature, "Slots");
+            add(Guids.EchoBuff, "Echo");
+            add(Guids.EchoToggle, "Echo");
             for (int i = 0; i < Guids.BonusFeatures.Length; i++) add(Guids.BonusFeatures[i], "Bonus" + (i + 1));
             return t;
         }

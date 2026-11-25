@@ -28,6 +28,7 @@ namespace ChaosWarrior
     public interface IMutationWorld
     {
         bool HasCaster { get; }
+        bool QuickenSpent { get; }
         // 지금 문맥의 부모 버프(Buff.Data)가 붙어 있는 우리 분노 버프인가 — 아니면 AsChild 가 조용히 안 묶이는 경로(부록 A-c)라 진행하지 않는다.
         bool ParentIsActiveRage { get; }
         int WarpriestLevel { get; }
@@ -221,6 +222,7 @@ namespace ChaosWarrior
         static MutationOutcome GrantQuickenRight(IMutationWorld w, string right, Action<string, string> report, string site)
         {
             if (right == null) throw new ArgumentNullException("right");
+            if (w.QuickenSpent) return MutationOutcome.Applied;
             var before = w.QuickenRightsOnCaster();
             if (before == null || before.Any(g => g == null)) { report(site, "quicken rights unreadable (before the grant)"); return MutationOutcome.QuickenFailed; }
             if (before.Count > 0)
@@ -271,6 +273,7 @@ namespace ChaosWarrior
             int level = w.WarpriestLevel;
             if (level < ChaosRules.Levels.MinLevel) { report(site, "reload refill: no level (warpriest level " + level + ")"); return MutationOutcome.NoLevel; }
             string right = QuickenSpec.RightFor(level);
+            if (w.QuickenSpent) return MutationOutcome.Applied;
             var attached = w.QuickenRightsOnCaster();
             if (attached == null || attached.Any(g => g == null)) { report(site, "reload refill: quicken rights unreadable"); return MutationOutcome.QuickenFailed; }
             var children = w.ChildrenOfParent();

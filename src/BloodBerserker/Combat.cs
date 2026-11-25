@@ -124,7 +124,7 @@ namespace BloodBerserker
                 evt.AttackRoll == null || !evt.AttackRoll.IsHit || !BloodrageRequired.Active(Owner)) return;
             mark.Remove();
             Owner.Buffs.GetBuff(Blueprints.Ward)?.Remove();
-            Owner.Buffs.AddBuff(Blueprints.Ward, Owner, new Rounds(1).Seconds);
+            Owner.Buffs.AddBuff(Blueprints.Ward, Owner, new Rounds(Rules.KnotWardRounds).Seconds);
         }
 
         public void HandleBuffDidAdded(Buff buff) { }
