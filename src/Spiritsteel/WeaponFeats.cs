@@ -162,6 +162,18 @@ namespace Spiritsteel
                 case WeaponFeatKind.ConstructHunter: return AgainstCreature("fd389783027d63343b4a5634bd81645f");
                 case WeaponFeatKind.DragonHunter: return AgainstCreature("455ac88e22f55804ab87c2467deff1d6");
                 case WeaponFeatKind.DemonHunter: return AgainstCreature("dc960a234d365cb4f905bdc5937e623a");
+                // The damage portion of the three stock Bane enchantments, scoped to this weapon.
+                case WeaponFeatKind.AberrationBane: return BaneDamage("3bec99efd9a363242a6c8d9957b75e91");
+                case WeaponFeatKind.FeyBane: return BaneDamage("018af8005220ac94a9a4f47b3e9c2b4e");
+                case WeaponFeatKind.MagicalBeastBane: return BaneDamage("625827490ea69d84d8e599a33929fdc6");
+                case WeaponFeatKind.GroundAssault:
+                    return new WeaponFeatAttackAgainstCondition { Condition = UnitCondition.Prone };
+                case WeaponFeatKind.FearPursuit:
+                    return new WeaponFeatAttackAgainstCondition { Condition = UnitCondition.Shaken, Alternative = UnitCondition.Frightened };
+                case WeaponFeatKind.EmberWard: return GrantFeature("a6acd8df82219d24c8f746659212543b");
+                case WeaponFeatKind.GraveWard: return GrantFeature("a77db677646ebfa4792bf6fa0875d5da");
+                case WeaponFeatKind.StunWard: return new AddConditionImmunityEquipment { Condition = UnitCondition.Stunned };
+                case WeaponFeatKind.LucidSpirit: return new AddConditionImmunityEquipment { Condition = UnitCondition.Confusion };
                 case WeaponFeatKind.Anchored: return new AddStatBonusEquipment { Stat = StatType.AdditionalCMD, Descriptor = ModifierDescriptor.Competence, Value = 4 };
                 case WeaponFeatKind.GiantSlayer: return new WeaponFeatGiantSlayer();
                 case WeaponFeatKind.Evasive: return new WeaponFeatReflexEvasion();
@@ -169,10 +181,8 @@ namespace Spiritsteel
                 case WeaponFeatKind.Sundering: return new WeaponFeatPenetration();
                 case WeaponFeatKind.Fortified:
                 case WeaponFeatKind.SpellWard:
-                    // These icons come from the actual armor property features granted by the stock enchantments.
-                    var grant = new AddUnitFeatureEquipment();
-                    SetField(grant, "m_Feature", Ref<BlueprintFeatureReference>(row.IconSource));
-                    return grant;
+                case WeaponFeatKind.SpiritSense:
+                    return GrantFeature(row.IconSource);
                 case WeaponFeatKind.GreaterFocus:
                 case WeaponFeatKind.GreaterSpecialization:
                 case WeaponFeatKind.Focus:
@@ -182,6 +192,18 @@ namespace Spiritsteel
                     return new WeaponFeatAttack { Kind = row.Kind, Value = tier + 1 };
                 default: throw new ArgumentOutOfRangeException(nameof(row.Kind), row.Kind, "Unexpected weapon inscription");
             }
+        }
+
+        private static AddUnitFeatureEquipment GrantFeature(string id)
+        {
+            var grant = new AddUnitFeatureEquipment();
+            SetField(grant, "m_Feature", Ref<BlueprintFeatureReference>(id));
+            return grant;
+        }
+
+        private static WeaponFeatBaneDamage BaneDamage(string typeId)
+        {
+            return new WeaponFeatBaneDamage { TargetType = Ref<BlueprintFeatureReference>(typeId) };
         }
 
         private static WeaponFeatHunter AgainstCreature(string typeId)

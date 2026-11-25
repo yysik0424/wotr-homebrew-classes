@@ -8,7 +8,8 @@ namespace Spiritsteel
     {
         Acid, Fire, Cold, Electricity, Sonic, Ghost, Agile, Keen, Dodge, Focus, Specialization, Critical, Trip, Mobility, Fortitude, Reflex, Will, Initiative, Precise, Shield,
         ColdIron, Adamantine, Watchful, Silent, Charging, Opportunist, UndeadHunter, ConstructHunter, DragonHunter, DemonHunter,
-        GreaterFocus, Anchored, GiantSlayer, Fortified, GreaterSpecialization, Evasive, Judgment, SpellWard, Sundering, Unfettered
+        GreaterFocus, Anchored, GiantSlayer, Fortified, GreaterSpecialization, Evasive, Judgment, SpellWard, Sundering, Unfettered,
+        AberrationBane, FeyBane, MagicalBeastBane, GroundAssault, FearPursuit, EmberWard, GraveWard, StunWard, LucidSpirit, SpiritSense
     }
 
     // Level thresholds and scope are from the approved 2026-11-24 weapon-feats design.
@@ -108,6 +109,26 @@ namespace Spiritsteel
                 "결속 무기의 물리 타격은 적의 피해 감소를 최대 10점 무시합니다. 본편 관통 타격 계열과 겹치면 높은 값만 적용합니다.", "Physical hits with the bound weapon ignore up to 10 points of damage reduction. Use the higher value when combined with the Penetrating Strike feats.", "eb6eb946c68ef094f89c7633f5bfdc9b"),
             new WeaponFeatRow(WeaponFeatKind.Unfettered, 16, "속박 해방", "Unfettered Spirit",
                 "결속 무기를 든 동안 마비, 얽힘, 감속 및 험지의 영향을 받지 않습니다.", "While wielding the bound weapon, gain immunity to paralysis, entanglement, slow, and difficult terrain.", "4c349361d720e844e846ad8c19959b1e"),
+            new WeaponFeatRow(WeaponFeatKind.AberrationBane, 16, "이형 사냥", "Aberration Bane",
+                "결속 무기로 이형을 명중시키면 역장 피해 2d6을 추가합니다. 치명타에도 한 번만 더합니다.", "Bound-weapon hits against aberrations deal an extra 2d6 force damage, rolled once even on a critical hit.", "2c38da66e5a599347ac95b3294acbe00"),
+            new WeaponFeatRow(WeaponFeatKind.FeyBane, 16, "페이 사냥", "Fey Bane",
+                "결속 무기로 페이를 명중시키면 역장 피해 2d6을 추가합니다. 치명타에도 한 번만 더합니다.", "Bound-weapon hits against fey deal an extra 2d6 force damage, rolled once even on a critical hit.", "4d9bf81b7939b304185d58a09960f589"),
+            new WeaponFeatRow(WeaponFeatKind.MagicalBeastBane, 16, "마법 야수 사냥", "Magical Beast Bane",
+                "결속 무기로 마법 야수를 명중시키면 역장 피해 2d6을 추가합니다. 치명타에도 한 번만 더합니다.", "Bound-weapon hits against magical beasts deal an extra 2d6 force damage, rolled once even on a critical hit.", "42c78009dd5cb8e429b27c13d92152b7"),
+            new WeaponFeatRow(WeaponFeatKind.GroundAssault, 16, "넘어진 적 추격", "Ground Assault",
+                "쓰러진 적을 결속 무기로 공격하면 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on bound-weapon attack rolls against prone targets.", "4cc71ae82bdd85b40b3cfe6697bb7949"),
+            new WeaponFeatRow(WeaponFeatKind.FearPursuit, 16, "공포 추격", "Fear Pursuit",
+                "동요하거나 겁에 질린 적을 결속 무기로 공격하면 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on bound-weapon attack rolls against shaken or frightened targets.", "8bc64d869456b004b9db255cdd1ea734"),
+            new WeaponFeatRow(WeaponFeatKind.EmberWard, 16, "화염 수호", "Flame Ward",
+                "결속 무기를 든 동안 화염 저항 30을 얻습니다.", "Gain fire resistance 30 while wielding the bound weapon.", "21ffef7791ce73f468b6fca4d9371e8b"),
+            new WeaponFeatRow(WeaponFeatKind.GraveWard, 16, "음에너지 수호", "Grave Ward",
+                "결속 무기를 든 동안 음에너지 피해 저항 30을 얻습니다.", "Gain resistance 30 to negative energy damage while wielding the bound weapon.", "0413915f355a38146bc6ad40cdf27b3f"),
+            new WeaponFeatRow(WeaponFeatKind.StunWard, 16, "기절 방호", "Stun Ward",
+                "결속 무기를 든 동안 기절 상태에 면역이 됩니다.", "Gain immunity to the stunned condition while wielding the bound weapon.", "09d39b38bb7c6014394b6daced9bacd3"),
+            new WeaponFeatRow(WeaponFeatKind.LucidSpirit, 16, "명료한 정신", "Lucid Spirit",
+                "결속 무기를 든 동안 혼란 상태에 면역이 됩니다.", "Gain immunity to the confused condition while wielding the bound weapon.", "886c7407dc629dc499b9f1465ff382df"),
+            new WeaponFeatRow(WeaponFeatKind.SpiritSense, 16, "신령 감각", "Spirit Sense",
+                "결속 무기를 든 동안 25피트 범위의 비시각 감지(Blindsense)를 얻습니다.", "Gain blindsense out to 25 feet while wielding the bound weapon.", "bb19b581f5a47b44abfe00164f1fcade"),
         };
 
         internal bool Element { get { return Kind <= WeaponFeatKind.Sonic; } }
@@ -123,7 +144,9 @@ namespace Spiritsteel
                     Kind == WeaponFeatKind.UndeadHunter || Kind == WeaponFeatKind.ConstructHunter ||
                     Kind == WeaponFeatKind.DragonHunter || Kind == WeaponFeatKind.DemonHunter ||
                     Kind == WeaponFeatKind.GreaterFocus || Kind == WeaponFeatKind.GreaterSpecialization ||
-                    Kind == WeaponFeatKind.GiantSlayer || Kind == WeaponFeatKind.Judgment || Kind == WeaponFeatKind.Sundering;
+                    Kind == WeaponFeatKind.GiantSlayer || Kind == WeaponFeatKind.Judgment || Kind == WeaponFeatKind.Sundering ||
+                    Kind == WeaponFeatKind.AberrationBane || Kind == WeaponFeatKind.FeyBane || Kind == WeaponFeatKind.MagicalBeastBane ||
+                    Kind == WeaponFeatKind.GroundAssault || Kind == WeaponFeatKind.FearPursuit;
             }
         }
 

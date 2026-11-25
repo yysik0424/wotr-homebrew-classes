@@ -4,11 +4,11 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.21-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.21-beta/HomebrewClasses-0.17.21-beta.zip) · [Release notes and test coverage](release-notes-0.17.21-beta.md)
+> [Download 0.17.22-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.22-beta/HomebrewClasses-0.17.22-beta.zip) · [Release notes and test coverage](release-notes-0.17.22-beta.md)
 
 Spiritsteel uses Wisdom for daily rage rounds. With Wisdom 18, you get 8 rounds at level 1 and 46 at level 20. Keeping the spirit awake costs one round per round in total.
 
-Spiritsteel can learn ten of 40 bound-weapon feats by level 20. Judgment Strike is available from level 12 and adds 2d6 holy damage on bound-weapon hits against evil targets. Starting at level 16, Spell Ward grants spell resistance 32, Pierce Defenses bypasses up to 10 points of physical damage reduction, and Unfettered Spirit protects against paralysis, entanglement, slow, and difficult terrain. Choose one feat at each of levels 16, 18, and 20.
+Spiritsteel can learn ten of 50 bound-weapon feats by level 20. Ten new choices open at level 16. Hunt aberrations, fey or magical beasts for an extra 2d6 force damage, or improve accuracy against prone or frightened foes. Defensive choices include fire or negative energy resistance 30, immunity to stun or confusion, and 25-foot blindsense. Choose one feat at each of levels 16, 18 and 20. Judgment Strike is available from level 12.
 
 With the shadow on, Magic Missile and its echo each spend one 1st-level slot. With one slot left, only the original fires.
 
@@ -54,7 +54,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.21-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.22-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -65,7 +65,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.21-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.22-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -2971,7 +2971,7 @@ Barbarian rage produces the first burst, followed shortly by a second burst as t
 
 ### Choices
 
-Choose from the 40 weapon feats below at or above their minimum barbarian level. Up to two elemental traits can be active together. Each adds **1d6, 2d6, 3d6 or 4d6** on a hit at levels 2, 8, 14 or 20 respectively. The elemental dice apply once on a critical. Choose ten by level 20. When multiple insight bonuses apply to the same roll, use the highest.
+Choose from the 50 weapon feats below at or above their minimum barbarian level. Up to two elemental traits can be active together. Each adds **1d6, 2d6, 3d6 or 4d6** on a hit at levels 2, 8, 14 or 20 respectively. The elemental dice apply once on a critical. Choose ten by level 20. When multiple insight bonuses apply to the same roll, use the highest.
 
 | Minimum level | Weapon feat | Effect and requirements |
 |---|---|---|
@@ -3015,6 +3015,16 @@ Choose from the 40 weapon feats below at or above their minimum barbarian level.
 | 16 | Spell Ward | Gain spell resistance 32 while wielding the bound weapon. Use the highest applicable spell resistance. |
 | 16 | Pierce Defenses | Physical hits with the bound weapon ignore up to 10 points of damage reduction. Use the higher value when combined with the Penetrating Strike feats. |
 | 16 | Unfettered Spirit | While wielding the bound weapon, gain immunity to paralysis, entanglement, slow, and difficult terrain. |
+| 16 | Aberration Bane | Bound-weapon hits against aberrations deal an extra 2d6 force damage, rolled once even on a critical hit. |
+| 16 | Fey Bane | Bound-weapon hits against fey deal an extra 2d6 force damage, rolled once even on a critical hit. |
+| 16 | Magical Beast Bane | Bound-weapon hits against magical beasts deal an extra 2d6 force damage, rolled once even on a critical hit. |
+| 16 | Ground Assault | Gain a +2 insight bonus on bound-weapon attack rolls against prone targets. |
+| 16 | Fear Pursuit | Gain a +2 insight bonus on bound-weapon attack rolls against shaken or frightened targets. |
+| 16 | Flame Ward | Gain fire resistance 30 while wielding the bound weapon. |
+| 16 | Grave Ward | Gain resistance 30 to negative energy damage while wielding the bound weapon. |
+| 16 | Stun Ward | Gain immunity to the stunned condition while wielding the bound weapon. |
+| 16 | Lucid Spirit | Gain immunity to the confused condition while wielding the bound weapon. |
+| 16 | Spirit Sense | Gain blindsense out to 25 feet while wielding the bound weapon. |
 
 When the character feat and inscription apply to the same weapon category, count each tier of Weapon Focus or Weapon Specialization once. At level 12, ordinary longsword specialization (+2) and the bound longsword inscription (+3) give +3 total. The base and Greater tiers add together. At level 20, both tiers of Focus give +2 to hit, and both tiers of Specialization give +7 physical damage with the bound weapon.
 

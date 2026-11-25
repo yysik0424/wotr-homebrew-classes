@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.22-beta
+
+- 스피릿스틸의 16레벨 무기 피트를 10종 추가했습니다. 전체 50종 중 20레벨까지 10개를 익힙니다.
+- Spiritsteel gains ten level-16 bound-weapon feats. Choose ten of 50 by level 20.
+
 ## 0.17.21-beta
 
 - 스피릿스틸의 주문 방벽·방벽 관통·속박 해방을 16레벨에 해금한다.
