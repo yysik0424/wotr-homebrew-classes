@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.20-beta
+
+- 스피릿스틸의 심판의 일격 해금 레벨을 18에서 12로 낮췄다.
+- Spiritsteel unlocks Judgment Strike at level 12 (previously 18).
+
 ## 0.17.19-beta
 
 - 스피릿스틸 결속 무기에 고레벨 피트 10종을 추가해 총 40종이 되었습니다.

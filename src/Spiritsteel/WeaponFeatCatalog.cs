@@ -100,7 +100,7 @@ namespace Spiritsteel
                 "결속 무기의 물리 피해에 +2를 더합니다. 무기나 전사가 해당 범주의 무기 전문화를 익혀야 합니다. 전사의 같은 범주 상급 무기 전문화와 겹치면 한 번만 적용합니다.", "Gain an additional +2 to physical damage with the bound weapon. Requires Weapon Specialization from the inscription or for its category. Overlaps with Greater Weapon Specialization for that category.", "7cf5edc65e785a24f9cf93af987d66b3"),
             new WeaponFeatRow(WeaponFeatKind.Evasive, 16, "신령의 회피", "Spirit Evasion",
                 "결속 무기를 든 동안 반사 내성 성공 시 피해가 절반이 되는 효과에 내성을 성공하면 피해를 받지 않습니다.", "While wielding the bound weapon, take no damage on a successful Reflex save against an effect that normally deals half damage on a success.", "576933720c440aa4d8d42b0c54b77e80"),
-            new WeaponFeatRow(WeaponFeatKind.Judgment, 18, "심판의 일격", "Judgment Strike",
+            new WeaponFeatRow(WeaponFeatKind.Judgment, 12, "심판의 일격", "Judgment Strike",
                 "결속 무기로 악 성향의 적을 명중시키면 신성 피해 2d6을 추가합니다. 치명타에도 한 번만 더합니다.", "Bound-weapon hits against evil targets deal an extra 2d6 holy damage, rolled once even on a critical hit.", "ad5ed5ea4ec52334a94e975a64dad336"),
             new WeaponFeatRow(WeaponFeatKind.SpellWard, 18, "주문 방벽", "Spell Ward",
                 "결속 무기를 든 동안 주문 저항 32를 얻습니다. 주문 저항이 여럿이면 가장 높은 값을 적용합니다.", "Gain spell resistance 32 while wielding the bound weapon. Use the highest applicable spell resistance.", "985d6dbff8c143e8b1ce5b96161b1ee0"),
