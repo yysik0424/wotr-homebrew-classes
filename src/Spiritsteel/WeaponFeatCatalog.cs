@@ -7,7 +7,8 @@ namespace Spiritsteel
     public enum WeaponFeatKind
     {
         Acid, Fire, Cold, Electricity, Sonic, Ghost, Agile, Keen, Dodge, Focus, Specialization, Critical, Trip, Mobility, Fortitude, Reflex, Will, Initiative, Precise, Shield,
-        ColdIron, Adamantine, Watchful, Silent, Charging, Opportunist, UndeadHunter, ConstructHunter, DragonHunter, DemonHunter
+        ColdIron, Adamantine, Watchful, Silent, Charging, Opportunist, UndeadHunter, ConstructHunter, DragonHunter, DemonHunter,
+        GreaterFocus, Anchored, GiantSlayer, Fortified, GreaterSpecialization, Evasive, Judgment, SpellWard, Sundering, Unfettered
     }
 
     // Level thresholds and scope are from the approved 2026-11-24 weapon-feats design.
@@ -87,6 +88,26 @@ namespace Spiritsteel
                 "결속 무기로 드래곤 유형의 적을 공격할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attack rolls with the bound weapon against dragons.", "f4201c85a991369408740c6888362e20"),
             new WeaponFeatRow(WeaponFeatKind.DemonHunter, 8, "데몬 사냥꾼", "Demon Hunter",
                 "결속 무기로 데몬 하위 유형의 적을 공격할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attack rolls with the bound weapon against creatures with the demon subtype.", "831e942864e924846a30d2e0678e438b"),
+            new WeaponFeatRow(WeaponFeatKind.GreaterFocus, 12, "상급 무기 집중", "Greater Weapon Focus",
+                "결속 무기 명중에 +1을 더합니다. 무기나 전사가 해당 범주의 무기 집중을 익혀야 합니다. 전사의 같은 범주 상급 무기 집중과 겹치면 한 번만 적용합니다.", "Gain an additional +1 on attack rolls with the bound weapon. Requires Weapon Focus from the inscription or for its category. Overlaps with Greater Weapon Focus for that category.", "09c9e82965fb4334b984a1e9df3bd088"),
+            new WeaponFeatRow(WeaponFeatKind.Anchored, 12, "뿌리내린 자세", "Rooted Stance",
+                "결속 무기를 든 동안 전법 방어도(CMD)에 +4 역량 보너스를 받습니다.", "Gain a +4 competence bonus to combat maneuver defense (CMD) while wielding the bound weapon.", "b3614622866fe7046b787a548bbd7f59"),
+            new WeaponFeatRow(WeaponFeatKind.GiantSlayer, 14, "거체 사냥꾼", "Giant-Killer",
+                "결속 무기로 크기가 대형 이상인 적을 공격할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on bound-weapon attack rolls against Large or larger targets.", "c60969e7f264e6d4b84a1499fdcf9039"),
+            new WeaponFeatRow(WeaponFeatKind.Fortified, 14, "신령의 요새", "Spirit Fortification",
+                "결속 무기를 든 동안 본편의 25% 요새화를 얻어 치명타와 암습을 일반 명중으로 바꿀 수 있습니다.", "Gain the standard 25% fortification against critical hits and sneak attacks while wielding the bound weapon.", "165b74db9493ded40ac05b3521aab427"),
+            new WeaponFeatRow(WeaponFeatKind.GreaterSpecialization, 16, "상급 무기 전문화", "Greater Weapon Specialization",
+                "결속 무기의 물리 피해에 +2를 더합니다. 무기나 전사가 해당 범주의 무기 전문화를 익혀야 합니다. 전사의 같은 범주 상급 무기 전문화와 겹치면 한 번만 적용합니다.", "Gain an additional +2 to physical damage with the bound weapon. Requires Weapon Specialization from the inscription or for its category. Overlaps with Greater Weapon Specialization for that category.", "7cf5edc65e785a24f9cf93af987d66b3"),
+            new WeaponFeatRow(WeaponFeatKind.Evasive, 16, "신령의 회피", "Spirit Evasion",
+                "결속 무기를 든 동안 반사 내성 성공 시 피해가 절반이 되는 효과에 내성을 성공하면 피해를 받지 않습니다.", "While wielding the bound weapon, take no damage on a successful Reflex save against an effect that normally deals half damage on a success.", "576933720c440aa4d8d42b0c54b77e80"),
+            new WeaponFeatRow(WeaponFeatKind.Judgment, 18, "심판의 일격", "Judgment Strike",
+                "결속 무기로 악 성향의 적을 명중시키면 신성 피해 2d6을 추가합니다. 치명타에도 한 번만 더합니다.", "Bound-weapon hits against evil targets deal an extra 2d6 holy damage, rolled once even on a critical hit.", "ad5ed5ea4ec52334a94e975a64dad336"),
+            new WeaponFeatRow(WeaponFeatKind.SpellWard, 18, "주문 방벽", "Spell Ward",
+                "결속 무기를 든 동안 주문 저항 32를 얻습니다. 주문 저항이 여럿이면 가장 높은 값을 적용합니다.", "Gain spell resistance 32 while wielding the bound weapon. Use the highest applicable spell resistance.", "985d6dbff8c143e8b1ce5b96161b1ee0"),
+            new WeaponFeatRow(WeaponFeatKind.Sundering, 20, "방벽 관통", "Pierce Defenses",
+                "결속 무기의 물리 타격은 적의 피해 감소를 최대 10점 무시합니다. 본편 관통 타격 계열과 겹치면 높은 값만 적용합니다.", "Physical hits with the bound weapon ignore up to 10 points of damage reduction. Use the higher value when combined with the Penetrating Strike feats.", "eb6eb946c68ef094f89c7633f5bfdc9b"),
+            new WeaponFeatRow(WeaponFeatKind.Unfettered, 20, "속박 해방", "Unfettered Spirit",
+                "결속 무기를 든 동안 마비, 얽힘, 감속 및 험지의 영향을 받지 않습니다.", "While wielding the bound weapon, gain immunity to paralysis, entanglement, slow, and difficult terrain.", "4c349361d720e844e846ad8c19959b1e"),
         };
 
         internal bool Element { get { return Kind <= WeaponFeatKind.Sonic; } }
@@ -100,7 +121,9 @@ namespace Spiritsteel
                     Kind == WeaponFeatKind.ColdIron || Kind == WeaponFeatKind.Adamantine ||
                     Kind == WeaponFeatKind.Charging || Kind == WeaponFeatKind.Opportunist ||
                     Kind == WeaponFeatKind.UndeadHunter || Kind == WeaponFeatKind.ConstructHunter ||
-                    Kind == WeaponFeatKind.DragonHunter || Kind == WeaponFeatKind.DemonHunter;
+                    Kind == WeaponFeatKind.DragonHunter || Kind == WeaponFeatKind.DemonHunter ||
+                    Kind == WeaponFeatKind.GreaterFocus || Kind == WeaponFeatKind.GreaterSpecialization ||
+                    Kind == WeaponFeatKind.GiantSlayer || Kind == WeaponFeatKind.Judgment || Kind == WeaponFeatKind.Sundering;
             }
         }
 
@@ -142,6 +165,7 @@ namespace Spiritsteel
             table.Add("weaponfeat.Agile.requirement", ("무기 기교 및 기교 가능한 결속 근접 무기", "Weapon Finesse and a finesse-compatible melee bound weapon"));
             table.Add("weaponfeat.Mobility.requirement", ("무기 또는 캐릭터의 피하기", "Dodge on the bound weapon or the character"));
             table.Add("weaponfeat.Specialization.requirement", ("무기 집중 (무기 피트 또는 결속 범주의 캐릭터 피트)", "Weapon Focus on the weapon or for its category"));
+            table.Add("weaponfeat.GreaterSpecialization.requirement", ("무기 전문화 (무기 피트 또는 결속 범주의 캐릭터 피트)", "Weapon Specialization on the weapon or for its category"));
             table.Add("weaponfeat.Precise.requirement", ("근거리 사격 및 결속 원거리·투척 무기", "Point-Blank Shot and a ranged or thrown bound weapon"));
             table.Add("weaponfeat.Shield.requirement", ("결속 방패 가시", "Bound shield spikes"));
             foreach (var row in All)

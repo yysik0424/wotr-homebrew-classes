@@ -81,7 +81,8 @@ namespace Spiritsteel
                 SetField(minimum, "m_CharacterClass", Ref<BlueprintCharacterClassReference>(barbarian.AssetGuid.ToString()));
                 AddComponents(feature, minimum, new WeaponFeatChange { Kind = row.Kind });
                 if (row.Element || row.Kind == WeaponFeatKind.Agile || row.Kind == WeaponFeatKind.Specialization ||
-                    row.Kind == WeaponFeatKind.Mobility || row.Kind == WeaponFeatKind.Shield || row.Kind == WeaponFeatKind.Precise)
+                    row.Kind == WeaponFeatKind.Mobility || row.Kind == WeaponFeatKind.Shield || row.Kind == WeaponFeatKind.Precise ||
+                    row.Kind == WeaponFeatKind.GreaterFocus || row.Kind == WeaponFeatKind.GreaterSpecialization)
                     AddComponents(feature, new WeaponFeatRequirement { Kind = row.Kind });
                 int tiers = row.Element || row.Kind == WeaponFeatKind.Specialization ? WeaponFeatRow.DamageTiers : 1;
                 var effects = new BlueprintWeaponEnchantment[tiers];
@@ -98,7 +99,7 @@ namespace Spiritsteel
                         SetField(e, "m_Prefix", NoText()); SetField(e, "m_Suffix", NoText());
                         e.WeaponFxPrefab = weaponFx ?? new PrefabLink();
                     });
-                    AddComponents(bp, Effect(row, tier));
+                    AddComponents(bp, EnchantmentComponents(row, tier));
                     effects[i] = bp;
                     OurEffects.Add(bp);
                 }
@@ -120,6 +121,14 @@ namespace Spiritsteel
         {
             SetField(fact, "m_DisplayName", Strings.L(name)); SetField(fact, "m_Description", Strings.L(description));
             SetField(fact, "m_DescriptionShort", NoText()); SetField(fact, "m_Icon", source.Icon);
+        }
+
+        private static BlueprintComponent[] EnchantmentComponents(WeaponFeatRow row, int tier)
+        {
+            if (row.Kind != WeaponFeatKind.Unfettered) return new[] { Effect(row, tier) };
+            // The four equipment immunities on the native Permanent Freedom boots.
+            return new[] { UnitCondition.Paralyzed, UnitCondition.Entangled, UnitCondition.Slowed, UnitCondition.DifficultTerrain }
+                .Select(condition => (BlueprintComponent)new AddConditionImmunityEquipment { Condition = condition }).ToArray();
         }
 
         private static BlueprintComponent Effect(WeaponFeatRow row, int tier)
@@ -153,6 +162,19 @@ namespace Spiritsteel
                 case WeaponFeatKind.ConstructHunter: return AgainstCreature("fd389783027d63343b4a5634bd81645f");
                 case WeaponFeatKind.DragonHunter: return AgainstCreature("455ac88e22f55804ab87c2467deff1d6");
                 case WeaponFeatKind.DemonHunter: return AgainstCreature("dc960a234d365cb4f905bdc5937e623a");
+                case WeaponFeatKind.Anchored: return new AddStatBonusEquipment { Stat = StatType.AdditionalCMD, Descriptor = ModifierDescriptor.Competence, Value = 4 };
+                case WeaponFeatKind.GiantSlayer: return new WeaponFeatGiantSlayer();
+                case WeaponFeatKind.Evasive: return new WeaponFeatReflexEvasion();
+                case WeaponFeatKind.Judgment: return new WeaponFeatJudgment();
+                case WeaponFeatKind.Sundering: return new WeaponFeatPenetration();
+                case WeaponFeatKind.Fortified:
+                case WeaponFeatKind.SpellWard:
+                    // These icons come from the actual armor property features granted by the stock enchantments.
+                    var grant = new AddUnitFeatureEquipment();
+                    SetField(grant, "m_Feature", Ref<BlueprintFeatureReference>(row.IconSource));
+                    return grant;
+                case WeaponFeatKind.GreaterFocus:
+                case WeaponFeatKind.GreaterSpecialization:
                 case WeaponFeatKind.Focus:
                 case WeaponFeatKind.Specialization:
                 case WeaponFeatKind.Critical:
@@ -247,7 +269,9 @@ namespace Spiritsteel
             switch (Kind)
             {
                 case WeaponFeatKind.Agile: return WeaponFeats.HasNative(owner, Kind) && category.Value.HasSubCategory(WeaponSubCategory.Finessable) && BoundWeapons.BaseWeapon(category.Value).IsMelee;
+                case WeaponFeatKind.GreaterFocus:
                 case WeaponFeatKind.Specialization: return unit.HasFact(WeaponFeats.Features[WeaponFeatKind.Focus]) || WeaponFeats.HasNative(owner, WeaponFeatKind.Focus, category);
+                case WeaponFeatKind.GreaterSpecialization: return unit.HasFact(WeaponFeats.Features[WeaponFeatKind.Specialization]) || WeaponFeats.HasNative(owner, WeaponFeatKind.Specialization, category);
                 case WeaponFeatKind.Mobility: return unit.HasFact(WeaponFeats.Features[WeaponFeatKind.Dodge]) || WeaponFeats.HasNative(owner, WeaponFeatKind.Dodge);
                 case WeaponFeatKind.Precise: return unit.HasFact(WeaponFeats.PointBlank) && BoundWeapons.BaseWeapon(category.Value).IsRanged;
                 case WeaponFeatKind.Shield: return category == WeaponCategory.SpikedLightShield || category == WeaponCategory.SpikedHeavyShield;
@@ -258,7 +282,8 @@ namespace Spiritsteel
         protected override string GetUITextInternal(UnitDescriptor unit)
         {
             var row = WeaponFeatRow.All.Single(r => r.Kind == Kind);
-            string requirement = Strings.L(row.Element ? "weaponfeat.element.limit" : row.Key("requirement")).ToString();
+            string requirementKey = Kind == WeaponFeatKind.GreaterFocus ? "weaponfeat.Specialization.requirement" : row.Key("requirement");
+            string requirement = Strings.L(row.Element ? "weaponfeat.element.limit" : requirementKey).ToString();
             if (unit == null || (!row.Element && Kind != WeaponFeatKind.Specialization)) return requirement;
             int level = unit.Progression.GetClassLevel(WeaponFeats.Barbarian);
             int next = row.NextLevel(level);

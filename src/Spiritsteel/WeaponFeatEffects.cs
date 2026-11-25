@@ -5,10 +5,12 @@ using Kingmaker.Blueprints.Items.Ecnchantments;
 using Kingmaker.EntitySystem;
 using Kingmaker.EntitySystem.Stats;
 using Kingmaker.Enums;
+using Kingmaker.Enums.Damage;
 using Kingmaker.Items;
 using Kingmaker.PubSubSystem;
 using Kingmaker.RuleSystem;
 using Kingmaker.RuleSystem.Rules;
+using Kingmaker.RuleSystem.Rules.Damage;
 using Kingmaker.UnitLogic;
 
 namespace Spiritsteel
@@ -22,14 +24,14 @@ namespace Spiritsteel
 
         public void OnEventAboutToTrigger(RuleCalculateAttackBonusWithoutTarget evt)
         {
-            if (Kind == WeaponFeatKind.Focus && evt.Weapon == Owner &&
+            if ((Kind == WeaponFeatKind.Focus || Kind == WeaponFeatKind.GreaterFocus) && evt.Weapon == Owner &&
                 !WeaponFeats.HasNative(evt.Initiator, Kind, Owner.Blueprint.Category))
                 evt.AddModifier(1, Fact, ModifierDescriptor.UntypedStackable);
         }
 
         public void OnEventAboutToTrigger(RuleCalculateWeaponStats evt)
         {
-            if (Kind != WeaponFeatKind.Specialization || evt.Weapon != Owner) return;
+            if ((Kind != WeaponFeatKind.Specialization && Kind != WeaponFeatKind.GreaterSpecialization) || evt.Weapon != Owner) return;
             int nativeBonus = WeaponFeats.HasNative(evt.Initiator, Kind, Owner.Blueprint.Category) ? 2 : 0;
             int bonus = WeaponFeatRow.AdditionalBonus(Value, nativeBonus);
             if (bonus > 0) evt.AddDamageModifier(bonus, Fact, ModifierDescriptor.UntypedStackable);
@@ -51,6 +53,46 @@ namespace Spiritsteel
         public void OnEventDidTrigger(RuleCalculateWeaponStats evt) { }
         public void OnEventDidTrigger(RuleAttackRoll evt) { }
         public void OnEventDidTrigger(RuleCalculateAttackBonus evt) { }
+    }
+
+    public class WeaponFeatGiantSlayer : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RuleCalculateAttackBonus>
+    {
+        public void OnEventAboutToTrigger(RuleCalculateAttackBonus evt)
+        {
+            if (evt.Weapon == Owner && evt.Target.State.Size >= Size.Large)
+                evt.AddModifier(2, Fact, ModifierDescriptor.Insight);
+        }
+        public void OnEventDidTrigger(RuleCalculateAttackBonus evt) { }
+    }
+
+    public class WeaponFeatReflexEvasion : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RuleSavingThrow>
+    {
+        public void OnEventAboutToTrigger(RuleSavingThrow evt)
+        {
+            if (evt.StatType == StatType.SaveReflex) evt.Evasion = true;
+        }
+        public void OnEventDidTrigger(RuleSavingThrow evt) { }
+    }
+
+    public class WeaponFeatJudgment : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RulePrepareDamage>
+    {
+        public void OnEventAboutToTrigger(RulePrepareDamage evt)
+        {
+            if (evt.DamageBundle.Weapon == Owner && evt.DamageBundle.WeaponDamage != null &&
+                evt.Target.Descriptor.Alignment.ValueRaw.HasComponent(AlignmentComponent.Evil))
+                evt.Add(new EnergyDamage(new DiceFormula(2, DiceType.D6), 0, DamageEnergyType.Holy));
+        }
+        public void OnEventDidTrigger(RulePrepareDamage evt) { }
+    }
+
+    public class WeaponFeatPenetration : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RuleCalculateDamage>
+    {
+        public void OnEventAboutToTrigger(RuleCalculateDamage evt)
+        {
+            if (evt.DamageBundle.Weapon == Owner && evt.DamageBundle.WeaponDamage is PhysicalDamage physical)
+                physical.ReductionPenalty.Add(new Kingmaker.RuleSystem.Rules.Modifier(10, Fact, ModifierDescriptor.Competence));
+        }
+        public void OnEventDidTrigger(RuleCalculateDamage evt) { }
     }
 
     public class WeaponFeatHunter : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RuleCalculateAttackBonus>

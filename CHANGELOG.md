@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.19-beta
+
+- 스피릿스틸 결속 무기에 고레벨 피트 10종을 추가해 총 40종이 되었습니다.
+- Spiritsteel gains ten high-level bound-weapon feats, bringing the pool to 40.
+
 ## 0.17.18-beta
 
 - Spiritsteel uses Wisdom for daily barbarian rage rounds.
