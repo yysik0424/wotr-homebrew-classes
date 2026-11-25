@@ -1,5 +1,8 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
+using Kingmaker.ElementsSystem;
+using Kingmaker.UnitLogic.Mechanics.ContextData;
 using WotrClassMod.Common;
 using Kingmaker;
 using Kingmaker.Blueprints;
@@ -52,11 +55,12 @@ namespace OathboundRevenant
     }
 
     // 원한의 반격: 자원 확인 → 반격 규칙 직접 발동 → 발동·해결됐을 때만 소비(본편 자원 조건 없음, ContextActionMeleeAttack 실패는 ActionList.Run 에 삼켜짐 — #11).
-    // 같은 공격 사건(같은 소유자·같은 공격자·같은 게임 시각)에서 두 번째 호출은 거절(이중 발동 방지, 검토 M1 — 키에 소유자 포함).
+    // 같은 피격 굴림은 한 번만 처리한다. 같은 시각에 해결된 연속 공격은 굴림별로 판정한다.
     // 주 무기가 원거리면 정당한 거절(근접 반격만), 맨손은 엔진의 빈 손 무기로 반격한다(결측 아님).
     public class RiposteAction : ContextAction
     {
-        static readonly RiposteOnceLedger<UnitEntityData> once = new RiposteOnceLedger<UnitEntityData>();
+        static readonly RulebookEvent.CustomDataKey resolved = new RulebookEvent.CustomDataKey("OathboundRevenant.RiposteResolved");
+        static readonly HashSet<UnitEntityData> resolving = new HashSet<UnitEntityData>();
 
         public override string GetCaption() { return "Vengeful riposte (OathboundRevenant)"; }
 
@@ -70,18 +74,28 @@ namespace OathboundRevenant
                 var weapon = owner == null ? null : (owner.Body.PrimaryHand.MaybeWeapon ?? owner.Body.EmptyHandWeapon);
                 var res = Survival.RiposteResource;
                 if (attacker == null) throw new InvalidOperationException("no attacker in context");
-                var now = Game.Instance.TimeController.GameTime;
-                bool already = owner != null && once.Already(owner, attacker, now);
+                var incoming = ContextData<ContextAttackData>.Current?.AttackRoll;
+                if (incoming == null || incoming.Initiator != attacker || incoming.Target != owner)
+                    throw new InvalidOperationException("riposte requires the triggering attacker's roll against its owner");
+                UnitEntityData previous;
+                bool already = incoming.TryGetCustomData(resolved, out previous) && ReferenceEquals(previous, owner);
                 int left = owner == null || res == null ? 0 : owner.Descriptor.Resources.GetResourceAmount(res);
                 bool melee = weapon != null && weapon.Blueprint.IsMelee;
                 bool inReach = owner != null && weapon != null && owner.DistanceTo(attacker) <= weapon.AttackRange.Meters + owner.Corpulence + attacker.Corpulence;
                 var d = RiposteRule.Decide(owner != null, weapon != null, res != null, left, !attacker.State.IsDead, inReach, already, melee);
                 if (d.Verdict == RiposteVerdict.Missing) { RevenantErrors.Report(ErrorLedger.SiteRiposte, "missing " + d.MissingInput); return; }
                 if (d.Verdict == RiposteVerdict.Refuse) return; // 정당한 거절
-                var rule = Rulebook.Trigger(new RuleAttackWithWeapon(owner, attacker, weapon, 0) { SkipAnimation = true });
-                if (rule.AttackRoll == null) { RevenantErrors.Report(ErrorLedger.SiteRiposte, "riposte attack did not resolve"); return; }
-                once.Record(owner, attacker, now);
-                owner.Descriptor.Resources.Spend(res, RevenantRules.Dials.UsesPerActivation);
+                // Some attacks in a full attack share a game timestamp. Use the incoming roll as
+                // the identity, and prevent recursive retaliation until the current attack settles.
+                if (!resolving.Add(owner)) return;
+                try
+                {
+                    var rule = Rulebook.Trigger(new RuleAttackWithWeapon(owner, attacker, weapon, 0) { SkipAnimation = true });
+                    if (rule.AttackRoll == null) { RevenantErrors.Report(ErrorLedger.SiteRiposte, "riposte attack did not resolve"); return; }
+                    incoming.SetCustomData(resolved, owner);
+                    owner.Descriptor.Resources.Spend(res, RevenantRules.Dials.UsesPerActivation);
+                }
+                finally { resolving.Remove(owner); }
             }, RevenantErrors.Sink)) return; // 실패는 계수됨 — 자원 불변
         }
     }

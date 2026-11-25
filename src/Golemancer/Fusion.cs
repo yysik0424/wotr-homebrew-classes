@@ -513,6 +513,7 @@ namespace Golemancer
                         if (!IsFusionTickTarget(u, slot)) continue;
                         u.Get<UnitPartGolemFusion>()?.FinishRemovedBuff();
                         TickUnit(u);
+                        u.Get<UnitPartGolemOverdrive>()?.FinishFormSync();
                     }
                     catch (Exception ex) { LogUnknown(u, "fusion: tick", ex); }
                 }

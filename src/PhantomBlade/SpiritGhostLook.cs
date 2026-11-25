@@ -88,8 +88,57 @@ namespace PhantomBlade
         // 실패(렌더러·재질·속성 없음)는 한 번 보고하고 그 령에서 더 시도하지 않는다 — 하체가 상체와 같은 흐림으로 남는다(눈에 드러남).
         static readonly PropertyInfo MaterialsProperty = typeof(StandardMaterialController).GetProperty("Materials", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         Material[] lowerMats;
+
+        sealed class ParticleTintSlot
+        {
+            public Renderer Renderer;
+            public int Slot;
+            public Material Original;
+            public Material Tinted;
+        }
+
+        readonly System.Collections.Generic.List<ParticleTintSlot> particleSlots = new System.Collections.Generic.List<ParticleTintSlot>();
+
+        public void ReleaseParticleTints()
+        {
+            foreach (var slot in particleSlots)
+            {
+                if (slot.Renderer != null)
+                {
+                    var materials = slot.Renderer.sharedMaterials;
+                    if (slot.Slot < materials.Length && materials[slot.Slot] == slot.Tinted)
+                    {
+                        materials[slot.Slot] = slot.Original;
+                        slot.Renderer.sharedMaterials = materials;
+                    }
+                }
+                if (slot.Tinted != null) UnityEngine.Object.Destroy(slot.Tinted);
+            }
+            particleSlots.Clear();
+        }
+
+        // The shadow demon's lower planes use Owlcat/Particles outside the dissolve controller.
+        // Only the phantom renderer gets the tinted material. Other units keep the shared asset.
+        bool TryParticleTint(Renderer renderer, int index, Material material)
+        {
+            if (material.shader == null || material.shader.name != "Owlcat/Particles") return false;
+            string property = null;
+            foreach (var candidate in new[] { "_TintColor", "_BaseColor", "_Color" })
+                if (material.HasProperty(candidate)) { property = candidate; break; }
+            if (property == null) return false;
+
+            var color = material.GetColor(property);
+            color.a *= 1f - (float)SpiritRules.Dials.LowerBodyDissolveLevel;
+            var tinted = new Material(material);
+            particleSlots.Add(new ParticleTintSlot { Renderer = renderer, Slot = index, Original = material, Tinted = tinted });
+            tinted.SetColor(property, color);
+            var slots = renderer.sharedMaterials;
+            slots[index] = tinted;
+            renderer.sharedMaterials = slots;
+            return true;
+        }
         bool lowerFailed;
-        public int LowerBodyMaterialCount { get { return lowerMats == null ? 0 : lowerMats.Length; } }
+        public int LowerBodyMaterialCount { get { return (lowerMats == null ? 0 : lowerMats.Length) + particleSlots.Count; } }
         public bool LowerBodyFailed { get { return lowerFailed; } }
 
         void TickLowerBody()
@@ -109,8 +158,9 @@ namespace PhantomBlade
             }
             catch (Exception e)
             {
+                ReleaseParticleTints();
                 lowerFailed = true;
-                SpiritVisualErrors.ReportOnce(SpiritVisualErrors.SiteLowerBody, who + "#" + view.GetInstanceID(), "spirit " + who + " lower-body fade failed, lower body keeps the upper-body dissolve: " + e.Message);
+                SpiritVisualErrors.ReportOnce(SpiritVisualErrors.SiteLowerBody, who + "|" + e.GetType().Name, "spirit " + who + " lower-body fade failed, lower body keeps the upper-body dissolve: " + e.Message);
             }
         }
 
@@ -129,15 +179,25 @@ namespace PhantomBlade
             {
                 if (r == null || !r.name.StartsWith(prefix, StringComparison.Ordinal)) continue;
                 renderers++;
-                foreach (var m in r.sharedMaterials)
-                    if (m != null && controlled.Contains(m) && !list.Contains(m)) list.Add(m);
+                var materials = r.sharedMaterials;
+                for (int slot = 0; slot < materials.Length; slot++)
+                {
+                    var m = materials[slot];
+                    if (m == null) continue;
+                    if (controlled.Contains(m))
+                    {
+                        if (!list.Contains(m)) list.Add(m);
+                    }
+                    else if (!TryParticleTint(r, slot, m))
+                        throw new InvalidOperationException("unsupported lower-body material " + m.name + "; " + SafeMismatchDiagnosis(smc, controlled, prefix));
+                }
             }
             if (renderers == 0) throw new InvalidOperationException("no renderer named '" + prefix + "*' on the spirit model");
-            if (list.Count == 0) throw new InvalidOperationException(renderers + " '" + prefix + "*' renderer(s) found, but none of their materials is driven by the dissolve controller; " + SafeMismatchDiagnosis(smc, controlled, prefix));
+            if (list.Count == 0 && particleSlots.Count == 0) throw new InvalidOperationException(renderers + " '" + prefix + "*' renderer(s) found, but none of their materials is driven by the dissolve controller; " + SafeMismatchDiagnosis(smc, controlled, prefix));
             foreach (var m in list)
                 if (!m.HasProperty(StandardMaterialController._Dissolve) || !m.HasProperty(StandardMaterialController._DissolveWidth))
                     throw new InvalidOperationException("lower-body material " + m.name + " has no _Dissolve/_DissolveWidth property");
-            ModContext.Log("PhantomBlade: spirit " + who + " lower-body fade on (" + renderers + " renderer(s), " + list.Count + " material(s), level " + SpiritRules.Dials.LowerBodyDissolveLevel + ")");
+            ModContext.Log("PhantomBlade: spirit " + who + " lower-body fade on (" + renderers + " renderer(s), " + list.Count + " dissolve material(s), " + particleSlots.Count + " particle tint(s), level " + SpiritRules.Dials.LowerBodyDissolveLevel + ")");
             return list.ToArray();
         }
 

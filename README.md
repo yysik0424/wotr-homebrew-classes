@@ -4,7 +4,7 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.9-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.9-beta/HomebrewClasses-0.17.9-beta.zip) · [Release notes and test coverage](release-notes-0.17.9-beta.md)
+> [Download 0.17.10-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.10-beta/HomebrewClasses-0.17.10-beta.zip) · [Release notes and test coverage](release-notes-0.17.10-beta.md)
 
 ## The classes
 
@@ -48,7 +48,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.9-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.10-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -59,7 +59,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.9-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.10-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -472,6 +472,8 @@ None
 With a +5 Charisma modifier, two Ghost Slashes leave three Full Assaults. The separate absorption pool tracks damage prevented and reports its remaining points in the combat log.
 
 ### Compatibility and notes
+
+The Guardian Phantom’s lower-body smoke uses a separate fade on particle materials that support tint.
 
 - **Required mods and DLC**: none. However, the black cloud afterimage of Ghost Slash borrows an effect from game data tagged DLC3 (Treasure of the Midnight Isles). If that effect cannot be loaded, only the afterimage is skipped; Ghost Slash and its other visuals are unaffected.
 - **Ghost Slash projectile look**: Ghost Slash borrows the projectile of the base-game spell Ray of Enfeeblement and hides only the flight of projectiles fired by a Phantom Blade's Ghost Slash. Ray of Enfeeblement cast by anyone else looks as usual. Because the game reuses projectile visuals, the mod checks every Ray of Enfeeblement projectile once, whoever fired it, and restores any that it left hidden.
@@ -1150,6 +1152,8 @@ Opposition schools apply only to your Golemancer extracts. They do not affect a 
 - **Golem hit points**: fully restored by a successful rest, which also revives a broken golem. Some materials add fast healing (adamantine 5, mithral 20).
 
 ### Compatibility and notes
+
+During overdrive, changing or losing a fusion form updates the master’s and golem’s limbs and school effects after the form change finishes.
 
 - **No animal companions**: the golem uses the animal companion slot. Combining it with a class or feature that grants an animal companion (druid, hunter and so on) leaves the golem non-functional and logs a conflict error in the mod log.
 - **Requires DLC 3.** The bundle skips Golemancer if the brass golem data is unavailable. The brass material uses the brass golem unit and model added by DLC 3 (The Treasure of the Midnight Isles). All other materials (wood, stone, iron, gold, autumn, summer, adamantine, greater gold, mithral) use base game golems. The cognatogen lockout also covers the Extra Discovery feat selection that ships with DLC 5 (The Lord of Nothing) content.
@@ -2324,7 +2328,7 @@ You choose one at levels 3, 6, 9, 12, 15 and 18 — six out of twenty. Each tale
 | 9 | Iron Bones | A critical hit or sneak attack against you has a 25% chance to be negated, so you take normal damage only (the same as 25% fortification). It does not reduce damage by a share. |
 | 12 | Death Blade | All melee weapon hits deal +1d6 negative energy damage. Divine damage against negative energy affinity. Not multiplied on a critical hit. The target does not have to be smitten. |
 | 12 | Empowered Channel | Your negative channel deals +2d6. Your self-healing from it rises by the same amount. |
-| 12 | Vengeful Riposte | 3/day. When a melee attack hits you, make one melee attack against the attacker. You must be wielding a melee weapon (or be unarmed) and the attacker must be within reach. A use is spent only when the riposte actually happens. |
+| 12 | Vengeful Riposte | 3/day. When a melee attack hits you, make one melee attack against the attacker. You must be wielding a melee weapon (or be unarmed) and the attacker must be within reach. Each incoming hit in a full attack can trigger a riposte, up to the daily limit. A use is spent when the counterattack resolves. |
 | 12 | Mark of Death | If your smite target dies while smitten, the smite passes for free to the nearest other evil enemy within 30 feet. |
 | 15 | Unyielding Oath | 1/day. When damage would reduce you to 0 hit points or below, you stay at 1 instead. Automatic. |
 | 18 | Last Breath | When Unyielding Oath triggers, a burst of negative energy hits enemies within 30 feet. It deals twice your negative channel dice (Empowered Channel included — 18d6 at 18th level, 22d6 with Empowered Channel), Will half (paladin DC). Divine damage against negative energy affinity. Requires Unyielding Oath. |

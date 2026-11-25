@@ -451,6 +451,8 @@ namespace Golemancer
                 else part.Warn("overdrive sync (" + why + "): no bound golem in the pet slot — golem limbs / school effect not touched");
                 SlamLimbs.Reconcile(master, SlamLimbs.WantedForMaster(master, level, overdrive));
                 ReconcileEffect(master, OverdriveRules.WantedEffect(overdrive, school, true, hasForm));
+                var activeRecord = master.Get<UnitPartGolemOverdrive>();
+                if (activeRecord != null) activeRecord.FormSyncPending = false;
             }
             catch (Exception ex)
             {
@@ -509,6 +511,14 @@ namespace Golemancer
     {
         [JsonProperty] public string School;
         [JsonProperty] public int ExtractLevel;
+        internal bool FormSyncPending;
+
+        internal void FinishFormSync()
+        {
+            if (!FormSyncPending) return;
+            FormSyncPending = false;
+            if (Overdrive.IsActive(Owner)) Overdrive.Sync(Owner, true, "fusion form changed");
+        }
     }
 
     // 폭주 버프에 붙는다(주인 소유). 블루프린트 컴포넌트는 모든 주인이 공유한다 → 인스턴스 필드 없음.
@@ -526,13 +536,16 @@ namespace Golemancer
         }
 
         // 합체 형태 버프가 본체에 붙거나 떨어질 때: 본체 쪽 추가 사지·학파 효과를 맞춘다(합체 = max(2, 폭주 값) + 효과, 풀면 본체에서 빠지고 골렘 쪽에 이어진다).
-        public void HandleBuffDidAdded(Buff buff) { OnForm(buff, "fusion form on"); }
-        public void HandleBuffDidRemoved(Buff buff) { OnForm(buff, "fusion form off"); }
+        public void HandleBuffDidAdded(Buff buff) { OnForm(buff); }
+        public void HandleBuffDidRemoved(Buff buff) { OnForm(buff); }
 
-        void OnForm(Buff buff, string why)
+        void OnForm(Buff buff)
         {
             if (buff?.Owner == null || !ReferenceEquals(buff.Owner.Unit, Owner) || !Fusion.IsForm(buff.Blueprint)) return;
-            Overdrive.Sync(Owner, true, why);
+            // The engine publishes removal before detaching the form. Reconciling limb or school
+            // buffs here mutates EventBus subscriptions during that same notification.
+            var record = Owner.Get<UnitPartGolemOverdrive>();
+            if (record != null) record.FormSyncPending = true;
         }
     }
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.17.10-beta
+
+- 골렘술사의 폭주 중 합체 형태가 바뀌면 버프 알림이 끝난 뒤 추가 사지와 학파 효과를 맞춘다.
+- 맹세의 망자의 반격은 같은 게임 시각에 발생한 연속 공격도 피격 굴림별로 한 번씩 판정한다.
+- 귀검사 수호령 하체의 파티클 재질은 해당 수호령에만 적용되는 색상으로 흐리게 표시한다.
+- During overdrive, Golemancer reconciles extra limbs and school effects after fusion form notifications finish.
+- Vengeful Riposte tracks each incoming attack roll separately, including hits in the same game tick.
+- The Phantom Blade can fade the Guardian Phantom’s lower particle planes with a tint applied to that spirit alone.
+
 ## 0.17.9-beta
 
 - 팔코너는 9레벨 회피를 유지하고 16레벨에 세 갈래 사냥을 얻는다. 향상된 회피는 성장표에서 제외했다.

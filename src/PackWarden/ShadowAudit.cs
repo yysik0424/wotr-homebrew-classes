@@ -13,8 +13,8 @@ namespace PackWarden
 
         public sealed class SlotView { public int Slot; public ShadowRules.SlotStatus Status; public string AuxId; public ShadowRules.StrikeVerdict? Decision; /* null = 판정 없음 */ }
         public sealed class SnapView { public bool Complete; public ShadowRules.ShadowVerdict Verdict; public SlotView[] Slots; }
-        public sealed class MainView { public int Index, Frame, AttackNumber, AttacksCount, RawPenalty, BabEntry, InitiatorBab, TargetHpAfter /* 기록 시점(그림자 뒤) 대상 HP — 프레임 안에서 HP 는 줄기만 한다 */; public bool IsFullAttack, IsFirstAttack; public string TargetId; public SnapView Snap; /* null = 처리기 스냅샷 없음 */ }
-        public sealed class ChildView { public int Index, Frame, AttackNumber, AttacksCount, RawPenalty, BabEntry, InitiatorBab, ParentIndex; public bool IsFullAttack, IsFirstAttack; public string InitiatorId, TargetId; }
+        public sealed class MainView { public int? BabEntry; public int Index, Frame, AttackNumber, AttacksCount, RawPenalty, InitiatorBab, TargetHpAfter /* 기록 시점(그림자 뒤) 대상 HP — 프레임 안에서 HP 는 줄기만 한다 */; public bool IsFullAttack, IsFirstAttack; public string TargetId; public SnapView Snap; /* null = 처리기 스냅샷 없음 */ }
+        public sealed class ChildView { public int? BabEntry; public int Index, Frame, AttackNumber, AttacksCount, RawPenalty, InitiatorBab, ParentIndex; public bool IsFullAttack, IsFirstAttack; public string InitiatorId, TargetId; }
         public sealed class RecView { public int Index; public string InitiatorId; public bool Extra, AoO; }
 
 

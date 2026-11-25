@@ -534,6 +534,7 @@ namespace PhantomBlade
 
         void ReleaseBinding()
         {
+            if (ghost != null) ghost.ReleaseParticleTints();
             if (registeredForWalk)
             {
                 registeredForWalk = false;

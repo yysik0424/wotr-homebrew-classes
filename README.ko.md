@@ -4,7 +4,7 @@
 
 *Pathfinder: Wrath of the Righteous*에 새 아키타입 21종을 더합니다. Unity Mod Manager 모드 하나로 설치합니다. 헌터로 동물 무리를 지휘하거나, 연금술사로 골렘을 입거나, 바바리안으로 부족에게 받은 무기의 신령과 함께 싸울 수 있습니다.
 
-> [Unity Mod Manager용 0.17.9-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.9-beta/HomebrewClasses-0.17.9-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.9-beta.md)
+> [Unity Mod Manager용 0.17.10-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.10-beta/HomebrewClasses-0.17.10-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.10-beta.md)
 
 ## 직업 목록
 
@@ -48,7 +48,7 @@
 ## 설치
 
 1. 게임을 종료합니다. 기존 직업 단독 모드가 설치돼 있으면 12개 직업 폴더를 게임의 `Mods` 밖에 백업합니다. 번들과 단독 모드가 동시에 같은 직업을 등록하지 않도록 합니다.
-2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.9-beta.zip`을 준비합니다.
+2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.10-beta.zip`을 준비합니다.
 3. ZIP을 Unity Mod Manager에 끌어다 놓거나 게임의 `Mods` 폴더에 풉니다. `Mods/HomebrewClasses` 아래에는 `Info.json`, `HomebrewClasses.dll`, 직업 DLL 21개가 든 `classes` 폴더가 있어야 합니다.
 4. 게임을 실행합니다. 캐릭터 생성 화면에서 기반 직업의 아키타입 목록에 나타납니다.
 
@@ -59,7 +59,7 @@
 Windows PowerShell에서 `WOTR_MANAGED_DIR`을 게임의 `Wrath_Data/Managed` 폴더로, `WOTR_CSC`를 Visual Studio Roslyn의 `csc.exe` 경로로 설정합니다. Unity Mod Manager를 설치한 게임의 어셈블리가 필요합니다. 다음 명령은 비어 있는 출력 폴더를 사용합니다.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.9-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.10-beta -Out .\out -NoDevCompare
 ```
 
 ## 설정
@@ -472,6 +472,8 @@ Unity Mod Manager 창에서 모드를 제거하거나 `Mods\HomebrewClasses` 폴
 매력 수정치가 +5라면 귀신참 두 번을 쓴 뒤 전력 공격을 세 번 쓸 수 있다. 피해 흡수량은 별도 풀에 남으며 전투 기록에 표시된다.
 
 ### 호환과 주의
+
+수호령 하체의 연기에는 별도 흐림 효과를 적용한다. 색조를 지원하는 파티클 재질은 수호령 개체별로 투명도를 조절한다.
 
 - **필요한 모드·DLC**: 없다. 다만 귀신참의 검은 구름 잔상은 이름에 DLC3(Treasure of the Midnight Isles) 표기가 있는 본편 데이터의 효과를 빌려 쓴다. 그 효과를 불러오지 못하면 잔상만 생략되고 귀신참과 다른 연출은 그대로다.
 - **귀신참 투사체 모양**: 본편 주문 「쇠약 광선 (Ray of Enfeeblement)」의 투사체 모양을 빌려 쓰고, 귀검사가 쏜 귀신참의 것만 날아가는 모습을 숨긴다. 다른 시전자의 쇠약 광선은 그대로 보인다. 투사체 화면 객체는 게임이 재사용하므로, 이 모드는 누가 쏜 것이든 쇠약 광선 투사체를 한 번씩 확인해 자기가 숨긴 채 남은 것이 있으면 되살린다.
@@ -1150,6 +1152,8 @@ KineticistElementsExpanded 모드가 켜져 있을 때만 추가되는 원소:
 - **골렘 HP**: 성공한 휴식에 전부 회복(부서진 골렘도 되살아남). 재질에 따라 빠른 치유(아다만틴 5, 미스랄 20).
 
 ### 호환과 주의
+
+폭주 중 합체 형태가 바뀌거나 풀리면 형태 변경이 끝난 뒤 본체와 골렘의 추가 사지와 학파 효과를 맞춘다.
 
 - **동물 동료와 병행 불가**: 골렘은 동물 동료 자리를 쓴다. 드루이드·헌터 등 동물 동료를 주는 직업·특성과 겹치면 골렘이 정상 동작하지 않고 모드 로그에 충돌 오류가 남는다.
 - **DLC 3 필요.** 황동 골렘 데이터를 사용할 수 없으면 골렘술사 전체를 건너뛴다. 황동 재질은 DLC 3(The Treasure of the Midnight Isles)에서 추가된 황동 골렘의 유닛·모델을 쓴다. 나머지 재질(나무·돌·철·황금·가을·여름·아다만틴·상위 황금·미스랄)은 본편 골렘을 쓴다. 인지약 차단은 DLC 5(The Lord of Nothing) 쪽에 들어 있는 특기 「추가 발견」 선택에도 적용된다.
@@ -2324,7 +2328,7 @@ DLC 유닛을 쓰는 칸: 심연 III(아브리칸딜루) 한 칸뿐이다. 나�
 | 9 | 강철 뼈 (Iron Bones) | 나에게 들어온 치명타나 암습이 25% 확률로 무효가 되어 일반 피해만 받는다(요새화 25%와 같은 효과). 피해 일부를 깎는 효과가 아니다. |
 | 12 | 죽음의 칼날 (Death Blade) | 모든 근접 무기 명중에 +1d6 음에너지 피해. 음에너지 친화 대상에게는 신성 피해. 치명타에 곱하지 않는다. 스마이트 대상이 아니어도 된다. |
 | 12 | 강화 채널 (Empowered Channel) | 음에너지 방출이 2d6 더 강해진다. 자기 회복량도 그만큼 늘어난다. |
-| 12 | 원한의 반격 (Vengeful Riposte) | 하루 3회. 근접 공격에 맞으면 공격자에게 근접 공격을 한 번 한다. 근접 무기(또는 맨손)를 들고 있고 공격자가 닿는 거리에 있어야 한다. 실제로 반격했을 때만 횟수가 줄어든다. |
+| 12 | 원한의 반격 (Vengeful Riposte) | 하루 3회. 근접 공격에 맞으면 공격자에게 근접 공격을 한 번 한다. 근접 무기(또는 맨손)를 들고 있고 공격자가 닿는 거리에 있어야 한다. 실제로 반격했을 때만 횟수가 줄어든다. 연속 공격은 같은 시각에 들어와도 피격 굴림마다 한 번씩 판정한다. |
 | 12 | 죽음의 낙인 (Mark of Death) | 스마이트 대상이 스마이트가 걸린 채 쓰러지면, 30피트 안의 가장 가까운 다른 악한 적에게 스마이트가 무료로 옮겨 간다. |
 | 15 | 꺼지지 않는 맹세 (Unyielding Oath) | 하루 1회. HP 가 0 이하로 떨어질 피해를 받으면 HP 1 로 버틴다. 자동 발동. |
 | 18 | 마지막 숨 (Last Breath) | 꺼지지 않는 맹세가 발동하면 30피트 안의 적에게 음에너지 폭발을 일으킨다. 피해는 음에너지 방출 주사위의 두 배(강화 채널 포함 — 18레벨 18d6, 강화 채널 보유 시 22d6), 의지 내성(팔라딘 DC) 성공 시 절반. 음에너지 친화 대상에게는 신성 피해. 선행: 꺼지지 않는 맹세. |
