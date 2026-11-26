@@ -6,7 +6,7 @@ Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod 
 
 > [Download 0.17.29-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.29-beta/HomebrewClasses-0.17.29-beta.zip) · [Release notes and test coverage](release-notes-0.17.29-beta.md)
 
-In turn-based combat, select a buff and point at an ally to see the base duration of each effect and the time remaining on a matching active buff. Instant self buffs show the remaining time on the ability icon tooltip. At caster level 7, a one-minute-per-level buff shows a base of 7 minutes, or 14 with Extend Spell when eligible. Random durations show a range. Effects resolved during casting show the available formula or ability description. For area abilities, the preview describes the hovered unit if affected. Healing, dispels, summons and toggles also have turn-based summaries.
+In turn-based combat, select a buff and point at an ally to see the base duration of each effect and the time remaining on a matching active buff. Instant self buffs show the remaining time on the ability icon tooltip. At caster level 7, a one-minute-per-level buff shows a base of 7 minutes, or 14 with Extend Spell when eligible. Random durations show a range. Effects resolved during casting show the available formula or ability description. For area abilities, the preview describes the hovered unit if affected. Healing, dispels, summons and toggles also have turn-based summaries. When the same buff is already active, the preview shows known recast rules, including replacement, extension and stacking. Golem Overdrive, spirit possession and Pack Empowerment use their own class rules for base duration.
 
 In PC character creation and level-up, the class list reserves space for both rows of category buttons. The first class stays below the buttons when the list rebuilds. Click the open category again to collapse it.
 
@@ -24,7 +24,7 @@ Spiritsteel uses Wisdom for daily rage rounds. With Wisdom 18, you get 8 rounds 
 
 Spiritsteel automatically gains stun immunity at level 12 and confusion immunity at level 16 while Spirit Rage is active. Two level-16 weapon feats join the selection. Speed grants one extra full-attack strike and overlaps with haste. Thundering Critical adds sonic damage on confirmed critical hits according to the weapon’s critical multiplier.
 
-With the shadow on, Magic Missile and its echo each spend one 1st-level slot. With one slot left, only the original fires.
+While the shadow is on, it echoes the first eligible harmful sorcerer spell each round. If that spell is Magic Missile, the original and its echo each spend one 1st-level slot. With one slot left, only the original fires.
 
 ## The classes
 
@@ -331,7 +331,7 @@ You gain the Tandem Executioner’s base feature at level 4 and choose technique
 
 ### Overview
 
-The Phantom Blade is a fighter bound to a Guardian Phantom. You fight in melee as usual while a shadowy figure overlapping your body drives force fists into whatever you attack. The same phantom soaks 25% of the damage you take into its own absorption pool. The pool refills only when you rest, so it is a defensive resource you have to ration across the day. Ghost Slash, your ranged attack, does not draw on it: it shares daily uses with Guardian Phantom Full Assault. In exchange you give up bravery, armor training and armor mastery; bonus feats, weapon training and weapon mastery are untouched.
+The Phantom Blade is a fighter bound to a Guardian Phantom. You fight in melee as usual while a shadowy figure overlapping your body drives force fists into whatever you attack. The same phantom soaks 25% of the damage you take into its own absorption pool. The pool refills when you finish a rest or gain a level. Ghost Slash, your ranged attack, does not draw on it: it shares daily uses with Guardian Phantom Full Assault. In exchange you give up bravery, armor training and armor mastery; bonus feats, weapon training and weapon mastery are untouched.
 
 ### What you give up
 
