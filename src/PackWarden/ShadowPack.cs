@@ -386,7 +386,13 @@ namespace PackWarden
 
         public void HandleAddPet(UnitEntityData master, UnitEntityData pet)
         {
-            try { if (ReferenceEquals(master, Owner)) ShadowPack.Reconcile(Owner); }
+            try
+            {
+                if (!ReferenceEquals(master, Owner)) return;
+                ShadowPack.Reconcile(Owner);
+                if (Owner.IsInCombat && IsMainPet(pet))
+                    PackCall.TrySummon(Owner);
+            }
             catch (Exception e) { ShadowPack.CountFailure("HandleAddPet", Owner, e); throw; }
         }
 

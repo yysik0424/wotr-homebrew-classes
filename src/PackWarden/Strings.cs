@@ -33,8 +33,8 @@ namespace PackWarden
         {
             ["Archetype.Name"] = ("무리 조련사", "Pack Warden"),
             ["Archetype.Description"] = (
-                "무리 조련사는 동물 여러 마리를 거느리고 다니는 헌터다. 본인은 거의 지휘만 하고, 짐승들이 대신 싸운다. 1레벨부터 주 동물 동료와 싸운다. 7레벨부터 전투 중 주 동료에 타면 같은 종의 보조 동물이 합류한다. 보조 동물의 수는 " + AuxCountKo + "다. 보조는 주 동물의 근접 공격마다 같은 적을 한 번씩 공격한다.",
-                "The Pack Warden is a hunter who travels with several animals at once. The hunter mostly gives orders while the beasts do the fighting. You fight alongside your main companion from level 1. From level 7, riding that companion in combat calls auxiliaries of the same species. Their number is " + AuxCountEn + ". Each auxiliary follows an eligible melee attack by the main companion with one attack of its own."),
+                "무리 조련사는 동물 여러 마리를 거느리고 다니는 헌터다. 본인은 거의 지휘만 하고, 짐승들이 대신 싸운다. 1레벨부터 주 동물 동료와 싸운다. 7레벨부터 도보든 기승 중이든 전투에 들어가면 같은 종의 보조 동물이 합류한다. 보조 동물의 수는 " + AuxCountKo + "다. 보조는 주 동물의 근접 공격마다 같은 적을 한 번씩 공격한다.",
+                "The Pack Warden is a hunter who travels with several animals at once. The hunter mostly gives orders while the beasts do the fighting. You fight alongside your main companion from level 1. From level 7, auxiliaries of the same species join when you enter combat on foot or mounted. Their number is " + AuxCountEn + ". Each auxiliary follows an eligible melee attack by the main companion with one attack of its own."),
             ["Archetype.DescriptionShort"] = (
                 "동물 여러 마리를 거느리고 다니며, 표식을 찍은 적에게 무리가 함께 달려든다.",
                 "Leads a pack of animals that all fall upon the foe the hunter has marked."),
@@ -46,11 +46,11 @@ namespace PackWarden
             ["CallToggle.Name"] = ("무리 소집: 토글", "Call the Pack: Toggle"),
             ["CallToggle.Description"] = ("이전 버전의 소집 토글입니다.", "Legacy pack call toggle."),
             ["CallToggleAbility.Name"] = ("무리 소집", "Call the Pack"),
-            ["CallToggleAbility.Description"] = ("기승 소집은 7레벨부터 자동으로 발동합니다.", "Mounted Call takes effect automatically from level 7."),
-            ["CallMounted.Name"] = ("기승 소집", "Mounted Call"),
+            ["CallToggleAbility.Description"] = ("무리 소집은 7레벨부터 자동으로 발동합니다.", "Call the Pack takes effect automatically from level 7."),
+            ["CallMounted.Name"] = ("무리 소집", "Call the Pack"),
             ["CallMounted.Description"] = (
-                "7레벨부터의 소집 조건이다. 주 동물 동료에 탄 채 전투에 들어가거나 전투 중에 타면 무리를 부른다. 7~12레벨에는 보조 1마리, 13레벨부터는 2마리를 부른다.\n스스로 내리면 무리가 흩어지고, 다시 타면 곧바로 돌아온다(그 전투에서 죽은 보조 동물은 빼고). 탈것이나 기수가 쓰러져 강제로 내려진 경우에는 무리가 남는다.\n" + ShadowRuleKo,
-                "The call condition from level 7. Entering combat while riding the main animal companion, or mounting it during combat, calls the pack. One auxiliary joins at levels 7–12 and two from level 13.\nDismounting by choice disperses the pack, and mounting again brings it back at once (except auxiliary animals that died in that combat). A forced dismount (the mount or the rider going down) leaves the pack in place.\n" + ShadowRuleEn),
+                "도보든 기승 중이든 전투에 들어가면 주 동물 동료와 같은 종의 보조 동물이 합류한다. 7~12레벨에는 1마리, 13레벨부터는 2마리가 합류한다. 전투 중에 타거나 내려도 무리는 함께 싸운다. 쓰러진 보조 동물은 다음 전투에 돌아온다.\n" + ShadowRuleKo,
+                "Auxiliaries of the main companion’s species join when you enter combat on foot or mounted. One joins at levels 7–12 and two from level 13. Mounting or dismounting during combat keeps the pack in the fight. Fallen auxiliaries return next combat.\n" + ShadowRuleEn),
             ["Aspects.Name"] = ("무리의 두 상", "Aspects of the Pack"),
             ["Aspects.Description"] = (
                 "사나운 상과 질긴 상 중 하나를 켠다. 한 상을 켜면 켜져 있던 다른 상은 꺼지고, 전환은 자유 행동이며 횟수 제한이 없다.\n사나운 상: 무리 전체의 명중과 피해에 보너스.\n질긴 상: 무리 전체의 방어도에 보너스. 보조 동물은 소환될 때 한 번 지혜 수정치 × 헌터 레벨의 임시 체력도 받는다.\n보너스는 지혜 수정치만큼이며(지혜 수정치가 0 이하이면 0, 깎이지는 않는다) 주 동물 동료와 보조 동물 모두에게 간다. 주인공은 영향 없음.",

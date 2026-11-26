@@ -193,8 +193,6 @@ namespace PackWarden
         public static BlueprintActivatableAbility ToggleAbility;
         public static BlueprintBuff ToggleBuff;
 
-        // SaddledUnitController.TickDismount 실행 중 = 탈것·기수 기절/사망 등 강제 하차(설계 4.5 "유지"). PackCallPatches 가 세우고 되돌린다.
-        [ThreadStatic] public static bool SuppressDismiss;
         // 메인이 숨어 있어 소환을 건너뛴 수(진단).
         public static int SummonSkippedWhileHidden;
 
@@ -250,7 +248,7 @@ namespace PackWarden
             Archetype.AddAt(1, CallFeature);
             CallFeature.HideInUI = true;
             CallFeature.HideInCharacterSheetAndLevelUp = true;
-            Archetype.AddAt(PackRules.MountedCallLevel, CallMountedFeature);
+            Archetype.AddAt(PackRules.FirstAuxiliaryLevel, CallMountedFeature);
         }
 
         internal static void Names(BlueprintUnitFact f, string key, UnityEngine.Sprite icon)
@@ -300,10 +298,8 @@ namespace PackWarden
                     Main.Entry.Logger.Warning("PackWarden: " + leader + " has the pack call feature but Hunter level 0; not summoning");
                 return false;
             }
-            if (!leader.IsInCombat || !PackRules.UsesMountGate(level)) return false;
-            var pet = leader.GetPet(PetType.AnimalCompanion);
-            var mount = leader.Get<UnitPartRider>()?.SaddledUnit;
-            return pet != null && ReferenceEquals(mount, pet);
+            return leader.IsInCombat && PackRules.AuxCount(level) > 0
+                && leader.GetPet(PetType.AnimalCompanion) != null;
         }
 
         // 멱등: 살아 있는 보조가 목표 수에 이르면 아무것도 안 한다. 목표 = PackRules.AuxCount(헌터 레벨) − 이번 전투에서 죽은 수(PackRules.SlotsToFill).

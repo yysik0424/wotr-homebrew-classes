@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.36-beta
+
+무리 조련사는 도보로 전투에 들어가도 주 동물 동료와 같은 종의 보조 동물을 자동으로 부릅니다. 헌터 7~12레벨에는 1마리, 13레벨부터는 2마리가 합류합니다. 전투 중 승하차해도 같은 무리가 계속 싸우며, 쓰러진 보조 동물은 다음 전투에 돌아옵니다.
+
+Pack Warden auxiliaries now join combat whether the hunter is on foot or mounted. One animal of the main companion’s species joins at Hunter levels 7–12 and two from level 13. Mounting or dismounting keeps the same pack in the fight. Fallen auxiliaries return next combat.
+
 ## 0.17.35-beta
 
 스피릿 웨폰의 수동 레벨업 화면에 전용 직업 **스피릿 웨폰**이 표시됩니다. 본편 동물 동료 직업을 골라 무기 칸이 잠기던 문제를 수정했습니다. 이미 이 문제를 겪은 스피릿 웨폰은 세이브를 불러와 지역에 들어가면 주 무기와 예비 무기를 다시 장착할 수 있습니다. 기존 직업 레벨과 선택한 특기는 유지됩니다.
