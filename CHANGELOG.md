@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.26-beta
+
+- 스피릿스틸의 1레벨 주적 선택과 결속 무기의 주적 명중·피해 보너스를 제거했습니다. 1레벨에는 결속 무기를 정하고 신령의 분노를 얻습니다.
+- Removed Spiritsteel’s favored enemy choice and its bound weapon attack and damage bonuses against the chosen enemy. At level 1, choose your bound weapon and gain Spirit Rage.
+
 ## 0.17.25-beta
 
 - PC에서 분류 버튼을 직업 선택 화면에 직접 연결했습니다. 코어·베이스·하이브리드·얼터네이트·오컬트·프레스티지 중 하나를 누르면 해당 직업과 아키타입이 표시되고, 같은 분류를 다시 누르면 접힙니다.

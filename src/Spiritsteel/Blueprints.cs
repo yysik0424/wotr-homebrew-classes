@@ -67,23 +67,6 @@ namespace Spiritsteel
                 SetField(f, "m_Features", refs); SetField(f, "m_AllFeatures", refs);
             });
         }
-        static BlueprintFeatureSelection BuildOath(Sprite fallback)
-        {
-            var source = Get<BlueprintFeatureSelection>(Guids.RangerEnemySelection);
-            var choices = new List<BlueprintFeature>();
-            foreach (var enemy in source.AllFeatures.Distinct())
-            {
-                var target = enemy.GetComponent<FavoredEnemy>();
-                if (target == null) continue;
-                var id = WeaponFeats.StableId("oath." + enemy.AssetGuid);
-                var option = Feature(id, "oath", enemy.Icon ?? source.Icon ?? fallback);
-                SetField(option, "m_DisplayName", FindField(typeof(BlueprintUnitFact), "m_DisplayName").GetValue(enemy));
-                var effect = new SpiritOath { Enemy = Ref<BlueprintFeatureReference>(enemy.AssetGuid.ToString()) };
-                AddComponents(option, effect);
-                choices.Add(option);
-            }
-            return Select(WeaponFeats.StableId("oath.selection"), "oath", source.Icon ?? fallback, choices);
-        }
         static LevelEntry Row(int level, params BlueprintFeatureBase[] facts)
         {
             var row = new LevelEntry { Level = level };
@@ -141,7 +124,7 @@ namespace Spiritsteel
             var stunWard = RageWard("rageward.stun", UnitCondition.Stunned, Get<BlueprintBuff>("09d39b38bb7c6014394b6daced9bacd3").Icon);
             var lucidSpirit = RageWard("rageward.confusion", UnitCondition.Confusion, Get<BlueprintBuff>("886c7407dc629dc499b9f1465ff382df").Icon);
             var removed = new List<LevelEntry> { Row(1, fast) };
-            var added = new List<LevelEntry> { Row(1, binding, rage, BuildOath(icon)) };
+            var added = new List<LevelEntry> { Row(1, binding, rage) };
             for (int level = 2; level <= 20; level += 2)
             {
                 removed.Add(Row(level, powers));
