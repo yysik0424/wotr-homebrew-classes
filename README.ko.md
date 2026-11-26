@@ -4,9 +4,11 @@
 
 *Pathfinder: Wrath of the Righteous*에 새 아키타입 21종을 더합니다. Unity Mod Manager 모드 하나로 설치합니다. 헌터로 동물 무리를 지휘하거나, 연금술사로 골렘을 입거나, 바바리안으로 부족에게 받은 무기의 신령과 함께 싸울 수 있습니다.
 
-> [Unity Mod Manager용 0.17.31-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.31-beta/HomebrewClasses-0.17.31-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.31-beta.md)
+> [Unity Mod Manager용 0.17.32-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.32-beta/HomebrewClasses-0.17.32-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.32-beta.md)
 
-배포 DLL의 파일 시각을 보존해 Unity Mod Manager가 업데이트 후 옛 로더 캐시를 다시 고르던 문제를 수정했습니다. 주문서 연동은 블루프린트 목록을 읽는 도중 목록이 바뀌면 메인 메뉴에서 다시 확인합니다. 직업 분류와 버프 재시전 비교는 새 로더로 재시작한 게임 화면에서 확인이 남아 있습니다.
+턴제 판정 표시가 우측 전투 로그 바로 위에서 로그 창과 함께 움직입니다. 표시 폭은 로그 창을 따르고, 글자는 게임 글자 크기 설정을 적용한 전투 로그의 80% 크기입니다. 긴 문구는 줄을 바꿔 모두 표시합니다. 로그를 화면 상단까지 키우면 판정 표시가 로그 상단에 일부 겹쳐 화면 안에 머뭅니다.
+
+배포 DLL의 파일 시각을 보존해 Unity Mod Manager가 업데이트 후 옛 로더 캐시를 다시 고르던 문제를 수정했습니다. 주문서 연동은 블루프린트 목록을 읽는 도중 목록이 바뀌면 메인 메뉴에서 다시 확인합니다. PC 캐릭터 생성에서 직업 분류 전환을 확인했습니다. 레벨업 화면과 버프 재시전 비교는 별도 확인이 남아 있습니다.
 
 ## 직업 목록
 

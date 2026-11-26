@@ -9,6 +9,9 @@ using Kingmaker.GameModes;
 using Kingmaker.Inspect;
 using Kingmaker.PubSubSystem;
 using Kingmaker.RuleSystem.Rules;
+using Kingmaker.UI.MVVM._PCView.CombatLog;
+using Kingmaker.UI.MVVM._PCView.InGame;
+using Kingmaker.UI.MVVM._ConsoleView.InGame;
 using Kingmaker.UI.MVVM._VM.Tooltip.Bricks;
 using Kingmaker.UI.MVVM._VM.Tooltip.Templates;
 using Kingmaker.UnitLogic.Abilities;
@@ -18,9 +21,7 @@ using Kingmaker.UnitLogic.Commands;
 using Kingmaker.UnitLogic.Commands.Base;
 using Kingmaker.View;
 using Owlcat.Runtime.UI.Tooltips;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace HomebrewClasses.Loader
 {
@@ -42,8 +43,8 @@ namespace HomebrewClasses.Loader
         string incoming;
         float expires, nextRefresh;
         bool inCombat;
-        TextMeshProUGUI label;
-        GameObject panel;
+        CombatLogBaseView combatLog;
+        CombatPreviewPanel panel;
 
         internal static void Install(Action<string> error)
         {
@@ -53,9 +54,34 @@ namespace HomebrewClasses.Loader
                 var h = new Harmony("HomebrewClasses.CombatPreview");
                 h.Patch(AccessTools.Method(typeof(TooltipTemplateAbility), "GetBody"), postfix: new HarmonyMethod(typeof(CombatPreview), nameof(AbilityTooltip)));
                 h.Patch(AccessTools.Method(typeof(TooltipTemplateActivatableAbility), "GetBody"), postfix: new HarmonyMethod(typeof(CombatPreview), nameof(ToggleTooltip)));
+                h.Patch(AccessTools.DeclaredMethod(typeof(CombatLogBaseView), "BindViewImplementation"), postfix: new HarmonyMethod(typeof(CombatPreview), nameof(BindLog)));
+                h.Patch(AccessTools.DeclaredMethod(typeof(CombatLogBaseView), "DestroyViewImplementation"), postfix: new HarmonyMethod(typeof(CombatPreview), nameof(UnbindLog)));
                 EventBus.Subscribe(Instance);
             }
             catch (Exception ex) { Report(ex); }
+        }
+
+        static void BindLog(CombatLogBaseView __instance)
+        {
+            // The world map and army battles have their own combat logs.
+            if (__instance.GetComponentInParent<InGameStaticPartPCView>(true) != null ||
+                __instance.GetComponentInParent<InGameStaticPartConsoleView>(true) != null)
+                Instance.UseLog(__instance);
+        }
+
+        static void UnbindLog(CombatLogBaseView __instance)
+        {
+            if (ReferenceEquals(Instance.combatLog, __instance)) Instance.UseLog(null);
+        }
+
+        void UseLog(CombatLogBaseView view)
+        {
+            if (ReferenceEquals(combatLog, view)) return;
+            Hide();
+            if (panel != null) UnityEngine.Object.Destroy(panel.gameObject);
+            panel = null;
+            combatLog = view;
+            nextRefresh = 0;
         }
 
         internal static bool Active
@@ -198,41 +224,19 @@ namespace HomebrewClasses.Loader
             if (selected != null) text = SkillPreview.Selected(selected, target, ActionChecks.Korean(selected.Blueprint));
             if (string.IsNullOrEmpty(text) && Time.unscaledTime < expires) text = incoming;
             if (string.IsNullOrEmpty(text)) { Hide(); return; }
-            if (!EnsurePanel()) return;
-            if (!panel.activeSelf) panel.SetActive(true);
-            if (label.text != text) label.text = text;
+            if (panel == null)
+            {
+                var anchor = combatLog != null ? combatLog.GetTransform() : null;
+                var font = UIRoot.Instance?.DefaultTMPFontAsset;
+                if (anchor == null || font == null) return;
+                panel = CombatPreviewPanel.Create(anchor, font);
+            }
+            panel.Show(text);
         }
-        void Hide() { if (panel != null && panel.activeSelf) panel.SetActive(false); }
-        bool EnsurePanel()
+
+        void Hide()
         {
-            if (panel != null) return true;
-            var canvas = Game.Instance.UI?.Canvas;
-            if (canvas == null || UIRoot.Instance?.DefaultTMPFontAsset == null) return false;
-            panel = new GameObject("Homebrew combat preview", typeof(RectTransform), typeof(Image), typeof(CanvasGroup));
-            var rect = (RectTransform)panel.transform;
-            rect.SetParent(canvas.transform, false);
-            rect.anchorMin = new Vector2(0.18f, 0.76f);
-            rect.anchorMax = new Vector2(0.82f, 0.76f);
-            rect.sizeDelta = new Vector2(0, 82);
-            rect.anchoredPosition = Vector2.zero;
-            var bg = panel.GetComponent<Image>();
-            bg.raycastTarget = false;
-            bg.color = new Color(0.06f, 0.05f, 0.04f, 0.92f);
-            var group = panel.GetComponent<CanvasGroup>();
-            group.blocksRaycasts = false;
-            group.interactable = false;
-            var caption = new GameObject("Checks", typeof(RectTransform), typeof(TextMeshProUGUI));
-            var inner = (RectTransform)caption.transform;
-            inner.SetParent(rect, false);
-            inner.anchorMin = Vector2.zero; inner.anchorMax = Vector2.one;
-            inner.offsetMin = new Vector2(12, 4); inner.offsetMax = new Vector2(-12, -4);
-            label = caption.GetComponent<TextMeshProUGUI>();
-            label.font = UIRoot.Instance.DefaultTMPFontAsset;
-            label.fontSize = 20; label.enableAutoSizing = true; label.fontSizeMin = 15; label.fontSizeMax = 20;
-            label.alignment = TextAlignmentOptions.Center;
-            label.richText = false;
-            label.raycastTarget = false;
-            return true;
+            if (panel != null && panel.gameObject.activeSelf) panel.gameObject.SetActive(false);
         }
     }
 }
