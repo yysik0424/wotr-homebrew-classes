@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.28-beta
+
+- PC 캐릭터 생성과 레벨업의 직업 목록이 자동으로 재배치될 때 분류 버튼과 첫 직업 행이 겹치는 문제를 수정했습니다.
+- Fixed the overlap between the category buttons and the first class row when the PC character creation or level-up screen rebuilds its list.
+
 ## 0.17.27-beta
 
 - 턴제 전투에서 기술을 가리키면 접촉 공격, 내성, 주문 저항 등 확인된 판정을 볼 수 있습니다. 기술을 선택하고 적을 가리키면 조사로 밝혀진 방어 수치가 표시됩니다. 접촉 공격의 기본 명중 추정치는 거리 보너스와 무방비 방어의 조건별 차이를 보여줍니다. 적이 아군을 공격하면 공격자, 대상과 실제 판정 결과가 잠시 남습니다.

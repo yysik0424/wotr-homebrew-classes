@@ -12,10 +12,11 @@ namespace HomebrewClasses.Loader
     internal sealed class ClassFamilyBar : MonoBehaviour
     {
         // Two rows of three buttons, in canvas units so they follow the game's UI scale.
-        const float Height = 62f;
+        const int Height = 62;
         readonly Button[] buttons = new Button[ClassFamilies.English.Length];
         readonly TextMeshProUGUI[] captions = new TextMeshProUGUI[ClassFamilies.English.Length];
-        RectTransform viewport;
+        VerticalLayoutGroup scrollLayout;
+        RectOffset reservedPadding;
         GameObject toolbar;
         CharGenClassSelectorPCView view;
         VirtualListComponent scroll;
@@ -24,7 +25,6 @@ namespace HomebrewClasses.Loader
         ClassFamilyList list;
         ClassFamily? open;
         IDisposable selectionChanges;
-        bool reserved;
         bool reportLayout;
         internal bool Filtering { get { return toolbar != null && list != null; } }
         internal bool Shows(CharGenClassSelectorItemVM row)
@@ -36,12 +36,13 @@ namespace HomebrewClasses.Loader
         {
             ResetView();
             if (area == null || area.parent == null) throw new InvalidOperationException("Class selector viewport is missing.");
+            scrollLayout = area.parent.GetComponent<VerticalLayoutGroup>();
+            if (scrollLayout == null) throw new InvalidOperationException("Class selector viewport has no vertical layout group.");
             var fontSource = selector.GetComponentInChildren<TextMeshProUGUI>(true);
             if (fontSource == null && selector.SlotPrefabs.Count > 0) fontSource = selector.SlotPrefabs[0].GetComponentInChildren<TextMeshProUGUI>(true);
             if (fontSource == null) throw new InvalidOperationException("Class selector font is missing.");
             view = selector;
             scroll = virtualList;
-            viewport = area;
             visibleRows = rows;
             list = families;
             open = families.First;
@@ -50,10 +51,8 @@ namespace HomebrewClasses.Loader
             toolbar.GetComponent<LayoutElement>().ignoreLayout = true;
             var rect = (RectTransform)toolbar.transform;
             rect.SetParent(area.parent, false);
-            rect.anchorMin = new Vector2(area.anchorMin.x, area.anchorMax.y);
-            rect.anchorMax = area.anchorMax;
-            rect.offsetMin = new Vector2(area.offsetMin.x, area.offsetMax.y - Height);
-            rect.offsetMax = area.offsetMax;
+            rect.anchorMin = new Vector2(0, 1);
+            rect.anchorMax = Vector2.one;
             for (int i = 0; i < buttons.Length; i++) CreateButton(rect, i, fontSource);
             Reserve(true);
             reportLayout = true;
@@ -150,9 +149,23 @@ namespace HomebrewClasses.Loader
         }
         void Reserve(bool value)
         {
-            if (viewport == null || reserved == value) return;
-            viewport.offsetMax += new Vector2(0, value ? -Height : Height);
-            reserved = value;
+            if (scrollLayout == null || value == (reservedPadding != null)) return;
+            var padding = scrollLayout.padding;
+            if (value)
+            {
+                // The game's layout owns the viewport size. Place the bar in the space it reserves.
+                var rect = (RectTransform)toolbar.transform;
+                rect.offsetMin = new Vector2(padding.left, -padding.top - Height);
+                rect.offsetMax = new Vector2(-padding.right, -padding.top);
+                reservedPadding = new RectOffset(padding.left, padding.right, padding.top + Height, padding.bottom);
+                scrollLayout.padding = reservedPadding;
+            }
+            else
+            {
+                if (ReferenceEquals(padding, reservedPadding))
+                    scrollLayout.padding = new RectOffset(padding.left, padding.right, padding.top - Height, padding.bottom);
+                reservedPadding = null;
+            }
         }
         void OnDisable() { Reserve(false); if (toolbar != null) toolbar.SetActive(false); }
         void OnEnable() { if (toolbar != null) { Reserve(true); toolbar.SetActive(true); } }
@@ -164,10 +177,10 @@ namespace HomebrewClasses.Loader
             sourceChanges?.Dispose();
             sourceChanges = null;
             Reserve(false);
-            reserved = false;
+            reservedPadding = null;
             if (toolbar != null) { toolbar.SetActive(false); Destroy(toolbar); }
             toolbar = null;
-            viewport = null;
+            scrollLayout = null;
             scroll = null;
             view = null;
             list = null;
