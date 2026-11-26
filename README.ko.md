@@ -4,7 +4,9 @@
 
 *Pathfinder: Wrath of the Righteous*에 새 아키타입 21종을 더합니다. Unity Mod Manager 모드 하나로 설치합니다. 헌터로 동물 무리를 지휘하거나, 연금술사로 골렘을 입거나, 바바리안으로 부족에게 받은 무기의 신령과 함께 싸울 수 있습니다.
 
-> [Unity Mod Manager용 0.17.34-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.34-beta/HomebrewClasses-0.17.34-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.34-beta.md)
+> [Unity Mod Manager용 0.17.35-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.35-beta/HomebrewClasses-0.17.35-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.35-beta.md)
+
+스피릿 웨폰의 수동 레벨업 화면에 전용 직업 **스피릿 웨폰**이 표시됩니다. 본편 동물 동료 직업을 골라 무기 칸이 잠기던 문제를 수정했습니다. 이미 이 문제를 겪은 스피릿 웨폰은 세이브를 불러와 지역에 들어가면 주 무기와 예비 무기를 다시 장착할 수 있습니다. 기존 직업 레벨과 선택한 특기는 유지됩니다.
 
 그레이 시어는 1레벨부터 **자동 검격**과 **자동 안전 검격** 중 하나를 켤 수 있습니다. 본인 아카니스트 주문을 쓸 때 장검이 닿는 적을 직접 겨냥했다면 그 적을, 아니면 자신과 교전 중이고 장검이 닿는 적 가운데 보이는 가장 가까운 적을 고릅니다. 직접 지정하면 해당 주문 한 번은 수동으로 고른 대상과 비용 방식을 따릅니다.
 
@@ -56,7 +58,7 @@
 ## 설치
 
 1. 게임을 종료합니다. 기존 직업 단독 모드가 설치돼 있으면 12개 직업 폴더를 게임의 `Mods` 밖에 백업합니다. 번들과 단독 모드가 동시에 같은 직업을 등록하지 않도록 합니다.
-2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.34-beta.zip`을 준비합니다.
+2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.35-beta.zip`을 준비합니다.
 3. ZIP을 Unity Mod Manager에 끌어다 놓거나 게임의 `Mods` 폴더에 풉니다. `Mods/HomebrewClasses` 아래에는 `Info.json`, `HomebrewClasses.dll`, 직업 DLL 21개가 든 `classes` 폴더가 있어야 합니다.
 4. 게임을 실행합니다. 캐릭터 생성 화면에서 기반 직업의 아키타입 목록에 나타납니다.
 
@@ -67,7 +69,7 @@
 Windows PowerShell에서 `WOTR_MANAGED_DIR`을 게임의 `Wrath_Data/Managed` 폴더로, `WOTR_CSC`를 Visual Studio Roslyn의 `csc.exe` 경로로 설정합니다. Unity Mod Manager를 설치한 게임의 어셈블리가 필요합니다. 다음 명령은 비어 있는 출력 폴더를 사용합니다.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.34-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.35-beta -Out .\out -NoDevCompare
 ```
 
 ## 설정
@@ -1468,6 +1470,8 @@ DLC 유닛을 쓰는 칸: 심연 III(아브리칸딜루) 한 칸뿐이다. 나�
 | 자동 특기 | 동물 동료가 물기에 받는 무기 중점화·향상된 치명타를 고른 무기 범주로 받는다. 스피릿 웨폰이 다른 범주의 무기로 바꿔 쥐어도 그 대상은 고른 범주 그대로다 |
 | 사망 | 쓰러지면 휴식 후 돌아온다 |
 | 초상화 | 본편의 떠다니는 무기(Animated Weapons) 초상화. 파티 바의 동료 칸에는 같은 그림의 작은 초상화가 나온다 |
+
+스피릿 웨폰의 수동 레벨업 화면에 전용 직업 **스피릿 웨폰**이 표시됩니다. 본편 동물 동료 직업을 골라 무기 칸이 잠기던 문제를 수정했습니다. 이미 이 문제를 겪은 스피릿 웨폰은 세이브를 불러와 지역에 들어가면 주 무기와 예비 무기를 다시 장착할 수 있습니다. 기존 직업 레벨과 선택한 특기는 유지됩니다.
 
 일반 동물 동료와 다른 점: 다중 공격(Multiattack)을 얻지 않고, 동물 유형이 아니며, 동물 동료 아키타입을 고를 수 없다.
 

@@ -12,7 +12,7 @@ namespace WeaponSpiritShaman
     public static class Main
     {
         // 모드 정체·로그·빌드 상태는 WotrClassMod.Common.ModContext. 블루프린트 생성 후크·로컬라이즈 패치(공용 3개)는 src\Common 이
-        // 같은 어셈블리에 컴파일되어 아래 PatchAll 이 함께 집는다. 이 모드 고유 [HarmonyPatch] 는 없다(설계 §14 Q8, 시험 exec: harmony patch set).
+        // 같은 어셈블리에 컴파일되어 아래 PatchAll 이 함께 집는다. 동료 수동 레벨업 목록과 직업 요건은 PetLevelUp.cs에서 보완한다.
         // 계획 파일 구조의 Load 순서: ModContext.Init → PatchAll → OnUpdate += ProgressionSync.Tick → RUN_CHECKS 면 CheckRunner.Begin.
         public static bool Load(UnityModManager.ModEntry modEntry)
         {

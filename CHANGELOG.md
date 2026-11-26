@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.35-beta
+
+스피릿 웨폰의 수동 레벨업 화면에 전용 직업 **스피릿 웨폰**이 표시됩니다. 본편 동물 동료 직업을 골라 무기 칸이 잠기던 문제를 수정했습니다. 이미 이 문제를 겪은 스피릿 웨폰은 세이브를 불러와 지역에 들어가면 주 무기와 예비 무기를 다시 장착할 수 있습니다. 기존 직업 레벨과 선택한 특기는 유지됩니다.
+
+Manual level-up now offers the **Weapon Spirit** class to the shaman’s weapon companion. Taking the standard Animal Companion class could lock its weapon slots. Loading an affected spirit into an area releases the animal equipment lock on its active and spare weapon sets. Its existing class levels and selected feats are preserved.
+
 ## 0.17.34-beta
 
 그레이 시어는 1레벨부터 **자동 검격**과 **자동 안전 검격** 중 하나를 켤 수 있습니다. 본인 아카니스트 주문을 쓸 때 장검이 닿는 적을 직접 겨냥했다면 그 적을, 아니면 자신과 교전 중이고 장검이 닿는 적 가운데 보이는 가장 가까운 적을 고릅니다. 직접 지정하면 해당 주문 한 번은 수동으로 고른 대상과 비용 방식을 따릅니다. 일반 검격은 공격할 때 저수지 1점을 씁니다. 안전 검격은 방어적 시전이 필요하면 기존의 1~3점을 먼저 지불합니다.

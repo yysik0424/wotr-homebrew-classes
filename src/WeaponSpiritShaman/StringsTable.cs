@@ -25,6 +25,7 @@ namespace WeaponSpiritShaman
                     "스피릿 웨폰이 곁에서 싸우고, 예비 세트 마법 무기의 마력을 휘두르는 무기에 비추며, 강신으로 그 힘을 받아 든다. 영 동물과 방랑 영·주술을 잃는다.",
                     "A spirit weapon fights beside you, mirrors the magic of weapons in its spare sets onto the weapon it wields, and lends that power to you through possession. Loses the spirit animal, wandering spirit and wandering hex."),
                  
+                ["Spirit.ClassDescription"] = ("스피릿 웨폰 샤먼의 무기 동료 직업입니다. 주술사의 성장에 따라 레벨을 올리고, 주 무기 세트와 예비 무기 세트에 무기를 장착할 수 있습니다.", "The weapon companion of a Weapon-Spirit Shaman. It gains levels as its shaman advances and can equip weapons in its active and spare weapon sets."),
                 ["Spirit.Name"] = ("스피릿 웨폰", "Weapon Spirit"),
                 ["SpiritSelection.Name"] = ("스피릿 웨폰", "Weapon Spirit"),
                 // 성장 특기 단계 숨김 특성(소유자 결정 2026-11-18) — 주술사 쪽·펫 쪽 둘 다 이 한 쌍. HideInUI 라 화면에는 붙여 준 본편 특기(무기 전문화 등)가 보인다.

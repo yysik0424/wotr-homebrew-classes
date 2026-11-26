@@ -130,7 +130,11 @@ namespace WeaponSpiritShaman
 
         protected override void OnPostLoad() { Route(new RawEvent(RawKind.OnPostLoad, false, null)); }
 
-        public void OnAreaDidLoad() { Route(new RawEvent(RawKind.OnAreaDidLoad, false, null)); }
+        public void OnAreaDidLoad()
+        {
+            PetLevelUp.RestoreWeaponSlots(Owner);
+            Route(new RawEvent(RawKind.OnAreaDidLoad, false, null));
+        }
 
         // 주인 연결(UnitPartPetMaster.AddPet → IPetHandler.HandleAddPet, 정찰 r1 §2.1). 남의 펫이면 코어 사건 0개(어댑터).
         public void HandleAddPet(UnitEntityData master, UnitEntityData pet)
@@ -156,6 +160,7 @@ namespace WeaponSpiritShaman
         public void HandleUnitAfterLevelUp(UnitEntityData unit, LevelUpController controller)
         {
             var owner = Owner;
+            if (ReferenceEquals(unit, owner)) PetLevelUp.RestoreWeaponSlots(owner);
             var master = owner.Master;
             string eventId = unit.UniqueId, petId = owner.UniqueId;
             var d = MirrorTrigger.Decide(TriggerKind.MasterLevelUp, eventId, petId, (object)master == null ? null : master.UniqueId);

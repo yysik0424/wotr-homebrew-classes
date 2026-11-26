@@ -20,6 +20,8 @@ namespace WeaponSpiritShaman
     public static class PetClass
     {
         public static BlueprintCharacterClass Class;
+        internal static BlueprintCharacterClass AnimalClass;
+        internal static BlueprintFeature AnimalSlotLock;
         public static BlueprintProgression Progression;
         public static BlueprintFeature SlotLock;
         public static BlueprintFeature Proficiency;
@@ -29,6 +31,8 @@ namespace WeaponSpiritShaman
             Isolation.TakeSnapshot(); // 본편 원본 값·참조를 복사 전에 읽어 둔다(계획 T3 「Build 전 스냅샷」)
             if (Class != null || Progression != null) throw new InvalidOperationException("WeaponSpiritShaman: PetClass.Build() called twice");
             var srcClass = Get<BlueprintCharacterClass>(Guids.Game.AnimalCompanionClass);
+            AnimalClass = srcClass;
+            AnimalSlotLock = Get<BlueprintFeature>(Guids.Game.AnimalCompanionSlotFeature);
             var srcProg = Get<BlueprintProgression>(Guids.Game.AnimalCompanionBaseProgression);
             // 원본 계약(C2): 직업 ↔ 진행표가 서로를 가리키고, 직업 컴포넌트는 (알려진 다른 모드 것을 뺀 뒤) PrerequisiteIsPet 하나(jbp 직독 — 시험 `jbp: progression classes`).
             if (!ReferenceEquals(srcClass.Progression, srcProg)) throw new InvalidOperationException("WeaponSpiritShaman: AnimalCompanionClass.Progression is not AnimalCompanionBaseProgression");
@@ -58,6 +62,10 @@ namespace WeaponSpiritShaman
             Class = Create<BlueprintCharacterClass>("WeaponSpiritShamanPetClass", Guids.PetClass, c =>
             {
                 CloneKit.CopyInto(srcClass, c);
+                c.LocalizedName = Strings.L("Spirit.Name");
+                c.LocalizedDescription = Strings.L("Spirit.ClassDescription");
+                c.LocalizedDescriptionShort = Strings.L("Spirit.ClassDescription");
+                c.HideIfRestricted = true;
                 c.ComponentsArray = new BlueprintComponent[0];
                 SetField(c, "m_Progression", Ref<BlueprintProgressionReference>(Guids.PetProgression));
                 SetField(c, "m_Archetypes", new BlueprintArchetypeReference[0]);
