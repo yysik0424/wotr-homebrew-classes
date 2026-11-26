@@ -52,7 +52,7 @@
 ## 설치
 
 1. 게임을 종료합니다. 기존 직업 단독 모드가 설치돼 있으면 12개 직업 폴더를 게임의 `Mods` 밖에 백업합니다. 번들과 단독 모드가 동시에 같은 직업을 등록하지 않도록 합니다.
-2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.31-beta.zip`을 준비합니다.
+2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.32-beta.zip`을 준비합니다.
 3. ZIP을 Unity Mod Manager에 끌어다 놓거나 게임의 `Mods` 폴더에 풉니다. `Mods/HomebrewClasses` 아래에는 `Info.json`, `HomebrewClasses.dll`, 직업 DLL 21개가 든 `classes` 폴더가 있어야 합니다.
 4. 게임을 실행합니다. 캐릭터 생성 화면에서 기반 직업의 아키타입 목록에 나타납니다.
 
@@ -63,7 +63,7 @@
 Windows PowerShell에서 `WOTR_MANAGED_DIR`을 게임의 `Wrath_Data/Managed` 폴더로, `WOTR_CSC`를 Visual Studio Roslyn의 `csc.exe` 경로로 설정합니다. Unity Mod Manager를 설치한 게임의 어셈블리가 필요합니다. 다음 명령은 비어 있는 출력 폴더를 사용합니다.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.31-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.32-beta -Out .\out -NoDevCompare
 ```
 
 ## 설정
