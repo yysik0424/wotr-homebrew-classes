@@ -26,6 +26,9 @@ namespace HomebrewClasses.Loader
 {
     internal sealed class ActionChecks
     {
+        readonly HashSet<SavingThrowType> definiteSaves = new HashSet<SavingThrowType>();
+        readonly HashSet<DamageEnergyType> definiteEnergy = new HashSet<DamageEnergyType>();
+        string Conditional(bool definite, bool ko) => definite ? "" : ko ? "조건부 " : "conditional ";
         internal AttackType? Attack;
         internal bool SpellResistance;
         internal readonly List<SavingThrowType> Saves = new List<SavingThrowType>();
@@ -97,7 +100,7 @@ namespace HomebrewClasses.Loader
             }
         }
 
-        internal static ActionChecks Read(BlueprintAbility bp)
+        internal static ActionChecks Read(BlueprintAbility bp, UnitEntityData known = null)
         {
             var checks = new ActionChecks { SpellResistance = bp.SpellResistance };
             var delivery = bp.GetComponent<AbilityEffectStickyTouch>()?.TouchDeliveryAbility;
@@ -105,35 +108,51 @@ namespace HomebrewClasses.Loader
             if (bp.GetComponent<AbilityDeliverTouch>() != null) checks.Attack = AttackType.Touch;
             var projectile = bp.GetComponent<AbilityDeliverProjectile>();
             if (projectile != null && projectile.NeedAttackRoll && projectile.Weapon != null) checks.Attack = projectile.Weapon.AttackType;
-            var run = bp.GetComponent<AbilityEffectRunAction>();
-            if (run != null) { checks.Save(run.SavingThrowType); checks.Scan(run.Actions, 0); }
+            foreach (var run in bp.GetComponents<AbilityEffectRunAction>()) { checks.Save(run.SavingThrowType, false); checks.Scan(run.Actions, known, false, 0); }
             return checks;
         }
 
-        void Save(SavingThrowType s) { if (s != SavingThrowType.Unknown && !Saves.Contains(s)) Saves.Add(s); }
-        void Scan(ActionList list, int depth)
+        void Save(SavingThrowType save, bool conditional)
         {
-            if (list?.Actions == null || depth > 10) return;
+            if (save == SavingThrowType.Unknown) return;
+            if (!Saves.Contains(save)) Saves.Add(save);
+            if (!conditional) definiteSaves.Add(save);
+        }
+
+        void Scan(ActionList list, UnitEntityData known, bool conditional, int depth)
+        {
+            if (list?.Actions == null || depth > 16) return;
             foreach (var action in list.Actions)
             {
-                if (action is ContextActionDealDamage damage && SimpleDamage(damage) && damage.DamageType.Type == Kingmaker.RuleSystem.Rules.Damage.DamageType.Energy && !Energy.Contains(damage.DamageType.Energy))
-                    Energy.Add(damage.DamageType.Energy);
-                else if (action is ContextActionSavingThrow save) { Save(save.Type); Scan(save.Actions, depth + 1); }
-                else if (action is ContextActionConditionalSaved saved) { Scan(saved.Succeed, depth + 1); Scan(saved.Failed, depth + 1); }
-                else if (action is Conditional condition) { Scan(condition.IfTrue, depth + 1); Scan(condition.IfFalse, depth + 1); }
+                if (action is ContextActionDealDamage damage && SimpleDamage(damage) && damage.DamageType.Type == Kingmaker.RuleSystem.Rules.Damage.DamageType.Energy)
+                {
+                    var energy = damage.DamageType.Energy;
+                    if (!Energy.Contains(energy)) Energy.Add(energy);
+                    if (!conditional) definiteEnergy.Add(energy);
+                }
+                else if (action is ContextActionSavingThrow save) { Save(save.Type, conditional); Scan(save.Actions, known, conditional, depth + 1); }
+                else if (action is ContextActionConditionalSaved saved) { Scan(saved.Succeed, known, true, depth + 1); Scan(saved.Failed, known, true, depth + 1); }
+                else if (action is Conditional condition)
+                {
+                    var choice = SkillPreview.Branch(condition.ConditionsChecker, known);
+                    if (choice != false) Scan(condition.IfTrue, known, conditional || !choice.HasValue, depth + 1);
+                    if (choice != true) Scan(condition.IfFalse, known, conditional || !choice.HasValue, depth + 1);
+                }
             }
         }
 
-        internal static string AbilityText(BlueprintAbility bp, bool ko)
+        internal static string AbilityText(BlueprintAbility bp, bool ko) => SkillPreview.Describe(bp, null, null, ko, Summary(bp, ko, null));
+
+        internal static string Summary(BlueprintAbility bp, bool ko, UnitEntityData known)
         {
             string supplied = ComponentText(bp, ko);
-            if (supplied != null) return supplied;
-            var checks = Read(bp);
+            if (!string.IsNullOrEmpty(supplied)) return supplied;
+            var checks = Read(bp, known);
             var parts = new List<string>();
             if (checks.Attack.HasValue) parts.Add(AttackName(checks.Attack.Value, ko));
             if (checks.SpellResistance) parts.Add(ko ? "주문 저항 판정" : "spell resistance check");
-            parts.AddRange(checks.Saves.Select(s => SaveName(s, ko) + (ko ? " 내성" : " save")));
-            parts.AddRange(checks.Energy.Select(e => ElementName(e, ko) + (ko ? " 피해" : " damage")));
+            parts.AddRange(checks.Saves.Select(s => checks.Conditional(checks.definiteSaves.Contains(s), ko) + SaveName(s, ko) + (ko ? " 내성" : " save")));
+            parts.AddRange(checks.Energy.Select(e => checks.Conditional(checks.definiteEnergy.Contains(e), ko) + ElementName(e, ko) + (ko ? " 피해" : " damage")));
             return string.Join(" · ", parts);
         }
 
@@ -144,13 +163,13 @@ namespace HomebrewClasses.Loader
         internal static string Defenses(AbilityData ability, UnitEntityData target, bool ko)
         {
             var bp = ability.Blueprint;
-            var c = Read(bp);
             if (!Revealed(target, UnitInfoPart.Defence))
             {
-                var text = AbilityText(bp, ko);
+                var text = Summary(bp, ko, null);
                 return text.Length == 0 ? "" : text + (ko ? " · 대상 방어 미확인" : " · target defenses unknown");
             }
             var parts = new List<string>();
+            var c = Read(bp, target);
             if (c.Attack.HasValue)
             {
                 var a = c.Attack.Value;
@@ -159,7 +178,7 @@ namespace HomebrewClasses.Loader
                 bool touch = a == AttackType.Touch || a == AttackType.RangedTouch;
                 parts.Add(AttackName(a, ko) + (touch ? (ko ? " · 접촉 AC " : " · touch AC ") : " · AC ") + (touch ? target.Stats.AC.Touch : target.Stats.AC.ModifiedValue));
             }
-            if (c.SpellResistance)
+            if (c.SpellResistance && !(bp.IgnoreSpellResistanceForAlly && ability.Caster.Unit.IsAlly(target)))
             {
                 var sr = target.Get<UnitPartSpellResistance>();
                 var value = sr == null ? 0 : sr.GetValue(bp, ability.Caster.Unit);
@@ -169,12 +188,12 @@ namespace HomebrewClasses.Loader
             foreach (var save in c.Saves)
             {
                 var stat = save == SavingThrowType.Fortitude ? target.Stats.SaveFortitude : save == SavingThrowType.Reflex ? target.Stats.SaveReflex : target.Stats.SaveWill;
-                parts.Add(SaveName(save, ko) + " " + stat.ModifiedValue.ToString("+0;-0;0"));
+                parts.Add(c.Conditional(c.definiteSaves.Contains(save), ko) + SaveName(save, ko) + " " + stat.ModifiedValue.ToString("+0;-0;0"));
             }
             var dr = c.Energy.Count == 0 ? null : target.Get<UnitPartDamageReduction>();
             foreach (var energy in c.Energy)
             {
-                string element = ElementName(energy, ko);
+                string element = c.Conditional(c.definiteEnergy.Contains(energy), ko) + ElementName(energy, ko);
                 bool immune = dr != null && dr.IsImmune(energy);
                 var values = dr?.AllSources.Where(x => x.SourceBlueprintComponent is AddDamageResistanceEnergy resist && resist.Type == energy)
                     .Select(x => x.GetCurrentValue()).Where(x => x > 0).Distinct().OrderByDescending(x => x).ToArray();
@@ -185,6 +204,8 @@ namespace HomebrewClasses.Loader
                     f.Blueprint.GetComponents<Kingmaker.Designers.Mechanics.Facts.AscendantElement>().Any(e => e.Element == energy)))
                     parts.Add(ko ? "초월 원소로 관통" : "bypassed by Ascendant Element");
             }
+            var extra = ComponentText(bp, ko);
+            if (!string.IsNullOrEmpty(extra)) parts.Add(extra);
             return string.Join(" · ", parts);
         }
     }

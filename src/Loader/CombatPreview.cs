@@ -14,6 +14,7 @@ using Kingmaker.UI.MVVM._VM.Tooltip.Templates;
 using Kingmaker.UnitLogic.Abilities;
 using Kingmaker.UnitLogic.Abilities.Blueprints;
 using Kingmaker.UnitLogic.ActivatableAbilities;
+using Kingmaker.UnitLogic.Buffs;
 using Kingmaker.UnitLogic.Commands;
 using Kingmaker.UnitLogic.Commands.Base;
 using Kingmaker.View;
@@ -54,6 +55,7 @@ namespace HomebrewClasses.Loader
                 h.Patch(AccessTools.Method(typeof(TooltipTemplateAbility), "GetBody"), postfix: new HarmonyMethod(typeof(CombatPreview), nameof(AbilityTooltip)));
                 h.Patch(AccessTools.Method(typeof(TooltipTemplateActivatableAbility), "GetBody"), postfix: new HarmonyMethod(typeof(CombatPreview), nameof(ToggleTooltip)));
                 EventBus.Subscribe(Instance);
+                h.Patch(AccessTools.Method(typeof(TooltipTemplateBuff), "GetBody"), postfix: new HarmonyMethod(typeof(CombatPreview), nameof(BuffTooltip)));
             }
             catch (Exception ex) { Report(ex); }
         }
@@ -64,7 +66,7 @@ namespace HomebrewClasses.Loader
                 Game.Instance.CurrentMode != GameModeType.EscMode && TurnBased.Controllers.CombatController.IsInTurnBasedCombat(); }
         }
 
-        static void Report(Exception ex)
+        internal static void Report(Exception ex)
         {
             if (failed) return;
             failed = true;
@@ -76,16 +78,27 @@ namespace HomebrewClasses.Loader
             if (!string.IsNullOrEmpty(line)) body = new ITooltipBrick[] { new TooltipBrickText(line, TooltipTextType.Bold) }.Concat(body);
         }
 
-        static void AbilityTooltip(BlueprintAbility ___BlueprintAbility, ref IEnumerable<ITooltipBrick> __result)
+        static void AbilityTooltip(BlueprintAbility ___BlueprintAbility, AbilityData ___m_AbilityData, ref IEnumerable<ITooltipBrick> __result)
         {
             if (!Active || ___BlueprintAbility == null) return;
-            try { AddLine(ActionChecks.AbilityText(___BlueprintAbility, ActionChecks.Korean(___BlueprintAbility)), ref __result); }
+            try
+            {
+                bool ko = ActionChecks.Korean(___BlueprintAbility);
+                AddLine(SkillPreview.Tooltip(___BlueprintAbility, ___m_AbilityData, ko), ref __result);
+            }
             catch (Exception ex) { Report(ex); }
         }
-        static void ToggleTooltip(BlueprintActivatableAbility ___BlueprintActivatableAbility, ref IEnumerable<ITooltipBrick> __result)
+        static void ToggleTooltip(BlueprintActivatableAbility ___BlueprintActivatableAbility, ActivatableAbility ___m_Ability, ref IEnumerable<ITooltipBrick> __result)
         {
             if (!Active || ___BlueprintActivatableAbility == null) return;
-            try { AddLine(ActionChecks.ToggleText(___BlueprintActivatableAbility, ActionChecks.Korean(___BlueprintActivatableAbility)), ref __result); }
+            try { AddLine(SkillPreview.Toggle(___BlueprintActivatableAbility, ___m_Ability, ActionChecks.Korean(___BlueprintActivatableAbility)), ref __result); }
+            catch (Exception ex) { Report(ex); }
+        }
+
+        static void BuffTooltip(Buff ___Buff, ref IEnumerable<ITooltipBrick> __result)
+        {
+            if (!Active || ___Buff == null) return;
+            try { AddLine(PreviewDuration.Remaining(___Buff, ActionChecks.Korean(___Buff.Blueprint)), ref __result); }
             catch (Exception ex) { Report(ex); }
         }
 
@@ -191,11 +204,7 @@ namespace HomebrewClasses.Loader
             shownTarget = target;
             nextRefresh = Time.unscaledTime + 0.25f;
             string text = null;
-            if (selected != null && target != null && !target.Destroyed && selected.Caster.Unit.IsEnemy(target))
-            {
-                var defenses = ActionChecks.Defenses(selected, target, ActionChecks.Korean(selected.Blueprint));
-                if (!string.IsNullOrEmpty(defenses)) text = selected.Name + " → " + target.CharacterName + "\n" + defenses;
-            }
+            if (selected != null) text = SkillPreview.Selected(selected, target, ActionChecks.Korean(selected.Blueprint));
             if (string.IsNullOrEmpty(text) && Time.unscaledTime < expires) text = incoming;
             if (string.IsNullOrEmpty(text)) { Hide(); return; }
             if (!EnsurePanel()) return;

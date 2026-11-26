@@ -563,6 +563,11 @@ namespace Golemancer
     {
         public int SlotLevel;
         public string School;
+        public IEnumerable<KeyValuePair<BlueprintBuff, TimeSpan?>> GetCombatPreviewDurations(UnitEntityData caster)
+        {
+            if (SlotLevel > 0 && Overdrive.Buff != null)
+                yield return new KeyValuePair<BlueprintBuff, TimeSpan?>(Overdrive.Buff, new Rounds(OverdriveRules.DurationRounds(SlotLevel)).Seconds);
+        }
         public BlueprintBuff RoutineBuff() { return Overdrive.Buff; }
         public bool RoutineIsLong() { return false; }
         public bool RoutinePresent(UnitEntityData master) { return master.Buffs.GetBuff(Overdrive.Buff) != null; }

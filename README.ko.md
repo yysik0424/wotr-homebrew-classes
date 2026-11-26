@@ -4,7 +4,9 @@
 
 *Pathfinder: Wrath of the Righteous*에 새 아키타입 21종을 더합니다. Unity Mod Manager 모드 하나로 설치합니다. 헌터로 동물 무리를 지휘하거나, 연금술사로 골렘을 입거나, 바바리안으로 부족에게 받은 무기의 신령과 함께 싸울 수 있습니다.
 
-> [Unity Mod Manager용 0.17.28-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.28-beta/HomebrewClasses-0.17.28-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.28-beta.md)
+> [Unity Mod Manager용 0.17.29-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.29-beta/HomebrewClasses-0.17.29-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.29-beta.md)
+
+턴제에서 버프를 선택하고 아군을 가리키면 효과별 기본 지속시간과 이미 걸린 효과의 남은 시간을 함께 볼 수 있습니다. 자신에게 즉시 사용하는 버프는 기술 아이콘에서도 남은 시간을 확인할 수 있습니다. 예를 들어 시전자 레벨 7의 레벨당 1분 버프는 기본 7분이며, 주문 연장이 적용되면 기본 14분입니다. 주사위로 정하는 시간은 범위로, 실제 시전 때 결정되는 효과는 공식이나 기술 설명으로 표시합니다. 광역기는 가리킨 대상이 범위에 들 경우의 정보를 보여줍니다. 회복·해제·소환·토글도 같은 턴제 툴팁에서 확인할 수 있습니다.
 
 PC 캐릭터 생성과 레벨업의 직업 목록 위에 분류 버튼 두 줄의 공간을 확보했습니다. 목록을 다시 배치해도 첫 직업 행이 버튼 아래에 놓입니다. 같은 분류를 다시 누르면 접힙니다.
 
@@ -66,7 +68,7 @@ Bubble Buffs 5.2.3에서 무리 강화, 골렘 폭주와 스피릿 웨폰 빙의
 ## 설치
 
 1. 게임을 종료합니다. 기존 직업 단독 모드가 설치돼 있으면 12개 직업 폴더를 게임의 `Mods` 밖에 백업합니다. 번들과 단독 모드가 동시에 같은 직업을 등록하지 않도록 합니다.
-2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.28-beta.zip`을 준비합니다.
+2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.29-beta.zip`을 준비합니다.
 3. ZIP을 Unity Mod Manager에 끌어다 놓거나 게임의 `Mods` 폴더에 풉니다. `Mods/HomebrewClasses` 아래에는 `Info.json`, `HomebrewClasses.dll`, 직업 DLL 21개가 든 `classes` 폴더가 있어야 합니다.
 4. 게임을 실행합니다. 캐릭터 생성 화면에서 기반 직업의 아키타입 목록에 나타납니다.
 
@@ -77,7 +79,7 @@ Bubble Buffs 5.2.3에서 무리 강화, 골렘 폭주와 스피릿 웨폰 빙의
 Windows PowerShell에서 `WOTR_MANAGED_DIR`을 게임의 `Wrath_Data/Managed` 폴더로, `WOTR_CSC`를 Visual Studio Roslyn의 `csc.exe` 경로로 설정합니다. Unity Mod Manager를 설치한 게임의 어셈블리가 필요합니다. 다음 명령은 비어 있는 출력 폴더를 사용합니다.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.28-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.29-beta -Out .\out -NoDevCompare
 ```
 
 ## 설정

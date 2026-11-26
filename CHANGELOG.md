@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.29-beta
+
+- 턴제에서 버프를 선택하고 아군을 가리키면 효과별 기본 지속시간과 이미 걸린 효과의 남은 시간을 함께 볼 수 있습니다. 자신에게 즉시 사용하는 버프는 기술 아이콘에서도 남은 시간을 확인할 수 있습니다. 예를 들어 시전자 레벨 7의 레벨당 1분 버프는 기본 7분이며, 주문 연장이 적용되면 기본 14분입니다. 주사위로 정하는 시간은 범위로, 실제 시전 때 결정되는 효과는 공식이나 기술 설명으로 표시합니다. 광역기는 가리킨 대상이 범위에 들 경우의 정보를 보여줍니다. 회복·해제·소환·토글도 같은 턴제 툴팁에서 확인할 수 있습니다.
+- In turn-based combat, select a buff and point at an ally to see the base duration of each effect and the time remaining on a matching active buff. Instant self buffs show the remaining time on the ability icon tooltip. At caster level 7, a one-minute-per-level buff shows a base of 7 minutes, or 14 with Extend Spell when eligible. Random durations show a range. Effects resolved during casting show the available formula or ability description. For area abilities, the preview describes the hovered unit if affected. Healing, dispels, summons and toggles also have turn-based summaries.
+
 ## 0.17.28-beta
 
 - PC 캐릭터 생성과 레벨업의 직업 목록이 자동으로 재배치될 때 분류 버튼과 첫 직업 행이 겹치는 문제를 수정했습니다.

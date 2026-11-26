@@ -378,6 +378,13 @@ namespace WeaponSpiritShaman
     // 능력 효과 요소. 인스턴스 필드 없음(블루프린트 요소 1개를 모든 주술사가 공유).
     public class PossessionAction : ContextAction
     {
+        public IEnumerable<KeyValuePair<BlueprintBuff, TimeSpan?>> GetCombatPreviewDurations(UnitEntityData caster)
+        {
+            if (caster == null) yield break;
+            int tier = PossessionRules.TierAt(GameMirrorEffects.ShamanLevelOf(caster));
+            if (tier > 0)
+                yield return new KeyValuePair<BlueprintBuff, TimeSpan?>(Possession.Buffs[PossessionRules.EffectBuffIndex(tier, Possession.Buffs.Length)], new Rounds(PossessionRules.Rounds(tier)).Seconds);
+        }
         public BlueprintBuff RoutineBuff() { return Possession.Buffs[0]; }
         public bool RoutineIsLong() { return false; }
         public bool RoutinePresent(UnitEntityData shaman)
