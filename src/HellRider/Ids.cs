@@ -4,6 +4,9 @@ namespace HellRider
     {
         internal const string CavalierClass = "3adc3439f98cb534ba98df59838f02c7";
         internal const string CavalierMountSelection = "0605927df6e2fdd42af6ee2424eb89f2";
+        internal const string CavalierTacticianFeature = "404f6e3da48b87f4e9fca21150d47f71";
+        internal const string CavalierTacticianFeatSelection = "7bc55b5e381358c45b42153b8b2603a6";
+        internal const string CavalierTacticianGreater = "c7913a6c300cb994b8e800e1096f9280";
         internal const string CavalierCharge = "30da5120b692d0d4f8a6840dff777abf";
         internal const string CavalierBanner = "2d957edad0adb3d49991cfcd3ac4cbf8";
         internal const string CavalierMightyCharge = "ded43678aa1fbe241827175b65e9a749";

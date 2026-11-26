@@ -117,11 +117,17 @@ namespace HellRider
             var presence = Magic.BuildSpell(Ids.OverwhelmingPresence, "Presence", 9);
             Greater = Feature("Greater", banner.Icon);
             Devils.BuildVisual();
+            var tacticianFeat = Get<BlueprintFeatureSelection>(Ids.CavalierTacticianFeatSelection);
             var removed = new[] {
-                Row(1,nativeMount), Row(5,Get<BlueprintFeature>(Ids.CavalierBanner)),
-                Row(11,Get<BlueprintFeature>(Ids.CavalierMightyCharge)), Row(14,Get<BlueprintFeature>(Ids.CavalierBannerGreater)),
-                Row(20,Get<BlueprintFeature>(Ids.CavalierSupremeCharge)) };
-            if (removed.Any(r => !Cavalier.Progression.LevelEntries.Any(e => e.Level == r.Level && e.Features.Contains(r.Features.Single()))))
+                Row(1, nativeMount, Get<BlueprintFeature>(Ids.CavalierTacticianFeature), tacticianFeat),
+                Row(5, Get<BlueprintFeature>(Ids.CavalierBanner)),
+                Row(9, tacticianFeat, Get<BlueprintFeature>(Ids.CavalierTacticianGreater)),
+                Row(11, Get<BlueprintFeature>(Ids.CavalierMightyCharge)),
+                Row(14, Get<BlueprintFeature>(Ids.CavalierBannerGreater)),
+                Row(17, tacticianFeat),
+                Row(20, Get<BlueprintFeature>(Ids.CavalierSupremeCharge)) };
+            if (removed.Any(row => !Cavalier.Progression.LevelEntries.Any(native =>
+                native.Level == row.Level && row.Features.All(feature => native.Features.Contains(feature)))))
                 throw new InvalidOperationException("Cavalier progression no longer matches the Hell Rider exchanges");
             Archetype = Make<BlueprintArchetype>("Archetype", a =>
             {

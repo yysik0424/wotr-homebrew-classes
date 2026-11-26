@@ -209,6 +209,7 @@ namespace ChimeraMonk
             //   4레벨 = StillMind 하나(진행표에 한 번만 — 환혹 내성 +2). 레벨은 ChimeraRules.Levels, 제거 표는 LevelPlan.RemovedCoreFeatures.
             public const string MonkFastMovementUnlock = "73ab5b41fa465ee429ad6658368c6629"; // Classes/Monk/MonkFeatureNoArmorUnlocks/MonkFastMovementUnlock.jbp — 진행표 항목(제거 대상)
             public const string MonkFastMovement = "ac18d5741dfb2f541b222e3a416c5942";       // Classes/Monk/MonkFastMovement.jbp — 위 항목이 주는 실제 속도 특성(진행표 항목 아님 — 빌드·점검이 「진행표에 없음」·「유닛에 없음」 을 본다)
+            public const string MonkStyleStrike = "7bc6a93f6e48eff49be5b0cde83c9450";
             public const string StillMind = "b8933d223d87087418a627e61ea42ae6";              // Classes/Monk/StillMind.jbp — 진행표 항목(제거 대상)
             // T5 자연 무기 복제 원본(Weapons/Items/Standard/NaturalWeapon/*.jbp)과 무기 형식(Weapons/Types/NaturalWeapon/*.jbp). 판정 D3: 추가 팔 = Slam.
             public const string Tail1d6 = "b21cd5b03fbb0f542815580e66f85915";

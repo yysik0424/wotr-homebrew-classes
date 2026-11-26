@@ -16,7 +16,7 @@ namespace BlastMagus
         public static BlueprintArchetype Bp;
         static bool registered;
 
-         
+        // 설계 §4.6 교환표 = 정찰 §1-1 (MagusProgression LevelEntries 직독, 2026-11-07): 16쌍 전부 진행표의 직접 항목.
         // 시험(tests\BlastMagusTests.cs)이 이 표를 dll 정적 초기화에서 읽어 정찰 표와 대조하고, blueprints.zip 의 MagusProgression 에 각 쌍이 있는지 본다.
         // RemoveAt 이 실행 시 같은 조건을 진행표에서 되읽는다(정찰 §1-2 CanAddArchetype: 그 레벨에 없으면 아키타입 선택 불가 → 우리는 빌드 실패로 먼저 드러낸다).
         static readonly (int level, string guid)[] Removed =
@@ -28,6 +28,7 @@ namespace BlastMagus
             (9, Guids.Game.ArcaneWeaponPlus3),
             (11, Guids.Game.MagusImprovedSpellRecallFeature),
             (13, Guids.Game.ArcaneWeaponPlus4),
+            (13, Guids.Game.ArcaneHeavyArmor),
             (17, Guids.Game.ArcaneWeaponPlus5),
              
             // 레벨 = MagusProgression 직독(설계 §4.6 「정확히 레벨 3·6·9·12·15·18」, 시험 arcana: levels vs jbp). PoolArcana 는 이 표에서 레벨을 파생한다(RemovedLevels, C4).

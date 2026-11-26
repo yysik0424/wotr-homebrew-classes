@@ -48,8 +48,8 @@ namespace ChimeraMonk
             public static readonly int MinLevel = 1;  // 설계 §3 몽크 1~20 (MonkProgression.jbp LevelEntries 1..20)
             public static readonly int MaxLevel = 20; // 설계 §3
             public static readonly int[] MutationLevels = { 2, 4, 6, 8, 10, 12, 14, 16, 18 }; // 설계 §6 변이 선택 9번
-            public static readonly int[] RemovedBonusFeatLevels = { 2, 6, 10 };            // 설계 §6 [판정] 제거 = 몽크 보너스 특기
-            public static readonly int[] KeptBonusFeatLevels = { 1, 14, 18 };              // 설계 §6 유지 = 몽크 보너스 특기
+            public static readonly int[] KeptBonusFeatLevels = { 1, 2, 6, 10, 14, 18 };              // 설계 §6 유지 = 몽크 보너스 특기
+            public static readonly int[] RemovedStyleStrikeLevels = { 5, 9, 13, 17 };  // 설계: 타격 자세 네 단계 모두 교환
             public static readonly int[] FastMovementRemovedLevels = { 3 };                 // 판정(소유자 결정 2026-11-16: 명경지수·빠른 이동 제거): 본편 MonkProgression.jbp 에서 MonkFastMovementUnlock 이 있는 레벨 전부(3레벨 한 번)
             public static readonly int[] StillMindRemovedLevels = { 4 };                    // 판정(소유자 결정 2026-11-16: 명경지수·빠른 이동 제거): 본편 MonkProgression.jbp 에서 StillMind 가 있는 레벨 전부(4레벨 한 번)
             public static readonly int GateLevel = 10;                                      // 설계 §7 [판정] PrerequisiteClassLevel(Monk, 10)

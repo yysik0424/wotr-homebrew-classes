@@ -5,7 +5,7 @@ namespace HellRider
     {
         internal static readonly Dictionary<string,(string ko,string en)> Table = new Dictionary<string,(string ko,string en)> {
             { "Archetype.name", ("지옥의 기수", "Hell Rider") },
-            { "Archetype.desc", ("나이트메어를 타고 돌격하며 배교자 데빌, 지옥 깃발과 지옥의 마법을 부립니다.", "Ride a nightmare and command apostate devils, infernal standards and the magic of Hell.") },
+            { "Archetype.desc", ("나이트메어를 타고 돌격하며 배교자 데빌, 지옥 깃발과 지옥의 마법을 부립니다. 1·9·17레벨의 전술가 팀워크 재주와 전술가의 재주 공유 능력을 잃습니다.", "Ride a nightmare and command apostate devils, infernal standards and the magic of Hell. You lose the tactician teamwork feats at levels 1, 9 and 17 and the ability to share them through tactician.") },
             { "Mount.name", ("나이트메어 탈것", "Nightmare Mount") },
             { "Mount.desc", ("말 동료처럼 성장합니다. 발굽 명중마다 화염 1d4를 더합니다.", "Your nightmare advances as a horse companion. Its hooves deal an additional 1d4 fire damage.") },
             { "Charge.name", ("지옥 돌격", "Infernal Charge") },

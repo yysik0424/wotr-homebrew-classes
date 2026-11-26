@@ -78,6 +78,7 @@ namespace Spiritsteel
             var barbarian = Get<BlueprintCharacterClass>(Guids.Barbarian);
             var powers = Get<BlueprintFeatureSelection>(Guids.RagePowers);
             var fast = Get<BlueprintFeature>(Guids.Fast);
+            var dangerSense = Get<BlueprintFeature>(Guids.DangerSense);
             Native = Get<BlueprintBuff>(Guids.NativeRage);
             var nativeToggle = Get<BlueprintActivatableAbility>(Guids.NativeToggle);
             RageRounds = nativeToggle.ComponentsArray.OfType<ActivatableAbilityResourceLogic>().Single().RequiredResource
@@ -125,9 +126,14 @@ namespace Spiritsteel
             var lucidSpirit = RageWard("rageward.confusion", UnitCondition.Confusion, Get<BlueprintBuff>("886c7407dc629dc499b9f1465ff382df").Icon);
             var removed = new List<LevelEntry> { Row(1, fast) };
             var added = new List<LevelEntry> { Row(1, binding, rage) };
-            for (int level = 2; level <= 20; level += 2)
+            for (int level = 2; level <= 20; level++)
             {
-                removed.Add(Row(level, powers));
+                bool even = level % 2 == 0;
+                if (level % 3 == 0)
+                    removed.Add(even ? Row(level, powers, dangerSense) : Row(level, dangerSense));
+                else if (even)
+                    removed.Add(Row(level, powers));
+                if (!even) continue;
                 var gains = new List<BlueprintFeatureBase> { feats };
                 if (level == 2) { gains.Add(Tactics); gains.Add(team); }
                 else gains.Add(level == Rules.TripLevel ? (BlueprintFeatureBase)Trip : flexible);

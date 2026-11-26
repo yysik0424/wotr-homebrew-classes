@@ -2,6 +2,7 @@ namespace Spiritsteel
 {
     internal static class Guids
     {
+        public const string DangerSense = "fdd591c1fbf1c0b41a359d59756f2888";
         public const string Barbarian = "f7d7eb166b3dd594fb330d085df41853", Fast = "d294a5dddd0120046aae7d4eb6cbc4fc", RagePowers = "28710502f46848d48b3f0d6132817c4e";
         public const string NativeRage = "da8ce41ac3cd74742b80984ccc3c9613", NativeToggle = "df6a2cce8e3a9bd4592fb1968b83f730", CoordinatedManeuvers = "b186cea78dce3a04aacff0a81786008c";
         public const string InquisitorTeam = "90b882830b3988446ae681c6596460cc", HunterTeam = "01046afc774beee48abde8e35da0f4ba", CavalierTeam = "7bc55b5e381358c45b42153b8b2603a6", PackTeam = "94ebbd6472c19fa4ea7196eaff11a740";

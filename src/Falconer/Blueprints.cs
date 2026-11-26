@@ -160,7 +160,8 @@ namespace Falconer
             Grant(focus, activate);
             var removed = new List<LevelEntry>
             {
-                Row(3, Get<BlueprintFeature>(Rules.Endurance))
+                Row(3, Get<BlueprintFeature>(Rules.Endurance), Get<BlueprintFeature>(Rules.Terrain)),
+                Row(12, Get<BlueprintFeature>(Rules.Camouflage))
             };
             foreach (int level in new[] { 8, 13, 18 })
                 removed.Add(Row(level, Get<BlueprintFeature>(Rules.Terrain), Get<BlueprintFeature>(Rules.TerrainRank)));

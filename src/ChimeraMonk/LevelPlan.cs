@@ -55,6 +55,7 @@ namespace ChimeraMonk
                 return new[]
                 {
                     new CoreRemoval("MonkFastMovementUnlock", Guids.Game.MonkFastMovementUnlock, ChimeraRules.Levels.FastMovementRemovedLevels),
+                    new CoreRemoval("MonkStyleStrike", Guids.Game.MonkStyleStrike, ChimeraRules.Levels.RemovedStyleStrikeLevels),
                     new CoreRemoval("StillMind", Guids.Game.StillMind, ChimeraRules.Levels.StillMindRemovedLevels),
                 };
             }
@@ -70,7 +71,7 @@ namespace ChimeraMonk
         {
             get
             {
-                var list = ChimeraRules.Levels.RemovedBonusFeatLevels.Select(l => (l, BonusFeatSelectionAt(l))).ToList();
+                var list = new List<(int Level, string Guid)>();
                 foreach (var row in RemovedCoreFeatures) list.AddRange(row.Levels.Select(l => (l, row.Guid)));
                 return list;
             }

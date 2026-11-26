@@ -14,7 +14,7 @@ namespace Falconer
                 t.Add(key + ".desc", (description, english));
             }
 
-            Add("Archetype", "팔코너", "Falconer", "성장하는 매와 함께 사냥합니다. 정식 동물 동료, 사냥감과 향상된 사냥감을 유지합니다. 9레벨에 회피를 얻고, 16레벨에는 향상된 회피 대신 세 갈래 사냥을 얻습니다.", "Hunt alongside a growing hawk. Keep your animal companion, quarry and improved quarry. You gain Evasion at level 9 and Threefold Hunt in place of Improved Evasion at level 16.");
+            Add("Archetype", "팔코너", "Falconer", "성장하는 매와 함께 사냥합니다. 선호 지형과 위장을 얻지 않습니다. 정식 동물 동료, 사냥감과 향상된 사냥감을 유지합니다. 9레벨에 회피를 얻고, 16레벨에는 향상된 회피 대신 세 갈래 사냥을 얻습니다.", "Hunt alongside a growing hawk. You give up all favored terrains and Camouflage. Keep your animal companion, quarry and improved quarry. You gain Evasion at level 9 and Threefold Hunt in place of Improved Evasion at level 16.");
             Add("Hawk", "사냥매 · 협공 사격", "Hunting Hawk", "신속 행동으로 매를 보내고, 매가 맞힌 표적에게 다음 화살의 명중 +2를 얻습니다. 급강하는 라운드에 한 번입니다.", "Send your hawk as a swift action once per round. Its hit grants +2 on your next arrow against that enemy.");
             Add("Dive", "급강하 명령", "Command Dive", "매가 적에게 돌진합니다. 8·15레벨에 공격이 한 번씩 늘어납니다. 모든 타격에 지혜, 선호 적과 명중 버프를 반영합니다.", "Send the hawk to attack an enemy. Gain an attack at levels 8 and 15. Wisdom, favored enemy and attack buffs apply.");
             Add("Drive", "몰아세우기", "Drive Prey", "동물 동료가 맞힌 적에게 다음 급강하 명중 +2. 동료에게 걸린 이로운 주문이 매에게도 적용됩니다.", "Your companion's hit grants +2 on the next dive against its target. Beneficial spells on the companion also affect the hawk.");

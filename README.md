@@ -4,7 +4,15 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.30-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.30-beta/HomebrewClasses-0.17.30-beta.zip) · [Release notes and test coverage](release-notes-0.17.30-beta.md)
+> [Download 0.17.31-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.31-beta/HomebrewClasses-0.17.31-beta.zip) · [Release notes and test coverage](release-notes-0.17.31-beta.md)
+
+- Hell Rider loses the tactician teamwork feats at levels 1, 9 and 17 and the ability to share them through tactician. Order, challenge and bonus combat feats at levels 6, 12 and 18 remain.
+- Falconer loses the first favored terrain, all later terrain selections and increases, and level 12 Camouflage. Favored enemy and quarry remain.
+- Chimera Monk regains monk bonus feats at levels 2, 6 and 10, for six selections in total. It gives up the four Style Strike selections at levels 5, 9, 13 and 17.
+- Blast Magus gives up level 13 heavy armor proficiency and armored casting in heavy armor. Its level 7 medium armor feature remains.
+- Spiritsteel loses all six ranks of Danger Sense at levels 3, 6, 9, 12, 15 and 18. Its level 2 teamwork feat and level 6 Spirit Trip remain.
+
+Release archives preserve DLL timestamps so Unity Mod Manager can distinguish the updated loader from an old cached copy. Spellbook integration retries discovery at the main menu if the blueprint collection changes during its initial scan. The class list controls and buff recast comparison still need confirmation on screen after a fresh game launch with the new loader.
 
 Active buff icons use the game’s own timer. When you select a buff in turn-based combat, the target preview shows its base duration alongside the time remaining on the current effect. Instant self buffs show the remaining time on the ability icon tooltip. At caster level 7, a one-minute-per-level buff shows a base of 7 minutes, or 14 with Extend Spell when eligible. Random durations show a range. Effects resolved during casting show the available formula or ability description. For area abilities, the preview describes the hovered unit if affected. Healing, dispels, summons and toggles also have turn-based summaries. When the same buff is already active, the preview shows known recast rules, including replacement, extension and stacking. Golem Overdrive, spirit possession and Pack Empowerment use their own class rules for base duration.
 
@@ -68,7 +76,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.30-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.31-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -79,7 +87,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.30-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.31-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -544,6 +552,7 @@ The Blast Magus fits elemental detonations between blade and spell. At 1st level
 | 4 | Spell Recall | |
 | 5, 9, 13, 17 | Arcane Weapon +2, +3, +4, +5 | The four upgrades of the arcane pool weapon enhancement |
 | 11 | Improved Spell Recall | |
+| 13 | Heavy Armor (Ex) | Retain the level 7 medium armor proficiency and armored casting. |
 
 Everything else is unchanged, including Spell Combat, Spellstrike and spellcasting from 1st-level spells up.
 
@@ -1997,19 +2006,17 @@ Two-sided mutations (5) - the upside and the downside come together, and drawing
 
 ### Overview
 
-The Chimera Monk reshapes the body through practice. Every two levels from level 2 you pick one of eighteen mutations, adding natural attacks such as a tail, bite, claw or horns, or scales, wings, a breath weapon or extra organs. Drinking the chimeric mutagen in combat raises an ability score and your natural armor, and pushes every mutation you own one step further. Flurry of blows, unarmed strike, the Wisdom bonus to AC and ki powers all work exactly as they do for a base monk; the price is three bonus feats plus Fast Movement and Still Mind.
+The Chimera Monk reshapes the body through practice. Every two levels from level 2 you pick one of eighteen mutations, adding natural attacks such as a tail, bite, claw or horns, or scales, wings, a breath weapon or extra organs. Drinking the chimeric mutagen in combat raises an ability score and your natural armor, and pushes every mutation you own one step further. Flurry of blows, unarmed strike, the Wisdom bonus to AC and ki powers all work exactly as they do for a base monk; the price is four Style Strike selections plus Fast Movement and Still Mind.
 
 ### What you give up
 
 | Level | Base class feature | Notes |
 |---|---|---|
-| 2 | Monk bonus feat | Removed |
 | 3 | Fast Movement | Removed. The whole unarmored speed bonus is gone, including the part that grows with monk level. Nothing replaces it |
 | 4 | Still Mind | Removed. Nothing replaces it |
-| 6 | Monk bonus feat | Removed |
-| 10 | Monk bonus feat | Removed |
+| 5, 9, 13, 17 | Style Strike | Lose all four selections. |
 
-The monk bonus feats at levels 1, 14 and 18 are kept. Flurry of blows, unarmed damage dice, the AC bonus, ki powers and every monk feature not listed above are unchanged.
+The monk bonus feats at levels 1, 2, 6, 10, 14 and 18 are kept. Flurry of blows, unarmed damage dice, the AC bonus, ki powers and every monk feature not listed above are unchanged.
 
 ### What you gain (by level)
 
@@ -2151,7 +2158,7 @@ Partial Aspect, Partial Aspect II and Partial Aspect III each pick one, and the 
 ### Feats
 
 - **Feats granted automatically**: Feral Combat Training (a DarkCodex feat) at level 1, regardless of that feat's prerequisites.
-- **Bonus feat slots**: the monk bonus feats at levels 2, 6 and 10 are gone; those at levels 1, 14 and 18 remain.
+- Choose six monk bonus feats at levels 1, 2, 6, 10, 14 and 18.
 - **Feats gained through mutations**: Extra Ears grants Blind-Fight. Partial Aspect: Horse grants Endurance, Wolverine grants Diehard (from monk level 8, while the aspect is active).
 - **Feats you can no longer take**: none.
 - **Feats added specifically for this archetype**: none.
@@ -2174,7 +2181,7 @@ Venom, the Partial Aspect toggle and the other mutations use no resource. The ki
 - **Mutation visuals**: the tail uses the look of the base game Gold Dragon mythic tail, and the horns use the base game Devil mythic small horns. If either of those visuals is missing from the game, the whole archetype is not created. The Wings mutation keeps the look of the base game wings effect.
 - **Breath**: built from the base game Scaled Fist's dragon breath, but it uses neither Charisma nor ki. The base game has no dedicated electricity cone visual, so the electricity breath uses a generic cone effect.
 - **TabletopTweaks**: with the setting that disables natural armor stacking, Scales is unaffected because it is a form-type bonus (only the mutagen's natural armor stops stacking with other natural armor). The chimeric mutagen's ability bonus is alchemical, so against a base game mutagen only the higher applies.
-- **Other mods**: if another mod moves or removes the monk bonus feats at levels 2, 6 or 10, or moves Fast Movement (level 3) or Still Mind (level 4) to other levels or adds them elsewhere in the monk progression, this archetype is not created (it is never created with only part of the removals applied).
+- Mods that move Style Strike, Fast Movement or Still Mind to different levels can prevent this archetype from registering.
 - **Retired mutation "Extra Tail"**: the Extra Tail mutation from earlier versions is no longer offered. The game engine allows only one tail attack per character, so taking it never added an attack. Saves of characters who already took it still load; the mutation stays as a hidden feature with no effect (some screens may show it as "Extra Tail (retired)"). Such a character can retrain and choose another mutation instead.
 - **Multiclassing and prestige classes**: the mutagen's bonuses and duration, natural weapon dice, Scales, breath dice and DC, the venom DC and the aspect tiers all read monk level only. Mutations with a level 10 requirement need monk level 10, and the level 8 and 14 requirements of Partial Aspect II and III are monk levels too.
 - **Known limitations**
@@ -2941,6 +2948,7 @@ When the barbarian rages, the spirit in the weapon can rage alongside its bearer
 |---|---|
 | 1 | Fast Movement gives way to the bound weapon and Spirit Rage. |
 | 2, 6 | These rage power picks give way to spirit teamwork and Spirit Trip. |
+| 3, 6, 9, 12, 15, 18 | Lose all six ranks of Danger Sense. |
 
 ### What you gain (by level)
 
@@ -3329,8 +3337,9 @@ Let the wolf drive prey into the open, send the hawk in from its blind side, the
 
 | Level | Feature exchanged | What remains |
 |---|---|---|
-| 3 | Endurance | Choose your first favored terrain at this level. |
+| 3 | Endurance and the first favored terrain | Choose your hunter’s bond at level 4. |
 | 8, 13, 18 | Additional favored terrains and their bonus increases | Favored enemy, quarry and improved quarry follow normal ranger progression. |
+| 12 | Camouflage | Lose the ability to hide using favored terrain. |
 | 16 | Improved Evasion | You keep Evasion from level 9. When Evasion applies to an attack that allows a Reflex save for half damage, a successful save deals no damage and a failed save deals full damage. |
 
 ### What you gain (by level)
@@ -3538,7 +3547,7 @@ Highest research tier and caster level use **oracle class level**. An oracle 8 /
 
 | Aspect | Details |
 |---|---|
-| Base class | Cavalier. Retains order, challenge, tactician and the level 3 Cavalier's Charge. |
+| Base class | Cavalier. Retains order, challenge and the level 3 Cavalier's Charge. |
 | Key abilities | Strength supports the rider's melee attacks. Charisma governs the devils' save DC, the ray's accuracy and uses, and the standard's daily uses. |
 | Mount | The nightmare advances as a horse companion. Each successful hoof attack adds 1d4 fire damage, and it learns to breathe fire at level 8. |
 | Magic | Four spell-like abilities arrive by class level with no spellbook or slots. The nightmare spends its own action on its breath. |
@@ -3553,6 +3562,7 @@ A Hell Rider picks a charge target and a place to plant the standard for differe
 | Level | Base feature | Replacement |
 |---|---|---|
 | 1 | Standard mount selection | Nightmare Mount |
+| 1, 9, 17 | Three tactician teamwork feats | Lose the level 1 sharing ability and its level 9 swift-action upgrade. |
 | 5, 14 | Banner and Greater Banner | Infernal Standard and Greater Infernal Standard, planted at a chosen point |
 | 11, 20 | Mighty Charge and Supreme Charge | The charge and the standard call two devils at level 11 and three at level 20 |
 
@@ -3619,7 +3629,7 @@ The base duration is one round per cavalier level. A target that makes its initi
 
 ### Feats
 
-Your order, challenge and tactician's teamwork feats follow cavalier progression. A newly selected nightmare grows as your actual animal companion. A multiclass rider who already has a companion can use the native continue-companion option when eligible. The level 8 breath belongs to the nightmare itself, so keeping a different companion does not give that animal Nightmare's Fire Breath.
+Your order, challenge and the bonus combat feats at levels 6, 12 and 18 follow cavalier progression. A newly selected nightmare grows as your actual animal companion. A multiclass rider who already has a companion can use the native continue-companion option when eligible. The level 8 breath belongs to the nightmare itself, so keeping a different companion does not give that animal Nightmare's Fire Breath.
 
 ### Resources
 

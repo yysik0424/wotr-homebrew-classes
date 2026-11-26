@@ -18,8 +18,8 @@ namespace ChimeraMonk
             {
                 ["archetype.name"] = ("키메라 몽크", "Chimera Monk"),
                 ["archetype.desc"] = (
-                    "수행으로 몸을 바꾸는 몽크. 2레벨부터 짝수 레벨마다 열여덟 변이 중 하나를 고른다. 키메라 변이약은 능력치와 자연 방어를 높이고 선택한 변이를 강화한다. 지혜는 변이의 내성 DC와 변이약 사용 횟수를 결정한다. 플러리·맨손 공격·지혜 AC·기 능력은 그대로다. 몽크 보너스 특기 세 개와 명경지수, 빠른 이동을 잃는다.",
-                    "A monk who reshapes the body through practice. Starting at 2nd level, choose one of eighteen mutations at each even level. Chimeric mutagen raises an ability score and natural armor and strengthens each mutation. Wisdom determines mutation save DCs and daily mutagen uses. Flurry, unarmed strike, Wisdom AC and ki powers are kept. You give up three monk bonus feats, Still Mind and Fast Movement."),
+                    "수행으로 몸을 바꾸는 몽크. 2레벨부터 짝수 레벨마다 열여덟 변이 중 하나를 고른다. 키메라 변이약은 능력치와 자연 방어를 높이고 선택한 변이를 강화한다. 지혜는 변이의 내성 DC와 변이약 사용 횟수를 결정한다. 플러리·맨손 공격·지혜 AC·기 능력은 그대로다. 몽크 보너스 특기는 모두 얻는다. 타격 자세 선택 네 번과 명경지수, 빠른 이동을 잃는다.",
+                    "A monk who reshapes the body through practice. Starting at 2nd level, choose one of eighteen mutations at each even level. Chimeric mutagen raises an ability score and natural armor and strengthens each mutation. Wisdom determines mutation save DCs and daily mutagen uses. Flurry, unarmed strike, Wisdom AC and ki powers are kept. You keep all monk bonus feats and give up the four style strike picks, Still Mind and Fast Movement."),
                 // T3: 변이 선택 + 변이(설계 §7 표 16종, 판정 D1·D5 반영 + 2026-11-16 소유자 결정 3종 − 2026-11-17 소유자 결정 추가 꼬리 삭제 = 18). 「변이약 중」 = 키메라 변이약 버프가 걸려 있는 동안.
                 ["mut.selection.name"] = ("키메라 변이", "Chimeric Mutation"),
                 ["mut.Tail.name"] = ("꼬리", "Tail"),

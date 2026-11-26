@@ -42,6 +42,9 @@ namespace HomebrewClasses.Loader
         static HashSet<string> enabled;
         static Action<string> error;
         static bool ready;
+        static bool retryAtMainMenu;
+        static readonly AccessTools.FieldRef<BlueprintsCache, object> CacheLock =
+            AccessTools.FieldRefAccess<BlueprintsCache, object>("m_Lock");
         static readonly MethodInfo shallowCopy = AccessTools.Method(typeof(object), "MemberwiseClone");
 
         internal static void Install(IEnumerable<string> modules, Action<string> logError)
@@ -52,6 +55,8 @@ namespace HomebrewClasses.Loader
             var h = new Harmony(BundlePatches.Owner + ".Spellbooks");
             h.Patch(AccessTools.Method(typeof(StartGameLoader), "LoadAllJson", new[] { typeof(string) }),
                 postfix: new HarmonyMethod(typeof(SpellbookIntegration), nameof(Build)) { priority = Priority.Last });
+            h.Patch(AccessTools.DeclaredMethod(typeof(Kingmaker.MainMenu), "Start"),
+                postfix: new HarmonyMethod(typeof(SpellbookIntegration), nameof(RetryAtMainMenu)));
             if (enabled.Contains("ProphecyBreaker"))
                 h.Patch(AccessTools.Method(typeof(AddSpellbookLevel), "OnActivate"),
                     transpiler: new HarmonyMethod(typeof(SpellbookIntegration), nameof(RouteLevelGain)));
@@ -82,6 +87,13 @@ namespace HomebrewClasses.Loader
             catch (Exception ex) { error("Spellbook integration initialization: " + ex); }
         }
 
+        static void RetryAtMainMenu()
+        {
+            if (!retryAtMainMenu || ready) return;
+            retryAtMainMenu = false;
+            Build();
+        }
+
         static void BuildSelections()
         {
             var families = new List<Family>();
@@ -101,12 +113,26 @@ namespace HomebrewClasses.Loader
             Family legacyFist = fist == null ? null : new Family { Archetype = fist.Archetype, Main = fist.Main, Donor = Get<BlueprintSpellbook>(LegacyArcanist) };
             if (legacyFist != null) donorIds.Add(legacyFist.Donor.AssetGuid);
             var bookField = AccessTools.Field(typeof(BlueprintFeatureReplaceSpellbook), "m_Spellbook");
-            ResourcesLibrary.BlueprintsCache.ForEachLoaded((id, bp) => {
-                if (bp is BlueprintFeatureSelectMythicSpellbook mythic) mythics.Add(mythic);
-                if (bp is BlueprintFeatureSelection selection) cachedSelections.Add(selection);
-                if (bp is BlueprintFeatureReplaceSpellbook option && bookField.GetValue(option) is BlueprintSpellbookReference r && donorIds.Contains(r.Guid))
-                    donorOptions.Add(id);
-            });
+            // Native Load uses this lock, while a mod can also register a blueprint directly.
+            // Finish discovery before publishing any mythic or prestige changes.
+            var cache = ResourcesLibrary.BlueprintsCache;
+            try
+            {
+                lock (CacheLock(cache))
+                {
+                    cache.ForEachLoaded((id, bp) => {
+                        if (bp is BlueprintFeatureSelectMythicSpellbook mythic) mythics.Add(mythic);
+                        if (bp is BlueprintFeatureSelection selection) cachedSelections.Add(selection);
+                        if (bp is BlueprintFeatureReplaceSpellbook option && bookField.GetValue(option) is BlueprintSpellbookReference r && donorIds.Contains(r.Guid))
+                            donorOptions.Add(id);
+                    });
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                retryAtMainMenu = true;
+                throw;
+            }
             foreach (var selection in mythics) ExtendMythic(selection, families);
             // Spell advancement is chosen from selections on prestige level entries (including TTT's replacement Loremaster selection).
             var direct = BlueprintRoot.Instance.Progression.CharacterClasses

@@ -11,6 +11,7 @@ namespace Falconer
         internal const string Endurance = "54ee847996c25cd4ba8773d7b8555174";
         internal const string ImprovedEvasion = "ce96af454a6137d47b9c6a1e02e66803";
         internal const int ImprovedEvasionLevel = 16;
+        internal const string Camouflage = "ff1b5aa8dcc7d7d4d9aa85e1cb3f9e88";
         internal const string Terrain = "a6ea422d7308c0d428a541562faedefd";
         internal const string TerrainRank = "c4de22ecac494c91b3d2f077ec162bbd";
         internal const string TrueStrike = "2c38da66e5a599347ac95b3294acbe00";

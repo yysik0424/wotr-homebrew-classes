@@ -88,7 +88,8 @@ function Write-ClassBundle {
         $hashes[$relative] = (Get-FileHash -LiteralPath $copy -Algorithm SHA256).Hash
         if ($hashes[$relative] -cne $verifiedHashes[$relative]) { throw "Build output changed during verification: $relative" }
         $entry = $zip.CreateEntry($relative, [IO.Compression.CompressionLevel]::Optimal)
-        $entry.LastWriteTime = [DateTimeOffset]::new(2000,1,1,0,0,0,[TimeSpan]::Zero)
+        # Unity Mod Manager derives its assembly cache key from the installed DLL's modification time.
+        $entry.LastWriteTime = [DateTimeOffset]::new([IO.File]::GetLastWriteTime($copy))
         $sourceStream = [IO.File]::OpenRead($copy)
         try {
           $targetStream = $entry.Open()

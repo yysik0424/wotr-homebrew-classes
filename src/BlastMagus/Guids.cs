@@ -79,6 +79,7 @@ namespace BlastMagus
             public const string ArcaneWeaponPlus2 = "36b609a6946733c42930c55ac540416b"; // Classes/Magus/ArcanePool/ArcaneWeaponPlus2.jbp
             public const string ArcaneWeaponPlus3 = "70be888059f99a245a79d6d61b90edc5"; // Classes/Magus/ArcanePool/ArcaneWeaponPlus3.jbp
             public const string ArcaneWeaponPlus4 = "1804187264121cd439d70a96234d4ddb"; // Classes/Magus/ArcanePool/ArcaneWeaponPlus4.jbp
+            public const string ArcaneHeavyArmor = "447ca91389e5c9246acb2c640d63f4da";
             public const string ArcaneWeaponPlus5 = "3cbe3e308342b3247ba2f4fbaf5e6307"; // Classes/Magus/ArcanePool/ArcaneWeaponPlus5.jbp
             public const string ArcanePoolResourse = "effc3e386331f864e9e06d19dc218b37"; // Classes/Magus/ArcanePool/ArcanePoolResourse.jbp
             public const string ArcaneAccuracyAbility = "1b7fb8120390ca24c9da98ce87780b7f"; // Classes/Magus/Arcanas/ArcaneAccuracyAbility.jbp — 폭발 능력 모양의 선례(정찰 §8) + 2026-11-15 폭발 FX 원본(FxTable, 빌드 시 읽기만)
