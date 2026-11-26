@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.30-beta
+
+- 이미 걸린 버프의 상태 아이콘에서는 본편 타이머가 남은 시간을 표시합니다. 턴제에서 버프를 다시 시전할 때는 대상 미리보기에서 새 효과의 기본 지속시간과 기존 효과의 남은 시간을 함께 확인할 수 있습니다.
+- Active buff icons use the game’s own timer. When you select a buff in turn-based combat, the target preview shows its base duration alongside the time remaining on the current effect.
+
 ## 0.17.29-beta
 
 - 턴제에서 버프를 선택하고 아군을 가리키면 효과별 기본 지속시간과 이미 걸린 효과의 남은 시간을 함께 볼 수 있습니다. 자신에게 즉시 사용하는 버프는 기술 아이콘에서도 남은 시간을 확인할 수 있습니다. 예를 들어 시전자 레벨 7의 레벨당 1분 버프는 기본 7분이며, 주문 연장이 적용되면 기본 14분입니다. 주사위로 정하는 시간은 범위로, 실제 시전 때 결정되는 효과는 공식이나 기술 설명으로 표시합니다. 광역기는 가리킨 대상이 범위에 들 경우의 정보를 보여줍니다. 회복·해제·소환·토글도 같은 턴제 툴팁에서 확인할 수 있습니다.

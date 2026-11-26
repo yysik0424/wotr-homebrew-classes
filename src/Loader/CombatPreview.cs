@@ -14,7 +14,6 @@ using Kingmaker.UI.MVVM._VM.Tooltip.Templates;
 using Kingmaker.UnitLogic.Abilities;
 using Kingmaker.UnitLogic.Abilities.Blueprints;
 using Kingmaker.UnitLogic.ActivatableAbilities;
-using Kingmaker.UnitLogic.Buffs;
 using Kingmaker.UnitLogic.Commands;
 using Kingmaker.UnitLogic.Commands.Base;
 using Kingmaker.View;
@@ -55,7 +54,6 @@ namespace HomebrewClasses.Loader
                 h.Patch(AccessTools.Method(typeof(TooltipTemplateAbility), "GetBody"), postfix: new HarmonyMethod(typeof(CombatPreview), nameof(AbilityTooltip)));
                 h.Patch(AccessTools.Method(typeof(TooltipTemplateActivatableAbility), "GetBody"), postfix: new HarmonyMethod(typeof(CombatPreview), nameof(ToggleTooltip)));
                 EventBus.Subscribe(Instance);
-                h.Patch(AccessTools.Method(typeof(TooltipTemplateBuff), "GetBody"), postfix: new HarmonyMethod(typeof(CombatPreview), nameof(BuffTooltip)));
             }
             catch (Exception ex) { Report(ex); }
         }
@@ -92,13 +90,6 @@ namespace HomebrewClasses.Loader
         {
             if (!Active || ___BlueprintActivatableAbility == null) return;
             try { AddLine(SkillPreview.Toggle(___BlueprintActivatableAbility, ___m_Ability, ActionChecks.Korean(___BlueprintActivatableAbility)), ref __result); }
-            catch (Exception ex) { Report(ex); }
-        }
-
-        static void BuffTooltip(Buff ___Buff, ref IEnumerable<ITooltipBrick> __result)
-        {
-            if (!Active || ___Buff == null) return;
-            try { AddLine(PreviewDuration.Remaining(___Buff, ActionChecks.Korean(___Buff.Blueprint)), ref __result); }
             catch (Exception ex) { Report(ex); }
         }
 
