@@ -259,7 +259,10 @@
                                   "WotrClassMod.Common.Strings::Configure",
                                   "HarmonyLib.Harmony::PatchAll",
                                   "GreySeer.Blueprints::BuildAll"
-                              ]
+                              ],
+        "linkedSources":  [
+                              "WeaponSpiritShaman/SpiritCategories.cs"
+                          ]
     },
     {
         "id":  "Falconer",

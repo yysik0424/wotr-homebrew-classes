@@ -16,15 +16,15 @@ namespace GreySeer
             return weapon != null && weapon.Blueprint.IsMelee && weapon.Blueprint.Category == category;
         }
 
-        internal static HandSlot SwordHand(UnitEntityData unit)
+        internal static HandSlot StrikeHand(UnitEntityData unit)
         {
             if (unit == null || !unit.Body.HandsAreEnabled) return null;
             var first = unit.Body.PrimaryHand;
             var second = unit.Body.SecondaryHand;
             var a = first.MaybeItem as ItemEntityWeapon;
             var b = second.MaybeItem as ItemEntityWeapon;
-            if (IsMelee(a, WeaponCategory.Longsword) && IsMelee(b, WeaponCategory.Quarterstaff)) return first;
-            if (IsMelee(b, WeaponCategory.Longsword) && IsMelee(a, WeaponCategory.Quarterstaff)) return second;
+            if (IsMelee(b, WeaponCategory.Quarterstaff) && WeaponChoices.Matches(unit, a)) return first;
+            if (IsMelee(a, WeaponCategory.Quarterstaff) && WeaponChoices.Matches(unit, b)) return second;
             return null;
         }
     }
@@ -50,7 +50,7 @@ namespace GreySeer
     {
         public void OnEventAboutToTrigger(RuleCalculateAttackBonusWithoutTarget evt)
         {
-            var sword = Weapons.SwordHand(Owner);
+            var sword = Weapons.StrikeHand(Owner);
             if (sword == null || evt.Weapon == null ||
                 (!ReferenceEquals(evt.Weapon, sword.MaybeItem) && !ReferenceEquals(evt.Weapon, sword.PairSlot.MaybeItem))) return;
             if (!Owner.Progression.IsArchetype(Blueprints.Archetype)) return;

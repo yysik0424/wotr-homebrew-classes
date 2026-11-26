@@ -20,7 +20,7 @@ namespace GreySeer
 {
     public class WeaponRequirement : BlueprintComponent, IAbilityCasterRestriction
     {
-        public bool IsCasterRestrictionPassed(UnitEntityData caster) { return Weapons.SwordHand(caster) != null; }
+        public bool IsCasterRestrictionPassed(UnitEntityData caster) { return Weapons.StrikeHand(caster) != null; }
         public string GetAbilityCasterRestrictionUIText() { return Strings.Resolve(ModContext.StringPrefix + "equipment"); }
     }
 
@@ -40,7 +40,7 @@ namespace GreySeer
         {
             var caster = context.Caster;
             var foe = target.Unit;
-            if (foe == null || foe.State.IsDead || !caster.IsEnemy(foe) || Weapons.SwordHand(caster) == null) return;
+            if (foe == null || foe.State.IsDead || !caster.IsEnemy(foe) || Weapons.StrikeHand(caster) == null) return;
             var link = caster.Ensure<SwordLinkPart>();
             if (link.Command != null) return;
             link.Target = foe;
@@ -100,7 +100,7 @@ namespace GreySeer
             var spell = (AbilityData)Blueprints.OriginalAbility.GetValue(cast) ?? cast.Ability;
             int? slot = SlotOfOwnSpell(spell);
             if (!slot.HasValue) return;
-            var sword = Weapons.SwordHand(Owner);
+            var sword = Weapons.StrikeHand(Owner);
             if (link?.Payment != null)
             {
                 // A manual designation owns this cast, including its choice of guarded price.
@@ -156,7 +156,7 @@ namespace GreySeer
         {
             var link = Owner.Get<SwordLinkPart>();
             if (link == null || link.Command == null || !ReferenceEquals(link.Command.Ability, ability)) return;
-            if (Weapons.SwordHand(Owner) == null) { Owner.Remove<SwordLinkPart>(); return; }
+            if (Weapons.StrikeHand(Owner) == null) { Owner.Remove<SwordLinkPart>(); return; }
             if (link.Payment.Protect(link.SlotLevel, TryPay)) forceSuccess = true;
         }
 
@@ -171,7 +171,7 @@ namespace GreySeer
             Owner.Remove<SwordLinkPart>(); // Clear before nested attack events can run.
             if (cast.Result != UnitCommand.ResultType.Success || cast.ExecutionProcess == null ||
                 Owner.State.IsDead || !Owner.State.CanAct) return;
-            var hand = Weapons.SwordHand(Owner);
+            var hand = Weapons.StrikeHand(Owner);
             if (!payment.Finish(CanStrike(target, hand), TryPay)) return;
             var attack = new RuleAttackWithWeapon(Owner, target, hand.MaybeWeapon, 0) {
                 ExtraAttack = true, AttackNumber = 1, AttacksCount = 1

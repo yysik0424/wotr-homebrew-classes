@@ -4,6 +4,7 @@ namespace GreySeer
     {
         internal const string Archetype = "ad82df40dff24da89918db03bba07b7e";
         internal const string Training = "023da3593e744e5a9c9ce220f292f994";
+        internal const string WeaponSelection = "5ff65e68362e4c649369794338524af8";
         internal const string Mark = "d162397012e44cc89ecdbb7a7d31f9a0";
         internal const string SafeMark = "210e01e02d70443aa5e7808c16b620e4";
 

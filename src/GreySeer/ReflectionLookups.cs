@@ -9,6 +9,9 @@ namespace GreySeer
             F(Fact, "m_DisplayName"), F(Fact, "m_Description"), F(Fact, "m_DescriptionShort"), F(Fact, "m_Icon"),
             F("Kingmaker.Blueprints.Classes.BlueprintArchetype", "m_ParentClass"),
             F("Kingmaker.Blueprints.Classes.BlueprintCharacterClass", "m_Archetypes"),
+            F("Kingmaker.Blueprints.Classes.Selection.BlueprintFeatureSelection", "m_Features"),
+            F("Kingmaker.Blueprints.Classes.Selection.BlueprintFeatureSelection", "m_AllFeatures"),
+            F("Kingmaker.DLC.DlcCondition", "m_DlcReward"), F("Kingmaker.DLC.DlcCondition", "m_HideInstead"),
             F("Kingmaker.UnitLogic.FactLogic.AddFacts", "m_Facts"),
             F("Kingmaker.UnitLogic.ActivatableAbilities.BlueprintActivatableAbility", "m_Buff"),
             new ReflectionLookup("Assembly-CSharp", "Kingmaker.UnitLogic.Commands.UnitUseAbility", "m_AbilityOriginal", LookupKind.Field, LookupMode.Exact)

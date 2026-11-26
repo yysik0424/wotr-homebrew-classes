@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.38-beta
+
+그레이 시어는 1레벨에 지팡이와 함께 들 한손 근접 무기 종류를 고르고 숙련을 얻습니다. 선택한 종류의 무기는 주손과 보조손 어느 쪽에서든 수동·자동·안전 검격에 쓰입니다. 같은 종류의 무기로 교체해도 적용됩니다. 이전에 장검 숙련을 받은 그레이 시어는 재훈련하면 다른 무기를 고를 수 있습니다.
+
+Grey Seers choose a light or one-handed melee weapon type at level 1 and gain proficiency with it. Pair any weapon of that type with a quarterstaff in either hand for the accuracy bonus and manual, automatic or guarded follow-ups. Existing Grey Seers can continue using their longsword or respec to choose another weapon.
+
 ## 0.17.37-beta
 
 턴제에서 적을 가리키면 현재 상태로 **본체를 맞힐 예상 확률**을 표시합니다. 알려진 방어도와 무방비, 협공, 주적, 은폐와 은폐 재굴림, 환영 분신, 고정 d20과 해석 가능한 명중 재굴림을 계산합니다. 일반 무기는 전력공격 시의 후속타와 보조 무기·자연 무기의 확률도 현재 상태 기준으로 보여줍니다. 예를 들어 명중 +12 대 AC 20은 65%, 은폐 20%를 적용하면 52%, 거기에 분신이 세 개면 본체 적중은 13%입니다.

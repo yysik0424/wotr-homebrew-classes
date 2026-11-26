@@ -44,7 +44,7 @@ namespace GreySeer
                 return Entry(level, exploit);
             }).ToArray();
             var twoWeapon = Get<BlueprintFeature>(Guids.TwoWeapon);
-            var sword = Get<BlueprintFeature>(Guids.Longsword);
+            var weaponChoice = WeaponChoices.Build(twoWeapon.Icon);
             var strikeIcon = Get<BlueprintAbility>(Guids.VitalStrikeAbility).Icon;
             var guardedIcon = Get<BlueprintFeature>(Guids.Improved).Icon;
             MakeMark(Guids.Mark, "mark", false, strikeIcon);
@@ -68,7 +68,7 @@ namespace GreySeer
                 a.RecommendedAttributes = Arcanist.RecommendedAttributes.ToArray();
                 a.NotRecommendedAttributes = Arcanist.NotRecommendedAttributes.ToArray();
                 a.RemoveFeatures = removals;
-                a.AddFeatures = new[] { Entry(1, sword, Training, twoWeapon), Entry(7, Get<BlueprintFeature>(Guids.Improved)), Entry(13, Get<BlueprintFeature>(Guids.Greater)) };
+                a.AddFeatures = new[] { Entry(1, weaponChoice, Training, twoWeapon), Entry(7, Get<BlueprintFeature>(Guids.Improved)), Entry(13, Get<BlueprintFeature>(Guids.Greater)) };
             });
             RequireOwnLocalizedStrings();
             RequireOwnBuffFx(true);
