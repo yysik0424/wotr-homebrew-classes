@@ -24,7 +24,7 @@ Turn-based attack odds, defenses and incoming results now appear directly above 
 - Blast Magus gives up level 13 heavy armor proficiency and armored casting in heavy armor. Its level 7 medium armor feature remains.
 - Spiritsteel loses all six ranks of Danger Sense at levels 3, 6, 9, 12, 15 and 18. Its level 2 teamwork feat and level 6 Spirit Trip remain.
 
-Release archives preserve DLL timestamps so Unity Mod Manager can distinguish the updated loader from an old cached copy. Spellbook integration retries discovery at the main menu if the blueprint collection changes during its initial scan. Category switching was observed during PC character creation. The level-up screen and buff recast comparison still need separate confirmation.
+Release archives preserve DLL timestamps so Unity Mod Manager can distinguish the updated loader from an old cached copy. Spellbook integration retries discovery at the main menu if the blueprint collection changes during its initial scan. Category switching was observed during PC character creation. Collapsing and reopening a category, the level-up class list, and the buff recast comparison still need an in-game check.
 
 Active buff icons use the game’s own timer. When you select a buff in turn-based combat, the target preview shows its base duration alongside the time remaining on the current effect. Instant self buffs show the remaining time on the ability icon tooltip. At caster level 7, a one-minute-per-level buff shows a base of 7 minutes, or 14 with Extend Spell when eligible. Random durations show a range. Effects resolved during casting show the available formula or ability description. For area abilities, the preview describes the hovered unit if affected. Healing, dispels, summons and toggles also have turn-based summaries. When the same buff is already active, the preview shows known recast rules, including replacement, extension and stacking. Golem Overdrive, spirit possession and Pack Empowerment use their own class rules for base duration.
 
@@ -2698,7 +2698,7 @@ The other native exploits span direct offense, protection and greater upgrades. 
 
 ### Feats
 
-At level 1, choose one type of light or one-handed melee weapon and gain proficiency with it. For example, pair a rapier with a quarterstaff in either hand to follow a spell with a rapier attack. Any rapier of that type qualifies. You also gain Two-Weapon Fighting at level 1. Improved Two-Weapon Fighting at 7 and Greater Two-Weapon Fighting at 13 are direct class grants, leaving your normal feat picks available. The one-handed exception is specific to a quarterstaff.
+At level 1, choose one type of light or one-handed melee weapon and gain proficiency with it. For example, pair a rapier with a quarterstaff in either hand to follow a spell with a rapier attack. Any rapier of that type qualifies. There are 30 standard choices, plus the sawtooth sabre if its DLC requirement is met. An existing Grey Seer can choose a different weapon when retraining. You also gain Two-Weapon Fighting at level 1. Improved Two-Weapon Fighting at 7 and Greater Two-Weapon Fighting at 13 are direct class grants, leaving your normal feat picks available. The one-handed exception is specific to a quarterstaff.
 
 ### Resources
 
