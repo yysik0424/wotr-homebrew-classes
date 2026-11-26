@@ -118,20 +118,6 @@ namespace Spiritsteel
         public void OnEventDidTrigger(RuleCalculateDamage evt) { }
     }
 
-    public class WeaponFeatBaneDamage : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RulePrepareDamage>
-    {
-        public BlueprintFeatureReference TargetType;
-
-        public void OnEventAboutToTrigger(RulePrepareDamage evt)
-        {
-            if (evt.DamageBundle.Weapon == Owner && evt.DamageBundle.WeaponDamage is PhysicalDamage &&
-                evt.Target.Descriptor.HasFact(TargetType.Get()))
-                evt.Add(new ForceDamage(new ModifiableDiceFormula(new DiceFormula(2, DiceType.D6)), 0));
-        }
-
-        public void OnEventDidTrigger(RulePrepareDamage evt) { }
-    }
-
     public class WeaponFeatAttackAgainstCondition : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RuleCalculateAttackBonus>
     {
         public UnitCondition Condition;
@@ -141,19 +127,6 @@ namespace Spiritsteel
         {
             if (evt.Weapon == Owner && (evt.Target.State.HasCondition(Condition) ||
                 (Alternative.HasValue && evt.Target.State.HasCondition(Alternative.Value))))
-                evt.AddModifier(2, Fact, ModifierDescriptor.Insight);
-        }
-
-        public void OnEventDidTrigger(RuleCalculateAttackBonus evt) { }
-    }
-
-    public class WeaponFeatHunter : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RuleCalculateAttackBonus>
-    {
-        public BlueprintFeatureReference TargetType;
-
-        public void OnEventAboutToTrigger(RuleCalculateAttackBonus evt)
-        {
-            if (evt.Weapon == Owner && evt.Target.Descriptor.HasFact(TargetType.Get()))
                 evt.AddModifier(2, Fact, ModifierDescriptor.Insight);
         }
 

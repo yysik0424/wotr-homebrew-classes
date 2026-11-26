@@ -7,9 +7,9 @@ namespace Spiritsteel
     public enum WeaponFeatKind
     {
         Acid, Fire, Cold, Electricity, Sonic, Ghost, Agile, Keen, Dodge, Focus, Specialization, Critical, Trip, Mobility, Fortitude, Reflex, Will, Initiative, Precise, Shield,
-        ColdIron, Adamantine, Watchful, Silent, Charging, Opportunist, UndeadHunter, ConstructHunter, DragonHunter, DemonHunter,
-        GreaterFocus, Anchored, GiantSlayer, Fortified, GreaterSpecialization, Evasive, Judgment, SpellWard, Sundering, Unfettered,
-        AberrationBane, FeyBane, MagicalBeastBane, GroundAssault, FearPursuit, EmberWard, GraveWard, Speed, ThunderingCritical, SpiritSense
+        ColdIron, Adamantine, Watchful, Silent, Charging, Opportunist,
+        GreaterFocus = 30, Anchored, GiantSlayer, Fortified, GreaterSpecialization, Evasive, Judgment, SpellWard, Sundering, Unfettered,
+        GroundAssault = 43, FearPursuit, EmberWard, GraveWard, Speed, ThunderingCritical, SpiritSense
     }
 
     // Level thresholds and scope are from the approved 2026-11-24 weapon-feats design.
@@ -81,14 +81,6 @@ namespace Spiritsteel
                 "결속 무기로 돌격 공격을 할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on charge attack rolls with the bound weapon.", "c78506dd0e14f7c45a599990e4e65038"),
             new WeaponFeatRow(WeaponFeatKind.Opportunist, 6, "빈틈 찌르기", "Opening Strike",
                 "결속 무기로 기회공격을 할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attacks of opportunity with the bound weapon.", "0f8939ae6f220984e8fb568abbdfba95"),
-            new WeaponFeatRow(WeaponFeatKind.UndeadHunter, 4, "언데드 사냥꾼", "Undead Hunter",
-                "결속 무기로 언데드를 공격할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attack rolls with the bound weapon against undead.", "6ab3056345b78164fa34b2c947b52083"),
-            new WeaponFeatRow(WeaponFeatKind.ConstructHunter, 4, "구조물 사냥꾼", "Construct Hunter",
-                "결속 무기로 구조물을 공격할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attack rolls with the bound weapon against constructs.", "9719015edcbf142409592e2cbaab7fe1"),
-            new WeaponFeatRow(WeaponFeatKind.DragonHunter, 6, "용 사냥꾼", "Dragon Hunter",
-                "결속 무기로 드래곤 유형의 적을 공격할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attack rolls with the bound weapon against dragons.", "f4201c85a991369408740c6888362e20"),
-            new WeaponFeatRow(WeaponFeatKind.DemonHunter, 8, "데몬 사냥꾼", "Demon Hunter",
-                "결속 무기로 데몬 하위 유형의 적을 공격할 때 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on attack rolls with the bound weapon against creatures with the demon subtype.", "831e942864e924846a30d2e0678e438b"),
             new WeaponFeatRow(WeaponFeatKind.GreaterFocus, 12, "상급 무기 집중", "Greater Weapon Focus",
                 "결속 무기 명중에 +1을 더합니다. 무기나 전사가 해당 범주의 무기 집중을 익혀야 합니다. 전사의 같은 범주 상급 무기 집중과 겹치면 한 번만 적용합니다.", "Gain an additional +1 on attack rolls with the bound weapon. Requires Weapon Focus from the inscription or for its category. Overlaps with Greater Weapon Focus for that category.", "09c9e82965fb4334b984a1e9df3bd088"),
             new WeaponFeatRow(WeaponFeatKind.Anchored, 12, "뿌리내린 자세", "Rooted Stance",
@@ -109,12 +101,6 @@ namespace Spiritsteel
                 "결속 무기의 물리 타격은 적의 피해 감소를 최대 10점 무시합니다. 본편 관통 타격 계열과 겹치면 높은 값만 적용합니다.", "Physical hits with the bound weapon ignore up to 10 points of damage reduction. Use the higher value when combined with the Penetrating Strike feats.", "eb6eb946c68ef094f89c7633f5bfdc9b"),
             new WeaponFeatRow(WeaponFeatKind.Unfettered, 16, "속박 해방", "Unfettered Spirit",
                 "결속 무기를 든 동안 마비, 얽힘, 감속 및 험지의 영향을 받지 않습니다.", "While wielding the bound weapon, gain immunity to paralysis, entanglement, slow, and difficult terrain.", "4c349361d720e844e846ad8c19959b1e"),
-            new WeaponFeatRow(WeaponFeatKind.AberrationBane, 16, "이형 사냥", "Aberration Bane",
-                "결속 무기로 이형을 명중시키면 역장 피해 2d6을 추가합니다. 치명타에도 한 번만 더합니다.", "Bound-weapon hits against aberrations deal an extra 2d6 force damage, rolled once even on a critical hit.", "2c38da66e5a599347ac95b3294acbe00"),
-            new WeaponFeatRow(WeaponFeatKind.FeyBane, 16, "페이 사냥", "Fey Bane",
-                "결속 무기로 페이를 명중시키면 역장 피해 2d6을 추가합니다. 치명타에도 한 번만 더합니다.", "Bound-weapon hits against fey deal an extra 2d6 force damage, rolled once even on a critical hit.", "4d9bf81b7939b304185d58a09960f589"),
-            new WeaponFeatRow(WeaponFeatKind.MagicalBeastBane, 16, "마법 야수 사냥", "Magical Beast Bane",
-                "결속 무기로 마법 야수를 명중시키면 역장 피해 2d6을 추가합니다. 치명타에도 한 번만 더합니다.", "Bound-weapon hits against magical beasts deal an extra 2d6 force damage, rolled once even on a critical hit.", "42c78009dd5cb8e429b27c13d92152b7"),
             new WeaponFeatRow(WeaponFeatKind.GroundAssault, 16, "넘어진 적 추격", "Ground Assault",
                 "쓰러진 적을 결속 무기로 공격하면 명중에 +2 통찰 보너스를 받습니다.", "Gain a +2 insight bonus on bound-weapon attack rolls against prone targets.", "4cc71ae82bdd85b40b3cfe6697bb7949"),
             new WeaponFeatRow(WeaponFeatKind.FearPursuit, 16, "공포 추격", "Fear Pursuit",
@@ -141,11 +127,8 @@ namespace Spiritsteel
                     Kind == WeaponFeatKind.Critical || Kind == WeaponFeatKind.Precise ||
                     Kind == WeaponFeatKind.ColdIron || Kind == WeaponFeatKind.Adamantine ||
                     Kind == WeaponFeatKind.Charging || Kind == WeaponFeatKind.Opportunist ||
-                    Kind == WeaponFeatKind.UndeadHunter || Kind == WeaponFeatKind.ConstructHunter ||
-                    Kind == WeaponFeatKind.DragonHunter || Kind == WeaponFeatKind.DemonHunter ||
                     Kind == WeaponFeatKind.GreaterFocus || Kind == WeaponFeatKind.GreaterSpecialization ||
                     Kind == WeaponFeatKind.GiantSlayer || Kind == WeaponFeatKind.Judgment || Kind == WeaponFeatKind.Sundering ||
-                    Kind == WeaponFeatKind.AberrationBane || Kind == WeaponFeatKind.FeyBane || Kind == WeaponFeatKind.MagicalBeastBane ||
                     Kind == WeaponFeatKind.GroundAssault || Kind == WeaponFeatKind.FearPursuit || Kind == WeaponFeatKind.ThunderingCritical;
             }
         }

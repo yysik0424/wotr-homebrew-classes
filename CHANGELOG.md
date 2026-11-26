@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.17.24-beta
+
+- 캐릭터 생성·레벨업의 직업 목록을 여섯 분류로 나눕니다. 마우스로 분류를 접고 펼칠 수 있습니다.
+- 스피릿스틸은 1레벨에 신령에게 맹세해 주적 하나를 고릅니다. 결속 무기의 명중과 피해 보너스는 +2에서 +10까지 성장합니다. 종족별 사냥 무기 피트 7종을 제거했습니다.
+- The class picker groups classes into six categories. Mouse users can expand and collapse them.
+- Spiritsteel swears an oath against one favored enemy at level 1. Its bound weapon gains +2 to +10 on attack and damage rolls against that enemy. Seven species-specific weapon feats have been removed.
+
 ## 0.17.23-beta
 
 - 스피릿스틸은 신령의 분노 중 12레벨부터 기절 면역, 16레벨부터 혼란 면역을 자동으로 얻습니다. 16레벨 무기 피트로 신속과 천둥 치명타를 추가했습니다.

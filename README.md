@@ -4,11 +4,15 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.23-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.23-beta/HomebrewClasses-0.17.23-beta.zip) · [Release notes and test coverage](release-notes-0.17.23-beta.md)
+> [Download 0.17.24-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.24-beta/HomebrewClasses-0.17.24-beta.zip) · [Release notes and test coverage](release-notes-0.17.24-beta.md)
+
+Character creation and level-up group classes into Core, Base, Hybrid, Alternate, Occult and Prestige. Click a category to expand it and click again to collapse. The controller list shows category labels and sorts by category. Archetypes appear under their parent class. Empty categories are disabled. A modded prestige class appears under Prestige. Unrecognized non-prestige classes appear under Base.
+
+At level 1, swear an oath to the spirit in your bound weapon and choose one ranger favored enemy. Attacks with that weapon gain a bonus on attack and weapon damage rolls against the chosen foe, including outside rage. The bonus rises from +2 to +4, +6, +8 and +10 at barbarian levels 1, 5, 10, 15 and 20. If a ranger favored enemy bonus also applies, use the higher bonus. The oath is separate from the ten even-level weapon feat picks.
 
 Spiritsteel uses Wisdom for daily rage rounds. With Wisdom 18, you get 8 rounds at level 1 and 46 at level 20. Keeping the spirit awake costs one round per round in total.
 
-Spiritsteel automatically gains stun immunity at level 12 and confusion immunity at level 16 while Spirit Rage is active. Two level-16 weapon feats join the selection. Speed grants one extra full-attack strike and overlaps with haste. Thundering Critical adds sonic damage on confirmed critical hits according to the weapon’s critical multiplier. Choose ten of 50 weapon feats by level 20.
+Spiritsteel automatically gains stun immunity at level 12 and confusion immunity at level 16 while Spirit Rage is active. Two level-16 weapon feats join the selection. Speed grants one extra full-attack strike and overlaps with haste. Thundering Critical adds sonic damage on confirmed critical hits according to the weapon’s critical multiplier. Choose ten of 43 weapon feats by level 20.
 
 With the shadow on, Magic Missile and its echo each spend one 1st-level slot. With one slot left, only the original fires.
 
@@ -19,7 +23,7 @@ With the shadow on, Magic Missile and its echo each spend one 1st-level slot. Wi
 | 1 | [Pack Warden](#pack-warden) | Hunter | Commands a pack: riding your main companion in combat calls one auxiliary at level 7 and two at level 13, and pack-only spell effects replace spellcasting | — |
 | 2 | [Phantom Blade](#phantom-blade) | Fighter | A guardian phantom strikes alongside you and absorbs 25% of the damage you take | — |
 | 3 | [Blast Magus](#blast-magus) | Magus | Picks an element, fires blasts with Intelligence and detonates them through weapon hits | *KineticistElementsExpanded* (optional: 5 more elements) |
-| 4 | [Spellfist](#spellfist) | Brawler | Unarmed brawler with full arcane casting from three chosen schools | **BrawlerClassWrath** |
+| 4 | [Spellfist](#spellfist) | Brawler | Unarmed brawler who casts up to 6th-level magus spells from chosen schools | **BrawlerClassWrath** |
 | 5 | [Golemancer](#golemancer) | Alchemist | Builds a golem tank, changes its material, and later wears it | DLC 3 |
 | 6 | [Warlock](#warlock) | Witch | Unlimited patron blasts that build Overheat and call summons | — |
 | 7 | [Weapon-Spirit Shaman](#weapon-spirit-shaman) | Shaman | A floating spirit weapon fights on its own and borrows the magic of stored weapons | — |
@@ -54,7 +58,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.23-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.24-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -65,7 +69,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.23-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.24-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -2921,6 +2925,8 @@ Gather paralysis with one round remaining and you can sentence an enemy in any e
 
 When the barbarian rages, the spirit in the weapon can rage alongside its bearer. The same weapon grows a stronger enhancement bonus and learns the traits you choose. A front-line fighter can inscribe Dodge and a trip bonus to hold an enemy in place. A damage-focused wielder can inscribe two elements and deliver both with each hit.
 
+At level 1, swear an oath to the spirit in your bound weapon and choose one ranger favored enemy. Attacks with that weapon gain a bonus on attack and weapon damage rolls against the chosen foe, including outside rage. The bonus rises from +2 to +4, +6, +8 and +10 at barbarian levels 1, 5, 10, 15 and 20. If a ranger favored enemy bonus also applies, use the higher bonus. The oath is separate from the ten even-level weapon feat picks.
+
 ### What you give up
 
 | Level | Exchange |
@@ -2932,7 +2938,7 @@ When the barbarian rages, the spirit in the weapon can rage alongside its bearer
 
 | Level | Progression |
 |---|---|
-| 1 | Choose from the Weapon-Spirit Shaman weapon list. Receive the actual weapon, category proficiency, a +1 enhancement and Spirit Rage. |
+| 1 | Choose from the Weapon-Spirit Shaman weapon list. Receive the actual weapon, category proficiency, a +1 enhancement and Spirit Rage, and choose one sworn enemy. |
 | 2 | Gain Solo Tactics while wielding the bound weapon. Choose a qualifying teamwork feat and, separately, your first weapon feat. |
 | Every even level, 2–20 | Inscribe one weapon feat per even level, for ten by level 20. |
 | 5, 9, 13, 17 | The weapon’s enhancement bonus rises to +2, +3, +4 and +5 respectively. |
@@ -2973,7 +2979,7 @@ Barbarian rage produces the first burst, followed shortly by a second burst as t
 
 ### Choices
 
-Choose from the 50 weapon feats below at or above their minimum barbarian level. Up to two elemental traits can be active together. Each adds **1d6, 2d6, 3d6 or 4d6** on a hit at levels 2, 8, 14 or 20 respectively. The elemental dice apply once on a critical. Choose ten by level 20. When multiple insight bonuses apply to the same roll, use the highest.
+Choose from the 43 weapon feats below at or above their minimum barbarian level. Up to two elemental traits can be active together. Each adds **1d6, 2d6, 3d6 or 4d6** on a hit at levels 2, 8, 14 or 20 respectively. The elemental dice apply once on a critical. Choose ten by level 20. When multiple insight bonuses apply to the same roll, use the highest.
 
 | Minimum level | Weapon feat | Effect and requirements |
 |---|---|---|
@@ -2997,15 +3003,11 @@ Choose from the 50 weapon feats below at or above their minimum barbarian level.
 | 4 | Combat Mobility | While wielding the bound weapon, gain +4 AC against attacks of opportunity provoked by movement. Requires Dodge from the weapon or the wielder. |
 | 4 | Improved Initiative | Gain +4 on initiative rolls while wielding the bound weapon. This overlaps with Improved Initiative. |
 | 4 | Vanguard Charge | Gain a +2 insight bonus on charge attack rolls with the bound weapon. |
-| 4 | Undead Hunter | Gain a +2 insight bonus on attack rolls with the bound weapon against undead. |
-| 4 | Construct Hunter | Gain a +2 insight bonus on attack rolls with the bound weapon against constructs. |
 | 6 | Trip | Gain +2 on trip checks with the bound weapon, including Spirit Rage’s trip. |
 | 6 | Adamantine Inscription | Physical hits with the bound weapon count as adamantine for overcoming damage reduction. |
 | 6 | Opening Strike | Gain a +2 insight bonus on attacks of opportunity with the bound weapon. |
-| 6 | Dragon Hunter | Gain a +2 insight bonus on attack rolls with the bound weapon against dragons. |
 | 8 | Thundering | Adds sonic damage on a hit. |
 | 8 | Keen | Double the bound weapon’s base critical threat range. This overlaps with Improved Critical. |
-| 8 | Demon Hunter | Gain a +2 insight bonus on attack rolls with the bound weapon against creatures with the demon subtype. |
 | 10 | Critical Focus | Gain +4 on confirmation rolls with the bound weapon. This overlaps with Critical Focus. |
 | 12 | Greater Weapon Focus | Gain an additional +1 on attack rolls with the bound weapon. Requires Weapon Focus from the inscription or for its category. Overlaps with Greater Weapon Focus for that category. |
 | 12 | Rooted Stance | Gain a +4 competence bonus to combat maneuver defense (CMD) while wielding the bound weapon. |
@@ -3017,9 +3019,6 @@ Choose from the 50 weapon feats below at or above their minimum barbarian level.
 | 16 | Spell Ward | Gain spell resistance 32 while wielding the bound weapon. Use the highest applicable spell resistance. |
 | 16 | Pierce Defenses | Physical hits with the bound weapon ignore up to 10 points of damage reduction. Use the higher value when combined with the Penetrating Strike feats. |
 | 16 | Unfettered Spirit | While wielding the bound weapon, gain immunity to paralysis, entanglement, slow, and difficult terrain. |
-| 16 | Aberration Bane | Bound-weapon hits against aberrations deal an extra 2d6 force damage, rolled once even on a critical hit. |
-| 16 | Fey Bane | Bound-weapon hits against fey deal an extra 2d6 force damage, rolled once even on a critical hit. |
-| 16 | Magical Beast Bane | Bound-weapon hits against magical beasts deal an extra 2d6 force damage, rolled once even on a critical hit. |
 | 16 | Ground Assault | Gain a +2 insight bonus on bound-weapon attack rolls against prone targets. |
 | 16 | Fear Pursuit | Gain a +2 insight bonus on bound-weapon attack rolls against shaken or frightened targets. |
 | 16 | Flame Ward | Gain fire resistance 30 while wielding the bound weapon. |

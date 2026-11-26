@@ -158,14 +158,6 @@ namespace Spiritsteel
                 case WeaponFeatKind.Charging:
                 case WeaponFeatKind.Opportunist:
                     return new WeaponFeatTacticalAttack { Kind = row.Kind };
-                case WeaponFeatKind.UndeadHunter: return AgainstCreature("734a29b693e9ec346ba2951b27987e33");
-                case WeaponFeatKind.ConstructHunter: return AgainstCreature("fd389783027d63343b4a5634bd81645f");
-                case WeaponFeatKind.DragonHunter: return AgainstCreature("455ac88e22f55804ab87c2467deff1d6");
-                case WeaponFeatKind.DemonHunter: return AgainstCreature("dc960a234d365cb4f905bdc5937e623a");
-                // The damage portion of the three stock Bane enchantments, scoped to this weapon.
-                case WeaponFeatKind.AberrationBane: return BaneDamage("3bec99efd9a363242a6c8d9957b75e91");
-                case WeaponFeatKind.FeyBane: return BaneDamage("018af8005220ac94a9a4f47b3e9c2b4e");
-                case WeaponFeatKind.MagicalBeastBane: return BaneDamage("625827490ea69d84d8e599a33929fdc6");
                 case WeaponFeatKind.GroundAssault:
                     return new WeaponFeatAttackAgainstCondition { Condition = UnitCondition.Prone };
                 case WeaponFeatKind.FearPursuit:
@@ -199,17 +191,6 @@ namespace Spiritsteel
             var grant = new AddUnitFeatureEquipment();
             SetField(grant, "m_Feature", Ref<BlueprintFeatureReference>(id));
             return grant;
-        }
-
-        private static WeaponFeatBaneDamage BaneDamage(string typeId)
-        {
-            return new WeaponFeatBaneDamage { TargetType = Ref<BlueprintFeatureReference>(typeId) };
-        }
-
-        private static WeaponFeatHunter AgainstCreature(string typeId)
-        {
-            var target = Get<BlueprintFeature>(typeId);
-            return new WeaponFeatHunter { TargetType = Ref<BlueprintFeatureReference>(target.AssetGuid.ToString()) };
         }
 
         private static WeaponFeatWearerStat WearerStat(WeaponFeatKind kind, StatType stat, int value)
