@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.23-beta
+
+- 스피릿스틸은 신령의 분노 중 12레벨부터 기절 면역, 16레벨부터 혼란 면역을 자동으로 얻습니다. 16레벨 무기 피트로 신속과 천둥 치명타를 추가했습니다.
+- Spiritsteel automatically gains stun immunity during Spirit Rage at level 12 and confusion immunity at level 16. Speed and Thundering Critical take their places as level-16 weapon feats.
+
 ## 0.17.22-beta
 
 - 스피릿스틸의 16레벨 무기 피트를 10종 추가했습니다. 전체 50종 중 20레벨까지 10개를 익힙니다.

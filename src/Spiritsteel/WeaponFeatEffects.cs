@@ -85,6 +85,29 @@ namespace Spiritsteel
         public void OnEventDidTrigger(RulePrepareDamage evt) { }
     }
 
+    public class WeaponFeatSpeed : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RuleCalculateAttacksCount>
+    {
+        public void OnEventAboutToTrigger(RuleCalculateAttacksCount evt) { }
+
+        public void OnEventDidTrigger(RuleCalculateAttacksCount evt)
+        {
+            // Native Speed contributes one HasteAttack. Wait for the engine to count eligible
+            // hands and other haste sources, including a shield bash or a double weapon.
+            var result = evt.Result;
+            if (result.PrimaryHand.HasteAttacks > 0 || result.SecondaryHand.HasteAttacks > 0) return;
+            var body = evt.Initiator.Body;
+            bool primary = ReferenceEquals(body.PrimaryHand.MaybeItem, Owner);
+            var other = body.SecondaryHand.MaybeItem;
+            if (!primary && !ReferenceEquals(other, Owner) &&
+                !(other is ItemEntityShield shield && ReferenceEquals(shield.WeaponComponent, Owner))) return;
+            var forced = evt.ForcePrimaryAttackWeapon;
+            if (forced != null && forced.IsPrimaryHand == primary && !ReferenceEquals(forced.Weapon, Owner)) return;
+            var hand = primary ? result.PrimaryHand : result.SecondaryHand;
+            if (hand.AdditionalAttacks > 0 && (evt.WeaponFilter == null || evt.WeaponFilter(Owner.Blueprint)))
+                hand.HasteAttacks = 1;
+        }
+    }
+
     public class WeaponFeatPenetration : WeaponEnchantmentLogic, IInitiatorRulebookHandler<RuleCalculateDamage>
     {
         public void OnEventAboutToTrigger(RuleCalculateDamage evt)

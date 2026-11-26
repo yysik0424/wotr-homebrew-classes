@@ -9,7 +9,7 @@ namespace Spiritsteel
         Acid, Fire, Cold, Electricity, Sonic, Ghost, Agile, Keen, Dodge, Focus, Specialization, Critical, Trip, Mobility, Fortitude, Reflex, Will, Initiative, Precise, Shield,
         ColdIron, Adamantine, Watchful, Silent, Charging, Opportunist, UndeadHunter, ConstructHunter, DragonHunter, DemonHunter,
         GreaterFocus, Anchored, GiantSlayer, Fortified, GreaterSpecialization, Evasive, Judgment, SpellWard, Sundering, Unfettered,
-        AberrationBane, FeyBane, MagicalBeastBane, GroundAssault, FearPursuit, EmberWard, GraveWard, StunWard, LucidSpirit, SpiritSense
+        AberrationBane, FeyBane, MagicalBeastBane, GroundAssault, FearPursuit, EmberWard, GraveWard, Speed, ThunderingCritical, SpiritSense
     }
 
     // Level thresholds and scope are from the approved 2026-11-24 weapon-feats design.
@@ -123,10 +123,10 @@ namespace Spiritsteel
                 "결속 무기를 든 동안 화염 저항 30을 얻습니다.", "Gain fire resistance 30 while wielding the bound weapon.", "21ffef7791ce73f468b6fca4d9371e8b"),
             new WeaponFeatRow(WeaponFeatKind.GraveWard, 16, "음에너지 수호", "Grave Ward",
                 "결속 무기를 든 동안 음에너지 피해 저항 30을 얻습니다.", "Gain resistance 30 to negative energy damage while wielding the bound weapon.", "0413915f355a38146bc6ad40cdf27b3f"),
-            new WeaponFeatRow(WeaponFeatKind.StunWard, 16, "기절 방호", "Stun Ward",
-                "결속 무기를 든 동안 기절 상태에 면역이 됩니다.", "Gain immunity to the stunned condition while wielding the bound weapon.", "09d39b38bb7c6014394b6daced9bacd3"),
-            new WeaponFeatRow(WeaponFeatKind.LucidSpirit, 16, "명료한 정신", "Lucid Spirit",
-                "결속 무기를 든 동안 혼란 상태에 면역이 됩니다.", "Gain immunity to the confused condition while wielding the bound weapon.", "886c7407dc629dc499b9f1465ff382df"),
+            new WeaponFeatRow(WeaponFeatKind.Speed, 16, "신속", "Speed",
+                "결속 무기로 전력 공격할 때 최대 명중 보너스로 한 번 더 공격합니다. 가속 등으로 이미 추가 공격을 받으면 겹치지 않습니다. 이중 무기도 한 번만 더합니다.", "On a full attack, make one extra attack with the bound weapon at your highest attack bonus. This does not stack with a haste extra attack. A double weapon gains only one extra attack.", "486eaff58293f6441a5c2759c4872f98"),
+            new WeaponFeatRow(WeaponFeatKind.ThunderingCritical, 16, "천둥 치명타", "Thundering Critical",
+                "결속 무기의 치명타가 확정되면 무기 치명타 배율 ×2·×3·×4에서 각각 음파 피해 1d8·2d8·3d8을 추가합니다. 견고화로 치명타가 무효화되면 발동하지 않습니다.", "On a confirmed bound-weapon critical hit, add 1d8/2d8/3d8 sonic damage for a weapon critical multiplier of ×2/×3/×4. Fortification that negates the critical also prevents the burst.", "f09453607e683784c8fca646eec49162"),
             new WeaponFeatRow(WeaponFeatKind.SpiritSense, 16, "신령 감각", "Spirit Sense",
                 "결속 무기를 든 동안 25피트 범위의 비시각 감지(Blindsense)를 얻습니다.", "Gain blindsense out to 25 feet while wielding the bound weapon.", "bb19b581f5a47b44abfe00164f1fcade"),
         };
@@ -146,7 +146,7 @@ namespace Spiritsteel
                     Kind == WeaponFeatKind.GreaterFocus || Kind == WeaponFeatKind.GreaterSpecialization ||
                     Kind == WeaponFeatKind.GiantSlayer || Kind == WeaponFeatKind.Judgment || Kind == WeaponFeatKind.Sundering ||
                     Kind == WeaponFeatKind.AberrationBane || Kind == WeaponFeatKind.FeyBane || Kind == WeaponFeatKind.MagicalBeastBane ||
-                    Kind == WeaponFeatKind.GroundAssault || Kind == WeaponFeatKind.FearPursuit;
+                    Kind == WeaponFeatKind.GroundAssault || Kind == WeaponFeatKind.FearPursuit || Kind == WeaponFeatKind.ThunderingCritical;
             }
         }
 

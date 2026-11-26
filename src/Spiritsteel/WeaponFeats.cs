@@ -172,8 +172,8 @@ namespace Spiritsteel
                     return new WeaponFeatAttackAgainstCondition { Condition = UnitCondition.Shaken, Alternative = UnitCondition.Frightened };
                 case WeaponFeatKind.EmberWard: return GrantFeature("a6acd8df82219d24c8f746659212543b");
                 case WeaponFeatKind.GraveWard: return GrantFeature("a77db677646ebfa4792bf6fa0875d5da");
-                case WeaponFeatKind.StunWard: return new AddConditionImmunityEquipment { Condition = UnitCondition.Stunned };
-                case WeaponFeatKind.LucidSpirit: return new AddConditionImmunityEquipment { Condition = UnitCondition.Confusion };
+                case WeaponFeatKind.Speed: return new WeaponFeatSpeed();
+                case WeaponFeatKind.ThunderingCritical: return new WeaponEnergyBurst { Element = DamageEnergyType.Sonic, Dice = DiceType.D8 };
                 case WeaponFeatKind.Anchored: return new AddStatBonusEquipment { Stat = StatType.AdditionalCMD, Descriptor = ModifierDescriptor.Competence, Value = 4 };
                 case WeaponFeatKind.GiantSlayer: return new WeaponFeatGiantSlayer();
                 case WeaponFeatKind.Evasive: return new WeaponFeatReflexEvasion();

@@ -5,7 +5,9 @@ using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.Classes;
 using Kingmaker.Blueprints.Classes.Selection;
 using Kingmaker.Blueprints.Facts;
+using Kingmaker.Designers.Mechanics.Facts;
 using Kingmaker.EntitySystem.Stats;
+using Kingmaker.UnitLogic;
 using Kingmaker.ResourceLinks;
 using Kingmaker.UnitLogic.ActivatableAbilities;
 using Kingmaker.UnitLogic.Buffs.Blueprints;
@@ -39,6 +41,23 @@ namespace Spiritsteel
                 Name(f, key, icon); f.IsClassFeature = true; f.Ranks = 1;
             });
         }
+        static BlueprintFeature RageWard(string key, UnitCondition condition, Sprite icon)
+        {
+            string buffId = WeaponFeats.StableId(key + ".buff");
+            var buff = Create<BlueprintBuff>("SpiritsteelWardBuff_" + key, buffId, b => {
+                Name(b, key, icon);
+                b.FxOnStart = new PrefabLink(); b.FxOnRemove = new PrefabLink();
+                b.Stacking = StackingType.Replace;
+            });
+            AddComponents(buff, new AddConditionImmunity { Condition = condition });
+            var feature = Feature(WeaponFeats.StableId(key + ".feature"), key, icon);
+            var whileRaging = new BuffExtraEffects();
+            SetField(whileRaging, "m_CheckedBuff", Ref<BlueprintBuffReference>(Guids.Buff));
+            SetField(whileRaging, "m_ExtraEffectBuff", Ref<BlueprintBuffReference>(buffId));
+            AddComponents(feature, whileRaging);
+            return feature;
+        }
+
         static BlueprintFeatureSelection Select(string id, string key, Sprite icon, IEnumerable<BlueprintFeature> options)
         {
             var refs = options.Distinct().Select(f => Ref<BlueprintFeatureReference>(f.AssetGuid.ToString())).ToArray();
@@ -102,13 +121,19 @@ namespace Spiritsteel
                 .SelectMany(id => Get<BlueprintFeatureSelection>(id).AllFeatures).Distinct().ToArray();
             var team = Select(Guids.Team, "team", teamworkIcon, nativeTeams);
             var flexible = Select(Guids.Flexible, "choice", powers.Icon ?? icon, powers.AllFeatures.Concat(nativeTeams));
+            var stunWard = RageWard("rageward.stun", UnitCondition.Stunned, Get<BlueprintBuff>("09d39b38bb7c6014394b6daced9bacd3").Icon);
+            var lucidSpirit = RageWard("rageward.confusion", UnitCondition.Confusion, Get<BlueprintBuff>("886c7407dc629dc499b9f1465ff382df").Icon);
             var removed = new List<LevelEntry> { Row(1, fast) };
             var added = new List<LevelEntry> { Row(1, binding, rage) };
             for (int level = 2; level <= 20; level += 2)
             {
                 removed.Add(Row(level, powers));
-                added.Add(level == 2 ? Row(level, feats, Tactics, team) :
-                    level == Rules.TripLevel ? Row(level, feats, Trip) : Row(level, feats, flexible));
+                var gains = new List<BlueprintFeatureBase> { feats };
+                if (level == 2) { gains.Add(Tactics); gains.Add(team); }
+                else gains.Add(level == Rules.TripLevel ? (BlueprintFeatureBase)Trip : flexible);
+                if (level == Rules.StunWardLevel) gains.Add(stunWard);
+                if (level == Rules.LucidSpiritLevel) gains.Add(lucidSpirit);
+                added.Add(Row(level, gains.ToArray()));
             }
             foreach (var row in removed)
                 if (!row.Features.All(f => barbarian.Progression.LevelEntries.Any(e => e.Level == row.Level && e.Features.Contains(f))))
