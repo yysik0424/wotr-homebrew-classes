@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.34-beta
+
+그레이 시어는 1레벨부터 **자동 검격**과 **자동 안전 검격** 중 하나를 켤 수 있습니다. 본인 아카니스트 주문을 쓸 때 장검이 닿는 적을 직접 겨냥했다면 그 적을, 아니면 자신과 교전 중이고 장검이 닿는 적 가운데 보이는 가장 가까운 적을 고릅니다. 직접 지정하면 해당 주문 한 번은 수동으로 고른 대상과 비용 방식을 따릅니다. 일반 검격은 공격할 때 저수지 1점을 씁니다. 안전 검격은 방어적 시전이 필요하면 기존의 1~3점을 먼저 지불합니다.
+
+At level 1, a Grey Seer can toggle **Automatic Spell and Sword** or **Automatic Guarded Casting**. When casting an arcanist spell, the seer chooses its hostile target if within longsword reach, then falls back to the nearest visible enemy engaged with the caster and within reach. A manual designation overrides both target and mode for one spell. The ordinary strike spends 1 reservoir point at the attack. Guarded casting still prepays 1–3 points when a defensive casting check is required.
+
 ## 0.17.33-beta
 
 턴제에서 일반 공격으로 적을 가리키면 캐릭터 시트의 첫 타격 명중 보너스, 확인된 대상 방어도(AC)에 대한 기본 명중률, 피해 감소 전 무기 피해 범위가 표시됩니다. 무기로 공격하는 기술과 접촉 공격에도 해당 판정을 표시합니다. 기본 명중률은 은폐와 대상별 추가 효과를 적용하기 전의 추정치입니다.

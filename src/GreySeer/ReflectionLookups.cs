@@ -10,6 +10,7 @@ namespace GreySeer
             F("Kingmaker.Blueprints.Classes.BlueprintArchetype", "m_ParentClass"),
             F("Kingmaker.Blueprints.Classes.BlueprintCharacterClass", "m_Archetypes"),
             F("Kingmaker.UnitLogic.FactLogic.AddFacts", "m_Facts"),
+            F("Kingmaker.UnitLogic.ActivatableAbilities.BlueprintActivatableAbility", "m_Buff"),
             new ReflectionLookup("Assembly-CSharp", "Kingmaker.UnitLogic.Commands.UnitUseAbility", "m_AbilityOriginal", LookupKind.Field, LookupMode.Exact)
         };
     }

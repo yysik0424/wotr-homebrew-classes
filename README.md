@@ -4,7 +4,9 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.33-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.33-beta/HomebrewClasses-0.17.33-beta.zip) · [Release notes and test coverage](release-notes-0.17.33-beta.md)
+> [Download 0.17.34-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.34-beta/HomebrewClasses-0.17.34-beta.zip) · [Release notes and test coverage](release-notes-0.17.34-beta.md)
+
+At level 1, a Grey Seer can toggle **Automatic Spell and Sword** or **Automatic Guarded Casting**. When casting an arcanist spell, the seer chooses its hostile target if within longsword reach, then falls back to the nearest visible enemy engaged with the caster and within reach. A manual designation overrides both target and mode for one spell.
 
 In turn-based combat, hover an enemy for the character sheet’s first weapon attack bonus, its base hit chance against revealed AC, and its damage range before mitigation. Weapon attacks from abilities and touch attacks also show their rolls. Base chances are estimates before concealment and target-specific effects. Spells show readable damage dice and their base range per damage instance. Magic Missile deals 1d4+1 (2–5) per missile. At base caster level 10, Fireball shows 10d6 (10–60), with a Reflex save for half. After an attack, the panel briefly shows the actual d20, bonus, AC and damage dealt for both party and enemy attacks. The latest result can appear alongside the next action’s preview.
 
@@ -54,7 +56,7 @@ While the shadow is on, it echoes the first eligible harmful sorcerer spell each
 | 10 | [Chimera Monk](#chimera-monk) | Monk | Reshapes the body with a new mutation every two levels | **DarkCodex** |
 | 11 | [Oathbound Revenant](#oathbound-revenant) | Paladin | An undead paladin whose smites knit the body back together | — |
 | 12 | [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | Toggle a shadow to echo the first eligible spell each round. The echo costs one extra slot of the same level. With one slot left, only the original fires | — |
-| 13 | [Grey Seer](#grey-seer) | Arcanist | Cast on the front line with sword and staff, then strike a designated foe. Spend reservoir points according to the spell slot to secure a threatened cast. | — |
+| 13 | [Grey Seer](#grey-seer) | Arcanist | Cast on the front line with sword and staff, then strike an automatically or manually chosen foe. Spend reservoir points according to the spell slot to secure a threatened cast. | — |
 | 14 | [Blood Berserker](#blood-berserker) | Bloodrager | Use a blood chain to reel in prey or pull yourself to a larger foe. Bloodrage coats your melee weapons, and their extra blood damage doubles on criticals from level 13. | — |
 | 15 | [Sorrow Inquisitor](#sorrow-inquisitor) | Inquisitor | Lift afflictions from allies into a lead rosary and sentence a foe to bear them. Returning one to its source raises its save DC, and from level 16 each bead that takes effect deals divine damage. | — |
 | 16 | [Spiritsteel](#spiritsteel) | Barbarian | Inscribe a new trait on one ancestral weapon every even level. Its spirit joins your rage, helps you flank and lends Wisdom to maneuvers such as trip. | — |
@@ -80,7 +82,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.33-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.34-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -91,7 +93,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.33-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.34-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -2637,6 +2639,8 @@ When both weapons are equipped, add the difference between a fighter’s and an 
 
 **Designate for Spell and Sword** is a free action. Selecting a new foe replaces the old target. Complete a spell from your own arcanist casting and, if the foe is alive and within longsword reach, spend 1 reservoir point for one attack without another action. Scrolls and wands do not trigger the follow-up.
 
+At level 1, a Grey Seer can toggle **Automatic Spell and Sword** or **Automatic Guarded Casting**. When casting an arcanist spell, the seer chooses its hostile target if within longsword reach, then falls back to the nearest visible enemy engaged with the caster and within reach. A manual designation overrides both target and mode for one spell. Both toggles start off. Enabling one turns off the other. With no target, no points are spent. If the chosen foe dies or moves out of reach during the cast, that spell loses its strike.
+
 #### Which hand makes the attack?
 
 You can put the longsword in either hand. If it is in your off hand, that is still the weapon you swing after a spell. On an ordinary full attack the Two-Weapon Fighting feats govern your off-hand attacks. The follow-up to a spell is a single longsword attack, with no staff strike or off-hand sequence.
@@ -2650,7 +2654,7 @@ Apply the weapon's enhancement, ability modifier and normal two-weapon penalties
 
 #### Aim the spell and sword separately
 
-Mark the enemy beside you and cast at an archer behind it. Even if the archer saves against the spell, a completed cast can still trigger the sword attack against the marked foe in reach. If the spell kills the marked foe, the sword does not switch to another enemy. Designate again for the next cast. Your arcanist cantrips can also trigger the follow-up.
+Mark the enemy beside you and cast at an archer behind it. Even if the archer saves against the spell, a completed cast can still trigger the sword attack against the marked foe in reach. If the spell kills the marked foe, the sword does not switch to another enemy. An active automatic mode selects a new target for the next cast. Your arcanist cantrips can also trigger the follow-up.
 
 ### Choices
 

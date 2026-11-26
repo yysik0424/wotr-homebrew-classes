@@ -7,6 +7,11 @@ namespace GreySeer
         internal const string Mark = "d162397012e44cc89ecdbb7a7d31f9a0";
         internal const string SafeMark = "210e01e02d70443aa5e7808c16b620e4";
 
+        internal const string AutoStrike = "7660392c491c4b0f9f1be7914d2cfca2";
+        internal const string AutoStrikeBuff = "4698d2fa4a9f446dad208a5b319e585e";
+        internal const string AutoGuarded = "b4a483a198da42508ea96f4097b44766";
+        internal const string AutoGuardedBuff = "2476a9bb620c4ed0b4f182656f3b0fda";
+
         // Installed blueprints.zip, 2026-11-23.
         internal const string Arcanist = "52dbfd8505e22f84fad8d702611f60b7";
         internal const string Fighter = "48ac8db94d5de7645906c7d0ad3bcfbd";

@@ -8,6 +8,8 @@ using Kingmaker.RuleSystem;
 using Kingmaker.RuleSystem.Rules;
 using Kingmaker.UnitLogic;
 using Kingmaker.UnitLogic.Abilities;
+using Kingmaker.UnitLogic.ActivatableAbilities;
+using Kingmaker.Items.Slots;
 using Kingmaker.UnitLogic.Abilities.Components.Base;
 using Kingmaker.UnitLogic.Commands;
 using Kingmaker.UnitLogic.Commands.Base;
@@ -46,22 +48,78 @@ namespace GreySeer
         }
     }
 
-    public class SpellLink : UnitFactComponentDelegate, IUnitCommandStartHandler, IUnitCommandEndHandler, IUnitTryCastingDefensivelyHandler, IUnitCombatHandler
+    public class SpellLink : UnitFactComponentDelegate, IUnitCommandStartHandler, IUnitCommandEndHandler, IUnitTryCastingDefensivelyHandler, IUnitCombatHandler, IActivatableAbilityStartHandler
     {
+        public void HandleActivatableAbilityStart(ActivatableAbility ability)
+        {
+            if (ability.Owner != Owner.Descriptor) return;
+            var mode = ability.Blueprint;
+            if (mode != Blueprints.AutoStrike && mode != Blueprints.AutoGuarded) return;
+            var other = mode == Blueprints.AutoStrike ? Blueprints.AutoGuarded : Blueprints.AutoStrike;
+            foreach (var toggle in Owner.ActivatableAbilities.Enumerable)
+                if (toggle.Blueprint == other && toggle.IsOn) toggle.IsOn = false;
+        }
+
+        bool? AutoGuardedMode()
+        {
+            foreach (var toggle in Owner.ActivatableAbilities.Enumerable)
+            {
+                if (!toggle.IsOn || !toggle.IsStarted) continue;
+                if (toggle.Blueprint == Blueprints.AutoStrike) return false;
+                if (toggle.Blueprint == Blueprints.AutoGuarded) return true;
+            }
+            return null;
+        }
+
+        bool CanStrike(UnitEntityData target, HandSlot sword)
+        {
+            return sword != null && target != null && target.IsInGame && !target.State.IsDead &&
+                Owner.IsEnemy(target) && !UnitCommand.CommandTargetUntargetable(Owner, target) &&
+                Owner.View != null && target.View != null && Owner.IsReach(target, sword);
+        }
+
+        UnitEntityData AutoTarget(UnitEntityData spellTarget, HandSlot sword)
+        {
+            if (CanStrike(spellTarget, sword)) return spellTarget;
+            if (!Owner.IsInCombat) return null;
+            // Only opponents engaged with this caster. Never draw an idle unit into a buff cast.
+            var combat = Owner.CombatState;
+            return combat.EngagedUnits.Concat(combat.EngagedBy)
+                .Where(foe => foe.IsInCombat && Owner.Memory.ContainsVisible(foe) && CanStrike(foe, sword))
+                .OrderBy(foe => Owner.SqrDistanceTo(foe))
+                .ThenBy(foe => foe.UniqueId, StringComparer.Ordinal).FirstOrDefault();
+        }
+
         public void HandleUnitCommandDidStart(UnitCommand command)
         {
             var cast = command as UnitUseAbility;
             if (cast == null || cast.Executor != Owner || cast.Cutscene) return;
             var link = Owner.Get<SwordLinkPart>();
-            if (link == null || link.Command != null) return;
+            if (link?.Command != null) return;
             // OnStart may substitute the displayed ability. OnAction spends the original.
             var spell = (AbilityData)Blueprints.OriginalAbility.GetValue(cast) ?? cast.Ability;
             int? slot = SlotOfOwnSpell(spell);
             if (!slot.HasValue) return;
-            if (link.Target == null || !link.Target.IsInGame || link.Target.State.IsDead || !Owner.IsEnemy(link.Target) || Weapons.SwordHand(Owner) == null)
+            var sword = Weapons.SwordHand(Owner);
+            if (link?.Payment != null)
             {
-                Owner.Remove<SwordLinkPart>();
-                return;
+                // A manual designation owns this cast, including its choice of guarded price.
+                if (sword == null || link.Target == null || !link.Target.IsInGame || link.Target.State.IsDead || !Owner.IsEnemy(link.Target))
+                {
+                    Owner.Remove<SwordLinkPart>();
+                    return;
+                }
+            }
+            else
+            {
+                if (sword == null) return;
+                var guarded = AutoGuardedMode();
+                if (!guarded.HasValue) return;
+                var target = AutoTarget(cast.TargetUnit, sword);
+                if (target == null) return;
+                link = Owner.Ensure<SwordLinkPart>();
+                link.Target = target;
+                link.Payment = new StrikePayment(guarded.Value);
             }
             if (slot.Value < 0 || slot.Value > 9)
             {
@@ -112,11 +170,9 @@ namespace GreySeer
             var payment = link.Payment;
             Owner.Remove<SwordLinkPart>(); // Clear before nested attack events can run.
             if (cast.Result != UnitCommand.ResultType.Success || cast.ExecutionProcess == null ||
-                Owner.State.IsDead || !Owner.State.CanAct || target == null || target.State.IsDead ||
-                !target.IsInGame || !Owner.IsEnemy(target)) return;
+                Owner.State.IsDead || !Owner.State.CanAct) return;
             var hand = Weapons.SwordHand(Owner);
-            bool inReach = hand != null && Owner.View != null && target.View != null && Owner.IsReach(target, hand);
-            if (!payment.Finish(inReach, TryPay)) return;
+            if (!payment.Finish(CanStrike(target, hand), TryPay)) return;
             var attack = new RuleAttackWithWeapon(Owner, target, hand.MaybeWeapon, 0) {
                 ExtraAttack = true, AttackNumber = 1, AttacksCount = 1
             };
