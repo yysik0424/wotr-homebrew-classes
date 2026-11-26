@@ -36,7 +36,13 @@ namespace HomebrewClasses.Loader
                 entry.Logger.Log(module.Id + " — " + host.Describe());
             }
             SpellbookIntegration.Install(classes.Where(host => host.State == LoadState.Loaded).Select(host => host.Module.Id), entry.Logger.Error);
-            entry.OnUpdate = (e, dt) => { foreach (var host in classes) host.Tick(dt); };
+            BubbleBuffsCompatibility.Install(UMM.FindMod("BubbleBuffs"), entry.Logger.Error);
+            CombatPreview.Install(entry.Logger.Error);
+            entry.OnUpdate = (e, dt) =>
+            {
+                foreach (var host in classes) host.Tick(dt);
+                CombatPreview.Tick();
+            };
             bool hasModMenu = UMM.FindMod("ModMenu") != null;
             entry.OnGUI = e =>
             {

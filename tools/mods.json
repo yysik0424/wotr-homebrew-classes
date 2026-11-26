@@ -387,7 +387,7 @@
 
                      ],
         "optionalAfter":  [
-
+                              "BubbleBuffs"
                           ],
         "devOnly":  [
 

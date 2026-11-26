@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.17.27-beta
+
+- 턴제 전투에서 기술을 가리키면 접촉 공격, 내성, 주문 저항 등 확인된 판정을 볼 수 있습니다. 기술을 선택하고 적을 가리키면 조사로 밝혀진 방어 수치가 표시됩니다. 접촉 공격의 기본 명중 추정치는 거리 보너스와 무방비 방어의 조건별 차이를 보여줍니다. 적이 아군을 공격하면 공격자, 대상과 실제 판정 결과가 잠시 남습니다.
+- Bubble Buffs 5.2.3에서 무리 강화, 골렘 폭주와 스피릿 웨폰 빙의를 묶음에 넣을 수 있습니다. 무리 강화는 살아 있는 무리 구성원 각각의 효과를 확인합니다. 골렘 폭주와 빙의는 단기 버프 필터에서 볼 수 있습니다.
+- In turn-based combat, hover an ability to see its attack, save and spell resistance checks. Select it and point at an enemy to see revealed defenses. Touch attacks show a base hit estimate and the effects of distance bonuses and flat-footed armor class where applicable. Incoming attacks briefly show the attacker, party target and resolved checks.
+- Bubble Buffs 5.2.3 recognizes Pack Empowerment, Golem Overdrive and spirit possession. Pack Empowerment checks the living pack members individually. Overdrive and possession use the short-buff filter.
+
 ## 0.17.26-beta
 
 - 스피릿스틸의 1레벨 주적 선택과 결속 무기의 주적 명중·피해 보너스를 제거했습니다. 1레벨에는 결속 무기를 정하고 신령의 분노를 얻습니다.

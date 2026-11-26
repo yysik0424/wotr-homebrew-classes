@@ -270,6 +270,12 @@ namespace BlastMagus
     // 인스턴스 필드 = 원소 하나(생성자에서만 정한다, 읽기 전용 — 블루프린트 설정값이지 유닛 상태가 아니다). 기본 생성자 없음: 원소가 빠진 컴포넌트(= 조용히 Fire(0))를 만들 수 없다.
     public class EnergizeWeapon : UnitFactComponentDelegate, IInitiatorRulebookHandler<RuleCalculateWeaponStats>
     {
+        public string GetCombatPreviewText(bool korean)
+        {
+            return korean ? "근접 무기 명중 시 선택한 유형의 추가 피해 · 별도 주문 저항 판정 없음" :
+                "Melee weapon hit adds the chosen damage type · no separate spell resistance check";
+        }
+
         readonly Element element;
 
         public EnergizeWeapon(Element e)

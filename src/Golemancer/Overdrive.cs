@@ -563,6 +563,10 @@ namespace Golemancer
     {
         public int SlotLevel;
         public string School;
+        public BlueprintBuff RoutineBuff() { return Overdrive.Buff; }
+        public bool RoutineIsLong() { return false; }
+        public bool RoutinePresent(UnitEntityData master) { return master.Buffs.GetBuff(Overdrive.Buff) != null; }
+
         public override string GetCaption() { return "Golemancer: golem overdrive L" + SlotLevel + " " + School; }
         public override void RunAction()
         {

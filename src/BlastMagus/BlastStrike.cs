@@ -443,6 +443,12 @@ namespace BlastMagus
     // 인스턴스 필드 없음(블루프린트 컴포넌트는 모든 유닛이 공유한다).
     public class BlastStateRestriction : BlueprintComponent, IAbilityCasterRestriction
     {
+        public string GetCombatPreviewText(bool korean)
+        {
+            return korean ? "다음 근접 무기 명중 시 폭발 · 선택 원소에 따라 주문 저항 판정" :
+                "Next melee weapon hit delivers the blast · spell resistance depends on the chosen element";
+        }
+
         public bool IsCasterRestrictionPassed(UnitEntityData caster) { return BlastState.IsEnabled(caster); } // null 이면 IsEnabled 가 던진다
 
         public string GetAbilityCasterRestrictionUIText() { return Strings.Resolve(ModContext.StringPrefix + "BlastStrike.Disabled"); }

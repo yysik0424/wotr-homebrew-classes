@@ -795,6 +795,21 @@ namespace PackWarden
             catch (Exception e) { return "<unit unreadable: " + e.GetType().Name + ">"; }
         }
 
+        internal static BlueprintBuff RoutineMarker(string key)
+        {
+            Plan plan;
+            return key != null && plans.TryGetValue(key, out plan) ? plan.Primary.FirstOrDefault() : null;
+        }
+
+        internal static bool RoutinePresent(UnitEntityData leader, string key)
+        {
+            bool readable;
+            var members = Members(leader, out readable);
+            if (!readable || members.Count == 0) return false;
+            var expected = ExpectationFor(leader, key).Buffs;
+            return expected.Count != 0 && members.All(member => expected.All(e => member.Buffs.GetBuff(e.Buff) != null));
+        }
+
         sealed class Expectation { public int HunterLevel, CasterLevel; public List<ExpectedBuff> Buffs; public BlueprintBuff[] Primary; }
 
         // 기대값의 입력 = 지도자의 헌터 레벨(능력의 컨텍스트에서 읽지 않는다 — 우리 능력의 시전자 레벨 계산이 틀려도 드러나게).
@@ -1006,6 +1021,10 @@ namespace PackWarden
     {
         public string Key;
         public ActionList Actions;
+
+        public BlueprintBuff RoutineBuff() { return PackEmpower.RoutineMarker(Key); }
+        public bool RoutineIsLong() { return EmpowerRules.DurationRateOf(EmpowerRules.Candidates.First(c => c.Key == Key)) != "Rounds"; }
+        public bool RoutinePresent(UnitEntityData leader) { return PackEmpower.RoutinePresent(leader, Key); }
 
         public override string GetCaption() { return "Pack empowerment: run the spell's actions on every pack member"; }
 
