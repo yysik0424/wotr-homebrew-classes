@@ -144,6 +144,8 @@ namespace HomebrewClasses.Loader
                     string who = buff.ToCaster ? L("시전자 · ", "caster · ") : recipient;
                     Add(Name(buff.Buff) + L(" · 기본 ", " · base ") + time + Existing(buff.Buff, owner), conditional, who);
                 }
+                else if (a is ContextActionDealDamage damage)
+                    result = PreviewDamage.Describe(damage, blueprint, data, meta, ko);
                 else if (a is ContextActionRemoveBuff remove && remove.Buff != null)
                     result = (remove.ToCaster ? L("시전자 · ", "caster · ") : "") + Name(remove.Buff) + L(" 제거", " removed");
                 else if (a is ContextActionHealTarget)
@@ -153,7 +155,15 @@ namespace HomebrewClasses.Loader
                 else if (a is ContextActionResurrect) result = L("부활", "resurrection");
                 else if (a is ContextActionDispelMagic) result = L("마법 해제", "dispel");
                 else if (a is ContextActionCombatManeuver) result = L("전투 책략", "combat maneuver");
-                else if (a is ContextActionMeleeAttack melee) result = melee.AutoHit ? L("자동 명중 근접 공격", "automatic melee hit") : L("근접 공격", "melee attack");
+                else if (a is ContextActionMeleeAttack melee)
+                {
+                    result = melee.AutoHit ? L("자동 명중 근접 공격", "automatic melee hit") : L("근접 공격", "melee attack");
+                    if (known != null && !melee.AutoHit && !melee.SelectNewTarget && !melee.IgnoreStatBonus)
+                    {
+                        var values = WeaponPreview.Describe(data?.Caster?.Unit, known, ko, true);
+                        if (values != null) result += " · " + values;
+                    }
+                }
                 else if (a is ContextActionEnchantWornItem enchant)
                     result = (enchant.ToCaster ? L("시전자 · ", "caster · ") : "") + (enchant.Enchantment?.Name ?? L("장비 강화", "equipment enchantment"))
                         + " · " + Duration(enchant.DurationValue) + (enchant.RemoveOnUnequip ? L(" (장비 해제 시 종료)", " (ends on unequip)") : "");

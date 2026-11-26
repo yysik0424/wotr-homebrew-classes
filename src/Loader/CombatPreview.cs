@@ -9,6 +9,7 @@ using Kingmaker.GameModes;
 using Kingmaker.Inspect;
 using Kingmaker.PubSubSystem;
 using Kingmaker.RuleSystem.Rules;
+using Kingmaker.RuleSystem.Rules.Damage;
 using Kingmaker.UI.MVVM._PCView.CombatLog;
 using Kingmaker.UI.MVVM._PCView.InGame;
 using Kingmaker.UI.MVVM._ConsoleView.InGame;
@@ -27,7 +28,7 @@ namespace HomebrewClasses.Loader
 {
     internal sealed class CombatPreview : IUnitDirectHoverUIHandler, IAbilityTargetSelectionUIHandler,
         IUnitCommandStartHandler, IGlobalRulebookHandler<RuleAttackRoll>, IGlobalRulebookHandler<RuleSavingThrow>,
-        IGlobalRulebookHandler<RuleSpellResistanceCheck>
+        IGlobalRulebookHandler<RuleSpellResistanceCheck>, IGlobalRulebookHandler<RuleDealDamage>
     {
         static readonly CombatPreview Instance = new CombatPreview();
         static Action<string> report;
@@ -40,7 +41,9 @@ namespace HomebrewClasses.Loader
         UnitEntityData hover;
         UnitEntityData shownTarget;
         AbilityData shownAbility;
-        string incoming;
+        string notice;
+        RuleAttackRoll lastDamageRoll;
+        int lastPacket;
         float expires, nextRefresh;
         bool inCombat;
         CombatLogBaseView combatLog;
@@ -134,9 +137,14 @@ namespace HomebrewClasses.Loader
             return Active && actor != null && target != null && target.IsPlayerFaction && actor.IsEnemy(target);
         }
 
+        static bool PartyCombat(UnitEntityData actor, UnitEntityData target)
+        {
+            return Active && actor != null && target != null && (actor.IsPlayerFaction || target.IsPlayerFaction) && actor.IsEnemy(target);
+        }
+
         void Notice(UnitEntityData actor, UnitEntityData target, string detail)
         {
-            incoming = actor.CharacterName + " → " + target.CharacterName + "   " + detail;
+            notice = actor.CharacterName + " → " + target.CharacterName + "   " + detail;
             expires = Time.unscaledTime + 4f;
             nextRefresh = 0;
         }
@@ -163,27 +171,65 @@ namespace HomebrewClasses.Loader
         public void OnEventAboutToTrigger(RuleAttackRoll evt) {}
         public void OnEventAboutToTrigger(RuleSavingThrow evt) {}
         public void OnEventAboutToTrigger(RuleSpellResistanceCheck evt) {}
+        internal static string ResolvedAttack(RuleAttackRoll evt, bool ko)
+        {
+            string outcome;
+            switch (evt.Result)
+            {
+                case AttackResult.CriticalHit: outcome = ko ? "치명타" : "critical hit"; break;
+                case AttackResult.MirrorImage: outcome = ko ? "환영 적중" : "mirror image"; break;
+                case AttackResult.Concealment: outcome = ko ? "은폐로 빗나감" : "concealment miss"; break;
+                case AttackResult.Parried: outcome = ko ? "받아넘김" : "parried"; break;
+                default: outcome = ko ? (evt.IsHit ? "명중" : "빗나감") : (evt.IsHit ? "hit" : "miss"); break;
+            }
+            if (evt.AutoMiss) return ko ? "자동 빗나감" : "automatic miss";
+            if (evt.AutoHit) return evt.Result == AttackResult.Hit ? (ko ? "자동 명중" : "automatic hit") :
+                (ko ? "자동 명중 · " : "automatic hit · ") + outcome;
+            if (evt.D20 == null || !evt.D20.IsTriggered) return outcome;
+            return "d20 " + evt.D20.Result + evt.AttackBonus.ToString(" +0; −0; +0") + " = " + evt.Roll +
+                " / AC " + evt.TargetAC + " · " + outcome;
+        }
+
         public void OnEventDidTrigger(RuleAttackRoll evt)
         {
-            if (evt.IsFake || !Incoming(evt.Initiator, evt.Target)) return;
+            if (evt.IsFake || !PartyCombat(evt.Initiator, evt.Target)) return;
             try
             {
-                bool ko = ActionChecks.Korean(evt.Reason.Ability?.Blueprint) || ActionChecks.Hangul(evt.Target.CharacterName) || ActionChecks.Hangul(evt.Initiator.CharacterName);
-                var attack = ActionChecks.AttackName(evt.AttackType, ko);
-                string name = evt.Reason.Ability?.Name ?? evt.Weapon?.Name;
-                string result = ko ? (evt.IsHit ? "명중" : "빗나감") : (evt.IsHit ? "hit" : "miss");
-                Notice(evt.Initiator, evt.Target, name + " · " + attack + " · AC " + evt.TargetAC + " · " + result);
+                bool ko = ActionChecks.Korean(evt.Reason?.Ability?.Blueprint) || ActionChecks.Hangul(evt.Target.CharacterName);
+                string name = evt.Reason?.Ability?.Name ?? evt.WeaponStats?.Weapon?.Name;
+                string text = name + " · " + ResolvedAttack(evt, ko);
+                if (ReferenceEquals(evt, lastDamageRoll)) text += (ko ? " · 실제 피해 " : " · damage dealt ") + lastPacket;
+                Notice(evt.Initiator, evt.Target, text);
+            }
+            catch (Exception ex) { Report(ex); }
+        }
+
+        public void OnEventAboutToTrigger(RuleDealDamage evt) {}
+        public void OnEventDidTrigger(RuleDealDamage evt)
+        {
+            if (evt.IsFake || evt.AttackRoll?.IsFake == true || !PartyCombat(evt.Initiator, evt.Target)) return;
+            try
+            {
+                var roll = evt.AttackRoll;
+                if (roll != null && (!ReferenceEquals(roll.Initiator, evt.Initiator) || !ReferenceEquals(roll.Target, evt.Target))) roll = null;
+                bool ko = ActionChecks.Korean(evt.Reason?.Ability?.Blueprint) || ActionChecks.Hangul(evt.Target.CharacterName);
+                string name = evt.Reason?.Ability?.Name ?? roll?.WeaponStats?.Weapon?.Name ?? evt.Reason?.Name;
+                string detail = string.IsNullOrEmpty(name) ? "" : name + " · ";
+                if (roll != null) detail += ResolvedAttack(roll, ko) + " · ";
+                lastDamageRoll = roll;
+                lastPacket = evt.Result;
+                Notice(evt.Initiator, evt.Target, detail + (ko ? "실제 피해 " : "damage dealt ") + evt.Result);
             }
             catch (Exception ex) { Report(ex); }
         }
         public void OnEventDidTrigger(RuleSavingThrow evt)
         {
-            var caster = evt.Reason.Caster ?? evt.Reason.Ability?.Caster?.Unit;
+            var caster = evt.Reason?.Caster ?? evt.Reason?.Ability?.Caster?.Unit;
             if (!Incoming(caster, evt.Initiator)) return;
             try
             {
-                bool ko = ActionChecks.Korean(evt.Reason.Ability?.Blueprint) || ActionChecks.Hangul(evt.Initiator.CharacterName);
-                Notice(caster, evt.Initiator, evt.Reason.Name + " · " + ActionChecks.SaveName(evt.Type, ko) + " DC " + evt.NonNegativeDC + " · "
+                bool ko = ActionChecks.Korean(evt.Reason?.Ability?.Blueprint) || ActionChecks.Hangul(evt.Initiator.CharacterName);
+                Notice(caster, evt.Initiator, evt.Reason?.Name + " · " + ActionChecks.SaveName(evt.Type, ko) + " DC " + evt.NonNegativeDC + " · "
                     + (ko ? (evt.Success ? "내성 성공" : "내성 실패") : (evt.Success ? "saved" : "failed save")));
             }
             catch (Exception ex) { Report(ex); }
@@ -209,20 +255,29 @@ namespace HomebrewClasses.Loader
         {
             if (!Active)
             {
-                if (inCombat) { hover = null; shownAbility = null; shownTarget = null; incoming = null; Hide(); inCombat = false; }
+                if (inCombat) { hover = null; shownAbility = null; shownTarget = null; notice = null; lastDamageRoll = null; WeaponPreview.Clear(); Hide(); inCombat = false; }
                 return;
             }
             inCombat = true;
             var turn = Game.Instance.TurnBasedCombatController?.CurrentTurn;
             var selected = (turn == null ? null : TurnAbility(turn)) ?? Game.Instance.SelectedAbilityHandler?.SelectedAbility;
-            var target = (turn == null ? null : TurnTarget(turn)) ?? hover;
+            var highlighted = turn == null ? null : TurnTarget(turn);
+            if (selected == null && highlighted != null) selected = turn.CurrentAbility;
+            var target = highlighted ?? hover;
             if (selected == shownAbility && ReferenceEquals(shownTarget, target) && Time.unscaledTime < nextRefresh) return;
             shownAbility = selected;
             shownTarget = target;
             nextRefresh = Time.unscaledTime + 0.25f;
             string text = null;
             if (selected != null) text = SkillPreview.Selected(selected, target, ActionChecks.Korean(selected.Blueprint));
-            if (string.IsNullOrEmpty(text) && Time.unscaledTime < expires) text = incoming;
+            else if (target != null && turn?.SelectedUnit is UnitEntityData actor && actor.IsDirectlyControllable)
+            {
+                bool ko = ActionChecks.Korean(null) || ActionChecks.Hangul(actor.CharacterName);
+                string values = WeaponPreview.Describe(actor, target, ko);
+                if (values != null) text = actor.CharacterName + " → " + target.CharacterName + "\n" + values;
+            }
+            if (notice != null && Time.unscaledTime < expires)
+                text = string.IsNullOrEmpty(text) ? notice : text + "\n" + notice;
             if (string.IsNullOrEmpty(text)) { Hide(); return; }
             if (panel == null)
             {

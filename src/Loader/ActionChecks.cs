@@ -33,7 +33,7 @@ namespace HomebrewClasses.Loader
         internal bool SpellResistance;
         internal readonly List<SavingThrowType> Saves = new List<SavingThrowType>();
         internal readonly List<DamageEnergyType> Energy = new List<DamageEnergyType>();
-        static readonly Func<ContextActionDealDamage, bool> SimpleDamage = (Func<ContextActionDealDamage, bool>)Delegate.CreateDelegate(typeof(Func<ContextActionDealDamage, bool>), AccessTools.PropertyGetter(typeof(ContextActionDealDamage), "IsSimpleDamage"));
+        internal static readonly Func<ContextActionDealDamage, bool> SimpleDamage = (Func<ContextActionDealDamage, bool>)Delegate.CreateDelegate(typeof(Func<ContextActionDealDamage, bool>), AccessTools.PropertyGetter(typeof(ContextActionDealDamage), "IsSimpleDamage"));
         // Optional component description for abilities that resolve their checks in managed code.
         static readonly Dictionary<Type, MethodInfo> providers = new Dictionary<Type, MethodInfo>();
         static string ComponentText(BlueprintScriptableObject bp, bool korean)
@@ -163,17 +163,22 @@ namespace HomebrewClasses.Loader
         internal static string Defenses(AbilityData ability, UnitEntityData target, bool ko)
         {
             var bp = ability.Blueprint;
+            bool charge = bp.GetComponent<AbilityCustomCharge>() != null;
+            string weapon = charge || bp.GetComponent<AbilityDeliverAttackWithWeapon>() != null
+                ? WeaponPreview.Describe(ability.Caster.Unit, target, ko, charge) : null;
             if (!Revealed(target, UnitInfoPart.Defence))
             {
                 var text = Summary(bp, ko, null);
+                if (weapon != null) return text.Length == 0 ? weapon : weapon + " · " + text;
                 return text.Length == 0 ? "" : text + (ko ? " · 대상 방어 미확인" : " · target defenses unknown");
             }
             var parts = new List<string>();
+            if (weapon != null) parts.Add(weapon);
             var c = Read(bp, target);
             if (c.Attack.HasValue)
             {
                 var a = c.Attack.Value;
-                var estimate = HitEstimate.Touch(ability, target, a, ko);
+                var estimate = HitEstimate.Ability(ability, target, a, ko);
                 if (estimate != null) parts.Add(estimate);
                 bool touch = a == AttackType.Touch || a == AttackType.RangedTouch;
                 parts.Add(AttackName(a, ko) + (touch ? (ko ? " · 접촉 AC " : " · touch AC ") : " · AC ") + (touch ? target.Stats.AC.Touch : target.Stats.AC.ModifiedValue));

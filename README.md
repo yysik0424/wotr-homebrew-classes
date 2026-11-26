@@ -4,7 +4,9 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.32-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.32-beta/HomebrewClasses-0.17.32-beta.zip) · [Release notes and test coverage](release-notes-0.17.32-beta.md)
+> [Download 0.17.33-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.33-beta/HomebrewClasses-0.17.33-beta.zip) · [Release notes and test coverage](release-notes-0.17.33-beta.md)
+
+In turn-based combat, hover an enemy for the character sheet’s first weapon attack bonus, its base hit chance against revealed AC, and its damage range before mitigation. Weapon attacks from abilities and touch attacks also show their rolls. Base chances are estimates before concealment and target-specific effects. Spells show readable damage dice and their base range per damage instance. Magic Missile deals 1d4+1 (2–5) per missile. At base caster level 10, Fireball shows 10d6 (10–60), with a Reflex save for half. After an attack, the panel briefly shows the actual d20, bonus, AC and damage dealt for both party and enemy attacks. The latest result can appear alongside the next action’s preview.
 
 Turn-based attack odds, defenses and incoming results now appear directly above the combat log and move with it. The panel matches the log width, wraps longer text and uses 80% of the scaled log font size. If there is too little room above the log, the panel overlaps its top edge to stay on screen.
 
@@ -78,7 +80,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.32-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.33-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -89,7 +91,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.32-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.33-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings

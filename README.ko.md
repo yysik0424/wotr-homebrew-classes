@@ -4,7 +4,9 @@
 
 *Pathfinder: Wrath of the Righteous*에 새 아키타입 21종을 더합니다. Unity Mod Manager 모드 하나로 설치합니다. 헌터로 동물 무리를 지휘하거나, 연금술사로 골렘을 입거나, 바바리안으로 부족에게 받은 무기의 신령과 함께 싸울 수 있습니다.
 
-> [Unity Mod Manager용 0.17.32-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.32-beta/HomebrewClasses-0.17.32-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.32-beta.md)
+> [Unity Mod Manager용 0.17.33-beta 다운로드](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.33-beta/HomebrewClasses-0.17.33-beta.zip) · [변경 내역과 검증 범위](release-notes-0.17.33-beta.md)
+
+턴제에서 일반 공격으로 적을 가리키면 캐릭터 시트의 첫 타격 명중 보너스, 확인된 대상 방어도(AC)에 대한 기본 명중률, 피해 감소 전 무기 피해 범위가 표시됩니다. 무기로 공격하는 기술과 접촉 공격에도 해당 판정을 표시합니다. 기본 명중률은 은폐와 대상별 추가 효과를 적용하기 전의 추정치입니다. 주문은 읽을 수 있는 피해 주사위와 1회 기본 범위를 표시합니다. 예를 들어 매직 미사일은 발당 1d4+1(2–5), 기본 시전자 레벨 10의 파이어볼은 10d6(10–60)이며 반사 내성 성공 시 절반입니다. 판정이 끝나면 아군과 적의 실제 d20, 명중 보너스, 방어도 및 적용된 피해가 잠깐 표시됩니다. 전투 로그 위에서 직전 결과와 다음 행동의 예상치를 함께 볼 수 있습니다.
 
 턴제 판정 표시가 우측 전투 로그 바로 위에서 로그 창과 함께 움직입니다. 표시 폭은 로그 창을 따르고, 글자는 게임 글자 크기 설정을 적용한 전투 로그의 80% 크기입니다. 긴 문구는 줄을 바꿔 모두 표시합니다. 로그를 화면 상단까지 키우면 판정 표시가 로그 상단에 일부 겹쳐 화면 안에 머뭅니다.
 
@@ -52,7 +54,7 @@
 ## 설치
 
 1. 게임을 종료합니다. 기존 직업 단독 모드가 설치돼 있으면 12개 직업 폴더를 게임의 `Mods` 밖에 백업합니다. 번들과 단독 모드가 동시에 같은 직업을 등록하지 않도록 합니다.
-2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.32-beta.zip`을 준비합니다.
+2. Unity Mod Manager에서 게임을 선택하고 `HomebrewClasses-0.17.33-beta.zip`을 준비합니다.
 3. ZIP을 Unity Mod Manager에 끌어다 놓거나 게임의 `Mods` 폴더에 풉니다. `Mods/HomebrewClasses` 아래에는 `Info.json`, `HomebrewClasses.dll`, 직업 DLL 21개가 든 `classes` 폴더가 있어야 합니다.
 4. 게임을 실행합니다. 캐릭터 생성 화면에서 기반 직업의 아키타입 목록에 나타납니다.
 
@@ -63,7 +65,7 @@
 Windows PowerShell에서 `WOTR_MANAGED_DIR`을 게임의 `Wrath_Data/Managed` 폴더로, `WOTR_CSC`를 Visual Studio Roslyn의 `csc.exe` 경로로 설정합니다. Unity Mod Manager를 설치한 게임의 어셈블리가 필요합니다. 다음 명령은 비어 있는 출력 폴더를 사용합니다.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.32-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.33-beta -Out .\out -NoDevCompare
 ```
 
 ## 설정

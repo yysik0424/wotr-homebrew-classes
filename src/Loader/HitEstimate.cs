@@ -25,15 +25,16 @@ namespace HomebrewClasses.Loader
             return current + "% (" + low + "–" + high + "%)";
         }
 
-        internal static string Touch(AbilityData ability, UnitEntityData target, AttackType type, bool ko)
+        internal static string Ability(AbilityData ability, UnitEntityData target, AttackType type, bool ko)
         {
-            if (type != AttackType.Touch && type != AttackType.RangedTouch) return null;
             var caster = ability.Caster.Unit;
             if (!ActionChecks.Revealed(caster, Kingmaker.Inspect.UnitInfoPart.Offence)) return null;
             var delivery = ability.Blueprint.GetComponent<AbilityEffectStickyTouch>()?.TouchDeliveryAbility ?? ability.Blueprint;
             var projectile = delivery.GetComponent<AbilityDeliverProjectile>();
-            bool ranged = type == AttackType.RangedTouch;
+            bool touch = type == AttackType.Touch || type == AttackType.RangedTouch;
+            bool ranged = type == AttackType.RangedTouch || type == AttackType.Ranged;
             var stat = projectile != null && projectile.ReplaceAttackRollBonusStat ? projectile.AttackRollBonusStat :
+                projectile?.Weapon != null && projectile.Weapon.AttackBonusStat != StatType.Unknown ? projectile.Weapon.AttackBonusStat :
                 ranged ? StatType.Dexterity : StatType.Strength;
             var attribute = caster.Stats.GetStat(stat) as ModifiableValueAttributeStat;
             if (attribute == null) return null;
@@ -43,8 +44,8 @@ namespace HomebrewClasses.Loader
                 target.CombatState.EngagedUnits.Any(u => u != caster && !caster.IsEnemy(u))) &&
                 !facts.Any(f => f.Blueprint.GetComponent<PreciseShot>() != null)) bonus -= 4;
             if (!ranged && target.CombatState.IsFlanked) bonus += 2;
-            int ac = target.Stats.AC.Touch;
-            int flat = target.Stats.AC.FlatFootedTouch;
+            int ac = touch ? target.Stats.AC.Touch : target.Stats.AC.ModifiedValue;
+            int flat = touch ? target.Stats.AC.FlatFootedTouch : target.Stats.AC.FlatFooted;
             int chance = Percent(bonus, ac);
             int lowBonus = bonus, highBonus = bonus;
             string variable = null;
@@ -67,7 +68,8 @@ namespace HomebrewClasses.Loader
             }
             int flatChance = Percent(bonus, flat);
             string band = Band(chance, Percent(lowBonus, Math.Max(ac, flat)), Percent(highBonus, Math.Min(ac, flat)));
-            string text = (ko ? "기본 접촉 명중 추정 " : "estimated base touch hit ") + band;
+            string text = (touch ? (ko ? "기본 접촉 명중 추정 " : "estimated base touch hit ") : (ko ? "기본 명중 추정 " : "estimated base hit ")) + band
+                + (ko ? " · 명중 " : " · attack ") + bonus.ToString("+0;-0;+0");
             if (flatChance != chance) text += (ko ? " · 무방비 시 " : " · if flat-footed ") + flatChance + "%";
             if (variable != null) text += " · " + variable;
             return text;

@@ -40,7 +40,7 @@ namespace HomebrewClasses.Loader
                 + (buff.IsSuppressed ? (ko ? " (억제됨)" : " (suppressed)") : "");
         }
 
-        static bool Literal(ContextValue v, out int n)
+        internal static bool Literal(ContextValue v, out int n)
         {
             n = v?.Value ?? 0;
             return v == null || v.ValueType == ContextValueType.Simple;
