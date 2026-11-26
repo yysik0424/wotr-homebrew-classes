@@ -88,7 +88,10 @@ namespace HomebrewClasses.Loader
         internal string Label(ClassFamily family) { return (Korean ? ClassFamilies.Korean : ClassFamilies.English)[(int)family]; }
         internal static ClassFamilyList For(CharGenClassPhaseVM phase)
         {
-            return phase == null ? null : lists.GetValue(phase, p => new ClassFamilyList(p));
+            if (phase == null) return null;
+            var list = lists.GetValue(phase, p => new ClassFamilyList(p));
+            if (!list.Usable) lists.Remove(phase);
+            return list;
         }
     }
 }

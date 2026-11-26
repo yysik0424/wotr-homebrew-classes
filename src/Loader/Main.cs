@@ -19,7 +19,7 @@ namespace HomebrewClasses.Loader
             }
             var ids = ModuleLedger.Modules.Select(m => m.Id).ToArray();
             var routes = BundlePatches.Install(ids, message => entry.Logger.Error(message));
-            ClassPicker.Install(entry.Logger.Error);
+            ClassPicker.Install(entry.Logger.Error, entry.Logger.Log);
             var resolver = new AssemblyNameResolver(ids);
             resolver.Install();
             var classes = new List<ClassHost>(ModuleLedger.Modules.Length);

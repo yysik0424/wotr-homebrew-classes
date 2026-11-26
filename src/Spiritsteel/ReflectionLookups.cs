@@ -8,6 +8,7 @@ namespace Spiritsteel
             return new ReflectionLookup("Assembly-CSharp", type, name, LookupKind.Field, LookupMode.Walk);
         }
         public static readonly ReflectionLookup[] All = {
+            Field("Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff", "m_Flags"),
             Field("Kingmaker.Designers.Mechanics.Facts.BuffExtraEffects", "m_CheckedBuff"),
             Field("Kingmaker.Designers.Mechanics.Facts.BuffExtraEffects", "m_ExtraEffectBuff"),
             Field("Kingmaker.Designers.Mechanics.EquipmentEnchants.AddUnitFeatureEquipment", "m_Feature"),

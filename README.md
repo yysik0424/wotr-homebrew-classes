@@ -4,15 +4,17 @@
 
 Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod Manager mod. Command a pack of animals as a hunter, wear your golem as an alchemist, or fight alongside an ancestral weapon as a barbarian.
 
-> [Download 0.17.24-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.24-beta/HomebrewClasses-0.17.24-beta.zip) · [Release notes and test coverage](release-notes-0.17.24-beta.md)
+> [Download 0.17.25-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.25-beta/HomebrewClasses-0.17.25-beta.zip) · [Release notes and test coverage](release-notes-0.17.25-beta.md)
 
-Character creation and level-up group classes into Core, Base, Hybrid, Alternate, Occult and Prestige. Click a category to expand it and click again to collapse. The controller list shows category labels and sorts by category. Archetypes appear under their parent class. Empty categories are disabled. A modded prestige class appears under Prestige. Unrecognized non-prestige classes appear under Base.
+Spiritsteel has 50 bound-weapon feats, up from 43, with ten picks by level 20. The new options are Strike in Darkness at 6, Spirit Vigil at 8, Close-Quarters Shot and Disruptive Spirit at 10, Spirit Lunge at 12, Disarming Critical at 14 and Spellcleaving Strike at 16.
+
+The category buttons attach directly to the PC class selection screen. Character creation and level-up group classes into Core, Base, Hybrid, Alternate, Occult and Prestige. Click a category to expand it and click again to collapse. The controller list shows category labels and sorts by category. Archetypes appear under their parent class. Empty categories are disabled. A modded prestige class appears under Prestige. Unrecognized non-prestige classes appear under Base.
 
 At level 1, swear an oath to the spirit in your bound weapon and choose one ranger favored enemy. Attacks with that weapon gain a bonus on attack and weapon damage rolls against the chosen foe, including outside rage. The bonus rises from +2 to +4, +6, +8 and +10 at barbarian levels 1, 5, 10, 15 and 20. If a ranger favored enemy bonus also applies, use the higher bonus. The oath is separate from the ten even-level weapon feat picks.
 
 Spiritsteel uses Wisdom for daily rage rounds. With Wisdom 18, you get 8 rounds at level 1 and 46 at level 20. Keeping the spirit awake costs one round per round in total.
 
-Spiritsteel automatically gains stun immunity at level 12 and confusion immunity at level 16 while Spirit Rage is active. Two level-16 weapon feats join the selection. Speed grants one extra full-attack strike and overlaps with haste. Thundering Critical adds sonic damage on confirmed critical hits according to the weapon’s critical multiplier. Choose ten of 43 weapon feats by level 20.
+Spiritsteel automatically gains stun immunity at level 12 and confusion immunity at level 16 while Spirit Rage is active. Two level-16 weapon feats join the selection. Speed grants one extra full-attack strike and overlaps with haste. Thundering Critical adds sonic damage on confirmed critical hits according to the weapon’s critical multiplier.
 
 With the shadow on, Magic Missile and its echo each spend one 1st-level slot. With one slot left, only the original fires.
 
@@ -58,7 +60,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 ## Installation
 
 1. Close the game. If you installed any of the twelve standalone class mods, move their folders outside the game’s `Mods` directory. Keep these backups to restore your previous installation.
-2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.24-beta.zip`.
+2. Select the game in Unity Mod Manager and locate `HomebrewClasses-0.17.25-beta.zip`.
 3. Drag the ZIP into Unity Mod Manager or extract it to the game’s `Mods` directory. Check that `Mods/HomebrewClasses` contains `Info.json`, `HomebrewClasses.dll` and a `classes` folder with 21 DLLs.
 4. Start the game. The archetypes appear in character creation under their base classes.
 
@@ -69,7 +71,7 @@ If a required mod is missing, only that one class is left out. The rest of the m
 In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Managed` directory and `WOTR_CSC` to the Visual Studio Roslyn `csc.exe` executable. Install Unity Mod Manager for the game first. Run this command with a new or empty output directory.
 
 ```powershell
-.\tools\package.ps1 -Version 0.17.24-beta -Out .\out -NoDevCompare
+.\tools\package.ps1 -Version 0.17.25-beta -Out .\out -NoDevCompare
 ```
 
 ## Settings
@@ -2979,7 +2981,7 @@ Barbarian rage produces the first burst, followed shortly by a second burst as t
 
 ### Choices
 
-Choose from the 43 weapon feats below at or above their minimum barbarian level. Up to two elemental traits can be active together. Each adds **1d6, 2d6, 3d6 or 4d6** on a hit at levels 2, 8, 14 or 20 respectively. The elemental dice apply once on a critical. Choose ten by level 20. When multiple insight bonuses apply to the same roll, use the highest.
+Choose from the 50 weapon feats below at or above their minimum barbarian level. Up to two elemental traits can be active together. Each adds **1d6, 2d6, 3d6 or 4d6** on a hit at levels 2, 8, 14 or 20 respectively. The elemental dice apply once on a critical. Choose ten by level 20. When multiple insight bonuses apply to the same roll, use the highest.
 
 | Minimum level | Weapon feat | Effect and requirements |
 |---|---|---|
@@ -3006,14 +3008,20 @@ Choose from the 43 weapon feats below at or above their minimum barbarian level.
 | 6 | Trip | Gain +2 on trip checks with the bound weapon, including Spirit Rage’s trip. |
 | 6 | Adamantine Inscription | Physical hits with the bound weapon count as adamantine for overcoming damage reduction. |
 | 6 | Opening Strike | Gain a +2 insight bonus on attacks of opportunity with the bound weapon. |
+| 6 | Strike in Darkness | Reroll a failed concealment check once when attacking with the bound melee weapon. This overlaps with Blind-Fight. |
 | 8 | Thundering | Adds sonic damage on a hit. |
 | 8 | Keen | Double the bound weapon’s base critical threat range. This overlaps with Improved Critical. |
+| 8 | Spirit Vigil | Make one extra attack of opportunity per round with the bound melee weapon. |
 | 10 | Critical Focus | Gain +4 on confirmation rolls with the bound weapon. This overlaps with Critical Focus. |
+| 10 | Close-Quarters Shot | Shooting or throwing the bound weapon does not provoke attacks of opportunity. |
+| 10 | Disruptive Spirit | Enemies threatened by the bound melee weapon take a +4 increase to the DC to cast defensively. This overlaps with Disruptive. |
 | 12 | Greater Weapon Focus | Gain an additional +1 on attack rolls with the bound weapon. Requires Weapon Focus from the inscription or for its category. Overlaps with Greater Weapon Focus for that category. |
 | 12 | Rooted Stance | Gain a +4 competence bonus to combat maneuver defense (CMD) while wielding the bound weapon. |
 | 12 | Judgment Strike | Bound-weapon hits against evil targets deal an extra 2d6 holy damage, rolled once even on a critical hit. |
+| 12 | Spirit Lunge | Toggle to extend your bound melee weapon attacks by 5 feet on your turn. You take −2 AC until your next turn after switching off (one round in real time). Your reach for attacks of opportunity stays the same. |
 | 14 | Giant-Killer | Gain a +2 insight bonus on bound-weapon attack rolls against Large or larger targets. |
 | 14 | Spirit Fortification | Gain the standard 25% fortification against critical hits and sneak attacks while wielding the bound weapon. |
+| 14 | Disarming Critical | Once per round, a confirmed critical hit with the bound melee weapon triggers a free disarm attempt against an armed foe. Fortification can negate the critical. |
 | 16 | Greater Weapon Specialization | Gain an additional +2 to physical damage with the bound weapon. Requires Weapon Specialization from the inscription or for its category. Overlaps with Greater Weapon Specialization for that category. |
 | 16 | Spirit Evasion | While wielding the bound weapon, take no damage on a successful Reflex save against an effect that normally deals half damage on a success. |
 | 16 | Spell Ward | Gain spell resistance 32 while wielding the bound weapon. Use the highest applicable spell resistance. |
@@ -3026,6 +3034,7 @@ Choose from the 43 weapon feats below at or above their minimum barbarian level.
 | 16 | Speed | On a full attack, make one extra attack with the bound weapon at your highest attack bonus. This does not stack with a haste extra attack. A double weapon gains only one extra attack. |
 | 16 | Thundering Critical | On a confirmed bound-weapon critical hit, add 1d8/2d8/3d8 sonic damage for a weapon critical multiplier of ×2/×3/×4. Fortification that negates the critical also prevents the burst. |
 | 16 | Spirit Sense | Gain blindsense out to 25 feet while wielding the bound weapon. |
+| 16 | Spellcleaving Strike | Once per combat, declare this strike as a free action. Your next bound weapon hit that combat attempts to dispel one beneficial spell on the enemy, choosing the highest caster level. Use your barbarian level for the dispel check. |
 
 When the character feat and inscription apply to the same weapon category, count each tier of Weapon Focus or Weapon Specialization once. At level 12, ordinary longsword specialization (+2) and the bound longsword inscription (+3) give +3 total. The base and Greater tiers add together. At level 20, both tiers of Focus give +2 to hit, and both tiers of Specialization give +7 physical damage with the bound weapon.
 

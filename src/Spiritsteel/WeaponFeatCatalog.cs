@@ -9,7 +9,8 @@ namespace Spiritsteel
         Acid, Fire, Cold, Electricity, Sonic, Ghost, Agile, Keen, Dodge, Focus, Specialization, Critical, Trip, Mobility, Fortitude, Reflex, Will, Initiative, Precise, Shield,
         ColdIron, Adamantine, Watchful, Silent, Charging, Opportunist,
         GreaterFocus = 30, Anchored, GiantSlayer, Fortified, GreaterSpecialization, Evasive, Judgment, SpellWard, Sundering, Unfettered,
-        GroundAssault = 43, FearPursuit, EmberWard, GraveWard, Speed, ThunderingCritical, SpiritSense
+        GroundAssault = 43, FearPursuit, EmberWard, GraveWard, Speed, ThunderingCritical, SpiritSense,
+        SightlessStrike, Vigil, CloseShot, Disrupt, Lunge, DisarmCritical, Spellcleave
     }
 
     // Level thresholds and scope are from the approved 2026-11-24 weapon-feats design.
@@ -115,14 +116,31 @@ namespace Spiritsteel
                 "결속 무기의 치명타가 확정되면 무기 치명타 배율 ×2·×3·×4에서 각각 음파 피해 1d8·2d8·3d8을 추가합니다. 견고화로 치명타가 무효화되면 발동하지 않습니다.", "On a confirmed bound-weapon critical hit, add 1d8/2d8/3d8 sonic damage for a weapon critical multiplier of ×2/×3/×4. Fortification that negates the critical also prevents the burst.", "f09453607e683784c8fca646eec49162"),
             new WeaponFeatRow(WeaponFeatKind.SpiritSense, 16, "신령 감각", "Spirit Sense",
                 "결속 무기를 든 동안 25피트 범위의 비시각 감지(Blindsense)를 얻습니다.", "Gain blindsense out to 25 feet while wielding the bound weapon.", "bb19b581f5a47b44abfe00164f1fcade"),
+            new WeaponFeatRow(WeaponFeatKind.SightlessStrike, 6, "어둠 속의 일격", "Strike in Darkness",
+                "결속 근접 무기의 공격이 은폐로 빗나가면 한 번 다시 굴립니다. 맹목 전투와 함께 한 번만 재굴림합니다.", "Reroll a failed concealment check once when attacking with the bound melee weapon. This overlaps with Blind-Fight.", "4e219f5894ad0ea4daa0699e28c37b1d"),
+            new WeaponFeatRow(WeaponFeatKind.Vigil, 8, "신령의 경계", "Spirit Vigil",
+                "결속 근접 무기로 라운드마다 기회공격을 한 번 더 할 수 있습니다.", "Make one extra attack of opportunity per round with the bound melee weapon.", "0f8939ae6f220984e8fb568abbdfba95"),
+            new WeaponFeatRow(WeaponFeatKind.CloseShot, 10, "근접 사격 숙련", "Close-Quarters Shot",
+                "결속 원거리·투척 무기로 공격할 때 사격으로 인한 기회공격을 유발하지 않습니다.", "Shooting or throwing the bound weapon does not provoke attacks of opportunity.", "05a3b543b0a0a0346a5061e90f293f0b"),
+            new WeaponFeatRow(WeaponFeatKind.Disrupt, 10, "시전 방해", "Disruptive Spirit",
+                "결속 근접 무기로 위협하는 적의 방어적 시전 집중 판정 난이도가 4 증가합니다. 같은 효과와 중복되지 않습니다.", "Enemies threatened by the bound melee weapon take a +4 increase to the DC to cast defensively. This overlaps with Disruptive.", "f3ef866a9da642c4b9f7dcd76c3567fe"),
+            new WeaponFeatRow(WeaponFeatKind.Lunge, 12, "뻗어 찌르기", "Spirit Lunge",
+                "토글을 켜면 자기 차례의 결속 근접 무기 공격 사거리가 5피트 증가합니다. 방어도는 2 감소하며, 토글을 꺼도 다음 자기 차례까지 지속됩니다. 실시간에서는 한 라운드입니다. 기회공격 사거리는 늘지 않습니다.", "Toggle to extend your bound melee weapon attacks by 5 feet on your turn. You take −2 AC until your next turn after switching off (one round in real time). Your reach for attacks of opportunity stays the same.", "d41d5bd9a775d7245929256d58a3e03e"),
+            new WeaponFeatRow(WeaponFeatKind.DisarmCritical, 14, "무장 해제의 일격", "Disarming Critical",
+                "결속 근접 무기로 치명타를 확정하면 라운드당 한 번, 무기를 든 적에게 무료로 무장 해제 전법을 시도합니다. 견고화로 무효화된 치명타에는 발동하지 않습니다.", "Once per round, a confirmed critical hit with the bound melee weapon triggers a free disarm attempt against an armed foe. Fortification can negate the critical.", "25bc9c439ac44fd44ac3b1e58890916f"),
+            new WeaponFeatRow(WeaponFeatKind.Spellcleave, 16, "마법을 가르는 일격", "Spellcleaving Strike",
+                "전투당 한 번 자유 행동으로 선언합니다. 그 전투에서 다음 결속 무기 명중 시 적의 해제 가능한 이로운 주문 중 시전자 레벨이 가장 높은 하나에 해제를 시도합니다. 해제 판정에 바바리안 레벨을 사용합니다.", "Once per combat, declare this strike as a free action. Your next bound weapon hit that combat attempts to dispel one beneficial spell on the enemy, choosing the highest caster level. Use your barbarian level for the dispel check.", "143775c49ae6b7446b805d3b2e702298"),
         };
 
         internal bool Element { get { return Kind <= WeaponFeatKind.Sonic; } }
+        internal bool MeleeOnly => Kind == WeaponFeatKind.SightlessStrike || Kind == WeaponFeatKind.Vigil ||
+            Kind == WeaponFeatKind.Disrupt || Kind == WeaponFeatKind.Lunge || Kind == WeaponFeatKind.DisarmCritical;
         internal bool OnBothHeads
         {
             get
             {
-                return Element || Kind == WeaponFeatKind.Ghost || Kind == WeaponFeatKind.Agile ||
+                return Kind == WeaponFeatKind.SightlessStrike || Kind == WeaponFeatKind.Vigil || Kind == WeaponFeatKind.CloseShot ||
+                    Kind == WeaponFeatKind.Disrupt || Kind == WeaponFeatKind.DisarmCritical || Element || Kind == WeaponFeatKind.Ghost || Kind == WeaponFeatKind.Agile ||
                     Kind == WeaponFeatKind.Keen || Kind == WeaponFeatKind.Focus || Kind == WeaponFeatKind.Specialization ||
                     Kind == WeaponFeatKind.Critical || Kind == WeaponFeatKind.Precise ||
                     Kind == WeaponFeatKind.ColdIron || Kind == WeaponFeatKind.Adamantine ||
@@ -165,6 +183,9 @@ namespace Spiritsteel
         {
             table.Add("weaponfeat.selection.name", ("무기 피트", "Weapon Feat"));
             table.Add("weaponfeat.selection.desc", ("짝수 스피릿스틸 레벨마다 결속 무기에 영구 특성 하나를 붙입니다. 원소는 두 종류까지 익히며 함께 발동합니다.", "At each even Spiritsteel level, teach your bound weapon one permanent trait. Up to two elements can be learned and both apply on a hit."));
+            table.Add("weaponfeat.melee.requirement", ("결속 근접 무기", "Bound melee weapon"));
+            table.Add("weaponfeat.CloseShot.requirement", ("결속 원거리 또는 투척 무기", "Bound ranged or thrown weapon"));
+            table.Add("weaponfeat.Spellcleave.spent", ("전투 중 한 번 선언할 수 있습니다.", "Can be declared once per combat."));
             table.Add("weaponfeat.element.limit", ("배운 원소가 두 종류 미만", "Fewer than two elements learned"));
             table.Add("weaponfeat.next", ("현재 {0} · 바바리안 {1}레벨에 {2}", "Current {0} · At barbarian level {1}: {2}"));
             table.Add("weaponfeat.final", ("현재 {0} (최종 단계)", "Current {0} (maximum)"));

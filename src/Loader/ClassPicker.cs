@@ -5,7 +5,7 @@ using HarmonyLib;
 using Kingmaker.UI.MVVM._ConsoleView.CharGen.Phases.Class;
 using Kingmaker.UI.MVVM._PCView.CharGen.Phases.Class;
 using Kingmaker.UI.MVVM._VM.CharGen.Phases.Class;
-using Kingmaker.UI.MVVM._VM.Other.NestedSelectionGroup;
+using UniRx;
 using Owlcat.Runtime.UI.VirtualListSystem;
 using TMPro;
 using UnityEngine;
@@ -16,28 +16,36 @@ namespace HomebrewClasses.Loader
     {
         internal const string Owner = "HomebrewClasses.ClassPicker";
         static readonly Type pc = typeof(CharGenClassSelectorPCView);
-        static readonly PropertyInfo model = AccessTools.Property(pc, "ViewModel");
+        static readonly Type phaseView = typeof(CharGenClassPhaseDetailedPCView);
+        static readonly PropertyInfo model = AccessTools.Property(phaseView, "ViewModel");
+        static readonly FieldInfo visibleRows = AccessTools.Field(pc, "VisibleCollection");
         internal static readonly MethodInfo Refresh = AccessTools.Method(pc, "OnCollectionChanged");
         static readonly FieldInfo virtualList = AccessTools.Field(pc, "VirtualList");
         static readonly FieldInfo viewport = AccessTools.Field(typeof(VirtualListComponent), "m_Viewport");
         static readonly PropertyInfo consoleModel = AccessTools.Property(typeof(CharGenClassSelectorItemConsoleView), "ViewModel");
         static Action<string> log;
-        static bool reported;
+        static Action<string> info;
 
-        internal static void Install(Action<string> error)
+        internal static void Install(Action<string> error, Action<string> trace)
         {
             log = error;
+            info = trace;
             var harmony = new Harmony(Owner);
             try
             {
-                if (model == null || Refresh == null || virtualList == null || viewport == null || consoleModel == null)
+                if (visibleRows == null || model == null || Refresh == null || virtualList == null || viewport == null)
                     throw new MissingMemberException("Class picker view bindings");
-                Patch(harmony, pc, "get_HasFilter", nameof(EnableFilter));
-                Patch(harmony, pc, "IsVisible", nameof(FilterRow));
+                Patch(harmony, phaseView, "BindViewImplementation", nameof(BindClassPhase));
+                Trace("PC class phase hook installed");
+            }
+            catch (Exception e) { Report(e); }
+            try
+            {
+                if (consoleModel == null) throw new MissingMemberException("Controller class picker view model");
                 Patch(harmony, typeof(CharGenClassSelectorConsoleView), "EntityComparer", nameof(ConsoleOrder));
                 Patch(harmony, typeof(CharGenClassSelectorItemConsoleView), "RefreshView", nameof(ConsoleLabel));
             }
-            catch (Exception e) { harmony.UnpatchAll(Owner); Report(e); }
+            catch (Exception e) { Report(e); }
         }
         static void Patch(Harmony harmony, Type type, string method, string postfix)
         {
@@ -45,32 +53,34 @@ namespace HomebrewClasses.Loader
         }
         internal static void Report(Exception e)
         {
-            if (reported) return;
-            reported = true;
-            if (log != null) log("Class picker: " + e);
+            log?.Invoke("Class picker: " + e);
         }
-        static void EnableFilter(CharGenClassSelectorPCView __instance, ref bool __result)
+        internal static void Trace(string message) { info?.Invoke("Class picker: " + message); }
+
+        // Both PC creation and level-up bind their selector in this concrete method.
+        // VisibleCollection is the same reactive collection that the virtual list renders.
+        static void BindClassPhase(CharGenClassPhaseDetailedPCView __instance, CharGenClassSelectorPCView ___ClassListSelectorPcView)
         {
-            var bar = __instance.GetComponent<ClassFamilyBar>();
+            ClassFamilyBar bar = null;
             try
             {
-                var group = (NestedSelectionGroupRadioVM<CharGenClassSelectorItemVM>)model.GetValue(__instance, null);
-                if (bar != null && bar.Matches(group)) { __result |= bar.Filtering; return; }
-                var phase = group == null ? null : group.NestedEntityCollections.Keys.OfType<CharGenClassPhaseVM>().FirstOrDefault();
-                var list = ClassFamilyList.For(phase);
-                if (list == null || !list.Usable) { if (bar != null) bar.ResetView(); return; }
-                if (bar == null) bar = __instance.gameObject.AddComponent<ClassFamilyBar>();
-                var scroll = (VirtualListComponent)virtualList.GetValue(__instance);
-                bar.Bind(__instance, group, phase, list, (RectTransform)viewport.GetValue(scroll), scroll);
-                __result |= bar.Filtering;
+                var view = ___ClassListSelectorPcView;
+                bar = view.GetComponent<ClassFamilyBar>();
+                var phase = (CharGenClassPhaseVM)model.GetValue(__instance, null);
+                var families = ClassFamilyList.For(phase);
+                if (families == null || !families.Usable)
+                {
+                    if (bar != null) bar.ResetView();
+                    Trace("skipped phase " + phase?.Mode);
+                    return;
+                }
+                var scroll = (VirtualListComponent)virtualList.GetValue(view);
+                var rows = (ReactiveCollection<CharGenClassSelectorItemVM>)visibleRows.GetValue(view);
+                if (bar == null) bar = view.gameObject.AddComponent<ClassFamilyBar>();
+                bar.Bind(view, phase, families, (RectTransform)viewport.GetValue(scroll), scroll, rows);
+                Trace(phase.Mode + " bound, " + rows.Count + " visible rows");
             }
             catch (Exception e) { if (bar != null) bar.ResetView(); Report(e); }
-        }
-        static void FilterRow(CharGenClassSelectorPCView __instance, CharGenClassSelectorItemVM __0, ref bool __result)
-        {
-            if (!__result) return;
-            var bar = __instance.GetComponent<ClassFamilyBar>();
-            if (bar != null && bar.Filtering) __result = bar.Shows(__0);
         }
         static void ConsoleOrder(CharGenClassSelectorItemVM __0, CharGenClassSelectorItemVM __1, ref int __result)
         {

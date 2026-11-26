@@ -19,28 +19,30 @@ namespace HomebrewClasses.Loader
         GameObject toolbar;
         CharGenClassSelectorPCView view;
         VirtualListComponent scroll;
-        object boundGroup;
+        ReactiveCollection<CharGenClassSelectorItemVM> visibleRows;
+        IDisposable sourceChanges;
         ClassFamilyList list;
         ClassFamily? open;
         IDisposable selectionChanges;
         bool reserved;
+        bool reportLayout;
         internal bool Filtering { get { return toolbar != null && list != null; } }
-        internal bool Matches(object group) { return group != null && ReferenceEquals(group, boundGroup); }
         internal bool Shows(CharGenClassSelectorItemVM row)
         {
             ClassFamily family;
             return !list.FamilyOf(row, out family) || open == family;
         }
-        internal void Bind(CharGenClassSelectorPCView selector, object group, CharGenClassPhaseVM phase, ClassFamilyList families, RectTransform area, VirtualListComponent virtualList)
+        internal void Bind(CharGenClassSelectorPCView selector, CharGenClassPhaseVM phase, ClassFamilyList families, RectTransform area, VirtualListComponent virtualList, ReactiveCollection<CharGenClassSelectorItemVM> rows)
         {
             ResetView();
             if (area == null || area.parent == null) throw new InvalidOperationException("Class selector viewport is missing.");
-            var fontSource = selector.SlotPrefabs[0].GetComponentInChildren<TextMeshProUGUI>(true);
+            var fontSource = selector.GetComponentInChildren<TextMeshProUGUI>(true);
+            if (fontSource == null && selector.SlotPrefabs.Count > 0) fontSource = selector.SlotPrefabs[0].GetComponentInChildren<TextMeshProUGUI>(true);
             if (fontSource == null) throw new InvalidOperationException("Class selector font is missing.");
             view = selector;
             scroll = virtualList;
             viewport = area;
-            boundGroup = group;
+            visibleRows = rows;
             list = families;
             open = families.First;
 
@@ -54,12 +56,34 @@ namespace HomebrewClasses.Loader
             rect.offsetMax = area.offsetMax;
             for (int i = 0; i < buttons.Length; i++) CreateButton(rect, i, fontSource);
             Reserve(true);
+            reportLayout = true;
             UpdateButtons();
+            ApplyFilter(visibleRows);
+            sourceChanges = phase.ClassSelector.NestedEntityCollections.ObserveCountChanged().Subscribe(_ => ApplyFilter(visibleRows));
             selectionChanges = phase.SelectedClassVM.Skip(1).Subscribe(row =>
             {
                 ClassFamily family;
                 if (list != null && list.FamilyOf(row, out family) && open != family) SetOpen(family);
             });
+        }
+        internal void ApplyFilter(ReactiveCollection<CharGenClassSelectorItemVM> rows)
+        {
+            for (int i = rows.Count - 1; i >= 0; i--)
+                if (!Shows(rows[i])) rows.RemoveAt(i);
+        }
+        void LateUpdate()
+        {
+            if (!reportLayout || toolbar == null || !toolbar.activeInHierarchy) return;
+            var rect = (RectTransform)toolbar.transform;
+            if (rect.rect.width <= 0 || rect.rect.height <= 0) return;
+            reportLayout = false;
+            var canvas = toolbar.GetComponentInParent<Canvas>();
+            var camera = canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay ? canvas.worldCamera : null;
+            var corners = new Vector3[4];
+            rect.GetWorldCorners(corners);
+            var bottom = RectTransformUtility.WorldToScreenPoint(camera, corners[0]);
+            var top = RectTransformUtility.WorldToScreenPoint(camera, corners[2]);
+            ClassPicker.Trace("six buttons at " + bottom + " to " + top + " on " + Screen.width + "x" + Screen.height);
         }
         void CreateButton(RectTransform parent, int i, TextMeshProUGUI source)
         {
@@ -106,6 +130,8 @@ namespace HomebrewClasses.Loader
                 open = family;
                 UpdateButtons();
                 ClassPicker.Refresh.Invoke(view, null);
+                ApplyFilter(visibleRows);
+                ClassPicker.Trace("selected " + (open?.ToString() ?? "none") + ", " + visibleRows.Count + " visible rows");
                 if (scroll.ScrollController != null) scroll.ScrollController.ForceScrollToTop();
             }
             catch (Exception e) { ClassPicker.Report(e); }
@@ -135,6 +161,8 @@ namespace HomebrewClasses.Loader
         {
             if (selectionChanges != null) selectionChanges.Dispose();
             selectionChanges = null;
+            sourceChanges?.Dispose();
+            sourceChanges = null;
             Reserve(false);
             reserved = false;
             if (toolbar != null) { toolbar.SetActive(false); Destroy(toolbar); }
@@ -143,7 +171,7 @@ namespace HomebrewClasses.Loader
             scroll = null;
             view = null;
             list = null;
-            boundGroup = null;
+            visibleRows = null;
         }
     }
 }

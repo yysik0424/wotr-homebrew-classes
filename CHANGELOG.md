@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.17.25-beta
+
+- PC에서 분류 버튼을 직업 선택 화면에 직접 연결했습니다. 코어·베이스·하이브리드·얼터네이트·오컬트·프레스티지 중 하나를 누르면 해당 직업과 아키타입이 표시되고, 같은 분류를 다시 누르면 접힙니다.
+- 스피릿스틸의 결속 무기 피트가 43종에서 50종으로 늘었습니다. 20레벨까지 고르는 횟수는 10회입니다. 6레벨에 은폐 재굴림, 8레벨에 추가 기회공격, 10레벨에 근접 사격 숙련과 시전 방해, 12레벨에 뻗어 찌르기, 14레벨에 무장 해제의 일격, 16레벨에 마법을 가르는 일격을 고를 수 있습니다.
+- The six category buttons now attach directly to the PC class selection screen in character creation and level-up. Click a category to show its classes and archetypes. Click it again to collapse it.
+- Spiritsteel has 50 bound-weapon feats, up from 43, with ten picks by level 20. The new options are Strike in Darkness at 6, Spirit Vigil at 8, Close-Quarters Shot and Disruptive Spirit at 10, Spirit Lunge at 12, Disarming Critical at 14 and Spellcleaving Strike at 16.
+
 ## 0.17.24-beta
 
 - 캐릭터 생성·레벨업의 직업 목록을 여섯 분류로 나눕니다. 마우스로 분류를 접고 펼칠 수 있습니다.
