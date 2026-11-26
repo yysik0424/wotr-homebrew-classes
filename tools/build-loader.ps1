@@ -36,7 +36,7 @@ $g = Join-Path $generatedDir 'ModuleLedger.g.cs'
 $body = @('namespace HomebrewClasses.Loader { internal static class ModuleLedger { internal static readonly ModuleInfo[] Modules = {') + $lines.ToArray() + @('}; } }')
 [IO.File]::WriteAllLines($g, [string[]]$body, [Text.Encoding]::UTF8)
 $info | Add-Member -NotePropertyName LoadAfter -NotePropertyValue ([string[]]$ordering.ToArray())
-$refs = @('Assembly-CSharp.dll','UnityModManager\UnityModManager.dll','UnityModManager\0Harmony.dll','UnityEngine.dll','UnityEngine.CoreModule.dll','UnityEngine.IMGUIModule.dll','Owlcat.Runtime.UI.dll','UniRx.dll','UnityEngine.UI.dll','UnityEngine.UIModule.dll','Unity.TextMeshPro.dll','netstandard.dll') | ForEach-Object { '/reference:'+(Join-Path $Script:GameManaged $_) }
+$refs = @('Assembly-CSharp.dll','UnityModManager\UnityModManager.dll','UnityModManager\0Harmony.dll','UnityEngine.dll','UnityEngine.CoreModule.dll','UnityEngine.IMGUIModule.dll','Owlcat.Runtime.Core.dll','Owlcat.Runtime.UI.dll','UniRx.dll','UnityEngine.UI.dll','UnityEngine.UIModule.dll','Unity.TextMeshPro.dll','netstandard.dll') | ForEach-Object { '/reference:'+(Join-Path $Script:GameManaged $_) }
 $src = @(Get-ChildItem -LiteralPath $loaderDir -Filter '*.cs' -File | ForEach-Object {$_.FullName})
 & $Script:Csc @Script:LibCscFlags @refs '/reference:System.Xml.dll' '/reference:System.Core.dll' ('/out:'+(Join-Path $out $info.AssemblyName)) @src $g
 if ($LASTEXITCODE -ne 0) { throw "Loader compilation failed (exit $LASTEXITCODE)." }

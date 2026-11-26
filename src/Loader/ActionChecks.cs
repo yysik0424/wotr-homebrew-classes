@@ -165,7 +165,7 @@ namespace HomebrewClasses.Loader
             var bp = ability.Blueprint;
             bool charge = bp.GetComponent<AbilityCustomCharge>() != null;
             string weapon = charge || bp.GetComponent<AbilityDeliverAttackWithWeapon>() != null
-                ? WeaponPreview.Describe(ability.Caster.Unit, target, ko, charge) : null;
+                ? WeaponPreview.Describe(ability.Caster.Unit, target, ko, charge, false) : null;
             if (!Revealed(target, UnitInfoPart.Defence))
             {
                 var text = Summary(bp, ko, null);
@@ -181,7 +181,7 @@ namespace HomebrewClasses.Loader
                 var estimate = HitEstimate.Ability(ability, target, a, ko);
                 if (estimate != null) parts.Add(estimate);
                 bool touch = a == AttackType.Touch || a == AttackType.RangedTouch;
-                parts.Add(AttackName(a, ko) + (touch ? (ko ? " · 접촉 AC " : " · touch AC ") : " · AC ") + (touch ? target.Stats.AC.Touch : target.Stats.AC.ModifiedValue));
+                if (estimate == null) parts.Add(AttackName(a, ko) + (touch ? (ko ? " · 접촉 AC " : " · touch AC ") : " · AC ") + (touch ? target.Stats.AC.Touch : target.Stats.AC.ModifiedValue));
             }
             if (c.SpellResistance && !(bp.IgnoreSpellResistanceForAlly && ability.Caster.Unit.IsAlly(target)))
             {

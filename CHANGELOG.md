@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.37-beta
+
+턴제에서 적을 가리키면 현재 상태로 **본체를 맞힐 예상 확률**을 표시합니다. 알려진 방어도와 무방비, 협공, 주적, 은폐와 은폐 재굴림, 환영 분신, 고정 d20과 해석 가능한 명중 재굴림을 계산합니다. 일반 무기는 전력공격 시의 후속타와 보조 무기·자연 무기의 확률도 현재 상태 기준으로 보여줍니다. 예를 들어 명중 +12 대 AC 20은 65%, 은폐 20%를 적용하면 52%, 거기에 분신이 세 개면 본체 적중은 13%입니다.
+
+In turn-based combat, hovering a target shows the **estimated chance to hit the real target**. The estimate uses revealed AC, flat-footed and flanking conditions, favored enemy bonuses, concealment and its rerolls, mirror images, and supported fixed or rerolled attack dice. Weapon full-attack follow-ups, off-hand weapons and natural attacks show their own chances at the current state. For example, +12 against AC 20 gives 65%, falling to 52% against 20% concealment and to 13% against three additional mirror images.
+
 ## 0.17.36-beta
 
 무리 조련사는 도보로 전투에 들어가도 주 동물 동료와 같은 종의 보조 동물을 자동으로 부릅니다. 헌터 7~12레벨에는 1마리, 13레벨부터는 2마리가 합류합니다. 전투 중 승하차해도 같은 무리가 계속 싸우며, 쓰러진 보조 동물은 다음 전투에 돌아옵니다.

@@ -1,7 +1,7 @@
 {
   "Id": "HomebrewClasses",
   "DisplayName": "홈브류 직업 모음 / Homebrew Classes",
-  "Version": "0.17.36-beta",
+  "Version": "0.17.37-beta",
   "ManagerVersion": "0.27.11",
   "AssemblyName": "HomebrewClasses.dll",
   "EntryMethod": "HomebrewClasses.Loader.Main.Load",

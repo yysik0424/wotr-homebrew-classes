@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Kingmaker.UnitLogic;
 using Kingmaker.Blueprints;
 using Kingmaker.Designers.Mechanics.Facts;
 using Kingmaker.EntitySystem.Entities;
@@ -18,13 +19,6 @@ namespace HomebrewClasses.Loader
             return 5 * Math.Min(19, Math.Max(1, 21 + attack - armor));
         }
 
-        internal static string Band(int current, int low, int high)
-        {
-            if (low == high) return current + "%";
-            if (current - low == high - current) return current + "% (±" + (high - current) + "%p)";
-            return current + "% (" + low + "–" + high + "%)";
-        }
-
         internal static string Ability(AbilityData ability, UnitEntityData target, AttackType type, bool ko)
         {
             var caster = ability.Caster.Unit;
@@ -33,45 +27,35 @@ namespace HomebrewClasses.Loader
             var projectile = delivery.GetComponent<AbilityDeliverProjectile>();
             bool touch = type == AttackType.Touch || type == AttackType.RangedTouch;
             bool ranged = type == AttackType.RangedTouch || type == AttackType.Ranged;
-            var stat = projectile != null && projectile.ReplaceAttackRollBonusStat ? projectile.AttackRollBonusStat :
+            var stat = projectile != null && projectile.ReplaceAttackRollBonusStat ? (caster.State.Features.DomainsByIntelligenceFeature ? StatType.Intelligence : projectile.AttackRollBonusStat) :
                 projectile?.Weapon != null && projectile.Weapon.AttackBonusStat != StatType.Unknown ? projectile.Weapon.AttackBonusStat :
                 ranged ? StatType.Dexterity : StatType.Strength;
             var attribute = caster.Stats.GetStat(stat) as ModifiableValueAttributeStat;
             if (attribute == null) return null;
-            var facts = caster.Facts.List.Where(f => f.Active);
-            int bonus = caster.Stats.BaseAttackBonus.ModifiedValue + caster.Stats.AdditionalAttackBonus.ModifiedValue + attribute.Bonus;
-            if (ranged && (target.CombatState.EngagedBy.Any(u => u != caster && !caster.IsEnemy(u)) ||
-                target.CombatState.EngagedUnits.Any(u => u != caster && !caster.IsEnemy(u))) &&
-                !facts.Any(f => f.Blueprint.GetComponent<PreciseShot>() != null)) bonus -= 4;
-            if (!ranged && target.CombatState.IsFlanked) bonus += 2;
-            int ac = touch ? target.Stats.AC.Touch : target.Stats.AC.ModifiedValue;
-            int flat = touch ? target.Stats.AC.FlatFootedTouch : target.Stats.AC.FlatFooted;
-            int chance = Percent(bonus, ac);
-            int lowBonus = bonus, highBonus = bonus;
-            string variable = null;
-            if (ranged)
-            {
-                // DistanceAttackBonus checks center distance against range plus both units' corpulence.
-                // A single component can be shown without guessing stacking rules of multiple mods.
-                var distances = facts.SelectMany(f => f.Blueprint.GetComponents<DistanceAttackBonus>()).Take(2).ToArray();
-                if (distances.Length == 1 && distances[0].AttackBonus != 0)
+            var odds = AttackOdds.Read(caster, target, type, projectile?.IsHandOfTheApprentice == true);
+            var spellWeapon = projectile?.Weapon;
+            int focusBonus = 0;
+            if (spellWeapon != null)
+                foreach (var fact in caster.Facts.List.Where(f => f.Active))
+                foreach (var component in fact.Blueprint.ComponentsArray)
                 {
-                    var d = distances[0];
-                    var within = caster.DistanceTo(target) <= d.Range.Meters + caster.Corpulence + target.Corpulence;
-                    int inside = Percent(bonus + d.AttackBonus, ac);
-                    chance = within ? inside : chance;
-                    variable = (ko ? "거리 조건 안/밖 " : "inside/outside range ") + inside + "%/" + Percent(bonus, ac) + "%";
-                    lowBonus += Math.Min(0, d.AttackBonus);
-                    highBonus += Math.Max(0, d.AttackBonus);
-                    if (within) bonus += d.AttackBonus;
+                    if (component is WeaponFocus focus && focus.WeaponType == spellWeapon.Type)
+                        focusBonus += focus.AttackBonus * fact.GetRank();
+                    if (component is WeaponFocusParametrized choice && fact is Feature feature && feature.Param == spellWeapon.Type.Category)
+                        focusBonus += caster.Progression.Features.Enumerable.Any(f => f.Param == feature.Param && f.Blueprint == choice.MythicFocus) ? 2 : 1;
                 }
-            }
-            int flatChance = Percent(bonus, flat);
-            string band = Band(chance, Percent(lowBonus, Math.Max(ac, flat)), Percent(highBonus, Math.Min(ac, flat)));
-            string text = (touch ? (ko ? "기본 접촉 명중 추정 " : "estimated base touch hit ") : (ko ? "기본 명중 추정 " : "estimated base hit ")) + band
-                + (ko ? " · 명중 " : " · attack ") + bonus.ToString("+0;-0;+0");
-            if (flatChance != chance) text += (ko ? " · 무방비 시 " : " · if flat-footed ") + flatChance + "%";
-            if (variable != null) text += " · " + variable;
+            int bonus = caster.Stats.BaseAttackBonus.ModifiedValue + caster.Stats.AdditionalAttackBonus.ModifiedValue + attribute.Bonus + focusBonus + odds.TargetBonus;
+            string chance = odds.BandAt(bonus);
+            string text = (touch ? (ko ? "예상 본체 접촉 명중 " : "estimated touch hit on target ") : (ko ? "예상 본체 명중 " : "estimated hit on target "))
+                + chance + " (" + bonus.ToString("+0;-0;+0") + (touch ? (ko ? " / 접촉 AC " : " / touch AC ") : " / AC ") + odds.Armor + ")";
+            if (odds.RangeAdjustment != odds.AlternateRangeAdjustment)
+                text += (ko ? " · 거리 조건 변경 시 " : " · other range ") +
+                    odds.At(bonus - odds.RangeAdjustment + odds.AlternateRangeAdjustment, odds.Armor);
+            int flat = touch ? target.Stats.AC.FlatFootedTouch : target.Stats.AC.FlatFooted;
+            int ordinary = touch ? target.Stats.AC.Touch : target.Stats.AC.ModifiedValue;
+            if (!odds.FlatFooted && flat != ordinary)
+                text += (ko ? " · 무방비 시 " : " · if flat-footed ") + odds.At(bonus, odds.Armor + flat - ordinary);
+            text += odds.Details(ko);
             return text;
         }
     }

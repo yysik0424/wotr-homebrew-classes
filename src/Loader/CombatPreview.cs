@@ -186,8 +186,16 @@ namespace HomebrewClasses.Loader
             if (evt.AutoHit) return evt.Result == AttackResult.Hit ? (ko ? "자동 명중" : "automatic hit") :
                 (ko ? "자동 명중 · " : "automatic hit · ") + outcome;
             if (evt.D20 == null || !evt.D20.IsTriggered) return outcome;
-            return "d20 " + evt.D20.Result + evt.AttackBonus.ToString(" +0; −0; +0") + " = " + evt.Roll +
+            string result = "d20 " + evt.D20.Result + evt.AttackBonus.ToString(" +0; −0; +0") + " = " + evt.Roll +
                 " / AC " + evt.TargetAC + " · " + outcome;
+            if (evt.Initiator != null && evt.ACRule != null)
+            {
+                // The resolved rule carries the target-specific bonus and AC after native and mod listeners.
+                // Keep rerolls and avoidance separate from the d20 threshold shown here.
+                double chance = AttackOdds.Chance(evt.AttackBonus, evt.TargetAC, evt.Initiator.State.Features.AlwaysChance, 0, 0, 0, 0, 0, 0);
+                result += (ko ? " · 실제 보정 d20 1회 " : " · single d20 at resolved modifiers ") + Math.Round(chance) + "%";
+            }
+            return result;
         }
 
         public void OnEventDidTrigger(RuleAttackRoll evt)
