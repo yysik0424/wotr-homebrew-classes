@@ -1806,7 +1806,7 @@ Kept: spellcasting, the first blessing, bonus feats (levels 3, 6, 9, 12, 15, 18)
 |---|---|---|
 | 1 | Chaos Rage | Free action, in combat only. +4 Strength and Constitution, +2 Will saves, -2 AC. Uses per day: max(1, half warpriest level + Wisdom modifier). You can cast spells while raging and are not fatigued afterwards |
 | 1 | Frenzied Casting (part of Chaos Rage) | Once per combat, the first eligible warpriest spell you cast while raging is cast as a swift action. Spell level cap 1 (2 at 7th level, 3 at 10th, 4 at 13th, 5 at 16th, 6 at 19th) |
-| 1 | Pain (part of Chaos Rage) | Each melee weapon hit on an enemy while raging adds 1 stack: -1 attack rolls, saves and skill checks per stack (at most -5) for 3 rounds. At 8 stacks the target makes a Will save (DC 10 + half warpriest level + Wisdom modifier) or is confused for 1d4 rounds |
+| 1 | Pain (part of Chaos Rage) | Each melee weapon hit on an enemy while raging adds 1 stack: -1 attack rolls, saves and skill checks per stack (at most -5) for 3 rounds. At 8 stacks the target makes a Will save (DC 10 + half warpriest level + Wisdom modifier) or is confused for 1d2 rounds |
 | 1 | Mutations of Madness | Each time you start a rage, 1-3 mutations (up to 4-8 at higher levels) are drawn at random from 32. A mutation drawn again stacks. All end with the rage |
 | 3 | Chaos Rage: magic natural weapons | While raging, your natural weapon attacks count as magic |
 | 7 | Chaos Rage: cold iron and silver natural weapons | While raging, your natural weapon attacks also count as cold iron and silver |
@@ -1865,11 +1865,14 @@ Kept: spellcasting, the first blessing, bonus feats (levels 3, 6, 9, 12, 15, 18)
 - A mutation that would do nothing now is not drawn (that draw is made among the others):
   - Natural attacks whose slots are full: one bite, one gore, one tail, and two claws and pincers combined. The same attacks from your race, a polymorph or other effects count. The other natural attacks (Extra Arm, Tentacle, Stinger, Wings, Hooves, Talons, Neuro-Stinger) have no limit.
   - Tough Hide, Horrific Form and Long Limbs once already drawn (once per rage).
-- In a rage begun while polymorphed, the 12 natural attack mutations do not appear (which makes the other mutations more likely).
+- If you become a wolf and then rage, you keep the wolf’s bite. The rage draws the usual number of mutations from the remaining eligible options, including harmful ones. It excludes the 12 natural attack mutations from that draw. Changing shape after starting a rage does not reroll its mutations.
 - Natural attacks: each adds one 1d6 natural attack to your full attack. While you hold a weapon it is a secondary attack (-5 on the attack roll, half the Strength bonus).
 - All mutations end when the rage ends. They do not change during a rage (a rage that is suppressed and then resumes keeps the mutations it already has). If you level up during a rage and your features are reapplied, the mutations are drawn again from scratch.
 
 #### Pain
+
+In development version 0.17.45-beta, confusion at eight pain stacks lasts 1d2 rounds for the target and for enemies affected by the level-10 spread.
+
 
 - When it stacks: every time the chaos warrior **hits with a melee weapon attack while raging** (natural attacks and attacks of opportunity count, ranged attacks do not) and the creature hit is an **enemy**. Hitting an ally applies nothing.
 - How much per hit: 1 stack, plus 1 for each time Amplified Pain was drawn, plus 1 for each time Pain Resonance was drawn, plus 1 if the hit was with the Neuro-Stinger.
@@ -1881,14 +1884,14 @@ Kept: spellcasting, the first blessing, bonus feats (levels 3, 6, 9, 12, 15, 18)
 - Threshold (8 stacks): the moment one chaos warrior's pain reaches 8 or more stacks (it triggers only once even if a single hit jumps past the threshold):
   1. That chaos warrior's pain is removed from the target, whether or not the save succeeds.
   2. The target makes a Will save. DC = 10 + half warpriest level (rounded down) + Wisdom modifier.
-  3. On a failure it is confused for 1d4 rounds (the base game's confusion condition).
+  3. On a failure it is confused for 1d2 rounds (the base game's confusion condition).
 - Creatures immune to mind-affecting effects: pain still builds but stops at 8 stacks. There is no save, no confusion and the pain is not removed (the -5 penalty lasts under the normal 3-round rule).
 - Dispel magic removes only the penalty; the stack count stays, and the next hit restores the penalty to match it.
 - The target's buff tooltip does not show the stack count.
 
 #### Spreading Madness
 
-- Automatic from 10th level. When pain reaches its threshold and the target makes its Will save, every **other enemy** within 15 ft of the target (alive and not immune to mind-affecting effects) makes a Will save against the same DC. Each one that fails is confused for 1d4 rounds.
+- Automatic from 10th level. When pain reaches its threshold and the target makes its Will save, every **other enemy** within 15 ft of the target (alive and not immune to mind-affecting effects) makes a Will save against the same DC. Each one that fails is confused for 1d2 rounds.
 - Allies are never affected. Nearby enemies do not need any pain stacks of their own.
 
 ### Choices
@@ -1998,7 +2001,7 @@ Two-sided mutations (5) - the upside and the downside come together, and drawing
 
 ### Overview
 
-The Chimera Monk reshapes the body through practice. Every two levels from level 2 you pick one of eighteen mutations, adding natural attacks such as a tail, bite, claw or horns, or scales, wings, a breath weapon or extra organs. Drinking the chimeric mutagen in combat raises an ability score and your natural armor, and pushes every mutation you own one step further. Flurry of blows, unarmed strike, the Wisdom bonus to AC and ki powers all work exactly as they do for a base monk; the price is four Style Strike selections plus Fast Movement and Still Mind.
+The Chimera Monk reshapes the body through practice. Every two levels from level 2 you pick one of seventeen mutations, adding natural attacks such as a tail, bite, claw or horns, or scales, wings, a breath weapon or extra organs. Drinking the chimeric mutagen in combat raises the chosen ability score, and pushes every mutation you own one step further. Flurry of blows, unarmed strike, the Wisdom bonus to AC and ki powers all work exactly as they do for a base monk; the price is four Style Strike selections plus Fast Movement and Still Mind.
 
 ### What you give up
 
@@ -2014,25 +2017,27 @@ The monk bonus feats at levels 1, 2, 6, 10, 14 and 18 are kept. Flurry of blows,
 
 | Level | Feature | Effect |
 |---|---|---|
-| 1 | Feral Combat Training (a DarkCodex feat) | Granted automatically. DarkCodex's feat that lets natural weapons be used like unarmed strikes |
-| 1 | Chimeric Mutagen | Standard action. +4 alchemical bonus to Strength, Dexterity or Wisdom (+6 at level 10, +8 at level 16) and +2 natural armor (+4, +6). Lasts 1 round per monk level, 3 + Wisdom modifier uses per day (minimum 1). Empowers every mutation while it lasts |
+| 1 | Feral Combat Training (a DarkCodex feat) | Grants eligible unarmed effects such as Stunning Fist to natural attacks |
+| 1 | Chimeric Mutagen | Standard action. +4 alchemical bonus to Strength, Dexterity or Wisdom (+6 at level 10, +8 at level 16). Lasts 1 round per monk level, 3 + Wisdom modifier uses per day (minimum 1). Empowers every mutation while it lasts |
 | 1 | Chimeric Body | The damage dice of natural weapon mutations grow with monk level (1d4 up to 1d8; 1d6 up to 1d10 while mutated). Not shown on the character sheet |
-| 2, 4, 6, 8, 10, 12, 14, 16, 18 | Chimeric Mutation | Choose one of eighteen mutations. Nine picks in total, each mutation once |
+| 2, 4, 6, 8, 10, 12, 14, 16, 18 | Chimeric Mutation | Choose one of seventeen mutations. Nine picks in total, each mutation once |
 
 Numbers that rise automatically with level: the mutagen bonuses (levels 10 and 16), natural weapon dice (levels 8 and 16), Scales (levels 5, 10, 15 and 20) and breath dice (every two levels).
 
 ### Abilities in detail
 
+Development version 0.17.45-beta removes the base natural armor from the chimeric mutagen. Scales gains its extra +1 while mutated. Extra Heart adds 2 maximum hit points per monk level. Partial Aspect has two selections.
+
 #### Chimeric Mutagen
 
 - **Activation**: standard action, supernatural. It comes as three abilities — Strength, Dexterity and Wisdom — and you choose one each time you drink. It cannot be used while you are polymorphed.
-- **Effect**: an alchemical bonus to the chosen ability score and a natural armor bonus to AC. Unlike the alchemist's mutagen, there is no penalty to a mental ability score.
+- **Effect**: an alchemical bonus to the chosen ability score. Unlike the alchemist's mutagen, there is no penalty to a mental ability score.
 
-| Monk level | Ability score (alchemical) | Natural armor |
-|---|---|---|
-| 1–9 | +4 | +2 |
-| 10–15 | +6 | +4 |
-| 16–20 | +8 | +6 |
+| Monk level | Ability score (alchemical) |
+|---|---|
+| 1–9 | +4 |
+| 10–15 | +6 |
+| 16–20 | +8 |
 
 - **Duration**: 1 round per monk level.
 - **One at a time**: drinking again replaces the previous chimeric mutagen.
@@ -2054,7 +2059,7 @@ Tail, Bite, Claw, Horns and Extra Arm each add one natural attack. Your hands re
 - **Number of attacks**: each mutation gives one natural attack, made once in a full attack in addition to your other attacks.
 - **Per-type limits**: the game engine lets a character use at most one tail attack, one bite, one gore and two claws. If another source also grants an attack of the same type, the one with the larger damage die stays.
 - The Extra Arm also gains +1 on its attack roll while mutated, on top of the die step.
-- Feral Combat Training (DarkCodex), granted at level 1, is what lets these natural weapons count as unarmed strikes.
+- Feral Combat Training (DarkCodex), granted at level 1, lets these natural attacks trigger eligible unarmed feat effects.
 - **Appearance**: taking the Tail mutation gives your character a tail, and taking Horns gives it horns. Neither is shown while you are polymorphed. On a pet with Chimera Monk levels, such as an animal companion, the tail and horns are not shown (the natural attacks and numbers still apply).
 
 #### Venom
@@ -2074,7 +2079,7 @@ Tail, Bite, Claw, Horns and Extra Arm each add one natural attack. Your hands re
 
 #### Scales
 
-- A natural armor bonus of the form type. It stacks with the mutagen's natural armor, with natural armor enhancement from amulets, and with barkskin.
+- A natural armor bonus of the form type. It stacks with natural armor enhancement from amulets, and with barkskin.
 - Against a polymorph effect that grants the same kind of natural armor, only the larger applies.
 
 | Monk level | 1–4 | 5–9 | 10–14 | 15–19 | 20 |
@@ -2085,7 +2090,7 @@ Tail, Bite, Claw, Horns and Extra Arm each add one natural attack. Your hands re
 #### Partial Aspect
 
 - Choose one of the shifter's ten minor aspects (it cannot be changed later). You gain a toggle that turns that aspect on and off. Turning it on is a swift action, with no limit on uses or duration.
-- **Partial Aspect II** and **Partial Aspect III** are separate mutations: the first needs Partial Aspect and monk level 8 or higher, the second needs Partial Aspect II and monk level 14 or higher. Each grants one more aspect toggle, different from those already chosen (three at most, all different).
+- **Partial Aspect II** becomes available at monk level 8 and grants a second, different aspect. Both can be active together.
 - All aspects you have can be active at the same time.
 - The aspect's numbers are computed from monk level instead of shifter level. The tiers are tier 1 at monk levels 1–7, tier 2 at 8–14 and tier 3 at 15–20.
 - While mutated every active aspect gets the values of the next tier up (a fourth tier's worth from level 15).
@@ -2093,7 +2098,7 @@ Tail, Bite, Claw, Horns and Extra Arm each add one natural attack. Your hands re
 
 ### Choices
 
-#### Chimeric Mutation — eighteen options
+#### Chimeric Mutation — seventeen options
 
 One pick at each of levels 2, 4, 6, 8, 10, 12, 14, 16 and 18, nine in all. Each mutation can be taken once.
 
@@ -2105,9 +2110,8 @@ One pick at each of levels 2, 4, 6, 8, 10, 12, 14, 16 and 18, nine in all. Each 
 | Horns | — | One gore natural attack. Damage 1d4 up to 1d8. Your character grows horns (some races have no horn model) | Die one step higher (1d6 up to 1d10) |
 | Venom | — | Natural and unarmed hits poison the target (once per round): Fortitude save each round for 6 rounds or 1d2 Constitution damage. DC 10 + half monk level + Wisdom | DC +2 |
 | Scales | — | +2 natural armor (form) bonus, +1 more at levels 5, 10, 15 and 20 (maximum +6). Stacks with other natural armor | +1 |
-| Partial Aspect | — | One of the ten shifter minor aspects as an at-will toggle (swift action, scaled by monk level). It can be active together with the aspects gained from Partial Aspect II and III | Every active aspect is one tier higher |
+| Partial Aspect | — | One of the ten shifter minor aspects as an at-will toggle (swift action, scaled by monk level). It can be active together with the aspect gained from Partial Aspect II | Every active aspect is one tier higher |
 | Partial Aspect II | Monk level 8, Partial Aspect | One more aspect, different from the one already chosen, as an at-will toggle. All aspects you have can be active at the same time | Every active aspect is one tier higher |
-| Partial Aspect III | Monk level 14, Partial Aspect II | One more aspect, different from the two already chosen, as an at-will toggle. All aspects you have can be active at the same time | Every active aspect is one tier higher |
 | Wings | Monk level 10 | You grow wings (the base game wings effect): +3 dodge bonus to AC against melee attacks and immunity to difficult terrain. The wings are visible | +10 ft speed |
 | Breath | Monk level 10 | Choose an element: 30-ft cone, 1d6 per two monk levels, Reflex half, 3 per day, standard action | One extra breath usable only while mutated (refills on rest) |
 | Extra Arm | Monk level 10 | One extra-arm slam natural attack. Damage 1d4 up to 1d8 | Die one step higher (1d6 up to 1d10), +1 on that attack roll |
@@ -2115,9 +2119,10 @@ One pick at each of levels 2, 4, 6, 8, 10, 12, 14, 16 and 18, nine in all. Each 
 | Extra Eyes | — | Cannot be flanked, +2 Perception | Another +2 Perception (+4 in total) |
 | Extra Ears | — | Blind-Fight feat, +2 Perception | Another +2 Perception (+4 in total) |
 | Extra Senses | Monk level 10 | Blindsense 30 ft | Blindsense 60 ft |
-| Extra Heart | — | +2 hit points (a flat amount, not per level), immunity to bleed | Fast healing 2 |
+| Extra Heart | — | +2 maximum hit points per monk level (+28 at 14th, +40 at 20th), immunity to bleed | Fast healing 2 |
 | Extra Lung | — | Immunity to fatigue and to the areas created by four cloud spells (stinking cloud, cloudkill, mind fog, acid fog). Not a general immunity to poison | If you have Breath, +1 extra breath usable while mutated (2 in total) |
 
+- Extra Senses detects enemies within range. Extra Ears grants Blind-Fight, which rerolls a failed melee concealment check once and grants immunity to gaze attacks. With 50% concealment, the chance to miss due to concealment falls to 25%.
 - The Perception bonuses of Extra Eyes and Extra Ears stack with each other.
 - Extra Lung: if you gain it while standing in such a cloud, it applies only after you leave and re-enter the cloud.
 
@@ -2125,9 +2130,20 @@ One pick at each of levels 2, 4, 6, 8, 10, 12, 14, 16 and 18, nine in all. Each 
 
 Breath: Fire, Breath: Cold, Breath: Acid or Breath: Electricity. Only the energy type differs; dice, area, DC and uses are identical. You can take only one.
 
+#### Level 14 mutation designs
+
+These four planned options share the regular picks at monk levels 14, 16 and 18, allowing up to three per character. They are under design.
+
+| Mutation | Base effect | While the chimeric mutagen is active |
+|---|---|---|
+| Hooked Tendons | Your first unarmed or natural melee hit on your turn prevents the target from taking a 5-foot step for 1 round. | Also halves its movement speed. |
+| Echo Organ | Standard action, 3/day. Reveal hidden enemies in a 30-foot cone and suppress their concealment from invisibility for all allies for 1 round. | Lasts 2 rounds. |
+| Shock-Absorbing Cartilage | Once per round, reduce the physical damage from the first weapon, natural or unarmed hit that deals physical damage by your monk level. | Add your positive Wisdom modifier to the reduction. |
+| Glandular Burst | Standard action, 3/day. Enemies within 10 feet must save against Fortitude DC 10 + half your monk level + Wisdom modifier or be sickened for 2 rounds. | Radius increases to 15 feet. A successful save still sickens for 1 round. |
+
 #### Partial Aspect forms
 
-Partial Aspect, Partial Aspect II and Partial Aspect III each pick one, and the aspects chosen must all be different. Tiers correspond to monk levels 1–7 / 8–14 / 15–20; while mutated you use the next tier's value.
+Partial Aspect and Partial Aspect II each pick one, and the aspects chosen must all be different. Tiers correspond to monk levels 1–7 / 8–14 / 15–20; while mutated you use the next tier's value.
 
 | Aspect | Main effect | Tier 1 / 2 / 3 | While mutated |
 |---|---|---|---|
@@ -2172,11 +2188,12 @@ Venom, the Partial Aspect toggle and the other mutations use no resource. The ki
 - **Shifter content**: Partial Aspect copies the base game shifter's minor aspects (the features, abilities and effects of the ten aspects, the wolf's scent, Diehard and Endurance) and rescales them to monk level. If any of those is missing from the game, the whole archetype is not created. The shifter originals are not modified, and the shifter's aspect uses per day are not involved. The Chimera Monk's aspect toggles can be active together, but the base game shifter's own aspects are still limited to one at a time.
 - **Mutation visuals**: the tail uses the look of the base game Gold Dragon mythic tail, and the horns use the base game Devil mythic small horns. If either of those visuals is missing from the game, the whole archetype is not created. The Wings mutation keeps the look of the base game wings effect.
 - **Breath**: built from the base game Scaled Fist's dragon breath, but it uses neither Charisma nor ki. The base game has no dedicated electricity cone visual, so the electricity breath uses a generic cone effect.
-- **TabletopTweaks**: with the setting that disables natural armor stacking, Scales is unaffected because it is a form-type bonus (only the mutagen's natural armor stops stacking with other natural armor). The chimeric mutagen's ability bonus is alchemical, so against a base game mutagen only the higher applies.
+- **TabletopTweaks**: with the setting that disables natural armor stacking, Scales is unaffected because it is a form-type bonus. The chimeric mutagen's ability bonus is alchemical, so against a base game mutagen only the higher applies.
 - Mods that move Style Strike, Fast Movement or Still Mind to different levels can prevent this archetype from registering.
 - **Retired mutation "Extra Tail"**: the Extra Tail mutation from earlier versions is no longer offered. The game engine allows only one tail attack per character, so taking it never added an attack. Saves of characters who already took it still load; the mutation stays as a hidden feature with no effect (some screens may show it as "Extra Tail (retired)"). Such a character can retrain and choose another mutation instead.
-- **Multiclassing and prestige classes**: the mutagen's bonuses and duration, natural weapon dice, Scales, breath dice and DC, the venom DC and the aspect tiers all read monk level only. Mutations with a level 10 requirement need monk level 10, and the level 8 and 14 requirements of Partial Aspect II and III are monk levels too.
+- **Multiclassing and prestige classes**: the mutagen's bonuses and duration, natural weapon dice, Scales, breath dice and DC, the venom DC and the aspect tiers all read monk level only. Mutations with a level 10 requirement need monk level 10, and Partial Aspect II requires monk level 8.
 - **Known limitations**
+  - DarkCodex Feral Combat Training extends eligible unarmed feat effects to natural weapons. In a level-12 check without haste, five unarmed attacks plus one each from tail, bite, claw and extra arm gave nine attacks. Unarmed base damage was 2d6 and mutation damage was 1d6 (1d8 while mutated). If you also have the mythic unarmed strike feat, DarkCodex adds half your mythic rank as flat damage to the eligible natural attacks.
   - The natural attacks from mutations are each made once in a full attack, in addition to your other attacks. They do not gain extra attacks the way flurry of blows or iterative attacks from a high base attack bonus do.
   - Natural attacks of one type never exceed the engine limit (one tail, one bite, one gore, two claws). If you already have an attack of that type from another source, only the one with the larger die remains.
   - The chimeric mutagen cannot be drunk while you are polymorphed.
@@ -2205,7 +2222,7 @@ Venom, the Partial Aspect toggle and the other mutations use no resource. The ki
 
 ### Overview
 
-The Oathbound Revenant is a paladin who came back from death to keep an oath. You are undead from 1st level: healing spells hurt you, negative energy mends you, and every weapon hit on the target of your smite renews your body. You lay on hands only for living allies, and from 4th level you channel negative energy instead of positive, wearing down living enemies while refilling yourself. You cast no spells at all. In their place you pick six of twenty death knight talents and build toward fear, draining or sheer refusal to fall.
+The Oathbound Revenant is a paladin who came back from death to keep an oath. You are undead from 1st level: healing spells hurt you, negative energy mends you, and every weapon hit on the target of your smite renews your body. You lay on hands only for living allies, and from 4th level you channel negative energy instead of positive, wearing down living enemies while refilling yourself. You cast no spells at all. In their place you pick six of twenty-six death knight talents and build toward fear, draining or sheer refusal to fall.
 
 ### What you give up
 
@@ -2335,7 +2352,9 @@ Everything else stays: Smite Evil, Divine Grace, Divine Bond, the auras of Resol
 
 #### Death Knight Talent
 
-You choose one at levels 3, 6, 9, 12, 15 and 18 — six out of twenty. Each talent can be taken only once. "Level" is the lowest paladin level at which the talent can be chosen. Below, "paladin DC" means 10 + half paladin level + Charisma modifier.
+Development version 0.17.45-beta adds three level-15 talents and a level-18 upgrade for each. Public version 0.17.39-beta has 20 choices.
+
+You choose one at levels 3, 6, 9, 12, 15 and 18 — six out of twenty-six. Each talent can be taken only once. "Level" is the lowest paladin level at which the talent can be chosen. Below, "paladin DC" means 10 + half paladin level + Charisma modifier.
 
 | Level | Talent | Effect |
 |---|---|---|
@@ -2358,6 +2377,12 @@ You choose one at levels 3, 6, 9, 12, 15 and 18 — six out of twenty. Each tale
 | 12 | Vengeful Riposte | 3/day. When a melee attack hits you, make one melee attack against the attacker. You must be wielding a melee weapon (or be unarmed) and the attacker must be within reach. Each incoming hit in a full attack can trigger a riposte, up to the daily limit. A use is spent when the counterattack resolves. |
 | 12 | Mark of Death | If your smite target dies while smitten, the smite passes for free to the nearest other evil enemy within 30 feet. |
 | 15 | Unyielding Oath | 1/day. When damage would reduce you to 0 hit points or below, you stay at 1 instead. Automatic. |
+| 15 | Breath of Death | Standard action, 2 uses of lay on hands. Enemies in a 50-foot cone take 10d6 negative energy damage, Reflex half. |
+| 15 | Executioner’s Oath | Once per round, a melee weapon hit against your smite target while it has half its hit points or less deals 4d6 extra physical damage of the weapon’s type. |
+| 15 | Call of the Grave Knight | Standard action, once per day. Summon one CR 11 grave knight at the chosen point for 1 minute. |
+| 18 | Greater Breath of Death | Requires Breath of Death. For the same 2 uses, damage rises to 15d6. A failed Reflex save also staggers for 1 round. |
+| 18 | Ruthless Execution | Requires Executioner’s Oath. The bonus damage increases to 8d6 under the same conditions. |
+| 18 | Host of Grave Knights | Requires Call of the Grave Knight. Summon two knights together. Both prioritize the summoner’s smite target. |
 | 18 | Last Breath | When Unyielding Oath triggers, a burst of negative energy hits enemies within 30 feet. It deals twice your negative channel dice (Empowered Channel included — 18d6 at 18th level, 22d6 with Empowered Channel), Will half (paladin DC). Divine damage against negative energy affinity. Requires Unyielding Oath. |
 
 ### Feats
@@ -2371,7 +2396,8 @@ You choose one at levels 3, 6, 9, 12, 15 and 18 — six out of twenty. Each tale
 
 | Resource | Uses | Recovery | Spent on |
 |---|---|---|---|
-| Lay on hands | Same as the base paladin's lay on hands | Rest | Revenant's Hands (1), Channel Negative Energy (2), Death's Touch (1) |
+| Lay on hands | Same as the base paladin's lay on hands | Rest | Revenant's Hands (1), Channel Negative Energy (2), Death's Touch (1), Breath of Death (2) |
+| Call of the Grave Knight | 1 per day | Rest | Summon grave knights |
 | Terrible Gaze | 3 per day | Rest | The Terrible Gaze talent |
 | Wail of the Dead | 1 per day | Rest | The Wail of the Dead talent |
 | Command Undead | 1 per day | Rest | The Command Undead talent |
