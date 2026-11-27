@@ -298,7 +298,7 @@ You gain the Tandem Executioner’s base feature at level 4 and choose technique
 - **TabletopTweaks**
   - The archetype recognises the way TabletopTweaks-Base reworks the size increase of animal companion upgrades, and removes only the auxiliaries' size increase, just as it does with the base-game data.
   - Pack Empowerment runs the original spell's effect, so spells that TabletopTweaks-Base fixes (Freedom of Movement, Death Ward and others) apply as fixed. The component TabletopTweaks-Base adds to Death Ward is accepted. The base-game Freedom of Movement also grants immunity to staggering, but TabletopTweaks-Base removes it; since this depends on whether that mod is installed, it is left out of the in-game description and the table above.
-- **When a pack empowerment is disabled**: if a spell's game data is not in a shape this mod knows (a game patch or another mod has changed that spell), only that pack empowerment is removed from the selection list, and a character who already chose it cannot use it (a message gives the reason, and the mod log has a detailed line). If so many are disabled that a selection level would have nothing to pick, the whole archetype does not appear in character creation.
+- **When a pack empowerment is disabled**: if a spell's game data is not in a shape this mod knows (a game patch or another mod has changed that spell), only that pack empowerment is removed from the selection list, and a character who already chose it cannot use it (a message gives the reason, and the mod log has a detailed line). If so many are disabled that a selection level would have nothing to pick, the whole archetype does not appear in character creation. **(Development build 0.17.49-beta)** A spell with a missing icon uses the animal focus icon and remains available to learn and cast.
 - **Pre-order bonus animals**: the pre-order bonus variants of the Horse, Smilodon and Triceratops are part of the selection list.
 - **Multiclassing and prestige classes**: the number and level of auxiliaries, the Tough Aspect's temporary hit points, and the selection levels, caster level and durations of Pack Empowerment all use Hunter class levels only. With no spellbook, Hunter levels contribute nothing to the requirements or spell progression of caster prestige classes.
 - **Two Pack Wardens in one party** each keep their own pack and their own aspects.
@@ -525,7 +525,7 @@ The Guardian Phantom’s lower-body smoke uses a separate fade on particle mater
 | Spellcasting | Changed: the magus spellbook is kept, but you lose cantrips (0-level spells) and spell recall |
 | Required mods | Unity Mod Manager |
 | Optional integrations | KineticistElementsExpanded: when enabled, the element choice grows from 6 to 11 elements |
-| Restrictions | No alignment or deity restriction. Multiclassing with kineticist disables the blast features (see Compatibility and notes) |
+| Restrictions | No alignment or deity restriction. Compatible with kineticist multiclassing. |
 
 ### Overview
 
@@ -678,7 +678,7 @@ Offered only while the KineticistElementsExpanded mod is enabled:
 ### Compatibility and notes
 
 - **Without KineticistElementsExpanded**: only the six base-game elements are offered; everything else works the same. The same is true if the mod is installed but disabled. If the mod is enabled but its elements cannot be confirmed, the five extra elements are not offered and an error is written to the mod log.
-- **Kineticist multiclass**: not supported. If one character has both Blast Magus and kineticist (or any other class or mod feature that sets up a kineticist burn pool), the Blast Magus blast features switch off: Energize Weapon adds no damage, Blast Strike is greyed out, and the reason is written to the mod log.
+- **(Development build 0.17.49-beta)** **Multiclassing with kineticist** keeps Energize Weapon and Blast Strike available. They use your magus level and chosen magus element. Ranged kinetic blasts use the kineticist’s burn and caster-level rules.
 - **Combining with other magus archetypes** (when a mod allows multiple archetypes): archetypes that remove the same features cannot be taken together. That covers archetypes that change the arcane pool, the magus arcana selection, spell recall or the arcane weapon upgrades.
 - **Mods that change the magus progression**: if a feature this archetype removes is no longer at its level in the magus progression (moved or removed by another mod), the archetype is not registered and an error is written to the mod log.
 - **Energize Weapon toggle group**: it shares a toggle group with the base game's Energized Wild Shape. A character who has both will switch one off when turning the other on.
@@ -704,7 +704,7 @@ Offered only while the KineticistElementsExpanded mod is enabled:
 | Spellcasting | Changed — the non-casting brawler gains an arcanist-style arcane spellbook (Intelligence, up to 6th-level spells) |
 | Required mods | BrawlerClassWrath (without it this archetype does not appear) |
 | Optional integrations | Spellbook Merge 1.7.1 |
-| Alignment, deity and other restrictions | None. It cannot be combined with the brawler mod's eight other archetypes (Wild Child, Venomfist, Snakebite Striker, Steel-Breaker, Turfer, Beast Wrestler, Exemplar, Mutagenic Mauler) |
+| Restrictions | No alignment or deity restriction. Mutually exclusive with other brawler archetypes present at registration. |
 
 ### Overview
 
@@ -868,13 +868,13 @@ The reservoir is the same resource as the base game arcanist's arcane reservoir.
 ### Compatibility and notes
 
 - **Without BrawlerClassWrath**: the game starts normally and only this archetype is left unregistered (it does not appear at character creation). One error line is written to the mod log.
-- **Other mods that add brawler archetypes**: this archetype knows, and blocks combination with, only the brawler mod's eight original archetypes. If the brawler class has any other archetype added to it, this archetype is not registered.
+- **(Development build 0.17.49-beta)** Additional brawler archetypes from other mods are included in the mutual exclusions when Spellfist registers.
 - **Mods that change the magus spell list**: spells another mod adds to the magus list are sorted into the Spellfist school lists by their school (universal spells are skipped). This includes mods that add spells after this one (for example CharacterOptionsPlus): on the first frame after the game starts, the school lists are rebuilt from the magus list as it is then. The spells added or removed are logged in one line in the mod log; if the magus list cannot be read, the school lists built at load are kept and one error line is written to the mod log. If a mod removes a base-game magus spell from the list or moves it to another level or school, this archetype is not registered.
 - **DLC spells**: DLC spells on the magus list are included in the school lists. Without the DLC the game hides them, exactly as it does for a magus.
 - **Multiclassing and Reservoir Quicken**: the quicken effect applies to the caster as a whole. A multiclass character with another spellbook gets that book's spells quickened too while the toggle is on, and those casts do not drain the reservoir. The drain and the spell-level cap line up exactly only on a single-class character.
 - **Magus multiclass**: not supported. With magus levels, Fist Spellstrike is not attached to the Spellfist spellbook and the magus's own Spellstrike is used as is.
 - **Other mods that alter Spellstrike**: when another mod has already allowed a spell for Spellstrike, that result is kept. This mod only adds spells from the Spellfist spellbook on top.
-- **Arcanist and Exploiter Wizard**: the base game's exploits are left untouched. Spellfist exploits are separate copies, so they do not satisfy prerequisites of other options that require the original exploits (for example the higher exploits that build on Ice Missile or Lightning Lance).
+- A Spellfist exploit satisfies feature prerequisites that name the corresponding arcanist exploit. Ice Missile and Lightning Lance each count toward their greater exploit.
 - **Known limitation**: if combat ends, or the reservoir drops and lowers the cap, before you turn the toggle off, a queued quickened cast may stay queued instead of being cancelled.
 
 </details>
@@ -1041,7 +1041,7 @@ Levels 15–20 — adamantine is Huge, the others Large:
 |---|---|---|---|---|---|---|
 | Healing (of max HP) | 10% | 20% | 30% | 40% | 50% | 60% |
 
-- **Requirements**: the golem must be adjacent (5 feet). While fused, it repairs the worn golem regardless of distance. It cannot be used when there is nothing to repair (full hit points and not broken) or when you have no prepared extract of that level.
+- **Requirements**: the golem must be adjacent (5 feet). While fused, it repairs the worn golem regardless of distance. It cannot be used when there is nothing to repair (full hit points and not broken) or when you have no prepared extract of that level. **(Development build 0.17.49-beta)** Repair reports whether the golem is absent, changing fusion state, undamaged, out of reach, or missing a prepared extract.
 
 #### Golem Overdrive
 
@@ -1256,7 +1256,7 @@ Loading an existing character with several patrons and no recorded first choice 
 
 The patron you choose at level 1 decides your group (see the table under "Choices"). The group follows the first patron you picked and does not change if you later gain another patron from some other source. The pact re-aligns your group abilities at every level-up: at level 6 the close-range blast is swapped for the medium-range one, at level 10 Double Blast is added, and you only ever hold the ward of your current tier.
 
-A warlock whose only patron is not on the table (the Dark Sister's Dark Pact, or a patron added by another mod) receives no group, and therefore no blast, Heat summoning or ward.
+**(Development build 0.17.49-beta)** Patrons outside the table are classified by theme words in their internal name and then by the number of bonus spells shared with each base-game patron. A tie across groups or no matches gives the Star group. Dark Pact belongs to Death.
 
 #### Blast
 
@@ -1391,7 +1391,7 @@ Select the Warlock option to advance your Charisma-based Stigmatized Witch book,
 - PrestigePlus spellbook selections recognize an owned Stigmatized Witch book.
 - ExpandedContent: the Stargazer's "witch spellbook" option is blocked for warlocks (picking it would create a separate witch spellbook instead of advancing the warlock's own). Nothing happens if ExpandedContent is not installed.
 - CharacterOptionsPlus: works alongside the Winter Witch archetype restriction that mod adds to the prestige spellbook options.
-- If another mod adds witch patrons, those patrons are not on the group table; a warlock whose only patron is one of them gets no blast, summons or ward.
+- Patrons added to the witch patron selection by other mods can grant blasts, summons and wards. Taking a second patron preserves the group of an existing pact.
 - If another mod changes the base game's prestige "witch spellbook" options in an unrecognized way, the Warlock may fail to be created (a `Warlock:` error appears in the mod log).
 
 **DLC**
@@ -2693,7 +2693,7 @@ Equip an uncharged quarterstaff, open **Store a Spell in Your Staff** and choose
 
 In development build **0.17.47-beta**, equip a quarterstaff at level 1 and click **Store a Spell in Your Staff** on the action bar to see eligible cantrips from your arcanist spellbook, including Ray of Frost and Acid Splash. You can choose a cantrip even with no eligible 1st-level spell prepared.
 
-In development build **0.17.48-beta**, click the quarterstaff icon to store spells such as Ray of Frost that have no material component. A staff with a wand core can also store a spell. The next hit releases the stored spell and preserves the core's charges.
+In development build **0.17.48-beta**, click the quarterstaff icon to store spells such as Ray of Frost that have no material component. A staff with a wand core can also store a spell. The next hit releases the stored spell and preserves the core's charges. **(Development build 0.17.49-beta)** If storage fails, the message identifies the relevant staff, existing charge, reservoir, spell level, slot or material requirement.
 
 | Eligible spells | What happens on a staff hit |
 |---|---|
@@ -2825,7 +2825,7 @@ During bloodrage, fire at a living enemy. A ranged touch hit attempts a pull man
 
 #### Reaching farther and loading a spell
 
-Launching from beyond 30 feet costs 5 actual hit points, payable even on a miss. You need more than 5 actual hit points to try. Blood Conduction uses a swift action and a slot for a spell you know from your bloodrager book. The next chain hit delivers the loaded spell once. A miss keeps the charge, and ending bloodrage clears it.
+Launching from beyond 30 feet costs 5 actual hit points, payable even on a miss. You need more than 5 actual hit points to try. Blood Conduction uses a swift action and a slot for a spell you know from your bloodrager book. The next chain hit delivers the loaded spell once. A miss keeps the charge, and ending bloodrage clears it. **(Development build 0.17.49-beta)** The ability reports when the chain is already loaded, the spell is unknown, or the required slot is missing.
 
 #### Two weapons and critical hits
 
