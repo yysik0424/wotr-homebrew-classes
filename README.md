@@ -2574,7 +2574,7 @@ The archetype adds no choices of its own. You pick a bloodline exactly as a base
 | Aspect | Details |
 |---|---|
 | Base class | Arcanist. Intelligence governs spellcasting. Wield your chosen weapon and a quarterstaff together. |
-| Versions | The **0.17.39-beta** release includes the spell and weapon link. The **0.17.40-beta** development build adds staff spell storage. **0.17.41-beta** adds the permanent Strength 16 entry requirement and two-handed primary weapon choices. **0.17.42-beta** adds consumable wand cores. |
+| Versions | The **0.17.39-beta** release includes the spell and weapon link. The **0.17.40-beta** development build adds staff spell storage. **0.17.41-beta** adds the permanent Strength 16 entry requirement and two-handed primary weapon choices. **0.17.42-beta** adds consumable wand cores. From **0.17.44-beta**, storing your own spell costs 1 arcane reservoir point. |
 | Spellcasting | Standard arcanist preparation, casts per day and spell progression, reaching 9th-level spells at arcanist level 18. Consume Spells still lets you turn a spell slot into reservoir points. |
 | Abilities | Intelligence powers the arcane spellbook. Strength and weapon bonuses support ordinary melee attacks, while Charisma affects Consume Spells uses and many exploits. |
 | Class mod requirement | Included in Homebrew Classes. No separate class mod is required. |
@@ -2594,10 +2594,10 @@ Hit an enemy with an arcanist spell to improve your next strike against it. Lead
 | Level | Feature | What it does |
 |---|---|---|
 | 1 | Sword and Staff, chosen weapon proficiency, Two-Weapon Fighting | Improve melee accuracy with both weapons and gain the regular and guarded strikes. The bonus for alternating spells and strikes against the same foe starts at **+1**. |
-| 1 | Store a Spell in Your Staff (from 0.17.40-beta) | Store one spell as a standard action before or during combat. |
+| 1 | Store a Spell in Your Staff (from 0.17.40-beta) | Store one spell as a standard action before or during combat. From 0.17.44-beta, each charge costs 1 arcane reservoir point. |
 | 7 | Improved Two-Weapon Fighting | The spell and strike bonus increases to **+2**. |
 | 13 | Greater Two-Weapon Fighting | The spell and strike bonus increases to **+3**. |
-| 15 | Swift staff charging (from 0.17.40-beta) | Charge the staff as a swift action, leaving your move and standard action available. |
+| 15 | Swift staff charging (from 0.17.40-beta) | Charge the staff as a swift action for the same cost, leaving your move and standard action available. |
 | 19 | Improved spell and strike bonus | The bonus increases to **+4**. |
 
 #### Prepared spells and base casts
@@ -2652,7 +2652,7 @@ Mark the enemy beside you and cast at an archer behind it. Even if the archer sa
 
 #### Storing a spell in your staff (from 0.17.40-beta)
 
-Equip an uncharged quarterstaff, open **Store a Spell in Your Staff** and choose one of your prepared arcanist spells or cantrips. You can charge it before or during combat. Charging takes a standard action at arcanist levels 1–14 and a swift action from level 15. The maximum slot level, including metamagic, is **half the spell’s caster level, rounded down**. Pay the spell slot and any material cost when charging. Cantrips use no slot. Charging costs no reservoir points.
+Equip an uncharged quarterstaff, open **Store a Spell in Your Staff** and choose one of your prepared arcanist spells or cantrips. You can charge it before or during combat. Charging takes a standard action at arcanist levels 1–14 and a swift action from level 15. The maximum slot level, including metamagic, is **half the spell’s caster level, rounded down**. Pay the spell slot and any material cost when charging. Cantrips use no slot. **From 0.17.44-beta, storing a spell costs 1 arcane reservoir point, including for cantrips.** An empty reservoir prevents a new charge. An already stored spell still fires on a staff hit at 0 points.
 
 | Eligible spells | What happens on a staff hit |
 |---|---|
@@ -2664,7 +2664,7 @@ The catalog covers 62 base-game spells and 18 from supported mods, counting each
 
 #### Consumable wand cores (from 0.17.42-beta)
 
-Equip a quarterstaff and choose **Break wand and implant** from a wand’s inventory or belt menu. One wand is consumed. Its spell and remaining charges move to that specific staff. A wand of Scorching Ray with seven charges fires on seven staff hits, even when a hit releases several rays. An offensive spell targets the enemy struck, a single-target healing spell or buff targets the wielder, and an area spell centers on the impact. Lines and cones aim toward the enemy.
+Equip a quarterstaff and choose **Break wand and implant** from a wand’s inventory or belt menu. One wand is consumed. Its spell and remaining charges move to that specific staff. A wand of Scorching Ray with seven charges fires on seven staff hits, even when a hit releases several rays. An offensive spell targets the enemy struck, a single-target healing spell or buff targets the wielder, and an area spell centers on the impact. Lines and cones aim toward the enemy. Implanting and firing a wand core use no arcane reservoir points.
 
 A manually stored spell fires on the first hit and leaves the core for the next one. Misses, attacks with another weapon and resting preserve the remaining charges. The staff name shows the balance. Its last charge frees the staff for another wand.
 
