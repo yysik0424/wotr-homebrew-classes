@@ -1652,10 +1652,13 @@ The wizard spellbook, spell learning and the wizard's weapon proficiencies are u
 | 5 | Tower shield attack penalty negated | The Tower Shield Specialist's level 5 feature, unchanged (removes the attack penalty for carrying a tower shield) |
 | 5 | Iron Concentration | While wearing heavy armor, you automatically succeed on concentration checks caused by damage |
 | 5 | Learn Shield Rebuke (2nd) · Bonded Shield +1 | Learn another rebuke. +1 enhancement to the tower shield in your off hand |
+| 5 | Arcane Vortex | Pulls enemies within 10 feet toward you and deals 1d6 force damage per two wizard levels (rounded down). Once per day |
 | 9 | Touch shield | The Tower Shield Specialist's level 9 feature, unchanged (your tower shield's shield bonus applies to touch AC) |
 | 10 | Learn Shield Rebuke (3rd) · Bonded Shield +2 | |
+| 10 | Improved Arcane Vortex · Arcane Storm | Vortex reaches 15 feet, twice per day. Storm deals 1d6 force damage per wizard level to enemies within 20 feet and pushes them 10 feet away. Once per day |
 | 13 | Total cover | The Tower Shield Specialist's level 13 feature, unchanged |
 | 15 | Learn Shield Rebuke (4th) · Bonded Shield +3 | |
+| 15 | Improved Arcane Vortex and Storm | Vortex reaches 20 feet, three times per day. Storm increases to twice per day |
 | 16 | Tower shield evasion | The Tower Shield Specialist's level 16 feature, unchanged (evasion while carrying a tower shield) |
 | 20 | Improved tower shield evasion | The Tower Shield Specialist's level 20 feature, unchanged (improved evasion while carrying a tower shield) |
 | 20 | Learn Shield Rebuke (5th) · Bonded Shield +4 | |
@@ -1676,6 +1679,12 @@ Levels 4, 8, 12, 17 and 19 grant nothing from the archetype beyond normal spell 
 - Applies to quarterstaves only. Every other two-handed weapon still needs both hands.
 - A quarterstaff held in one hand does not get the two-handed Strength bonus.
 - With your off hand free, you can carry a tower shield alongside it.
+
+#### Arcane Vortex and Arcane Storm
+
+Added in development build 0.17.46-beta. The current public GitHub release is 0.17.39-beta. Each is a standard-action spell-like ability with its own daily uses and works with any equipment. Only enemies around the caster are affected. Spell resistance applies. Each enemy makes a Fortitude save against DC 10 + half your wizard level (rounded down) + your Intelligence modifier. A successful save halves the damage and prevents movement.
+
+Vortex pulls each enemy toward an open space beside you. Obstacles or occupied spaces can shorten the pull. Storm pushes each enemy up to 10 feet away. At wizard level 20, Vortex deals 10d6 and Storm deals 20d6 force damage per enemy.
 
 #### Shield Rebuke
 
@@ -1744,6 +1753,8 @@ Shield Rebuke: at levels 1, 5, 10, 15 and 20 you learn one of the seven rebukes 
 | Resource | Maximum | Restored |
 |---|---|---|
 | Shield Rebuke uses | 3 + Intelligence modifier (minimum 1) | On rest |
+| Arcane Vortex | 1 / 2 / 3 uses at levels 5 / 10 / 15 | On rest |
+| Arcane Storm | 1 / 2 uses at levels 10 / 15 | On rest |
 | Bonded Shield spell recall | 1 per day | On rest |
 
 The "once per round" limit on Shield Rebuke is not a resource. It clears when your own round starts again — your personal 6-second cycle in real time, or the start of your turn in turn-based mode.
@@ -2001,7 +2012,7 @@ Two-sided mutations (5) - the upside and the downside come together, and drawing
 
 ### Overview
 
-The Chimera Monk reshapes the body through practice. Every two levels from level 2 you pick one of seventeen mutations, adding natural attacks such as a tail, bite, claw or horns, or scales, wings, a breath weapon or extra organs. Drinking the chimeric mutagen in combat raises the chosen ability score, and pushes every mutation you own one step further. Flurry of blows, unarmed strike, the Wisdom bonus to AC and ki powers all work exactly as they do for a base monk; the price is four Style Strike selections plus Fast Movement and Still Mind.
+The Chimera Monk reshapes the body through practice. Every two levels from level 2 you pick one of twenty-one mutations, adding natural attacks such as a tail, bite, claw or horns, or scales, wings, a breath weapon or extra organs. Drinking the chimeric mutagen in combat raises the chosen ability score, and pushes every mutation you own one step further. Flurry of blows, unarmed strike, the Wisdom bonus to AC and ki powers all work exactly as they do for a base monk; the price is four Style Strike selections plus Fast Movement and Still Mind.
 
 ### What you give up
 
@@ -2020,7 +2031,7 @@ The monk bonus feats at levels 1, 2, 6, 10, 14 and 18 are kept. Flurry of blows,
 | 1 | Feral Combat Training (a DarkCodex feat) | Grants eligible unarmed effects such as Stunning Fist to natural attacks |
 | 1 | Chimeric Mutagen | Standard action. +4 alchemical bonus to Strength, Dexterity or Wisdom (+6 at level 10, +8 at level 16). Lasts 1 round per monk level, 3 + Wisdom modifier uses per day (minimum 1). Empowers every mutation while it lasts |
 | 1 | Chimeric Body | The damage dice of natural weapon mutations grow with monk level (1d4 up to 1d8; 1d6 up to 1d10 while mutated). Not shown on the character sheet |
-| 2, 4, 6, 8, 10, 12, 14, 16, 18 | Chimeric Mutation | Choose one of seventeen mutations. Nine picks in total, each mutation once |
+| 2, 4, 6, 8, 10, 12, 14, 16, 18 | Chimeric Mutation | Choose one of twenty-one mutations. Nine picks in total, each mutation once |
 
 Numbers that rise automatically with level: the mutagen bonuses (levels 10 and 16), natural weapon dice (levels 8 and 16), Scales (levels 5, 10, 15 and 20) and breath dice (every two levels).
 
@@ -2098,7 +2109,7 @@ Tail, Bite, Claw, Horns and Extra Arm each add one natural attack. Your hands re
 
 ### Choices
 
-#### Chimeric Mutation — seventeen options
+#### Chimeric Mutation — twenty-one options
 
 One pick at each of levels 2, 4, 6, 8, 10, 12, 14, 16 and 18, nine in all. Each mutation can be taken once.
 
@@ -2130,9 +2141,9 @@ One pick at each of levels 2, 4, 6, 8, 10, 12, 14, 16 and 18, nine in all. Each 
 
 Breath: Fire, Breath: Cold, Breath: Acid or Breath: Electricity. Only the energy type differs; dice, area, DC and uses are identical. You can take only one.
 
-#### Level 14 mutation designs
+#### Mutations available from level 14
 
-These four planned options share the regular picks at monk levels 14, 16 and 18, allowing up to three per character. They are under design.
+Added in development build 0.17.46-beta. The current public GitHub release is 0.17.39-beta. These four options share the regular mutation picks at monk levels 14, 16 and 18, so one character can learn up to three. Echo Organ and Glandular Burst each have their own three daily uses.
 
 | Mutation | Base effect | While the chimeric mutagen is active |
 |---|---|---|
