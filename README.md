@@ -92,6 +92,8 @@ The mod ships Korean and English text in the same file and picks one automatical
 
 ## Compatibility and warnings
 
+- Development build 0.17.50-beta registers prestige and mythic spellbook options for Prophecy Breaker, Spellfist and Warlock at the main menu or on loading a save. It retries if another mod is updating the list.
+
 - **Saves:** once a character has levels in one of these archetypes, that save needs the mod. Turning a class off, or removing the mod, makes saves that contain that class fail to load.
 - **Beta:** the classes are covered by automated tests, but in-game play time is limited. Expect rough edges and please report them.
 - **DLC:** a few pieces use DLC content (noted in the class details). Play without those DLCs has not been tested in game.
@@ -707,6 +709,8 @@ Offered only while the KineticistElementsExpanded mod is enabled:
 | Restrictions | No alignment or deity restriction. Mutually exclusive with other brawler archetypes present at registration. |
 
 ### Overview
+
+In development build 0.17.50-beta, character creation recommends Intelligence, Strength and Dexterity.
 
 The Spellfist is a brawler who carries arcane spells in the same body as the fists. At 1st level you pick three arcane schools, then prepare and cast only magus spells of those schools the way an arcanist does, reaching 6th-level spells at 16th level. A single arcane reservoir lets you pull spells forward as swift actions and powers a set of arcanist exploits. From 2nd level you hold a touch spell in your hand and discharge it through your unarmed flurry. You keep the brawler's bonus combat feats and flurry, and give up maneuver training, Knockout and Awesome Blow.
 
@@ -2618,6 +2622,8 @@ The archetype adds no choices of its own. You pick a bloodline exactly as a base
 
 ### Overview
 
+In development build 0.17.50-beta, character creation marks Strength as recommended. The archetype requires a permanent Strength score of 16.
+
 Hit an enemy with an arcanist spell to improve your next strike against it. Lead with your chosen weapon to improve your next spell attack or penalize the enemy’s saving throw. Alternating separate actions is free. Spend 1 arcane reservoir point to cast and strike in either order as one regular combined action. You can also split the targets, for example by casting a protective spell on yourself while cutting a nearby foe.
 
 ### What you give up
@@ -2899,6 +2905,8 @@ When immunity or fortification negates a critical, use the ordinary hit dice. At
 
 ### Overview
 
+In development build 0.17.50-beta, from level 6, the ability list hides the standard-action sentence and shows the move-action version. Targeting an ally with no eligible affliction explains why gathering is unavailable.
+
 A bead begins with something that actually happened to an ally. Free a paralyzed companion now, carry that paralysis in a lead rosary, and choose its recipient later. Returning it to the original aggressor makes the sentence harder to resist. Loading it onto a bane weapon lets a melee hit deliver the sentence while you keep fighting. A gathered affliction stays in its bead until your next rest.
 
 ### What you give up
@@ -3002,6 +3010,8 @@ Gather paralysis with one round remaining and you can sentence an enemy in any e
 | Class mod requirement | Included in Homebrew Classes. No separate class mod is required. |
 
 ### Overview
+
+In development build 0.17.50-beta, character creation includes Wisdom among the recommended attributes.
 
 When the barbarian rages, the spirit in the weapon can rage alongside its bearer. The same weapon grows a stronger enhancement bonus and learns the traits you choose. A front-line fighter can inscribe Dodge and a trip bonus to hold an enemy in place. A damage-focused wielder can inscribe two elements and deliver both with each hit.
 
@@ -3172,6 +3182,8 @@ The bond tracks the actual item issued at creation as well as its category. The 
 | Class mod requirement | Included in Homebrew Classes. No separate class mod is required. |
 
 ### Overview
+
+In development build 0.17.50-beta, dreamwalk’s tooltip shows its range increasing from 30 to 50 feet at level 9 and its switch to a move action at level 15.
 
 A Dream Thief throws Desna’s star-shaped blade, then steps through a dream to deliver the waking blow. Put an enemy to sleep and let the party attack someone else until your starknife lands. Against a foe your allies are already hitting, sleep can end almost immediately. The same pool can instead sustain a minute of weapon damage or pay for an attack from across the field.
 
@@ -3393,6 +3405,8 @@ Another slayer's studied mark belongs to that slayer. Your reactions and intensi
 | Class mod requirement | Included in Homebrew Classes. No separate class mod is required. |
 
 ### Overview
+
+In development build 0.17.50-beta, if your hawk has already dived this round, the button explains why it is unavailable. Hawk’s Eye displays its duration in rounds, equal to your Wisdom modifier with a minimum of one.
 
 In the fields of Andoran, a falconer takes a young hawk on the glove, and the two learn to read the wind together.<br>
 After seasons spent hunting side by side, a turn of the hawk’s wing is enough to tell the falconer where the quarry lies hidden.
@@ -3622,6 +3636,8 @@ Highest research tier and caster level use **oracle class level**. An oracle 8 /
 | Class mod requirement | Included in Homebrew Classes. No separate class mod is required. |
 
 ### Overview
+
+In development build 0.17.50-beta, the tooltip for planting an infernal standard displays its five-round duration.
 
 Cursed children with a tie to the plane of Hell are bound by infernal contracts from an early age. They are taken in and trained as Hell Riders, learning to wield the power of Hell. Cheliax raises many such children to fill its ranks.
 
