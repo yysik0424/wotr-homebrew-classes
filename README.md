@@ -2693,6 +2693,8 @@ Equip an uncharged quarterstaff, open **Store a Spell in Your Staff** and choose
 
 In development build **0.17.47-beta**, equip a quarterstaff at level 1 and click **Store a Spell in Your Staff** on the action bar to see eligible cantrips from your arcanist spellbook, including Ray of Frost and Acid Splash. You can choose a cantrip even with no eligible 1st-level spell prepared.
 
+In development build **0.17.48-beta**, click the quarterstaff icon to store spells such as Ray of Frost that have no material component. A staff with a wand core can also store a spell. The next hit releases the stored spell and preserves the core's charges.
+
 | Eligible spells | What happens on a staff hit |
 |---|---|
 | 16 melee touch spells, including Shocking Grasp and Chill Touch | The staff hit delivers the first touch. A spell with multiple touches discharges once and empties the staff. |
