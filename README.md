@@ -44,7 +44,7 @@ While the shadow is on, it echoes the first eligible harmful sorcerer spell each
 | 10 | [Chimera Monk](#chimera-monk) | Monk | Reshapes the body with a new mutation every two levels | **DarkCodex** |
 | 11 | [Oathbound Revenant](#oathbound-revenant) | Paladin | An undead paladin whose smites knit the body back together | — |
 | 12 | [Shadow Sorcerer](#shadow-sorcerer) | Sorcerer | Toggle a shadow to echo the first eligible spell each round. The echo costs one extra slot of the same level. With one slot left, only the original fires | — |
-| 13 | [Grey Seer](#grey-seer) | Arcanist | Cast on the front line with your chosen weapon and a quarterstaff, then strike an automatically or manually chosen foe. Spend reservoir points according to the spell slot to secure a threatened cast. | — |
+| 13 | [Grey Seer](#grey-seer) | Arcanist | Alternate spells and weapon hits against one foe, or spend 1 reservoir point to combine them. The development build also lets an off-hand quarterstaff release a stored spell on a melee hit. | — |
 | 14 | [Blood Berserker](#blood-berserker) | Bloodrager | Use a blood chain to reel in prey or pull yourself to a larger foe. Bloodrage coats your melee weapons, and their extra blood damage doubles on criticals from level 13. | — |
 | 15 | [Sorrow Inquisitor](#sorrow-inquisitor) | Inquisitor | Lift afflictions from allies into a lead rosary and sentence a foe to bear them. Returning one to its source raises its save DC, and from level 16 each bead that takes effect deals divine damage. | — |
 | 16 | [Spiritsteel](#spiritsteel) | Barbarian | Inscribe a new trait on one ancestral weapon every even level. Its spirit joins your rage, helps you flank and lends Wisdom to maneuvers such as trip. | — |
@@ -2576,13 +2576,14 @@ The archetype adds no choices of its own. You pick a bloodline exactly as a base
 | Aspect | Details |
 |---|---|
 | Base class | Arcanist. Intelligence governs spellcasting. Wield your chosen weapon and a quarterstaff together. |
+| Versions | The **0.17.39-beta** release includes the spell and weapon link. The **0.17.40-beta** development build adds staff spell storage. **0.17.41-beta** adds the permanent Strength 16 entry requirement and two-handed primary weapon choices. |
 | Spellcasting | Standard arcanist preparation, casts per day and spell progression, reaching 9th-level spells at arcanist level 18. Consume Spells still lets you turn a spell slot into reservoir points. |
 | Abilities | Intelligence powers the arcane spellbook. Strength and weapon bonuses support ordinary melee attacks, while Charisma affects Consume Spells uses and many exploits. |
 | Class mod requirement | Included in Homebrew Classes. No separate class mod is required. |
 
 ### Overview
 
-Pick the enemy you want to fence with before choosing where to cast. You can protect yourself with a spell or aim an area spell at a distant group, then cut the enemy standing beside you. The two targets are independent. When threatened, you decide how much of your arcane reservoir to commit to getting the spell off.
+Hit an enemy with an arcanist spell to improve your next strike against it. Lead with your chosen weapon to improve your next spell attack or penalize the enemy’s saving throw. Alternating separate actions is free. Spend 1 arcane reservoir point to cast and strike in either order as one regular combined action. You can also split the targets, for example by casting a protective spell on yourself while cutting a nearby foe.
 
 ### What you give up
 
@@ -2594,9 +2595,12 @@ Pick the enemy you want to fence with before choosing where to cast. You can pro
 
 | Level | Feature | What it does |
 |---|---|---|
-| 1 | Sword and Staff, proficiency with the chosen weapon, Two-Weapon Fighting | Wield the staff in one hand. Pair it with the chosen weapon to improve melee accuracy with both and unlock the two ways to designate a foe. |
-| 7 | Improved Two-Weapon Fighting | Gain the second feat in the two-weapon chain. |
-| 13 | Greater Two-Weapon Fighting | Gain the third feat in the chain. |
+| 1 | Sword and Staff, chosen weapon proficiency, Two-Weapon Fighting | Improve melee accuracy with both weapons and gain the regular and guarded strikes. The bonus for alternating spells and strikes against the same foe starts at **+1**. |
+| 1 | Store a Spell in Your Staff (from 0.17.40-beta) | Store one spell as a standard action before or during combat. |
+| 7 | Improved Two-Weapon Fighting | The spell and strike bonus increases to **+2**. |
+| 13 | Greater Two-Weapon Fighting | The spell and strike bonus increases to **+3**. |
+| 15 | Swift staff charging (from 0.17.40-beta) | Charge the staff as a swift action, leaving your move and standard action available. |
+| 19 | Improved spell and strike bonus | The bonus increases to **+4**. |
 
 #### Prepared spells and base casts
 
@@ -2623,11 +2627,11 @@ Using Consume Spells on a tier 1 slot spends one of today's casts while leaving 
 
 When both weapons are equipped, add the difference between a fighter’s and an arcanist’s base attack bonus at your arcanist level to melee attacks with either weapon. That is +5 at level 10 and +10 at level 20. Rays and the number of iterative attacks from base attack bonus still use their normal calculations.
 
-#### One spell, one follow-up
+#### Linking a spell and a strike in either order
 
 While wielding your chosen weapon and a quarterstaff, land an arcanist spell to gain a bonus on your next chosen-weapon attack against that foe. Hit with the chosen weapon to improve your next spell attack against that foe or reduce its next save against your arcanist spell. The bonus is 1, 2, 3 or 4 at arcanist levels 1, 7, 13 and 19. Each opening applies once through the end of your next turn (one round in real time). Repeated hits refresh the opening.
 
-Alternating separate actions is free. A regular combined action costs 1 reservoir point, and its first hit helps its second roll. Enable **Strike Before Casting**, then select your spell normally, to strike the designated or automatically selected foe before resolving the spell. With this toggle off, use a designation or an automatic stance to strike after the spell lands. A miss leaves the second action its usual roll.
+Alternating separate actions is free. A regular combined action costs 1 reservoir point, and the first hit helps the second roll against the same foe. Enable **Strike Before Casting**, then select a spell to strike the designated or automatically selected foe before the spell resolves. With the toggle off, use a designation or an automatic stance to strike after casting. If the first attack misses, the second action still resolves.
 
 **Designate for Spell and Sword** is a free action. Selecting a new foe replaces the old target. Complete a spell from your own arcanist casting and, if the foe is alive and within reach of the chosen weapon, spend 1 reservoir point for one attack without another action. Scrolls and wands do not trigger the follow-up.
 
@@ -2635,7 +2639,7 @@ At level 1, a Grey Seer can toggle **Automatic Spell and Sword** or **Automatic 
 
 #### Which hand makes the attack?
 
-You can put the chosen weapon in either hand. If it is in your off hand, that is still the weapon you swing after a spell. On an ordinary full attack the Two-Weapon Fighting feats govern your off-hand attacks. The follow-up to a spell is a single attack with the chosen weapon, with no staff strike or off-hand sequence.
+A chosen light or one-handed weapon can go in either hand. From 0.17.41-beta, you can also wield a regular two-handed melee weapon, such as a greatsword, greataxe or longspear, in your primary hand with a quarterstaff in your off hand. The linked strike uses your chosen weapon. A spell stored in the off-hand staff releases when that staff scores a melee hit. On a normal full attack, the Two-Weapon Fighting feats govern your off-hand attacks.
 
 | Arcanist level | 1 | 5 | 10 | 15 | 20 |
 |---|---|---|---|---|---|
@@ -2647,6 +2651,18 @@ Apply the weapon's enhancement, ability modifier and normal two-weapon penalties
 #### Aim the spell and sword separately
 
 Mark the enemy beside you and cast at an archer behind it. Even if the archer saves against the spell, a completed cast can still trigger the sword attack against the marked foe in reach. If the spell kills the marked foe, the strike does not switch to another enemy. An active automatic mode selects a new target for the next cast. Your arcanist cantrips can also trigger the follow-up.
+
+#### Storing a spell in your staff (from 0.17.40-beta)
+
+Equip an uncharged quarterstaff, open **Store a Spell in Your Staff** and choose one of your prepared arcanist spells or cantrips. You can charge it before or during combat. Charging takes a standard action at arcanist levels 1–14 and a swift action from level 15. The maximum slot level, including metamagic, is **half the spell’s caster level, rounded down**. Pay the spell slot and any material cost when charging. Cantrips use no slot. Charging costs no reservoir points.
+
+| Eligible spells | What happens on a staff hit |
+|---|---|
+| 16 melee touch spells, including Shocking Grasp and Chill Touch | The staff hit delivers the first touch. A spell with multiple touches discharges once and empties the staff. |
+| 21 ranged touch spells, including Ray of Frost and Scorching Ray | The first ray uses the staff hit. Each remaining ray makes a separate ranged touch attack against the same enemy. |
+| 43 single-target saving throw spells, including Hold Person and Phantasmal Killer | If the enemy struck is a valid target, it makes the spell’s normal saving throw. |
+
+The catalog covers 62 base-game spells and 18 from supported mods, counting each name once. Mythic spells are ineligible. The first melee hit against an enemy with the charged staff spends the charge. The spell’s target restrictions and spell resistance still apply. A miss or a hit with the other weapon leaves the charge intact. Completing a rest clears it.
 
 ### Choices
 
@@ -2684,7 +2700,9 @@ The other native exploits span direct offense, protection and greater upgrades. 
 
 ### Feats
 
-At level 1, choose one type of light or one-handed melee weapon and gain proficiency with it. For example, pair a rapier with a quarterstaff in either hand to follow a spell with a rapier attack. Any rapier of that type qualifies. There are 30 standard choices, plus the sawtooth sabre if its DLC requirement is met. An existing Grey Seer can choose a different weapon when retraining. You also gain Two-Weapon Fighting at level 1. Improved Two-Weapon Fighting at 7 and Greater Two-Weapon Fighting at 13 are direct class grants, leaving your normal feat picks available. The one-handed exception is specific to a quarterstaff.
+In 0.17.39-beta, choose one of 30 light or one-handed melee weapon types at level 1 and gain proficiency with it. The sawtooth sabre brings the total to 31 if you meet its DLC requirement. In 0.17.41-beta, 13 regular two-handed melee types bring the total to 43, or 44 with the DLC. Double weapons are excluded. Entering Grey Seer in this version requires **permanent Strength 16 or higher**, including the final ability scores at character creation. Existing Grey Seers keep their chosen weapon and can choose again when retraining.
+
+The class grants Two-Weapon Fighting at level 1, Improved Two-Weapon Fighting at 7 and Greater Two-Weapon Fighting at 13.
 
 ### Resources
 
