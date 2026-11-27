@@ -8,27 +8,7 @@ Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod 
 
 In turn-based combat, hovering a target shows the **estimated chance to hit the real target**. The estimate uses revealed AC, flat-footed and flanking conditions, favored enemy bonuses, concealment and its rerolls, mirror images, and supported fixed or rerolled attack dice. Weapon full-attack follow-ups, off-hand weapons and natural attacks show their own chances at the current state. For example, +12 against AC 20 gives 65%, falling to 52% against 20% concealment and to 13% against three additional mirror images. These estimates use the state at hover time. Parries, scripted reactions or mod-specific rules at execution, and effects spent by earlier attacks can change the outcome. Detected conditional rules that cannot be evaluated are marked pending. The resolved attack also shows the single-d20 chance against the attack bonus and AC that the engine actually used.
 
-Pack Warden auxiliaries now join combat whether the hunter is on foot or mounted. One animal of the main companion’s species joins at Hunter levels 7–12 and two from level 13. Mounting or dismounting keeps the same pack in the fight. Fallen auxiliaries return next combat.
-
-Manual level-up now offers the **Weapon Spirit** class to the shaman’s weapon companion. Taking the standard Animal Companion class could lock its weapon slots. Loading an affected spirit into an area releases the animal equipment lock on its active and spare weapon sets. Its existing class levels and selected feats are preserved.
-
-Grey Seers can alternate arcanist spells and chosen-weapon hits against the same enemy for +1/+2/+3/+4 at levels 1/7/13/19. Spell attacks gain accuracy and saving-throw spells penalize that enemy on its save. Alternating separate actions is free. A regular combined action costs 1 reservoir point. Enable **Strike Before Casting** to let the opening hit help the spell immediately.
-
-At level 1, choose one type of light or one-handed melee weapon and gain proficiency with it. For example, pair a rapier with a quarterstaff in either hand to follow a spell with a rapier attack. Any rapier of that type qualifies. A Grey Seer can toggle **Automatic Spell and Sword** or **Automatic Guarded Casting**. When casting an arcanist spell, the seer chooses its hostile target if within reach of the chosen weapon, then falls back to the nearest visible enemy engaged with the caster and within reach. A manual designation overrides both target and mode for one spell.
-
-Spells show readable damage dice and their base range per damage instance. Magic Missile deals 1d4+1 (2–5) per missile. At base caster level 10, Fireball shows 10d6 (10–60), with a Reflex save for half. After an attack, the panel briefly shows the actual d20, bonus, AC and damage dealt for both party and enemy attacks. The latest result can appear alongside the next action’s preview.
-
 Turn-based attack odds, defenses and incoming results now appear directly above the combat log and move with it. The panel matches the log width, wraps longer text and uses 80% of the scaled log font size. If there is too little room above the log, the panel overlaps its top edge to stay on screen.
-
-- Hell Rider loses the tactician teamwork feats at levels 1, 9 and 17 and the ability to share them through tactician. Order, challenge and bonus combat feats at levels 6, 12 and 18 remain.
-- Falconer loses the first favored terrain, all later terrain selections and increases, and level 12 Camouflage. Favored enemy and quarry remain.
-- Chimera Monk regains monk bonus feats at levels 2, 6 and 10, for six selections in total. It gives up the four Style Strike selections at levels 5, 9, 13 and 17.
-- Blast Magus gives up level 13 heavy armor proficiency and armored casting in heavy armor. Its level 7 medium armor feature remains.
-- Spiritsteel loses all six ranks of Danger Sense at levels 3, 6, 9, 12, 15 and 18. Its level 2 teamwork feat and level 6 Spirit Trip remain.
-
-Release archives preserve DLL timestamps so Unity Mod Manager can distinguish the updated loader from an old cached copy. Spellbook integration retries discovery at the main menu if the blueprint collection changes during its initial scan. Category switching was observed during PC character creation. Collapsing and reopening a category, the level-up class list, and the buff recast comparison still need an in-game check.
-
-Active buff icons use the game’s own timer. When you select a buff in turn-based combat, the target preview shows its base duration alongside the time remaining on the current effect. Instant self buffs show the remaining time on the ability icon tooltip. At caster level 7, a one-minute-per-level buff shows a base of 7 minutes, or 14 with Extend Spell when eligible. Random durations show a range. Effects resolved during casting show the available formula or ability description. For area abilities, the preview describes the hovered unit if affected. Healing, dispels, summons and toggles also have turn-based summaries. When the same buff is already active, the preview shows known recast rules, including replacement, extension and stacking. Golem Overdrive, spirit possession and Pack Empowerment use their own class rules for base duration.
 
 In PC character creation and level-up, the class list reserves space for both rows of category buttons. The first class stays below the buttons when the list rebuilds. Click the open category again to collapse it.
 
