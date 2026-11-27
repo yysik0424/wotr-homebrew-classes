@@ -93,6 +93,7 @@ The mod ships Korean and English text in the same file and picks one automatical
 ## Compatibility and warnings
 
 - With NWN2 QuickItems installed, development build 0.17.51-beta lets you select one character and left-click a drinkable potion outside combat to use the inventory's Use action on that character. In combat, drinking uses the character's belt and normal action rules. Hover previews also use the selected character.
+- Starting with development build 0.17.52-beta, clicking a stack of potions in the bag during combat uses the single bottle moved to the character's belt.
 
 - Development build 0.17.50-beta registers prestige and mythic spellbook options for Prophecy Breaker, Spellfist and Warlock at the main menu or on loading a save. It retries if another mod is updating the list.
 
