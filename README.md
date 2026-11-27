@@ -6,27 +6,7 @@ Twenty-one archetypes for *Pathfinder: Wrath of the Righteous* in one Unity Mod 
 
 > [Download 0.17.39-beta for Unity Mod Manager](https://github.com/yysik0424/wotr-homebrew-classes/releases/download/v0.17.39-beta/HomebrewClasses-0.17.39-beta.zip) · [Release notes and test coverage](release-notes-0.17.39-beta.md)
 
-In turn-based combat, hovering a target shows the **estimated chance to hit the real target**. The estimate uses revealed AC, flat-footed and flanking conditions, favored enemy bonuses, concealment and its rerolls, mirror images, and supported fixed or rerolled attack dice. Weapon full-attack follow-ups, off-hand weapons and natural attacks show their own chances at the current state. For example, +12 against AC 20 gives 65%, falling to 52% against 20% concealment and to 13% against three additional mirror images. These estimates use the state at hover time. Parries, scripted reactions or mod-specific rules at execution, and effects spent by earlier attacks can change the outcome. Detected conditional rules that cannot be evaluated are marked pending. The resolved attack also shows the single-d20 chance against the attack bonus and AC that the engine actually used.
-
-Turn-based attack odds, defenses and incoming results now appear directly above the combat log and move with it. The panel matches the log width, wraps longer text and uses 80% of the scaled log font size. If there is too little room above the log, the panel overlaps its top edge to stay on screen.
-
-In PC character creation and level-up, the class list reserves space for both rows of category buttons. The first class stays below the buttons when the list rebuilds. Click the open category again to collapse it.
-
-In turn-based combat, hover an ability to see its attack, save and spell resistance checks. Select it and point at an enemy to see revealed defenses. Touch attacks show a base hit estimate and the effects of distance bonuses and flat-footed armor class where applicable. Incoming attacks briefly show the attacker, party target and resolved checks.
-
-Bubble Buffs 5.2.3 recognizes Pack Empowerment, Golem Overdrive and spirit possession. Pack Empowerment checks the living pack members individually. Overdrive and possession use the short-buff filter.
-
-Removed Spiritsteel’s favored enemy choice and its bound weapon attack and damage bonuses against the chosen enemy. At level 1, choose your bound weapon and gain Spirit Rage.
-
-Spiritsteel has 50 bound-weapon feats, up from 43, with ten picks by level 20. The new options are Strike in Darkness at 6, Spirit Vigil at 8, Close-Quarters Shot and Disruptive Spirit at 10, Spirit Lunge at 12, Disarming Critical at 14 and Spellcleaving Strike at 16.
-
-The category buttons attach directly to the PC class selection screen. Character creation and level-up group classes into Core, Base, Hybrid, Alternate, Occult and Prestige. Click a category to expand it and click again to collapse. The controller list shows category labels and sorts by category. Archetypes appear under their parent class. Empty categories are disabled. A modded prestige class appears under Prestige. Unrecognized non-prestige classes appear under Base.
-
-Spiritsteel uses Wisdom for daily rage rounds. With Wisdom 18, you get 8 rounds at level 1 and 46 at level 20. Keeping the spirit awake costs one round per round in total.
-
-Spiritsteel automatically gains stun immunity at level 12 and confusion immunity at level 16 while Spirit Rage is active. Two level-16 weapon feats join the selection. Speed grants one extra full-attack strike and overlaps with haste. Thundering Critical adds sonic damage on confirmed critical hits according to the weapon’s critical multiplier.
-
-While the shadow is on, it echoes the first eligible harmful sorcerer spell each round. If that spell is Magic Missile, the original and its echo each spend one 1st-level slot. With one slot left, only the original fires.
+[Class list](#the-classes) · [Turn-based combat information](#turn-based-combat-information)
 
 ## The classes
 
@@ -51,10 +31,26 @@ While the shadow is on, it echoes the first eligible harmful sorcerer spell each
 | 17 | [Dream Thief](#dream-thief) | Rogue | Put enemies to sleep with Desna’s starknife, cross the battlefield through dreams and wake them with a critical hit. Spend starlight on sleep, a sudden strike or divine weapon damage. | — |
 | 18 | [Deathdealer](#deathdealer) | Slayer | Read a studied foe’s actions to riposte, trip a moving enemy or interrupt a spell. Intelligence improves reactions, and nine personal arcane abilities help you prepare for the fight. | — |
 | 19 | [Falconer](#falconer) | Ranger | Send a hawk to open a shot for your bow while an animal companion drives prey into its path. From level 8, the hawk can dive automatically after your weapon attack. | — |
-| 20 | [Prophecy Breaker](#prophecy-breaker) | Oracle | Defy a foretelling through study. Cast divine spells with Intelligence and reserve two divine casts per unlocked tier for arcane research. Inscribe four spells and prepare two per tier. | — |
+| 20 | [Prophecy Breaker](#prophecy-breaker) | Oracle | Study the power of a prophecy whose message you never learned. Cast divine spells with Intelligence and reserve two divine casts per unlocked tier for arcane research. Inscribe four spells and prepare two per tier. | — |
 | 21 | [Hell Rider](#hell-rider) | Cavalier | Charge on a nightmare to concentrate devil strikes, or plant a standard to hit several foes. Wield Charisma-based Hellfire Ray, Greater Command, Firebrand and Overwhelming Presence. | — |
 
 Full details for every archetype (what is removed, what is gained at each level, every choice) are in [Class details](#class-details) below.
+
+## Turn-based combat information
+
+When choosing an action, read its **forecast**. After it resolves, read the **result**. Homebrew Classes enables this for every class in turn-based combat. Look at the ability tooltip and the panel immediately above the combat log.
+
+| What you want to know | What to do | What appears |
+|---|---|---|
+| Weapon attacks and full attacks | On a party member’s turn, point at an enemy for a normal attack. | The first attack’s bonus, enemy Armor Class (AC), estimated chance to hit the real target and base weapon damage range. Full-attack follow-ups, off-hand weapons and natural attacks have their own chances. |
+| Spell and ability checks | Hover the ability icon, then select the ability and point at a target. | The tooltip identifies melee or ranged touch, the saving throw and any spell resistance check. The target preview shows the relevant revealed AC or touch AC, save bonus, spell or energy resistance, and immunities. An uninspected defense is marked “target defenses unknown.” |
+| Spell damage and area effects | Select a damaging spell. For an area effect, point at a unit that might be caught in it. | Magic Missile shows 1d4+1 (2–5) **per missile**. At base caster level 10, Fireball shows 10d6 (10–60) **per target**, with a Reflex save for half. An area preview describes what happens if the hovered unit is affected. |
+| Buffs, healing and toggles | Select a buff and point at an ally, or hover an instant self-buff icon. | See the new base duration, time left on an active effect and known recast behavior (replace, extend, stack or ignore a duplicate). Healing can show the target’s missing HP. Toggles show their current state. |
+| The last action | Read the latest result above the combat log after an attack. | Attacks between the party and an enemy show the actual d20, attack bonus, AC, outcome and damage dealt. Incoming hostile spells also show the save DC and outcome or the spell resistance result when those checks occur. The latest result stays for about four seconds and can appear alongside the next forecast. |
+
+**Reading the percentages.** At +12 against AC 20, an 8 or higher on a d20 hits, giving 65%. With 20% concealment this falls to 52%. With three mirror images as well, the estimate for hitting the real target is 13%. Flanking, flat-footed AC and supported rerolls use the state at hover time. “Conditional modifiers pending” means a modifier will be settled during execution. An image lost to an earlier strike or a parry can change the outcome. After the roll, “single d20 at resolved modifiers” gives the chance for one d20 using the attack bonus and AC the engine actually applied.
+
+The panel moves with the combat log and wraps to its width. It uses 80% of the log’s scaled font size and overlaps the top edge when space above the log runs out.
 
 ## Requirements
 
@@ -87,6 +83,8 @@ In Windows PowerShell, set `WOTR_MANAGED_DIR` to the game’s `Wrath_Data/Manage
 ## Settings
 
 Open the Unity Mod Manager window in game (Ctrl+F10). Every class has its own on/off switch. All are on by default; changes apply after a restart.
+
+In the PC class picker, click a category to expand it and click again to collapse it. Bubble Buffs 5.2.3 recognizes Pack Empowerment, Golem Overdrive and spirit possession. Collapsing and reopening a category and the buff recast comparison still await an in-game check.
 
 ## Language
 
@@ -712,7 +710,7 @@ Offered only while the KineticistElementsExpanded mod is enabled:
 
 The Spellfist is a brawler who carries arcane spells in the same body as the fists. At 1st level you pick three arcane schools, then prepare and cast only magus spells of those schools the way an arcanist does, reaching 6th-level spells at 16th level. A single arcane reservoir lets you pull spells forward as swift actions and powers a set of arcanist exploits. From 2nd level you hold a touch spell in your hand and discharge it through your unarmed flurry. You keep the brawler's bonus combat feats and flurry, and give up maneuver training, Knockout and Awesome Blow.
 
-The main book can merge on the same mythic paths as the Magus book. Select Spellfist to advance arcane casting through a prestige class. Brawler Martial Training counts Brawler levels as Fighter and Monk levels for feat prerequisites.
+The main book can merge on the same mythic paths as the Magus book. Select Spellfist to advance arcane casting through a prestige class. A 9th-level Spellfist who chooses this book at Loremaster 1 reaches caster level 10 and unlocks 4th-level slots. Brawler Martial Training counts Brawler levels as Fighter and Monk levels for feat prerequisites.
 
 ### What you give up
 
@@ -1389,7 +1387,7 @@ Cells that use a DLC unit: only Abyss III (Abrikandilu). The other 53 cells use 
 Select the Warlock option to advance your Charisma-based Stigmatized Witch book, including on the arcane side of Mystic Theurge. Each prestige class retains its entry requirements. Spellbook Merge 1.7.1 paths that support the Witch book can also merge the Warlock’s main book.
 
 **Other mods**
-- With TabletopTweaks-Base’s Loremaster, select the Stigmatized Witch book. Its alternate witch capstone selection at level 20 contains no hexes, so warlocks keep it. A patron gained through its Second Patron option does not change your group.
+- With TabletopTweaks-Base’s Loremaster, select the Stigmatized Witch book. The option uses the base class name **Witch**. A 7th-level Warlock who takes Loremaster 1 advances that book to caster level 8 and gains 4th-level slots. Its alternate witch capstone selection at level 20 contains no hexes, so warlocks keep it. A patron gained through its Second Patron option does not change your group.
 - PrestigePlus spellbook selections recognize an owned Stigmatized Witch book.
 - ExpandedContent: the Stargazer's "witch spellbook" option is blocked for warlocks (picking it would create a separate witch spellbook instead of advancing the warlock's own). Nothing happens if ExpandedContent is not installed.
 - CharacterOptionsPlus: works alongside the Winter Witch archetype restriction that mod adds to the prestige spellbook options.
@@ -2576,7 +2574,7 @@ The archetype adds no choices of its own. You pick a bloodline exactly as a base
 | Aspect | Details |
 |---|---|
 | Base class | Arcanist. Intelligence governs spellcasting. Wield your chosen weapon and a quarterstaff together. |
-| Versions | The **0.17.39-beta** release includes the spell and weapon link. The **0.17.40-beta** development build adds staff spell storage. **0.17.41-beta** adds the permanent Strength 16 entry requirement and two-handed primary weapon choices. |
+| Versions | The **0.17.39-beta** release includes the spell and weapon link. The **0.17.40-beta** development build adds staff spell storage. **0.17.41-beta** adds the permanent Strength 16 entry requirement and two-handed primary weapon choices. **0.17.42-beta** adds consumable wand cores. |
 | Spellcasting | Standard arcanist preparation, casts per day and spell progression, reaching 9th-level spells at arcanist level 18. Consume Spells still lets you turn a spell slot into reservoir points. |
 | Abilities | Intelligence powers the arcane spellbook. Strength and weapon bonuses support ordinary melee attacks, while Charisma affects Consume Spells uses and many exploits. |
 | Class mod requirement | Included in Homebrew Classes. No separate class mod is required. |
@@ -2663,6 +2661,12 @@ Equip an uncharged quarterstaff, open **Store a Spell in Your Staff** and choose
 | 43 single-target saving throw spells, including Hold Person and Phantasmal Killer | If the enemy struck is a valid target, it makes the spell’s normal saving throw. |
 
 The catalog covers 62 base-game spells and 18 from supported mods, counting each name once. Mythic spells are ineligible. The first melee hit against an enemy with the charged staff spends the charge. The spell’s target restrictions and spell resistance still apply. A miss or a hit with the other weapon leaves the charge intact. Completing a rest clears it.
+
+#### Consumable wand cores (from 0.17.42-beta)
+
+Equip a quarterstaff and choose **Break wand and implant** from a wand’s inventory or belt menu. One wand is consumed. Its spell and remaining charges move to that specific staff. A wand of Scorching Ray with seven charges fires on seven staff hits, even when a hit releases several rays. An offensive spell targets the enemy struck, a single-target healing spell or buff targets the wielder, and an area spell centers on the impact. Lines and cones aim toward the enemy.
+
+A manually stored spell fires on the first hit and leaves the core for the next one. Misses, attacks with another weapon and resting preserve the remaining charges. The staff name shows the balance. Its last charge frees the staff for another wand.
 
 ### Choices
 
@@ -3349,6 +3353,9 @@ Another slayer's studied mark belongs to that slayer. Your reactions and intensi
 
 ### Overview
 
+In the fields of Andoran, a falconer takes a young hawk on the glove, and the two learn to read the wind together.<br>
+After seasons spent hunting side by side, a turn of the hawk’s wing is enough to tell the falconer where the quarry lies hidden.
+
 Let the wolf drive prey into the open, send the hawk in from its blind side, then loose an arrow as the target turns. The hawk responds to your commands and attacks. You can position your companion on the ground and choose a different enemy for the hawk to dive on this round.
 
 ### What you give up
@@ -3459,9 +3466,11 @@ Automatic Dive checks for a surviving enemy after the ranger's own weapon attack
 
 ### Overview
 
+A prophecy was given to him, too. Whether through sheer force of will or outside intervention, its message remains unknown to him. He began to study the power it left him and, through his own efforts, learned to wield it.
+
 Your oracle’s curse is the mark the prophecy left on you. You follow the trail of failed predictions and copy what you learn from arcane scrolls into a research book. Before a dungeon, the question is which spells to ready. Once inside, you decide whether the same spell is worth both of that tier's casts.
 
-With Spellbook Merge 1.7.1, the Intelligence-based main spellbook follows normal oracle mythic merge paths and qualifies for divine prestige advancement. The arcane research book advances only with oracle levels. A separate class must supply 2nd-level arcane spells for Mystic Theurge entry. Research spells use a base save DC of 10 + spell level + Intelligence modifier, including the usual Spell Focus and Heighten Spell adjustments.
+With Spellbook Merge 1.7.1, the Intelligence-based main spellbook follows normal oracle mythic merge paths and qualifies for divine prestige advancement. The arcane research book advances only with oracle levels. For example, a 7th-level Prophecy Breaker who advances the main book at Loremaster 1 reaches divine caster level 8 and gains 4th-level divine slots. The research book stays at oracle level 7. A separate class must supply 2nd-level arcane spells for Mystic Theurge entry. Research spells use a base save DC of 10 + spell level + Intelligence modifier, including the usual Spell Focus and Heighten Spell adjustments.
 
 ### What you give up
 
@@ -3573,6 +3582,8 @@ Highest research tier and caster level use **oracle class level**. An oracle 8 /
 
 ### Overview
 
+Cursed children with a tie to the plane of Hell are bound by infernal contracts from an early age. They are taken in and trained as Hell Riders, learning to wield the power of Hell. Cheliax raises many such children to fill its ranks.
+
 A Hell Rider picks a charge target and a place to plant the standard for different reasons. Charge an isolated enemy to concentrate the devils' blows. Against a group holding a passage, the standard can pressure that ground for five rounds while the nightmare breathes fire across the front line. The devils appear for their strikes, while the nightmare stays at your side as a companion.
 
 ### What you give up
@@ -3582,7 +3593,7 @@ A Hell Rider picks a charge target and a place to plant the standard for differe
 | 1 | Standard mount selection | Nightmare Mount |
 | 1, 9, 17 | Three tactician teamwork feats | Lose the level 1 sharing ability and its level 9 swift-action upgrade. |
 | 5, 14 | Banner and Greater Banner | Infernal Standard and Greater Infernal Standard, planted at a chosen point |
-| 11, 20 | Mighty Charge and Supreme Charge | The charge and the standard call two devils at level 11 and three at level 20 |
+| 11, 20 | Mighty Charge and Supreme Charge | Charge and standard call additional devils as shown in the progression below. |
 
 ### What you gain (by level)
 
@@ -3595,9 +3606,20 @@ A Hell Rider picks a charge target and a place to plant the standard for differe
 | 11, 15, 19 | Hellfire Ray | Make a ranged touch attack using Charisma. Fire one ray at level 11, two at 15, and three at 19 at the same foe. Each deals 1d6 per cavalier level, up to 15d6, split between fire and unholy damage. |
 | 13 | Firebrand | Allies add 1d6 fire damage to weapon and natural attacks. Each bearer can expend their own brand to fire a ray. |
 | 17 | Overwhelming Presence | Enemies that fail their Will save prostrate themselves and cower. Even an enemy that succeeds on the initial save is staggered for one round. |
-| 20 | Third Devil | Charge and standard now call three devils. A charge can concentrate all three strikes on an isolated target. The standard can strike up to three different foes per round. |
+| 19 (development build 0.17.43-beta onward) / 20 (public 0.17.39-beta) | Third Devil | Charge and standard now call three devils. A charge can concentrate all three strikes on an isolated target. The standard can strike up to three different foes per round. |
 
 ### Abilities in detail
+
+#### Nightmare stats and advancement
+
+The mount uses the base game's horse companion stats and animal companion progression. Its appearance and name come from the friendly Challenge Rating (CR) 5 nightmare. Both are Large and have a base speed of 50 feet. These are their base scores before companion advancement.
+
+| Unit | STR | DEX | CON | INT | WIS | CHA |
+|---|---:|---:|---:|---:|---:|---:|
+| Hell Rider’s nightmare | 16 | 13 | 15 | 2 | 12 | 6 |
+| Base-game CR 5 nightmare | 18 | 15 | 16 | 13 | 13 | 12 |
+
+The base animal companion progression adds +1 Strength, +1 Dexterity and +2 natural armor at companion levels 1, 3, 6, 9, 12, 15 and 18. At **effective companion level 4**, the horse upgrade also grants +2 Strength and +2 Constitution and turns its two secondary hoof attacks into primary natural attacks. Each hoof hit adds 1d4 fire damage. Fire breath unlocks at **cavalier level 8**.
 
 #### Damage from one apparition
 
@@ -3665,10 +3687,11 @@ At level 19 with +6 Charisma, you can plant nine standards and cast Hellfire Ray
 | 8 | 1 × 2d6 | — |
 | 11 | 2 × 3d6 | 1 × 11d6 |
 | 15 | 2 × 5d6 | 2 × 15d6 |
-| 19 | 2 × 6d6 | 3 × 15d6 |
+| 18 | 2 × 6d6 | 2 × 15d6 |
+| 19 | **3 × 6d6** in development build 0.17.43-beta / **2 × 6d6** in public 0.17.39-beta | 3 × 15d6 |
 | 20 | 3 × 6d6 | 3 × 15d6 |
 
-The change from 19 to 20 is the third devil. The ray volley reached three at level 19. The nightmare rolls its own 1d4-round breath recharge without spending any entry in the daily-use table.
+The nightmare rolls its own 1d4-round breath recharge without spending any entry in the daily-use table.
 
 ### Compatibility and notes
 
