@@ -12,6 +12,10 @@ namespace GreySeer
         internal const string AutoStrikeBuff = "4698d2fa4a9f446dad208a5b319e585e";
         internal const string AutoGuarded = "b4a483a198da42508ea96f4097b44766";
         internal const string AutoGuardedBuff = "2476a9bb620c4ed0b4f182656f3b0fda";
+        internal const string BladeFirst = "ed58af74d32445b6a4581fe24b65125a";
+        internal const string BladeFirstBuff = "890312eb737a49c18f9c86f2afbc976d";
+        internal const string NextBlade = "b34dd2dc6ea249d69c3d55c1c3dd449e";
+        internal const string NextSpell = "390f4361d2f942b6b853042f2cdd9766";
 
         // Installed blueprints.zip, 2026-11-23.
         internal const string Arcanist = "52dbfd8505e22f84fad8d702611f60b7";

@@ -19,7 +19,8 @@ namespace GreySeer
     internal static class Blueprints
     {
         internal static BlueprintFeature Training, Cantrips;
-        internal static BlueprintActivatableAbility AutoStrike, AutoGuarded;
+        internal static BlueprintActivatableAbility AutoStrike, AutoGuarded, BladeFirst;
+        internal static BlueprintBuff NextBlade, NextSpell;
         internal static BlueprintArchetype Archetype;
         internal static BlueprintCharacterClass Arcanist, Fighter;
         internal static BlueprintAbilityResource Reservoir;
@@ -51,6 +52,9 @@ namespace GreySeer
             MakeMark(Guids.SafeMark, "safe", true, guardedIcon);
             AutoStrike = MakeToggle("AutoStrike", "auto", Guids.AutoStrike, Guids.AutoStrikeBuff, twoWeapon.Icon);
             AutoGuarded = MakeToggle("AutoGuarded", "autoSafe", Guids.AutoGuarded, Guids.AutoGuardedBuff, Get<BlueprintFeature>(Guids.Greater).Icon);
+            BladeFirst = MakeToggle("BladeFirst", "first", Guids.BladeFirst, Guids.BladeFirstBuff, strikeIcon);
+            NextBlade = MakeOpening("NextBlade", "bladeOpening", Guids.NextBlade, strikeIcon);
+            NextSpell = MakeOpening("NextSpell", "spellOpening", Guids.NextSpell, guardedIcon);
             Training = Create<BlueprintFeature>("GreySeerSwordAndStaff", Guids.Training, f => {
                 Name(f, "training", twoWeapon.Icon);
                 f.Ranks = 1;
@@ -58,8 +62,9 @@ namespace GreySeer
             });
             var grant = new AddFacts();
             SetField(grant, "m_Facts", new[] { Ref<BlueprintUnitFactReference>(Guids.Mark), Ref<BlueprintUnitFactReference>(Guids.SafeMark),
-                Ref<BlueprintUnitFactReference>(Guids.AutoStrike), Ref<BlueprintUnitFactReference>(Guids.AutoGuarded) });
-            AddComponents(Training, grant, new WeaponAccuracy(), new SpellLink());
+                Ref<BlueprintUnitFactReference>(Guids.AutoStrike), Ref<BlueprintUnitFactReference>(Guids.AutoGuarded),
+                Ref<BlueprintUnitFactReference>(Guids.BladeFirst) });
+            AddComponents(Training, grant, new WeaponAccuracy(), new SpellLink(), new LinkedAccuracy());
             Archetype = Create<BlueprintArchetype>("GreySeerArchetype", Guids.Archetype, a => {
                 SetField(a, "m_ParentClass", Arcanist);
                 a.LocalizedName = Strings.L("archetype.name");
@@ -116,6 +121,20 @@ namespace GreySeer
             });
             if (toggle.Buff != buff) throw new InvalidOperationException("Grey Seer: missing stance buff for " + id);
             return toggle;
+        }
+
+        static BlueprintBuff MakeOpening(string id, string key, string guid, UnityEngine.Sprite icon)
+        {
+            var buff = Create<BlueprintBuff>("GreySeer" + id, guid, b => {
+                Name(b, key, icon);
+                b.IsClassFeature = true;
+                // Two different seers can open the same target independently.
+                b.Stacking = StackingType.Stack;
+                b.FxOnStart = new Kingmaker.ResourceLinks.PrefabLink();
+                EmptyFxOnRemove(b);
+            });
+            AddComponents(buff, new OpeningWindow());
+            return buff;
         }
 
         static void MakeMark(string guid, string key, bool guarded, UnityEngine.Sprite icon)

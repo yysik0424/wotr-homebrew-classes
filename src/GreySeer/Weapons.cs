@@ -21,6 +21,7 @@ namespace GreySeer
             if (unit == null || !unit.Body.HandsAreEnabled) return null;
             var first = unit.Body.PrimaryHand;
             var second = unit.Body.SecondaryHand;
+            if (!first.Active || !second.Active) return null;
             var a = first.MaybeItem as ItemEntityWeapon;
             var b = second.MaybeItem as ItemEntityWeapon;
             if (IsMelee(b, WeaponCategory.Quarterstaff) && WeaponChoices.Matches(unit, a)) return first;

@@ -34,6 +34,10 @@ namespace GreySeer
         internal static readonly int[] ExchangeLevels = { 1, 5, 9, 13, 17 };
         internal const int StrikeCost = 1;
 
+        // Owner's 2026-11-27 progression: the three two-weapon feats and the level-19 improvement.
+        internal static int LinkBonus(int arcanistLevel) =>
+            arcanistLevel >= 19 ? 4 : arcanistLevel >= 13 ? 3 : arcanistLevel >= 7 ? 2 : arcanistLevel >= 1 ? 1 : 0;
+
         internal static int ProtectedCost(int slotLevel)
         {
             if (slotLevel < 0 || slotLevel > 9)

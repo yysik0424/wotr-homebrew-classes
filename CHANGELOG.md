@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.39-beta
+
+그레이 시어가 주문과 선택 무기를 번갈아 맞히면 같은 적에 대한 다음 공격이 쉬워집니다. 아카니스트 1·7·13·19레벨에 보정이 +1·+2·+3·+4로 성장합니다. 별도 행동은 무료이며, 일반 연계는 비전 저수지 1점으로 두 행동을 원하는 순서로 묶습니다. **검격 먼저**를 켜면 무기가 먼저 공격합니다.
+
+Grey Seers can alternate spells and strikes in either order. Landing one improves the next roll of the other against the same enemy. The bonus reaches +1/+2/+3/+4 at arcanist levels 1/7/13/19. Alternating separate actions is free. A regular combined action costs 1 reservoir point. Enable **Strike Before Casting** to lead with the weapon.
+
 ## 0.17.38-beta
 
 그레이 시어는 1레벨에 지팡이와 함께 들 한손 근접 무기 종류를 고르고 숙련을 얻습니다. 선택한 종류의 무기는 주손과 보조손 어느 쪽에서든 수동·자동·안전 검격에 쓰입니다. 같은 종류의 무기로 교체해도 적용됩니다. 이전에 장검 숙련을 받은 그레이 시어는 재훈련하면 다른 무기를 고를 수 있습니다.
